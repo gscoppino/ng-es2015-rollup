@@ -4,15 +4,25 @@
   "description": "Seed project for frontend development with PostCSS for CSS, ES2015 for Javascript, JSPM for dependency management, and Angular with Karma+Jasmine for a development framework.",
   "main": "package.json",
   "scripts": {
+    "build:js": "rollup -c build/rollup.config.js",
     "test": "karma start"
   },
   "author": "Giuseppe Scoppino <scoppino.giuseppe@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.6.0",
+    "babel-preset-es2015-rollup": "^1.1.1",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.21",
     "karma-jasmine": "^0.3.7",
     "karma-phantomjs-launcher": "^1.0.0",
-    "phantomjs-prebuilt": "^2.1.4"
+    "phantomjs-prebuilt": "^2.1.4",
+    "rollup": "^0.25.4",
+    "rollup-plugin-babel": "^2.4.0",
+    "rollup-plugin-commonjs": "^2.2.1",
+    "rollup-plugin-node-resolve": "^1.4.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.0"
   }
 }

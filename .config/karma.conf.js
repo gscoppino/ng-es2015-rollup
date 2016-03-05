@@ -37,12 +37,17 @@ module.exports = function(config) {
         rollup: {
             plugins: [
                 babel({
-                    exclude: 'node_modules/**',
+                    include: 'src/**',
+                    exclude: 'node_modules/**'
+                }),
+                node_resolve({
+                    jsnext: true,
+                    main: true
                 }),
                 commonjs({
-                    include: 'node_modules/**'
-                }),
-                node_resolve()
+                    include: 'node_modules/**',
+                    exclude: 'src/**'
+                })
             ] 
         },
         bundle: {

@@ -10,11 +10,16 @@ export default {
     sourceMap: true,
     plugins: [
         babel({
+            include: 'src/**',
             exclude: 'node_modules/**'
         }),
-        commonjs({
-            include: 'node_modules/**'
+        node_resolve({
+            jsnext: true,
+            main: true
         }),
-        node_resolve()
+        commonjs({
+            include: 'node_modules/**',
+            exclude: 'src/**'
+        })
     ]
 };

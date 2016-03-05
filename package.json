@@ -16,6 +16,7 @@
     "karma": "^0.13.21",
     "karma-jasmine": "^0.3.7",
     "karma-phantomjs-launcher": "^1.0.0",
+    "karma-rollup-preprocessor": "^2.0.1",
     "phantomjs-prebuilt": "^2.1.4",
     "rollup": "^0.25.4",
     "rollup-plugin-babel": "^2.4.0",
@@ -23,6 +24,7 @@
     "rollup-plugin-node-resolve": "^1.4.0"
   },
   "dependencies": {
-    "angular": "^1.5.0"
+    "angular": "^1.5.0",
+    "angular-mocks": "^1.5.0"
   }
 }

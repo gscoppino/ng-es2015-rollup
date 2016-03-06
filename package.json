@@ -4,26 +4,42 @@
   "description": "Seed project for frontend development with PostCSS for CSS, ES2015 for Javascript, JSPM for dependency management, and Angular with Karma+Jasmine for a development framework.",
   "main": "package.json",
   "scripts": {
+    "clean": "rm dist/*",
+    
     "build:markup": "cp src/index.html dist/index.html",
+    "build-inc:markup": "nodemon --watch src -e html --exec \"npm run build:markup\"",
     "build:css": "postcss -c .config/postcss.config.js",
+    "build-inc:css": "postcss -c .config/postcss.config.js --watch",
     "build:js": "rollup -c .config/rollup.config.js",
-    "build": "npm run build:markup && npm run build:css && npm run build:js",
-    "test": "karma start",
-    "devserver": "http-server dist/"
+    "build-inc:js": "nodemon --watch src -e js --exec \"npm run build:js\"",
+    
+    "prebuild": "npm run clean",
+    "build": "parallelshell \"npm run build:markup\" \"npm run build:css\" \"npm run build:js\"",
+    "prebuild-inc": "npm run clean",
+    "build-inc": "parallelshell \"npm run build-inc:markup\" \"npm run build-inc:css\" \"npm run build-inc:js\"",
+    
+    "prestart": "npm run build",
+    "start": "browser-sync start --server dist --files \"dist/*\"",
+    "start-inc": "parallelshell \"npm run build-inc\" \"npm run start\"",
+    
+    "test": "karma start"
   },
   "author": "Giuseppe Scoppino <scoppino.giuseppe@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.6.0",
     "babel-preset-es2015-rollup": "^1.1.1",
+    "browser-sync": "^2.11.1",
     "cash-cp": "^0.2.0",
-    "http-server": "^0.9.0",
+    "cash-rm": "^0.2.0",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.21",
     "karma-jasmine": "^0.3.7",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-rollup-preprocessor": "^2.0.1",
     "karma-sourcemap-loader": "^0.3.7",
+    "nodemon": "^1.9.1",
+    "parallelshell": "^2.0.0",
     "phantomjs-prebuilt": "^2.1.4",
     "postcss-cli": "^2.5.1",
     "postcss-cssnext": "^2.4.0",

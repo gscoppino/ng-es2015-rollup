@@ -2,7 +2,7 @@ import 'angular';
 import 'angular-mocks';
 import app, { AppService } from './app';
 
-beforeEach(module('app'));
+beforeEach(module(app.name));
 describe('app ->', function () {
     describe('AppService:', function () {
         it('method should resolve something.', inject(function ($injector) {

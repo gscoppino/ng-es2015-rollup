@@ -1,7 +1,7 @@
 {
   "name": "frontend-seed",
   "version": "0.0.0",
-  "description": "Seed project for frontend development with PostCSS for CSS, ES2015 for Javascript, JSPM for dependency management, and Angular with Karma+Jasmine for a development framework.",
+  "description": "Seed project for frontend development with PostCSS for CSS, ES2015 for Javascript, Rollup for dependency management, and Angular with Karma+Jasmine for a development framework.",
   "main": "package.json",
   "scripts": {
     "clean": "rm dist/*",

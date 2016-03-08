@@ -1,7 +1,5 @@
-import AppModule from './module';
 import { AppController } from './component';
 
-beforeEach(module(AppModule.name));
 describe('AppComponent ->', function () {
     describe('AppController:', function () {
         let $log, controller;

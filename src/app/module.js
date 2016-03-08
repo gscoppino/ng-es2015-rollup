@@ -4,7 +4,7 @@ import AppComponent from './component';
 const AppModule = angular
     .module('app', [])
         .component('main', AppComponent)
-        .run(function () {
+        .run(()=> {
             console.log('Loaded!');
         });
 

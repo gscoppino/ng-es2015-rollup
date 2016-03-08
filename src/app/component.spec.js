@@ -1,7 +1,7 @@
 import { AppController } from './component';
 
-describe('AppComponent ->', function () {
-    describe('AppController:', function () {
+describe('AppComponent ->', ()=> {
+    describe('AppController:', ()=> {
         let $log, controller;
         
         beforeEach(inject(($injector) => {
@@ -9,7 +9,7 @@ describe('AppComponent ->', function () {
             controller = new AppController($log);
         }));
         
-        describe('login', function () {
+        describe('login', ()=> {
             it('should call $log with info.', function () {
                 spyOn($log, 'info').and.callThrough();
                 controller.login();

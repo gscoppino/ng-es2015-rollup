@@ -27,12 +27,8 @@ gulp.task('build:css', ()=> {
         .process(fs.readFileSync(POSTCSS_CONFIG.from), POSTCSS_CONFIG)
         .then((result)=> {
             return Promise.all([
-                new Promise((resolve)=> {
-                    fs.writeFile(POSTCSS_CONFIG.to, result.css, resolve);              
-                }),
-                new Promise((resolve) => {
-                    fs.writeFile(POSTCSS_CONFIG.to + '.map', result.map, resolve);                    
-                })
+                new Promise((resolve)=> fs.writeFile(POSTCSS_CONFIG.to, result.css, resolve)),
+                new Promise((resolve)=> fs.writeFile(POSTCSS_CONFIG.to + '.map', result.map, resolve))
             ]);
         })
         .then(server.reload);
@@ -40,15 +36,13 @@ gulp.task('build:css', ()=> {
 
 gulp.task('build:js', ()=> {
     return rollup(ROLLUP_CONFIG.rollup)
-        .then((bundle)=> {
-            return bundle.write(ROLLUP_CONFIG.bundle);
-        })
+        .then((bundle)=> bundle.write(ROLLUP_CONFIG.bundle))
         .then(server.reload);
 });
 
-gulp.task('watch:markup', ()=> { return gulp.watch('src/index.html', ['build:markup']) });
-gulp.task('watch:css', ()=> { return gulp.watch('src/**/*.css', ['build:css']) });
-gulp.task('watch:js', ()=> { return gulp.watch('src/**/!(*.spec).js', ['build:js']) });
+gulp.task('watch:markup', ()=> gulp.watch('src/index.html', ['build:markup']));
+gulp.task('watch:css', ()=> gulp.watch('src/**/*.css', ['build:css']));
+gulp.task('watch:js', ()=> gulp.watch('src/**/!(*.spec).js', ['build:js']));
 
 gulp.task('serve', ()=> {
     server.init({

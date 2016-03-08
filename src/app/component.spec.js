@@ -1,5 +1,3 @@
-import 'angular';
-import 'angular-mocks';
 import AppModule from './module';
 import { AppController } from './component';
 

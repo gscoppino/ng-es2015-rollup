@@ -19,6 +19,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        'node_modules/angular/angular.js',
+        'node_modules/angular-mocks/angular-mocks.js',
         'src/**/*.spec.js'
     ],
 
@@ -35,6 +37,7 @@ module.exports = function(config) {
     
     rollupPreprocessor: {
         rollup: {
+            external: ['angular'], // Load Angular + Mocks via Karma instead to avoid angular-mocks multi-import bug.
             plugins: [
                 babel({
                     include: 'src/**',

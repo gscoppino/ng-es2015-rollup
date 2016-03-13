@@ -1,5 +1,5 @@
 import angular from 'angular';
-import AppComponent from './component';
+import AppComponent from './views/app/component';
 
 const AppModule = angular
     .module('app', [])

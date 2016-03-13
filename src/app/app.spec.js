@@ -1,4 +1,4 @@
-import AppModule from './module';
+import AppModule from './app';
 
 beforeEach(module(AppModule.name));
 describe('AppModule ->', ()=> {

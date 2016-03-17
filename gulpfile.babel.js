@@ -28,7 +28,7 @@ gulp.task('build:css', ()=> {
         .then((result)=> {
             return Promise.all([
                 new Promise((resolve)=> fs.writeFile(POSTCSS_CONFIG.to, result.css, resolve)),
-                new Promise((resolve)=> fs.writeFile(POSTCSS_CONFIG.to + '.map', result.map, resolve))
+                new Promise((resolve)=> fs.writeFile(`${POSTCSS_CONFIG.to}.map`, result.map, resolve))
             ]);
         })
         .then(server.reload);

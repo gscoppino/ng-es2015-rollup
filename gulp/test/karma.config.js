@@ -21,9 +21,3 @@ export default {
     reporters: ['progress'],
     colors: true
 };
-/*
-    basePath: '../',
-   
-    singleRun: true,
-    autoWatch: false
-*/

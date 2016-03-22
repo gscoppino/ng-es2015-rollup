@@ -9,7 +9,8 @@
     "build": "gulp build",
     "predevelop": "npm run build",
     "develop": "gulp develop",
-    "test": "karma start"
+    "test": "gulp test",
+    "test-ci": "gulp watch:test"
   },
   "author": "Giuseppe Scoppino <scoppino.giuseppe@gmail.com>",
   "license": "MIT",

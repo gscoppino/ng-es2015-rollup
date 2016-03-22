@@ -8,4 +8,4 @@ import './gulp/serve/tasks';
 
 gulp.task('build', ['build:markup', 'build:css', 'build:js']);
 gulp.task('watch', ['watch:markup', 'watch:css', 'watch:js']);
-gulp.task('develop', ['watch', 'serve']);
+gulp.task('develop', ['watch', 'devserver']);

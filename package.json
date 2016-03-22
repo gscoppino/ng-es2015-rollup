@@ -22,7 +22,6 @@
     "browser-sync": "^2.11.1",
     "cash-rm": "^0.2.0",
     "gulp": "^3.9.1",
-    "gulp-util": "^3.0.7",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.21",
     "karma-jasmine": "^0.3.7",

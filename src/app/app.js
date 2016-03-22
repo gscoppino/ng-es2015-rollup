@@ -3,8 +3,8 @@ import Routes from './routes/routes';
 
 const AppModule = angular
     .module('app', [Routes])
-        .run(()=> {
-            console.log('Loaded!');
+        .run(($log)=> {
+            $log.log('Loaded!');
         });
 
 export default AppModule.name;

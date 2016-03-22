@@ -1,11 +1,10 @@
 import angular from 'angular';
-import AppComponent from './views/app/component';
+import Routes from './routes/routes';
 
 const AppModule = angular
-    .module('app', [])
-        .component('main', AppComponent)
+    .module('app', [Routes])
         .run(()=> {
             console.log('Loaded!');
         });
 
-export default AppModule;
+export default AppModule.name;

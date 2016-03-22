@@ -1,7 +1,7 @@
 import angular from 'angular';
-import AppModule from './app/app';
+import App from './app/app';
 
 const $injector = angular
-    .bootstrap(window.document, [AppModule.name], { strictDi: true });
+    .bootstrap(window.document, [App], { strictDi: true });
 
 export default $injector;

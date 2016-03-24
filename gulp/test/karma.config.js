@@ -14,6 +14,13 @@ export default {
     browsers: ['PhantomJS'],
     port: 9876,
     concurrency: Infinity,
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
+    coverageReporter: {
+        dir: 'dist/coverage',
+        reporters: [
+            { type: 'text' },
+            { type: 'html', subdir: 'html' }
+        ]
+    },
     colors: true
 };

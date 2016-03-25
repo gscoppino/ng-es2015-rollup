@@ -1,7 +1,3 @@
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
-import node_resolve from 'rollup-plugin-node-resolve';
-
 import ROLLUP_CONFIG from './rollup.config';
 
 export default {

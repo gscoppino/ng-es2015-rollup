@@ -1,8 +1,8 @@
 import gulp from 'gulp';
 
 gulp.task('build:markup', ()=> {
-    return gulp.src('src/index.html')
+    return gulp.src('src/*.html')
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch:markup', ()=> gulp.watch('src/index.html', ['build:markup']));
+gulp.task('watch:markup', ()=> gulp.watch('src/*.html', ['build:markup']));

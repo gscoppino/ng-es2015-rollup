@@ -7,7 +7,7 @@ class SampleComponentController {
 }
 
 const SampleComponentModule = angular
-    .module('SampleComponent', [])
+    .module('app.components.sample', [])
         .component('sampleComponent', {
             template: template,
             controller: SampleComponentController

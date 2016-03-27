@@ -1,7 +1,9 @@
 import angular from 'angular';
 import App from './app/app';
 
-const $injector = angular
-    .bootstrap(window.document, [App], { strictDi: true });
+const AppInstance = Object.create(null);
+document.addEventListener("DOMContentLoaded", event => {
+    AppInstance.$injector = angular.bootstrap(document.documentElement, [App], { strictDi: true });
+});
 
-export default $injector;
+export default AppInstance;

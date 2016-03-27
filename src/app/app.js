@@ -1,4 +1,5 @@
 import angular from 'angular';
+import Api from '../api/api';
 import Routes from './routes/routes';
 
 Run.$inject = ['$log'];
@@ -7,7 +8,7 @@ function Run ($log) {
 }
 
 const AppModule = angular
-    .module('app', [Routes])
+    .module('app', [Api, Routes])
         .run(Run);
 
 export default AppModule.name;

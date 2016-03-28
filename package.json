@@ -21,6 +21,7 @@
     "babel-preset-es2015-rollup": "^1.1.1",
     "browser-sync": "^2.11.1",
     "cash-rm": "^0.2.0",
+    "connect-history-api-fallback": "^1.2.0",
     "gulp": "^3.9.1",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.21",

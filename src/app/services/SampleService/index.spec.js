@@ -1,5 +1,5 @@
 import angular from 'angular';
-import SampleServiceModule from './index';
+import SampleServiceModule from './';
 
 beforeEach(module(SampleServiceModule));
 

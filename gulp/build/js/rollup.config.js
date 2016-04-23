@@ -9,7 +9,7 @@ export default {
         plugins: [
             // Transform ES2015 to ES5, sans module imports/exports
             babel({
-                include: 'src/**/*.js',
+                include: ['src/*.js', 'src/**/*.js'],
                 exclude: 'node_modules/**'
             }),
             // Resolve relative HTML imports

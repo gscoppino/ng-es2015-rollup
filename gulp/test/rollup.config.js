@@ -13,15 +13,15 @@ export default {
         plugins: [
             // Transform ES2015 to ES5 for all spec files, sans module imports/exports
             babel({
-                include: 'src/**/*.spec.js',
-                exclude: ['src/**/!(*.spec).js', 'node_modules/**']
+                include: ['src/*.spec.js', 'src/**/*.spec.js'],
+                exclude: ['src/!(*.spec).js', 'src/**/!(*.spec).js', 'node_modules/**']
             }),
             // Instrument source code so that code coverage can be determined.
             // Babel is used during instrumentation to transform ES2015 to ES5
             // for all source files, sans module imports/exports
             istanbul({
-                include: 'src/**/!(*.spec).js',
-                exclude: ['src/**/*.spec.js', 'node_modules/**'],
+                include: ['src/!(*.spec).js', 'src/**/!(*.spec).js'],
+                exclude: ['src/*.spec.js', 'src/**/*.spec.js', 'node_modules/**'],
                 instrumenter: babel_istanbul
             }),
             // Resolve relative HTML imports

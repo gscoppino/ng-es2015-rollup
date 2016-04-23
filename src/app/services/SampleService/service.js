@@ -16,8 +16,4 @@ class SampleService {
     }
 }
 
-const SampleServiceModule = angular
-    .module('app.services.sample', [])
-        .service('SampleService', SampleService);
-
-export default SampleServiceModule.name;
+export default SampleService;

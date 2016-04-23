@@ -1,4 +1,4 @@
-import SampleComponentModule from './SampleComponent';
+import SampleComponentModule from './index';
 
 beforeEach(module(SampleComponentModule));
 

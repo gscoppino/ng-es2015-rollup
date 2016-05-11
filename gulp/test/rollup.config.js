@@ -1,3 +1,4 @@
+import eslint from 'rollup-plugin-eslint';
 import babel from 'rollup-plugin-babel';
 import text from 'rollup-plugin-string';
 import node_resolve from 'rollup-plugin-node-resolve';
@@ -11,6 +12,11 @@ export default {
     rollup: {
         external: ['angular'], // Load Angular + Mocks via Karma instead to avoid angular-mocks multi-import bug.
         plugins: [
+            // Lint all JS files for syntax errors, code style adherance, and potential oversights.
+            eslint({
+                include: ['src/*.js', 'src/**/*.js'],
+                exclude: 'node_modules/**'
+            }),
             // Transform ES2015 syntax to ES5 for all spec files, sans module imports/exports
             // Do not attempt to determine Babel helpers as they will not be representative
             // of the actual code, due to source files not being transpiled yet

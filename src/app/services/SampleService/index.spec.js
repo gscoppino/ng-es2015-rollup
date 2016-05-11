@@ -29,7 +29,7 @@ describe('SampleService', () => {
             it('should return a promise.', () => {
                 SampleService.resolve()
                     .then(value => expect(value).toEqual(42))
-                    .catch(()=> { fail('The value was not resolved.' )});
+                    .catch(()=> { fail('The value was not resolved.' ); });
                 $rootScope.$digest();
             });
         });

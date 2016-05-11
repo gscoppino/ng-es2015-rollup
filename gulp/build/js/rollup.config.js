@@ -1,3 +1,4 @@
+import fs from 'fs';
 import babel from 'rollup-plugin-babel';
 import text from 'rollup-plugin-string';
 import node_resolve from 'rollup-plugin-node-resolve';
@@ -7,7 +8,7 @@ export default {
     rollup: {
         entry: 'src/main.js',
         plugins: [
-            // Transform ES2015 to ES5, sans module imports/exports
+            // Transform ES2015 syntax to ES5, sans module imports/exports
             babel({
                 include: ['src/*.js', 'src/**/*.js'],
                 exclude: 'node_modules/**'
@@ -33,6 +34,7 @@ export default {
     },
     bundle: {
         dest: 'dist/main.js',
+        banner: fs.readFileSync('node_modules/babel-polyfill/dist/polyfill.min.js'), // Polyfill ES2015 features.
         format: 'iife',
         moduleName: 'App',
         sourceMap: true

@@ -12,9 +12,12 @@ export default {
         external: ['angular'], // Load Angular + Mocks via Karma instead to avoid angular-mocks multi-import bug.
         plugins: [
             // Transform ES2015 syntax to ES5 for all spec files, sans module imports/exports
+            // Do not attempt to determine Babel helpers as they will not be representative
+            // of the actual code, due to source files not being transpiled yet
             babel({
                 include: ['src/*.spec.js', 'src/**/*.spec.js'],
-                exclude: ['src/!(*.spec).js', 'src/**/!(*.spec).js', 'node_modules/**']
+                exclude: ['src/!(*.spec).js', 'src/**/!(*.spec).js', 'node_modules/**'],
+                externalHelpers: true
             }),
             // Instrument source code so that code coverage can be determined.
             // Babel is used during instrumentation to transform ES2015 syntax to ES5
@@ -46,6 +49,6 @@ export default {
     bundle: {
         format: 'iife', // Transpiled ES5 exported as a global module.
         sourceMap: 'inline', // For use by Karma in stack traces and code coverage
-        intro: buildBabelHelpers() // Global helpers for transpiled JS to use in the browser.
+        intro: buildBabelHelpers() // Prepend the full suite of Babel helpers to the transpiled bundle
     }
 };

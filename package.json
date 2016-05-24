@@ -4,6 +4,8 @@
   "description": "Seed project for frontend development with PostCSS for CSS, ES2015 for Javascript, Rollup for dependency management, and Angular with Karma+Jasmine for a development framework.",
   "main": "package.json",
   "scripts": {
+    "build:builder": "rollup -c gulp/rollup.config.js",
+    "postinstall": "npm run build:builder",
     "clean": "rm -r dist/*",
     "prebuild": "npm run clean",
     "build": "gulp build",
@@ -20,7 +22,6 @@
     "babel-istanbul": "~0.8.x",
     "babel-plugin-transform-class-properties": "~6.9.x",
     "babel-polyfill": "~6.9.x",
-    "babel-preset-es2015-node4": "~2.1.x",
     "babel-preset-es2015-rollup": "~1.1.x",
     "browser-sync": "~2.12.x",
     "cash-rm": "~0.2.x",

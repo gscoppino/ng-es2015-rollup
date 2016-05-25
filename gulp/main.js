@@ -1,0 +1,12 @@
+import gulp from 'gulp';
+
+import './build/html/tasks';
+import './build/css/tasks';
+import './build/js/tasks';
+import './build/images/tasks';
+import './test/tasks';
+import './serve/tasks';
+
+gulp.task('build', ['build:markup', 'build:css', 'build:js', 'build:images']);
+gulp.task('watch', ['watch:markup', 'watch:css', 'watch:js', 'watch:images']);
+gulp.task('develop', ['watch', 'devserver']);

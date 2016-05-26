@@ -14,9 +14,9 @@ describe('SampleService', () => {
 
     describe('Constructor', () => {
         it('should set dependencies on the instance object.', inject(($injector) => {
-            spyOn(angular, 'extend').and.callFake(angular.noop);
+            spyOn(Object, 'assign').and.callFake(angular.noop);
             SampleService = $injector.get('SampleService');
-            expect(angular.extend).toHaveBeenCalledWith(SampleService, { $log, $q });
+            expect(Object.assign).toHaveBeenCalledWith(SampleService, { $log, $q });
         }));
     });
 

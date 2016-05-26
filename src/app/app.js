@@ -1,6 +1,6 @@
 import angular from 'angular';
-import Api from './api/api';
-import Routes from './routes/routes';
+import Api from './api';
+import Routes from './routes';
 
 Run.$inject = ['$log'];
 function Run ($log) {

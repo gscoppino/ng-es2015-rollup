@@ -8,4 +8,4 @@ gulp.task('build:markup', ['clean:markup'], ()=> {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch:markup', ()=> gulp.watch('src/*.html', ['build:markup']));
+gulp.task('watch:markup', ['build:markup'], ()=> gulp.watch('src/*.html', ['build:markup']));

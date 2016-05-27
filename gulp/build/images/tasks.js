@@ -8,4 +8,4 @@ gulp.task('build:images', ['clean:images'], () => {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch:images', () => gulp.watch('src/assets/**', ['build:images']));
+gulp.task('watch:images', ['build:images'], () => gulp.watch('src/assets/**', ['build:images']));

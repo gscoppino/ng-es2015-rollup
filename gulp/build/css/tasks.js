@@ -17,4 +17,4 @@ gulp.task('build:css', ['clean:css'], ()=> {
         });
 });
 
-gulp.task('watch:css', ()=> gulp.watch('src/**/*.css', ['build:css']));
+gulp.task('watch:css', ['build:css'], ()=> gulp.watch('src/**/*.css', ['build:css']));

@@ -1,6 +1,9 @@
 import gulp from 'gulp';
+import del from 'del';
 
-gulp.task('build:images', () => {
+gulp.task('clean:images', ()=> del('dist/assets'));
+
+gulp.task('build:images', ['clean:images'], () => {
     return gulp.src('src/assets/**/*', { base: 'src' })
         .pipe(gulp.dest('dist'));
 });

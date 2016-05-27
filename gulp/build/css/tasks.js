@@ -1,9 +1,12 @@
 import gulp from 'gulp';
+import del from 'del';
 import fs from 'fs';
 import postcss from 'postcss';
 import POSTCSS_CONFIG from './postcss.config';
 
-gulp.task('build:css', ()=> {
+gulp.task('clean:css', ()=> del([POSTCSS_CONFIG.to, `${POSTCSS_CONFIG.to}.map`]));
+
+gulp.task('build:css', ['clean:css'], ()=> {
     return postcss(POSTCSS_CONFIG.plugins)
         .process(fs.readFileSync(POSTCSS_CONFIG.from), POSTCSS_CONFIG)
         .then((result)=> {

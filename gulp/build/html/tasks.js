@@ -1,6 +1,9 @@
 import gulp from 'gulp';
+import del from 'del';
 
-gulp.task('build:markup', ()=> {
+gulp.task('clean:markup', ()=> del('dist/*.html'));
+
+gulp.task('build:markup', ['clean:markup'], ()=> {
     return gulp.src('src/*.html')
         .pipe(gulp.dest('dist'));
 });

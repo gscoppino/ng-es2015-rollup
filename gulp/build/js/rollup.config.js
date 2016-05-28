@@ -2,6 +2,7 @@ import fs from 'fs';
 import eslint from 'rollup-plugin-eslint';
 import babel from 'rollup-plugin-babel';
 import text from 'rollup-plugin-string';
+import include_paths from 'rollup-plugin-includepaths';
 import node_resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 
@@ -24,6 +25,10 @@ export default {
                 include: 'src/**/*.html',
                 exclude: 'node_modules/**',
                 extensions: ['.html']
+            }),
+            // Allow resolution of relative imports from application root
+            include_paths({
+                paths: ['src']
             }),
             // Resolve any non-relative module imports using NPM
             node_resolve({

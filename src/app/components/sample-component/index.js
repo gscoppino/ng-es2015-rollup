@@ -6,7 +6,8 @@ import controller from './component.js';
 const SampleComponent = angular.module('app.components.sample', [])
     .component('sampleComponent', {
         template,
-        controller
+        controller,
+        bindings: controller.bindings
     });
 
 export default SampleComponent.name;

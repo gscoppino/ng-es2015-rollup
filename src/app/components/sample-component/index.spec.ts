@@ -1,4 +1,4 @@
-import SampleComponentModule from './';
+import SampleComponentModule from './index.ts';
 
 beforeEach(module(SampleComponentModule));
 

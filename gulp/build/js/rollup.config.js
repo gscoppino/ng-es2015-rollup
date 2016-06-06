@@ -1,6 +1,6 @@
 import fs from 'fs';
-import eslint from 'rollup-plugin-eslint';
-import babel from 'rollup-plugin-babel';
+//import eslint from 'rollup-plugin-eslint';
+import typescript from 'rollup-plugin-typescript';
 import text from 'rollup-plugin-string';
 import include_paths from 'rollup-plugin-includepaths';
 import node_resolve from 'rollup-plugin-node-resolve';
@@ -8,17 +8,18 @@ import commonjs from 'rollup-plugin-commonjs';
 
 export default {
     rollup: {
-        entry: 'src/main.js',
+        entry: 'src/main.ts',
         plugins: [
             // Lint source files for syntax errors, code style adherance, and potential oversights.
-            eslint({
-                include: ['src/*.js', 'src/**/*.js'],
-                exclude: 'node_modules/**'
-            }),
+            // eslint({
+            //     include: ['src/*.js', 'src/**/*.js'],
+            //     exclude: 'node_modules/**'
+            // }),
             // Transform ES2015 syntax to ES5, sans module imports/exports
-            babel({
-                include: ['src/*.js', 'src/**/*.js'],
-                exclude: 'node_modules/**'
+            typescript({
+                include: ['src/*.ts', 'src/**/*.ts'],
+                exclude: 'node_modules/**',
+                tsconfig: false
             }),
             // Resolve relative HTML imports
             text({

@@ -1,5 +1,5 @@
 import angular from 'angular';
-import SampleServiceModule from './';
+import SampleServiceModule from './index.ts';
 
 beforeEach(module(SampleServiceModule));
 
@@ -16,7 +16,7 @@ describe('SampleService', () => {
         it('should set dependencies on the instance object.', inject(($injector) => {
             spyOn(Object, 'assign').and.callFake(angular.noop);
             SampleService = $injector.get('SampleService');
-            expect(Object.assign).toHaveBeenCalledWith(SampleService, { $log, $q });
+            expect(Object.assign).toHaveBeenCalledWith(SampleService, { $log: $log, $q: $q });
         }));
     });
 

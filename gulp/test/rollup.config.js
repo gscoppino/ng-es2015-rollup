@@ -1,38 +1,36 @@
-import eslint from 'rollup-plugin-eslint';
-import babel from 'rollup-plugin-babel';
+//import eslint from 'rollup-plugin-eslint';
+import typescript from 'rollup-plugin-typescript';
 import text from 'rollup-plugin-string';
 import include_paths from 'rollup-plugin-includepaths';
 import node_resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import istanbul from 'rollup-plugin-istanbul';
-
-import babel_istanbul from 'babel-istanbul';
-import { buildExternalHelpers as buildBabelHelpers } from 'babel-core';
+//import { buildExternalHelpers as buildBabelHelpers } from 'babel-core';
 
 export default {
     rollup: {
         external: ['angular'], // Load Angular + Mocks via Karma instead to avoid angular-mocks multi-import bug.
         plugins: [
             // Lint all JS files for syntax errors, code style adherance, and potential oversights.
-            eslint({
-                include: ['src/*.js', 'src/**/*.js'],
-                exclude: 'node_modules/**'
-            }),
+            // eslint({
+            //     include: ['src/*.js', 'src/**/*.js'],
+            //     exclude: 'node_modules/**'
+            // }),
             // Transform ES2015 syntax to ES5 for all spec files, sans module imports/exports
             // Do not attempt to determine Babel helpers as they will not be representative
             // of the actual code, due to source files not being transpiled yet
-            babel({
-                include: ['src/*.spec.js', 'src/**/*.spec.js'],
-                exclude: ['src/!(*.spec).js', 'src/**/!(*.spec).js', 'node_modules/**'],
-                externalHelpers: true
+            typescript({
+                include: ['src/*.ts', 'src/**/*.ts'],
+                exclude: ['node_modules/**'],
+                tsconfig: false
+                //externalHelpers: true
             }),
             // Instrument source code so that code coverage can be determined.
             // Babel is used during instrumentation to transform ES2015 syntax to ES5
             // for all source files, sans module imports/exports
             istanbul({
-                include: ['src/!(*.spec).js', 'src/**/!(*.spec).js'],
-                exclude: ['src/*.spec.js', 'src/**/*.spec.js', 'node_modules/**'],
-                instrumenter: babel_istanbul
+                include: ['src/*.spec.ts', 'src/**/*.spec.ts'],
+                exclude: ['src/!(*.spec).ts', 'src/**/!(*.spec).ts', 'node_modules/**']
             }),
             // Resolve relative HTML imports
             text({
@@ -60,6 +58,6 @@ export default {
     bundle: {
         format: 'iife', // Transpiled ES5 exported as a global module.
         sourceMap: 'inline', // For use by Karma in stack traces and code coverage
-        intro: buildBabelHelpers() // Prepend the full suite of Babel helpers to the transpiled bundle
+        //intro: buildBabelHelpers() // Prepend the full suite of Babel helpers to the transpiled bundle
     }
 };

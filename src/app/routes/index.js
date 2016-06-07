@@ -1,6 +1,11 @@
+/** @module App/Routes */
+
 import angular from 'angular';
 
 RouterConfig.$inject = ['$locationProvider'];
+/**
+ * Configure how the Angular $location service handles routing.
+ */
 function RouterConfig($locationProvider) {
     /*
      * Attempt to use HTML5 History API for routing, if available.

@@ -1,5 +1,7 @@
+/** @module App/Api */
+
 import angular from 'angular';
 
-const ApiModule = angular.module('api', []);
+const ApiModule = angular.module('app.api', []);
 
 export default ApiModule.name;

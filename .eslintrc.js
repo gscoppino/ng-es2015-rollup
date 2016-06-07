@@ -16,6 +16,16 @@ module.exports = {
         module: true
     },
     rules: {
+        "require-jsdoc": [
+            "error",
+            {
+                require: {
+                    ClassDeclaration: true,
+                    MethodDefinition: true,
+                    FunctionDeclaration: true
+                }
+            }
+        ],
         indent: [
             "error",
             4

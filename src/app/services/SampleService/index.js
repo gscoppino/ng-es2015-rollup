@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import service from './service.js';
+import service from './SampleService.js';
 
 const SampleService = angular.module('app.services.sample', [])
     .service('SampleService', service);

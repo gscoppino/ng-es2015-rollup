@@ -1,7 +1,7 @@
 import angular from 'angular';
 
-import template from './component.html';
-import controller from './component.js';
+import template from './SampleComponent.html';
+import controller from './SampleComponent.js';
 
 const SampleComponent = angular.module('app.components.sample', [])
     .component('sampleComponent', {

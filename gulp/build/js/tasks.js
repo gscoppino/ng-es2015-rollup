@@ -10,4 +10,4 @@ gulp.task('build:js', ['clean:js'], ()=> {
         .then((bundle)=> bundle.write(ROLLUP_CONFIG.bundle));
 });
 
-gulp.task('watch:js', ['build:js'], ()=> gulp.watch('src/**/!(*.spec).js', ['build:js']));
+gulp.task('watch:js', ['build:js'], ()=> gulp.watch(['src/**/!(*.spec).js', 'src/app/**/*.html'], ['build:js']));

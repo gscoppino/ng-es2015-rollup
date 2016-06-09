@@ -1,3 +1,7 @@
+import angular from 'angular';
+
+import template from './SampleComponent.html';
+
 class SampleComponentController {
     static $inject = [];
 
@@ -14,4 +18,11 @@ class SampleComponentController {
     $postLink() {}
 }
 
-export default SampleComponentController;
+const SampleComponent = angular.module('app.components.sample', [])
+    .component('sampleComponent', {
+        template,
+        controller: SampleComponentController,
+        bindings: SampleComponentController.bindings
+    });
+
+export default SampleComponent.name;

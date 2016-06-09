@@ -1,3 +1,5 @@
+import angular from 'angular';
+
 class SampleService {
     static $inject = ['$log', '$q'];
 
@@ -14,4 +16,7 @@ class SampleService {
     }
 }
 
-export default SampleService;
+const SampleServiceModule = angular.module('app.services.sample', [])
+    .service('SampleService', SampleService);
+
+export default SampleServiceModule.name;

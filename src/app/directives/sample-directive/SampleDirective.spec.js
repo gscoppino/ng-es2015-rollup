@@ -1,5 +1,5 @@
 import angular from 'angular';
-import SampleDirectiveModule from './';
+import SampleDirectiveModule from './SampleDirective';
 
 beforeEach(module(SampleDirectiveModule));
 

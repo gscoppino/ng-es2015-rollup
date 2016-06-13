@@ -1,4 +1,5 @@
 import angular from 'angular';
+import UIRouter from 'angular-ui-router';
 
 RouterConfig.$inject = ['$locationProvider'];
 function RouterConfig($locationProvider) {
@@ -12,7 +13,7 @@ function RouterConfig($locationProvider) {
 }
 
 const RouterModule = angular
-    .module('app.routes', [])
+    .module('app.routes', [UIRouter])
     .config(RouterConfig);
 
 export default RouterModule.name;

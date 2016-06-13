@@ -45,8 +45,8 @@
     "rollup-plugin-istanbul": "~1.0.x",
     "rollup-plugin-node-resolve": "~1.5.x",
     "rollup-plugin-string": "~1.0.x",
-    "stylelint": "~6.5.x",
-    "stylelint-config-standard": "~8.0.x"
+    "stylelint": "~6.6.x",
+    "stylelint-config-standard": "~9.0.x"
   },
   "dependencies": {
     "angular": "~1.5.x",

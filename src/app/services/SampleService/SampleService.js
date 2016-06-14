@@ -16,7 +16,9 @@ class SampleService {
     }
 }
 
-const SampleServiceModule = angular.module('app.services.sample', [])
-    .service('SampleService', SampleService);
+const SampleServiceName = SampleService.name;
 
-export default SampleServiceModule.name;
+export { SampleServiceName as SampleServiceInjectable };
+export default angular.module('app.services.sample', [])
+    .service(SampleServiceName, SampleService)
+    .name;

@@ -1,5 +1,6 @@
 import angular from 'angular';
 import SampleDirectiveModule from './SampleDirective';
+import { SampleServiceInjectable } from 'app/services/SampleService/SampleService';
 
 beforeEach(module(SampleDirectiveModule));
 
@@ -9,7 +10,7 @@ describe('SampleDirective', ()=> {
     beforeEach(inject(($injector) => {
         $rootScope = $injector.get('$rootScope');
         $compile = $injector.get('$compile');
-        SampleService = $injector.get('SampleService');
+        SampleService = $injector.get(SampleServiceInjectable);
 
         spyOn(SampleService, 'log').and.callFake(angular.noop);
 

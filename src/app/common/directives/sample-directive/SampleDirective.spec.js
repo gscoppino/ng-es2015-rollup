@@ -1,13 +1,13 @@
 import angular from 'angular';
 import SampleDirectiveModule from './SampleDirective';
-import { SampleServiceInjectable } from 'app/services/SampleService/SampleService';
+import { SampleServiceInjectable } from 'app/common/services/SampleService/SampleService';
 
-beforeEach(module(SampleDirectiveModule));
+beforeEach(angular.mock.module(SampleDirectiveModule));
 
 describe('SampleDirective', ()=> {
     let $rootScope, $compile, SampleService, element;
 
-    beforeEach(inject(($injector) => {
+    beforeEach(angular.mock.inject(($injector) => {
         $rootScope = $injector.get('$rootScope');
         $compile = $injector.get('$compile');
         SampleService = $injector.get(SampleServiceInjectable);

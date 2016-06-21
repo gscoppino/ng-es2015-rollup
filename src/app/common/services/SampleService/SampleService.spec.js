@@ -1,12 +1,12 @@
 import angular from 'angular';
 import SampleServiceModule from './SampleService';
 
-beforeEach(module(SampleServiceModule));
+beforeEach(angular.mock.module(SampleServiceModule));
 
 describe('SampleService', () => {
     let $rootScope, $log, $q, SampleService;
 
-    beforeEach(inject(($injector) => {
+    beforeEach(angular.mock.inject(($injector) => {
         $rootScope = $injector.get('$rootScope');
         $log = $injector.get('$log');
         $q = $injector.get('$q');

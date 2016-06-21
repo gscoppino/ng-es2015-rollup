@@ -1,5 +1,5 @@
 import angular from 'angular';
-import SampleService, { SampleServiceInjectable } from 'app/services/SampleService/SampleService';
+import SampleService, { SampleServiceInjectable } from 'app/common/services/SampleService/SampleService';
 
 SampleDirective.$inject = [SampleServiceInjectable];
 function SampleDirective(SampleService) {

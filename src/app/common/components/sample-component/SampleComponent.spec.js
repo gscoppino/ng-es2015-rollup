@@ -1,12 +1,13 @@
+import angular from 'angular';
 import SampleComponentModule from './SampleComponent';
 
-beforeEach(module(SampleComponentModule));
+beforeEach(angular.mock.module(SampleComponentModule));
 
 describe('SampleComponent', () => {
     describe('Template', () => {
         let $rootScope, $compile;
 
-        beforeEach(inject(($injector) => {
+        beforeEach(angular.mock.inject(($injector) => {
             $rootScope = $injector.get('$rootScope');
             $compile = $injector.get('$compile');
         }));

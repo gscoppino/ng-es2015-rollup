@@ -1,17 +1,31 @@
-import ROLLUP_CONFIG from './rollup.config';
-
 export default {
-    frameworks: ['jasmine'],
+    frameworks: ['systemjs', 'jasmine'],
     files: [
-        'node_modules/babel-polyfill/dist/polyfill.min.js', // Polyfill ES2015 features
-        'node_modules/angular/angular.js',
-        'node_modules/angular-mocks/angular-mocks.js',
         'src/**/*.spec.js'
     ],
     preprocessors: {
-        'src/**/*.spec.js': ['rollup', 'sourcemap']
+        'src/**/*.spec.js': ['sourcemap']
     },
-    rollupPreprocessor: ROLLUP_CONFIG,
+    systemjs: {
+        configFile: 'src/system.config.js',
+        config: {
+            transpiler: false,
+            map: {
+                // SystemJS
+                'systemjs': 'node_modules/systemjs/dist/system.js',
+
+                // Extra External Dependencies
+                'angular-mocks': 'node_modules/angular-mocks/ngMock.js'
+            }
+        },
+        includeFiles: [
+            //'node_modules/babel-polyfill/dist/polyfill.min.js'
+        ],
+        serveFiles: [
+            { pattern: './node_modules/**/*.js', included: false, served: true, watched: false },
+            'src/**/!(*.spec).js'
+        ]
+    },
     browsers: ['PhantomJS'],
     port: 9876,
     concurrency: Infinity,

@@ -1,13 +1,17 @@
 import gulp from 'gulp';
 import del from 'del';
-import { rollup } from 'rollup';
-import ROLLUP_CONFIG from './rollup.config';
+import path from 'path';
+import Builder from 'systemjs-builder';
 
-gulp.task('clean:js', ()=> del([ROLLUP_CONFIG.bundle.dest, `${ROLLUP_CONFIG.bundle.dest}.map`]));
+const builder = new Builder();
+builder.loadConfig('src/system.config.js');
+
+gulp.task('clean:js', ()=> del(['dist/main.js', 'dist/main.js.map']));
 
 gulp.task('build:js', ['clean:js'], ()=> {
-    return rollup(ROLLUP_CONFIG.rollup)
-        .then((bundle)=> bundle.write(ROLLUP_CONFIG.bundle));
+    return builder.buildStatic('src/main.js', 'dist/main.js', {
+        sourceMaps: true
+    });
 });
 
 gulp.task('watch:js', ['build:js'], ()=> gulp.watch(['src/**/!(*.spec).js', 'src/app/**/*.html'], ['build:js']));

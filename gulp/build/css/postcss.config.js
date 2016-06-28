@@ -8,9 +8,10 @@ export default {
     to: 'dist/main.css',
     map: { inline: false },
     plugins: [
-        cssimport(),
         stylelint(),
-        reporter(),
+        cssimport({
+            plugins: [stylelint()]
+        }),
         cssnext({
             browsers: [
                 "IE 11",
@@ -23,6 +24,7 @@ export default {
                 "last 2 iOS versions",
                 "last 2 ExplorerMobile versions"
             ]
-        })
+        }),
+        reporter()
     ]
 };

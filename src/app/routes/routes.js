@@ -1,8 +1,9 @@
 import angular from 'angular';
 import UIRouter from 'angular-ui-router';
 
-RouterConfig.$inject = ['$locationProvider'];
 function RouterConfig($locationProvider) {
+    'ngInject';
+
     /*
      * Attempt to use HTML5 History API for routing, if available.
      * Otherwise, route using hashbangs.

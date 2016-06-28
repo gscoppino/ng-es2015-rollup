@@ -32,6 +32,7 @@
     "karma-phantomjs-launcher": "~1.0.x",
     "karma-rollup-preprocessor": "~2.0.x",
     "karma-sourcemap-loader": "~0.3.x",
+    "ng-annotate": "~1.2.x",
     "phantomjs-prebuilt": "~2.1.x",
     "postcss": "~5.0.x",
     "postcss-cssnext": "~2.6.x",

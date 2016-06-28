@@ -2,8 +2,9 @@ import angular from 'angular';
 import Api from './api/api';
 import Routes from './routes/routes';
 
-Run.$inject = ['$log'];
 function Run ($log) {
+    'ngInject';
+
     $log.log('Loaded!');
 }
 

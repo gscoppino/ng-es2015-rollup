@@ -1,8 +1,9 @@
 import angular from 'angular';
 import SampleService, { SampleServiceInjectable } from 'app/common/services/SampleService/SampleService';
 
-SampleDirective.$inject = [SampleServiceInjectable];
 function SampleDirective(SampleService) {
+    'ngInject';
+
     return {
         restrict: 'A',
         link: function (scope, element) {

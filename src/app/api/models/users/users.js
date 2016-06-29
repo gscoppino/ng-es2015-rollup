@@ -5,7 +5,10 @@ class Users {
     static $inject = ['Models'];
 
     constructor(Models) {
-        return Models.create('users');
+        return Models.create('users', {
+            nestedResources: ['card'],
+            nestedEndpoints: ['current']
+        });
     }
 }
 

@@ -10,7 +10,7 @@ class Models {
         this._cache = {};
     }
 
-    baseCreate(name, resource) {
+    create(name, options={}) {
         let cacheInitialized = {};
 
         const cache = this._cache[name] = this.$cacheFactory(name);
@@ -45,7 +45,7 @@ class Models {
             }
         };
 
-        const model = this.$resource(resource, {}, {
+        const model = this.$resource(this.ApiUrl(name, ':id'), {}, {
             get: { method: 'GET', cache },
             getList: { method: 'GET', isArray: true, cache, interceptor },
             forceGet: { method: 'GET', interceptor },
@@ -57,14 +57,6 @@ class Models {
         });
 
         return model;
-    }
-
-    create(name) {
-        return this.baseCreate(name, this.ApiUrl(name, ':id'));
-    }
-
-    nestedCreate(name, nestedName) {
-        return this.baseCreate(name, this.ApiUrl(name, ':id', nestedName, ':nestedId'));
     }
 
     reset() {

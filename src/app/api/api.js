@@ -1,5 +1,22 @@
 import angular from 'angular';
+import ngResource from 'angular-resource';
 
-const ApiModule = angular.module('api', []);
+ApiConfig.$inject = ['$resourceProvider'];
+function ApiConfig($resourceProvider) {
+    $resourceProvider.stripTrailingSlashes = true;
+    $resourceProvider.cancellable = true;
+}
 
-export default ApiModule.name;
+const ApiBase = '/api';
+class ApiUrl {
+    constructor() {
+        return function(...URIFragments) {
+            return [ApiBase, ...URIFragments].join('/');
+        };
+    }
+}
+
+export default angular.module('api', [ngResource])
+    .config(ApiConfig)
+    .service('ApiUrl', ApiUrl)
+    .name;

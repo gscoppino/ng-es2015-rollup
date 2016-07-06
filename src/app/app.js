@@ -7,8 +7,6 @@ function Run ($log) {
     $log.log('Loaded!');
 }
 
-const AppModule = angular
-    .module('app', [Api, Routes])
-        .run(Run);
-
-export default AppModule.name;
+export default angular.module('app', [Api, Routes])
+    .run(Run)
+    .name;

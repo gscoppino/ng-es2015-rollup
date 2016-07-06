@@ -12,8 +12,6 @@ function RouterConfig($locationProvider) {
     $locationProvider.html5Mode(true);
 }
 
-const RouterModule = angular
-    .module('app.routes', [UIRouter])
-    .config(RouterConfig);
-
-export default RouterModule.name;
+export default angular.module('app.routes', [UIRouter])
+    .config(RouterConfig)
+    .name;

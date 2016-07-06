@@ -1,5 +1,11 @@
 import angular from 'angular';
+import Restangular from 'restangular-umd';
 
-const ApiModule = angular.module('api', []);
+ApiConfig.$inject = ['RestangularProvider'];
+function ApiConfig(RestangularProvider) {
+    RestangularProvider.setBaseUrl('/api');
+}
 
-export default ApiModule.name;
+export default angular.module('app.api', [Restangular])
+    .config(ApiConfig)
+    .name;

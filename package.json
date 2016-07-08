@@ -53,6 +53,7 @@
     "angular": "~1.5.x",
     "angular-mocks": "~1.5.x",
     "angular-ui-router": "~0.3.x",
+    "immutable": "~3.8.x",
     "restangular-umd": "~1.0.1"
   }
 }

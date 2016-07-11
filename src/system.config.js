@@ -12,7 +12,10 @@ System.config({
 
         // External Dependencies
         'angular': 'node_modules/angular/angular.js',
-        'angular-ui-router': 'node_modules/angular-ui-router/release/angular-ui-router.js'
+        'angular-ui-router': 'node_modules/angular-ui-router/release/angular-ui-router.js',
+        'lodash': 'node_modules/lodash/lodash.js',
+        'restangular-umd': 'node_modules/restangular-umd/dist/restangular.js',
+        'immutable': 'node_modules/immutable/dist/immutable.js'
     },
     meta: {
         'src/app/**/*.html': { loader: 'html-import' },

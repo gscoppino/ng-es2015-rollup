@@ -15,10 +15,9 @@ class SampleService {
         this.$log.log('Sample Service: log message.');
     }
 }
+const { name: SampleServiceInjectable } = SampleService;
 
-const SampleServiceName = SampleService.name;
-
-export { SampleServiceName as SampleServiceInjectable };
+export { SampleServiceInjectable };
 export default angular.module('app.services.sample', [])
-    .service(SampleServiceName, SampleService)
+    .service(SampleServiceInjectable, SampleService)
     .name;

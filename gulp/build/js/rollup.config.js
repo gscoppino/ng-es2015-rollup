@@ -47,7 +47,6 @@ export default {
         dest: 'dist/main.js',
         banner: fs.readFileSync('node_modules/babel-polyfill/dist/polyfill.min.js'), // Polyfill ES2015 features.
         format: 'iife',
-        moduleName: 'App',
         sourceMap: true
     }
 };

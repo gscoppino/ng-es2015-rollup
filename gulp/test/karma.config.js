@@ -1,4 +1,4 @@
-import ROLLUP_CONFIG from './rollup.config';
+import ROLLUP_TESTING_CONFIG from './rollup.testing';
 
 export default {
     frameworks: ['jasmine'],
@@ -11,7 +11,7 @@ export default {
     preprocessors: {
         'src/**/*.spec.js': ['rollup', 'sourcemap']
     },
-    rollupPreprocessor: ROLLUP_CONFIG,
+    rollupPreprocessor: ROLLUP_TESTING_CONFIG,
     browsers: ['PhantomJS'],
     port: 9876,
     concurrency: Infinity,

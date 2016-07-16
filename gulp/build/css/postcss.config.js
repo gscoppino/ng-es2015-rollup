@@ -14,7 +14,7 @@ export default {
         }),
         cssnext({
             browsers: [
-                "IE 11",
+                "IE 9",
                 "last 2 Chrome versions",
                 "last 2 Firefox versions",
                 "last 2 Edge versions",

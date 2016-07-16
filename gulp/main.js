@@ -16,3 +16,5 @@ gulp.task('watch', ['watch:markup', 'watch:css', 'watch:js', 'watch:images',
                     'watch:git']);
 
 gulp.task('develop', ['watch'], ()=> gulp.start('devserver'));
+
+gulp.task('build-production', ['build:markup', 'build:css-production', 'build:js-production', 'build:images']);

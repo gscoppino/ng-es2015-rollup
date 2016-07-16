@@ -2,6 +2,7 @@ import stylelint from 'stylelint';
 import reporter from 'postcss-reporter';
 import cssimport from 'postcss-import';
 import cssnext from 'postcss-cssnext';
+import BROWSERS from './browserslist';
 
 export default {
     from: 'src/main.css',
@@ -13,17 +14,7 @@ export default {
             plugins: [stylelint()]
         }),
         cssnext({
-            browsers: [
-                "IE 9",
-                "last 2 Chrome versions",
-                "last 2 Firefox versions",
-                "last 2 Edge versions",
-                "last 2 Safari versions",
-                "last 2 Android versions",
-                "last 2 ChromeAndroid versions",
-                "last 2 iOS versions",
-                "last 2 ExplorerMobile versions"
-            ]
+            browsers: BROWSERS
         }),
         reporter()
     ]

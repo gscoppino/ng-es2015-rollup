@@ -1,5 +1,6 @@
 import angular from 'angular';
 import template from './app.html';
+import Config from './config/config';
 import Api from './api/api';
 import Routes from './routes/routes';
 
@@ -20,6 +21,6 @@ const AppComponentTag = 'app',
     };
 
 export { AppComponentTag };
-export default angular.module('app', [Api, Routes])
+export default angular.module('app', [Config, Api, Routes])
     .component(AppComponentTag, AppComponent)
     .name;

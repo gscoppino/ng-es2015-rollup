@@ -1,5 +1,14 @@
 import angular from 'angular';
 
+RootscopeConfig.$inject = ['$rootScopeProvider'];
+function RootscopeConfig($rootScopeProvider) {
+    /*
+     * Keep the limit on how many times $digest can trigger new model updates,
+     * as low as possible. Never go above the Angular default of 10 iterations.
+     */
+    $rootScopeProvider.digestTtl(1);
+}
+
 CompilerConfig.$inject = ['$compileProvider'];
 function CompilerConfig($compileProvider) {
     /*
@@ -13,8 +22,31 @@ function CompilerConfig($compileProvider) {
     if (location.hostname !== 'localhost') {
         $compileProvider.debugInfoEnabled(false);
     }
+
+    /*
+     * Keep the limit on how many times $onChanges can trigger new model updates,
+     * as low as possible. Never go above the Angular default of 10 iterations.
+     */
+    $compileProvider.onChangesTtl(0);
+}
+
+HttpConfig.$inject = ['$httpProvider'];
+function HttpConfig($httpProvider) {
+    /*
+     * Allow coalescing multiple HTTP responses into a single digest cycle.
+     * This is just a performance optimization.
+     */
+    $httpProvider.useApplyAsync(true);
+
+    /*
+     * Disable non-Promises/A+ handlers on promises returned by $http.
+     * `success` and `error` should not be used, use `then` and `catch` instead.
+     */
+    $httpProvider.useLegacyPromiseExtensions = false;
 }
 
 export default angular.module('app.config', [])
+    .config(RootscopeConfig)
     .config(CompilerConfig)
+    .config(HttpConfig)
     .name;

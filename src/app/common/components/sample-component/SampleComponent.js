@@ -18,10 +18,14 @@ class SampleComponentController {
     $postLink() {}
 }
 
-export default angular.module('app.components.sample', [])
-    .component('sampleComponent', {
+const SampleComponentTag = 'sampleComponent',
+    SampleComponent = {
         template,
         controller: SampleComponentController,
         bindings: SampleComponentController.bindings
-    })
+    };
+
+export { SampleComponentTag };
+export default angular.module('app.components.sample', [])
+    .component(SampleComponentTag, SampleComponent)
     .name;

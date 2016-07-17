@@ -4,7 +4,7 @@ import SampleComponentModule from './SampleComponent';
 beforeEach(angular.mock.module(SampleComponentModule));
 
 describe('SampleComponent', () => {
-    describe('Template', () => {
+    describe('View', () => {
         let $rootScope, $compile;
 
         beforeEach(angular.mock.inject(($injector) => {

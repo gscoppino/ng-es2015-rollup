@@ -1,8 +1,8 @@
 import angular from 'angular';
 import SampleService, { SampleServiceInjectable } from 'app/common/services/SampleService/SampleService';
 
-SampleDirective.$inject = [SampleServiceInjectable];
-function SampleDirective(SampleService) {
+sampleDirective.$inject = [SampleServiceInjectable];
+function sampleDirective(SampleService) {
     return {
         restrict: 'A',
         link: function (scope, element) {
@@ -11,7 +11,9 @@ function SampleDirective(SampleService) {
         }
     };
 }
+const { name: SampleDirectiveTag } = sampleDirective;
 
+export { SampleDirectiveTag };
 export default angular.module('app.directives.sample', [SampleService])
-    .directive('sampleDirective', SampleDirective)
+    .directive(SampleDirectiveTag, sampleDirective)
     .name;

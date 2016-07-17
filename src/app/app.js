@@ -12,10 +12,14 @@ class AppController {
     }
 }
 
-export default angular.module('app', [Api, Routes])
-    .component('app', {
+const AppComponentTag = 'app',
+    AppComponent = {
         template,
         controller: AppController,
         bindings: AppController.bindings
-    })
+    };
+
+export { AppComponentTag };
+export default angular.module('app', [Api, Routes])
+    .component(AppComponentTag, AppComponent)
     .name;

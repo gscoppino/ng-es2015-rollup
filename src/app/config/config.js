@@ -1,4 +1,5 @@
 import angular from 'angular';
+import ngAria from 'angular-aria';
 
 RootscopeConfig.$inject = ['$rootScopeProvider'];
 function RootscopeConfig($rootScopeProvider) {
@@ -45,7 +46,7 @@ function HttpConfig($httpProvider) {
     $httpProvider.useLegacyPromiseExtensions = false;
 }
 
-export default angular.module('app.config', [])
+export default angular.module('app.config', [ngAria])
     .config(RootscopeConfig)
     .config(CompilerConfig)
     .config(HttpConfig)

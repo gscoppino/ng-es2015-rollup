@@ -1,4 +1,4 @@
-import ROLLUP_TESTING_CONFIG from './rollup.testing';
+import WEBPACK_TESTING_CONFIG from './webpack.testing';
 
 export default {
     frameworks: ['jasmine'],
@@ -9,9 +9,9 @@ export default {
         'src/**/*.spec.js'
     ],
     preprocessors: {
-        'src/**/*.spec.js': ['rollup', 'sourcemap']
+        'src/**/*.spec.js': ['webpack', 'sourcemap']
     },
-    rollupPreprocessor: ROLLUP_TESTING_CONFIG,
+    webpack: WEBPACK_TESTING_CONFIG,
     browsers: ['PhantomJS'],
     port: 9876,
     concurrency: Infinity,

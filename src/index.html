@@ -16,6 +16,20 @@
         <!-- Application data -->
         <title>App</title>
         <base href="/"> <!-- Base server URL, appended to relative URL's -->
+
+        <!-- Critical Application Resources -->
+        <!-- TODO: Inline at build-time -->
+        <style>
+        </style>
+        <script>
+            navigator.serviceWorker && navigator.serviceWorker
+                .register('/worker.js')
+                .then(function () {
+                    console.log('Service Worker Registered.');
+                });
+        </script>
+
+        <!-- Full Application Resources -->
         <link type="text/css" rel="stylesheet" href="main.css">
         <script type="text/javascript" defer src="main.js"></script>
     </head>

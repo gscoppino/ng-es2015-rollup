@@ -58,6 +58,7 @@ export default {
         ]
     },
     bundle: {
+        globals: { angular: 'angular' }, // Angular will have been loaded by Karma
         format: 'iife', // Transpiled ES5 exported as a global module.
         sourceMap: 'inline', // For use by Karma in stack traces and code coverage
         intro: buildBabelHelpers() // Prepend the full suite of Babel helpers to the transpiled bundle

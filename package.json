@@ -30,7 +30,7 @@
     "jasmine-core": "~2.4.x",
     "json-server": "~0.8.x",
     "karma": "~1.1.x",
-    "karma-coverage": "~1.0.x",
+    "karma-coverage": "~1.1.x",
     "karma-jasmine": "~1.0.x",
     "karma-phantomjs-launcher": "~1.0.x",
     "karma-rollup-preprocessor": "~2.0.x",

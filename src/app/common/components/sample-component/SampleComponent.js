@@ -14,6 +14,7 @@ class SampleComponentController {
     constructor() {}
     $onInit() {}
     $onChanges() {}
+    $doCheck() {}
     $onDestroy() {}
     $postLink() {}
 }

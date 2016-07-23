@@ -1,6 +1,6 @@
 {
   "name": "ng-es2015-rollup",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Seed project for frontend development with PostCSS for CSS, ES2015 for Javascript, Rollup for dependency management, and Angular with Karma+Jasmine for a development framework.",
   "main": "dist/main.js",
   "scripts": {

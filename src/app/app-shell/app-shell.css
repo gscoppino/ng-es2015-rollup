@@ -1,0 +1,17 @@
+app-shell {
+    display: block;
+
+    & ng-transclude {
+        display: inherit;
+    }
+
+    & label {
+        display: none;
+    }
+
+    & .decorated {
+        & label {
+            display: block;
+        }
+    }
+}

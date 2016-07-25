@@ -16,10 +16,18 @@
         <!-- Application data -->
         <title>App</title>
         <base href="/"> <!-- Base server URL, appended to relative URL's -->
+
+<!-- inject:critical-css -->
+<!-- endinject -->
+
+        <!-- Application -->
         <link type="text/css" rel="stylesheet" href="main.css">
         <script type="text/javascript" defer src="main.js"></script>
     </head>
     <body>
-        <app></app>
+        <app>
+<!-- inject:app-shell -->
+<!-- endinject -->
+        </app>
     </body>
 </html>

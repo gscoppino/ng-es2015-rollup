@@ -1,6 +1,6 @@
 {
   "name": "ng-es2015-rollup",
-  "version": "1.1.2",
+  "version": "1.1.0",
   "description": "Seed project for frontend development with PostCSS for CSS, ES2015 for Javascript, Rollup for dependency management, and Angular with Karma+Jasmine for a development framework.",
   "main": "dist/main.js",
   "scripts": {
@@ -10,6 +10,7 @@
     "build": "gulp build",
     "build-production": "gulp build-production",
     "develop": "gulp develop",
+    "production": "gulp production",
     "test": "gulp test",
     "test-ci": "gulp watch:test"
   },
@@ -27,6 +28,9 @@
     "cssnano": "~3.7.x",
     "del": "~2.2.x",
     "gulp": "~3.9.x",
+    "gulp-htmlmin": "~2.0.x",
+    "gulp-inject": "~4.1.x",
+    "gulp-postcss": "~6.1.x",
     "jasmine-core": "~2.4.x",
     "json-server": "~0.8.x",
     "karma": "~1.1.x",

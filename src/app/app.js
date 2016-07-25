@@ -1,11 +1,11 @@
 import angular from 'angular';
 import UIRouter from 'angular-ui-router';
-import template from './app.html';
-import Config from './config/config';
+import Config from './common/config/config';
 import Api from './api/api';
 import Routes from './routes/routes';
 import AppShell from './app-shell/app-shell';
 import LoaderSpinner from './common/components/loader-spinner/loader-spinner';
+import template from './app.html';
 
 class AppController {
     static $inject = ['$rootScope', '$log'];

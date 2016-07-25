@@ -13,7 +13,7 @@ ROLLUP_PRODUCTION_CONFIG.rollup = Object.assign({}, ROLLUP_CONFIG.rollup, {
 
 // Write to a different file than dev version
 ROLLUP_PRODUCTION_CONFIG.bundle = Object.assign({}, ROLLUP_CONFIG.bundle, {
-    dest: 'dist/main.min.js',
+    dest: 'dist/main.js',
     sourceMap: false
 });
 

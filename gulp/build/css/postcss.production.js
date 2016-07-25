@@ -5,7 +5,7 @@ import cssnano from 'cssnano';
 // Write to different file than dev version
 // Add minification step
 const POSTCSS_PRODUCTION_CONFIG = Object.assign({}, POSTCSS_CONFIG, {
-    to: 'dist/main.min.css',
+    to: 'dist/main.css',
     map: false,
     plugins: [
         ...POSTCSS_CONFIG.plugins,

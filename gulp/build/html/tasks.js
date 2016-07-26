@@ -31,11 +31,11 @@ gulp.task('build:markup-production', ['clean:markup'], ()=> {
         .pipe(htmlmin({ collapseWhitespace: true, conservativeCollapse: true }));
 
     let criticalCSS = gulp.src([
+        'src/app/common/styles/**/*.css',
+        'src/app/common/components/loader-spinner/loader-spinner.css',
         'src/main.css',
-        'src/app/common/styles/box-model.css',
         'src/app/app.css',
         'src/app/app-shell/app-shell.css',
-        'src/app/common/components/loader-spinner/loader-spinner.css'
     ])
         .pipe(postcss([cssnext({ browsers: BROWSERS }), cssnano({ browsers: BROWSERS})]));
 

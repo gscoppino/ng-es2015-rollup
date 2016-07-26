@@ -1,7 +1,7 @@
 import angular from 'angular';
 import template from './loader-spinner.html';
 
-const LoaderSpinnerComponentTag = 'loader-spinner',
+const LoaderSpinnerComponentTag = 'loaderSpinner',
     LoaderSpinnerComponent = {
         template
     };

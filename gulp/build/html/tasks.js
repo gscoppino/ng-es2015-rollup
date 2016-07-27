@@ -75,6 +75,9 @@ gulp.task('build:markup-production', ['clean:markup'], ()=> {
     let target = gulp.src('src/index.html');
 
     return injectCSS(injectHTML(target, INJECT_CRITICAL.html), INJECT_CRITICAL.css)
-        .pipe(htmlmin({ collapseWhitespace: true, conservativeCollapse: true }))
+        .pipe(htmlmin({
+            collapseWhitespace: true,
+            removeComments: true // NOTE: This is safe to use with conditional comments
+        }))
         .pipe(gulp.dest('dist'));
 });

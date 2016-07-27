@@ -53,8 +53,7 @@ function injectHTML(target, injectConfig) {
 function injectCSS(target, source) {
     let transformedCSS = gulp.src(source)
         .pipe(postcss([
-            cssnext({ browsers: BROWSERS }),
-            cssnano({ browsers: BROWSERS })
+            cssnext({ browsers: BROWSERS })
         ]));
 
     console.log("Injecting critical CSS from: ", source);
@@ -77,7 +76,8 @@ gulp.task('build:markup-production', ['clean:markup'], ()=> {
     return injectCSS(injectHTML(target, INJECT_CRITICAL.html), INJECT_CRITICAL.css)
         .pipe(htmlmin({
             collapseWhitespace: true,
-            removeComments: true // NOTE: This is safe to use with conditional comments
+            removeComments: true, // NOTE: This is safe to use with conditional comments,
+            minifyCSS: true
         }))
         .pipe(gulp.dest('dist'));
 });

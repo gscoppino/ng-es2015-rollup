@@ -18,7 +18,6 @@
   "license": "MIT",
   "devDependencies": {
     "babel-core": "~6.10.x",
-    "babel-eslint": "~6.1.x",
     "babel-istanbul": "~0.11.x",
     "babel-polyfill": "~6.9.x",
     "babel-preset-es2015-rollup": "~1.1.x",

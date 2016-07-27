@@ -72,7 +72,7 @@ function injectCSS(target, source) {
 }
 
 gulp.task('build:markup-production', ['clean:markup'], ()=> {
-    let target = gulp.src('src/index.html');
+    let target = gulp.src('src/*.html');
 
     return injectCSS(injectHTML(target, INJECT_CRITICAL.html), INJECT_CRITICAL.css)
         .pipe(htmlmin({

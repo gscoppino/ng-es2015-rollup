@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 class SampleService {
-    static $inject = ['$log', '$q'];
+    static get $inject() { return ['$log', '$q'] };
 
     constructor($log, $q) {
         Object.assign(this, { $log, $q });

@@ -2,10 +2,12 @@ import angular from 'angular';
 import template from './app-shell.html';
 
 class AppShellController {
-    static $inject = [];
-    static bindings = {
-        showDecorations: '<'
-    };
+    static get $inject() { return []; }
+    static get bindings() {
+        return {
+            showDecorations: '<'
+        };
+    }
 }
 
 const AppShellComponentTag = 'appShell',

@@ -8,8 +8,10 @@ import LoaderSpinner from './common/components/loader-spinner/loader-spinner';
 import template from './app.html';
 
 class AppController {
-    static $inject = ['$rootScope', '$log'];
-    static bindings = {};
+    static get $inject() { return ['$rootScope', '$log']; }
+    static get bindings() {
+        return {};
+    }
 
     constructor($rootScope, $log) {
         Object.assign(this, { $rootScope });

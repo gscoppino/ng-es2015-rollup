@@ -3,13 +3,14 @@ import angular from 'angular';
 import template from './SampleComponent.html';
 
 class SampleComponentController {
-    static $inject = [];
-
-    static bindings = {
-        input1: '<',
-        input2: '@',
-        output1: '&'
-    };
+    static get $inject() { return []; }
+    static get bindings() {
+        return {
+            input1: '<',
+            input2: '@',
+            output1: '&'
+        };
+    }
 
     constructor() {}
     $onInit() {}

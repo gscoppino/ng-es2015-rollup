@@ -51,8 +51,8 @@
     "rollup-plugin-node-resolve": "~1.7.x",
     "rollup-plugin-string": "~2.0.x",
     "rollup-plugin-uglify": "~1.0.x",
-    "stylelint": "~6.8.x",
-    "stylelint-config-standard": "~10.0.x"
+    "stylelint": "~7.0.x",
+    "stylelint-config-standard": "~11.0.x"
   },
   "dependencies": {
     "angular": "~1.5.x",

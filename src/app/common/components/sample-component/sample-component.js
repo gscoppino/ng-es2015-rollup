@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import template from './SampleComponent.html';
+import template from './sample-component.html';
 
 class SampleComponentController {
     static get $inject() { return []; }
@@ -28,6 +28,6 @@ const SampleComponentTag = 'sampleComponent',
     };
 
 export { SampleComponentTag };
-export default angular.module('app.components.sample', [])
+export default angular.module('app.components.sample-component', [])
     .component(SampleComponentTag, SampleComponent)
     .name;

@@ -1,5 +1,5 @@
 import angular from 'angular';
-import SampleDirectiveModule from './SampleDirective';
+import SampleDirectiveModule from './sample-directive';
 import { SampleServiceInjectable } from 'app/common/services/SampleService/SampleService';
 
 beforeEach(angular.mock.module(SampleDirectiveModule));

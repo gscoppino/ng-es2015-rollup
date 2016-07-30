@@ -1,9 +1,9 @@
 import angular from 'angular';
-import SampleComponentModule from './SampleComponent';
+import SampleComponentModule from './sample-component';
 
 beforeEach(angular.mock.module(SampleComponentModule));
 
-describe('SampleComponent', () => {
+describe('sample-component', () => {
     describe('View', () => {
         let $rootScope, $compile;
 

@@ -1,10 +1,10 @@
 import angular from 'angular';
-import SampleDirectiveModule from './sample-directive';
+import SampleDirective from './sample-directive';
 import { SampleServiceInjectable } from 'app/common/services/SampleService/SampleService';
 
-beforeEach(angular.mock.module(SampleDirectiveModule));
+beforeEach(angular.mock.module(SampleDirective));
 
-describe('SampleDirective', ()=> {
+describe('sample-directive', ()=> {
     let $rootScope, $compile, SampleService, element;
 
     beforeEach(angular.mock.inject(($injector) => {
@@ -18,11 +18,11 @@ describe('SampleDirective', ()=> {
         $rootScope.$digest();
     }));
 
-    it('should log something.', () => {
+    it('should log something using SampleService.', () => {
         expect(SampleService.log).toHaveBeenCalled();
     });
 
-    it('should have prepended to the element.', () => {
+    it('should have prepended content to the element.', () => {
         let firstChildEl = element.children()[0];
 
         expect(firstChildEl.nodeName).toEqual('DIV');

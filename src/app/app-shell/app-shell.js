@@ -1,5 +1,5 @@
 import angular from 'angular';
-import template from './app-shell.html';
+import AppShellTemplate from './app-shell.html';
 
 class AppShellController {
     static get $inject() { return []; }
@@ -10,15 +10,15 @@ class AppShellController {
     }
 }
 
-const AppShellComponentTag = 'appShell',
+const AppShellInjectable = 'appShell',
     AppShellComponent = {
-        template,
+        template: AppShellTemplate,
         transclude: true,
         controller: AppShellController,
         bindings: AppShellController.bindings
     };
 
-export { AppShellComponentTag };
+export { AppShellInjectable };
 export default angular.module('app.components.app-shell', [])
-    .component(AppShellComponentTag, AppShellComponent)
+    .component(AppShellInjectable, AppShellComponent)
     .name;

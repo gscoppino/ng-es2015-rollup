@@ -1,11 +1,12 @@
 import angular from 'angular';
-import template from './loader-spinner.html';
+import LoaderSpinnerTemplate from './loader-spinner.html';
 
-const LoaderSpinnerComponentTag = 'loaderSpinner',
+const LoaderSpinnerInjectable = 'loaderSpinner',
     LoaderSpinnerComponent = {
-        template
+        template: LoaderSpinnerTemplate
     };
 
+export { LoaderSpinnerInjectable };
 export default angular.module('app.components.loader-spinner', [])
-    .component(LoaderSpinnerComponentTag, LoaderSpinnerComponent)
+    .component(LoaderSpinnerInjectable, LoaderSpinnerComponent)
     .name;

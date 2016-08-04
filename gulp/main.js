@@ -7,6 +7,7 @@ import './build/js/tasks';
 import './build/images/tasks';
 import './test/tasks';
 import './serve/tasks';
+import './generate/tasks';
 
 gulp.task('clean', ['clean:markup', 'clean:css', 'clean:js', 'clean:images']);
 

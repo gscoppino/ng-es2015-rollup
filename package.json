@@ -38,7 +38,7 @@
     "gulp-template": "~4.0.x",
     "jasmine-core": "~2.4.x",
     "json-server": "~0.8.x",
-    "karma": "~1.1.x",
+    "karma": "~1.2.0",
     "karma-coverage": "~1.1.x",
     "karma-jasmine": "~1.0.x",
     "karma-phantomjs-launcher": "~1.0.x",

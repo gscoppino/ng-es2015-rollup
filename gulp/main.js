@@ -7,6 +7,7 @@ import './build/js/tasks';
 import './build/images/tasks';
 import './test/tasks';
 import './serve/tasks';
+import './generate/tasks';
 
 gulp.task('clean', ['clean:markup', 'clean:css', 'clean:js', 'clean:images']);
 
@@ -17,4 +18,6 @@ gulp.task('watch', ['watch:markup', 'watch:css', 'watch:js', 'watch:images',
 
 gulp.task('develop', ['watch'], ()=> gulp.start('devserver'));
 
-gulp.task('build-production', ['build:markup', 'build:css-production', 'build:js-production', 'build:images']);
+gulp.task('build-production', ['build:markup-production', 'build:css-production', 'build:js-production', 'build:images']);
+
+gulp.task('production', ['build-production'], ()=> gulp.start('devserver'));

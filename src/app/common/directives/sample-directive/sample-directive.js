@@ -11,9 +11,9 @@ function sampleDirective(SampleService) {
         }
     };
 }
-const { name: SampleDirectiveTag } = sampleDirective;
+const { name: SampleDirectiveInjectable } = sampleDirective;
 
-export { SampleDirectiveTag };
-export default angular.module('app.directives.sample', [SampleService])
-    .directive(SampleDirectiveTag, sampleDirective)
+export { SampleDirectiveInjectable };
+export default angular.module('app.directives.sample-directive', [SampleService])
+    .directive(SampleDirectiveInjectable, sampleDirective)
     .name;

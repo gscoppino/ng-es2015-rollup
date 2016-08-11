@@ -6,7 +6,7 @@ const WEBPACK_PRODUCTION_CONFIG = Object.assign({}, WEBPACK_CONFIG);
 delete WEBPACK_PRODUCTION_CONFIG.devtool;
 
 WEBPACK_PRODUCTION_CONFIG.output = Object.assign({}, WEBPACK_PRODUCTION_CONFIG.output, {
-    filename: 'main.min.js'
+    filename: 'main.js'
 });
 delete WEBPACK_PRODUCTION_CONFIG.output.sourceMapFilename;
 delete WEBPACK_PRODUCTION_CONFIG.output.devtoolModuleFilenameTemplate;

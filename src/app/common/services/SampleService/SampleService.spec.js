@@ -1,10 +1,10 @@
 import angular from 'angular';
-import SampleServiceModule from './SampleService';
+import SampleService, { SampleServiceInjectable } from './SampleService';
 
-beforeEach(angular.mock.module(SampleServiceModule));
+beforeEach(angular.mock.module(SampleService));
 
 describe('SampleService', () => {
-    let $rootScope, $log, $q, SampleService;
+    let $rootScope, $log, $q;
 
     beforeEach(angular.mock.inject(($injector) => {
         $rootScope = $injector.get('$rootScope');
@@ -13,23 +13,29 @@ describe('SampleService', () => {
     }));
 
     describe('Constructor', () => {
+        let SampleService;
+
         it('should set dependencies on the instance object.', angular.mock.inject(($injector) => {
             spyOn(Object, 'assign').and.callFake(angular.noop);
-            SampleService = $injector.get('SampleService');
+
+            SampleService = $injector.get(SampleServiceInjectable);
             expect(Object.assign).toHaveBeenCalledWith(SampleService, { $log, $q });
         }));
     });
 
     describe('Methods', () => {
+        let SampleService;
+
         beforeEach(angular.mock.inject(($injector) => {
-            SampleService = $injector.get('SampleService');
+            SampleService = $injector.get(SampleServiceInjectable);
         }));
 
         describe('resolve', () => {
-            it('should return a promise.', () => {
+            it('should return a promise that resolves with the value "42".', () => {
                 SampleService.resolve()
                     .then(value => expect(value).toEqual(42))
-                    .catch(()=> { fail('The value was not resolved.' ); });
+                    .catch(()=> { fail('The value was not resolved.'); });
+
                 $rootScope.$digest();
             });
         });

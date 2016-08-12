@@ -4,12 +4,10 @@ export default {
     frameworks: ['jasmine'],
     files: [
         'node_modules/babel-polyfill/dist/polyfill.min.js', // Polyfill ES2015 features
-        'node_modules/angular/angular.js',
-        'node_modules/angular-mocks/angular-mocks.js',
-        'src/**/*.spec.js'
+        'src/main.test.js'
     ],
     preprocessors: {
-        'src/**/*.spec.js': ['webpack', 'sourcemap']
+        'src/main.test.js': ['webpack', 'sourcemap']
     },
     webpack: WEBPACK_TESTING_CONFIG,
     browsers: ['PhantomJS'],

@@ -1,9 +1,6 @@
 import path from 'path';
 
 export default {
-    // Module that should be kept external to the bundle.
-    // These will be loaded into the environment in advance to speed up tests.
-    externals: ['angular', 'angular-mocks'],
 
     // This section configures how imports are resolved by webpck.
     resolve: {

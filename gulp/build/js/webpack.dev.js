@@ -1,37 +1,42 @@
 import path from 'path';
 
 export default {
+    // Output bundle as IIFE.
+    target: 'web',
+
     entry: [
-        path.resolve(process.cwd(), 'node_modules', 'babel-polyfill', 'dist', 'polyfill.min.js'),
+        // All entries are loaded into the bundle,
+        // but only the last is exported.
+        path.resolve(process.cwd(), 'node_modules', 'babel-polyfill', 'dist', 'polyfill.js'),
         path.resolve(process.cwd(), 'src', 'main.js'),
     ],
 
     output: {
+        // Output bundle and sourcemap.
         path: path.resolve(process.cwd(), 'dist'),
         filename: 'main.js',
         sourceMapFilename: '[file].map',
 
-        // By default, webpack maps all sources to its own network path
-        // in the sourcemap.
-        // Override it so that sources show up on the host network path.
+        // Make the sourcemaps show on the same
+        // network path as the host server.
         devtoolModuleFilenameTemplate: '[resource-path]'
     },
 
-    // This section configures how imports are resolved by webpck.
     resolve: {
-        // Allow importing relative to the application root
+        // Allow importing files relative to the application root.
         root: path.resolve(process.cwd(), 'src'),
-        // Allow importing from node_modules
+
+        // Allow importing modules from node_modules.
         modulesDirectories: ['node_modules']
     },
 
-    // The section configures the pipeline that imports are tested against.
+    // The section configures the pipeline that imports are applied against.
     // Imports that match patterns in the pipeline will have those pipelines
     // applied to them (unless they are explicitly excluded).
     // NOTE: The pipeline is evaluated tail to head at each stage.
     module: {
         preLoaders: [
-            // Lint all Javascript files
+            // Lint all Javascript files.
             {
                 test: /\.js$/,
                 include: [path.resolve(process.cwd(), 'src')],
@@ -40,14 +45,14 @@ export default {
             }
         ],
         loaders: [
-            // Import HTML as raw strings
+            // Import HTML as raw strings.
             {
                 test: /\.html$/,
                 include: [path.resolve(process.cwd(), 'src')],
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
                 loaders: ['raw-loader']
             },
-            // Transform ES2015 syntax to ES5 for all spec files.
+            // Transform ES2015 syntax to ES5 for all source files.
             {
                 test: /\.js$/,
                 include: [path.resolve(process.cwd(), 'src')],
@@ -59,6 +64,6 @@ export default {
 
     plugins: [],
 
-    // Configure the type of sourcemap desired to be, external file
+    // Emit a sourcemap that can be directed to an external file.
     devtool: 'source-map'
 };

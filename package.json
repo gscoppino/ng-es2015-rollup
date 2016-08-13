@@ -29,7 +29,7 @@
     "browser-sync": "~2.14.x",
     "connect-history-api-fallback": "~1.3.x",
     "cssnano": "~3.7.x",
-    "del": "~2.2.x",
+    "del": "~2.2.2",
     "gulp": "~3.9.x",
     "gulp-htmlmin": "~2.0.x",
     "gulp-inject": "~4.1.x",

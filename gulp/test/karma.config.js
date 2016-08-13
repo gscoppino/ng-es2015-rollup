@@ -1,17 +1,15 @@
-import ROLLUP_TESTING_CONFIG from './rollup.testing';
+import WEBPACK_TESTING_CONFIG from './webpack.testing';
 
 export default {
     frameworks: ['jasmine'],
     files: [
         'node_modules/babel-polyfill/dist/polyfill.min.js', // Polyfill ES2015 features
-        'node_modules/angular/angular.js',
-        'node_modules/angular-mocks/angular-mocks.js',
-        'src/**/*.spec.js'
+        'src/main.test.js'
     ],
     preprocessors: {
-        'src/**/*.spec.js': ['rollup', 'sourcemap']
+        'src/main.test.js': ['webpack', 'sourcemap']
     },
-    rollupPreprocessor: ROLLUP_TESTING_CONFIG,
+    webpack: WEBPACK_TESTING_CONFIG,
     browsers: ['PhantomJS'],
     port: 9876,
     concurrency: Infinity,

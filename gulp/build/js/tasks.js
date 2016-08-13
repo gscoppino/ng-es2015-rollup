@@ -1,30 +1,33 @@
 import gulp from 'gulp';
+import path from 'path';
 import del from 'del';
-import { rollup } from 'rollup';
-import ROLLUP_DEV_CONFIG from './rollup.dev';
-import ROLLUP_PRODUCTION_CONFIG from './rollup.production';
+import webpack from 'webpack';
+import WEBPACK_DEV_CONFIG from './webpack.dev';
+import WEBPACK_PRODUCTION_CONFIG from './webpack.production';
 
-let cache; // used for watched builds
+gulp.task('clean:js', ()=> del([
+    path.resolve(WEBPACK_DEV_CONFIG.output.path, WEBPACK_DEV_CONFIG.output.filename),
+    path.resolve(WEBPACK_DEV_CONFIG.output.path, WEBPACK_DEV_CONFIG.output.filename+'.map'),
+    path.resolve(WEBPACK_PRODUCTION_CONFIG.output.path, WEBPACK_PRODUCTION_CONFIG.output.filename)
+]));
 
-gulp.task('clean:js', ()=> del([ROLLUP_DEV_CONFIG.bundle.dest, `${ROLLUP_DEV_CONFIG.bundle.dest}.map`, ROLLUP_PRODUCTION_CONFIG.bundle.dest]));
-
-gulp.task('build:js', ['clean:js'], ()=> {
-    return rollup(Object.assign({}, ROLLUP_DEV_CONFIG.rollup, { cache }))
-        .then((bundle)=> {
-            cache = bundle;
-            console.log('cached bundle for later use.');
-            return bundle.write(ROLLUP_DEV_CONFIG.bundle);
-        });
+gulp.task('build:js', ['clean:js'], (fin)=> {
+    webpack(WEBPACK_DEV_CONFIG).run((error)=> {
+        if (error) throw new Error('webpack', error);
+        else fin();
+    });
 });
 
-gulp.task('watch:js', ['build:js'], ()=> gulp.watch(['src/**/!(*.spec).js', 'src/app/**/*.html'], ['build:js']));
+gulp.task('watch:js', ['clean:js'], ()=> {
+    webpack(WEBPACK_DEV_CONFIG).watch({}, (error)=> {
+        if (error) throw new Error('webpack', error);
+        else console.log('webpack rebundle complete.');
+    });
+});
 
-
-gulp.task('build:js-production', ['clean:js'], ()=> {
-    return rollup(Object.assign({}, ROLLUP_PRODUCTION_CONFIG.rollup, { cache }))
-        .then((bundle)=> {
-            cache = bundle;
-            console.log('cached bundle for later use.');
-            return bundle.write(ROLLUP_PRODUCTION_CONFIG.bundle)
-        });
+gulp.task('build:js-production', ['clean:js'], (fin)=> {
+    return webpack(WEBPACK_PRODUCTION_CONFIG).run((error)=> {
+        if (error) throw new Error('webpack', error);
+        else fin();
+    });
 });

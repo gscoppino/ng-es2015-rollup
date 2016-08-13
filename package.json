@@ -4,7 +4,6 @@
   "description": "Seed project for frontend development with PostCSS for CSS, ES2015 for Javascript, Webpack for dependency management, and Angular with Karma+Jasmine for a development framework.",
   "main": "dist/main.js",
   "scripts": {
-    "gulp": "gulp",
     "build:builder": "rollup -c gulp/rollup.config.js",
     "postinstall": "npm run build:builder",
     "clean": "gulp clean",

@@ -9,10 +9,6 @@ import template from './app.html';
 
 class AppController {
     static get $inject() { return ['$rootScope', '$log']; }
-    static get bindings() {
-        return {};
-    }
-
     constructor($rootScope, $log) {
         Object.assign(this, { $rootScope });
         this.showDecorations = null;
@@ -21,18 +17,21 @@ class AppController {
         $log.log('Loaded!');
     }
 
-    _updateDecorationsState(event, {
-        data: { showAppShellDecorations = true } = {}
-    }) {
-        this.showDecorations = showAppShellDecorations;
+    static get bindings() {
+        return {};
     }
-
     $onInit() {
         this.listeners.push(
             this.$rootScope.$on(
                 '$stateChangeStart', this._updateDecorationsState.bind(this)
             )
         );
+    }
+
+    _updateDecorationsState(event, {
+        data: { showAppShellDecorations = true } = {}
+    }) {
+        this.showDecorations = showAppShellDecorations;
     }
 
     $onDestroy() {

@@ -2,18 +2,14 @@ import angular from 'angular';
 import <%= UpperCamelCaseName %>Template from './<%= name %>.html';
 
 class <%= UpperCamelCaseName %>Controller {
-    static get $inject() {
-        return [];
+    static get $inject() { return []; }
+    constructor() {
+        Object.assign(this, {});
     }
 
     static get bindings() {
         return {};
     }
-
-    constructor() {
-        Object.assign(this, {});
-    }
-
     $onInit() {}
 
     $onChanges(changes) {}

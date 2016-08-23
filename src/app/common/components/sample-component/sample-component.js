@@ -2,8 +2,9 @@ import angular from 'angular';
 import SampleComponentTemplate from './sample-component.html';
 
 class SampleComponentController {
-    static get $inject() {
-        return ['$log'];
+    static get $inject() { return ['$log']; }
+    constructor($log) {
+        Object.assign(this, { $log });
     }
 
     static get bindings() {
@@ -13,11 +14,6 @@ class SampleComponentController {
             output1: '&'
         };
     }
-
-    constructor($log) {
-        Object.assign(this, { $log });
-    }
-
     $onInit() {
         this.$log.log('component initialized.');
     }

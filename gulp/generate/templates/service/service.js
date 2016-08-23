@@ -1,10 +1,7 @@
 import angular from 'angular';
 
 class <%= name %>Service {
-    static get $inject() {
-        return [];
-    }
-
+    static get $inject() { return []; }
     constructor() {
         Object.assign(this, {});
     }

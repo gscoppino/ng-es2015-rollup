@@ -1,5 +1,5 @@
 import angular from 'angular';
-import SampleComponent, { SampleComponentInjectable } from './sample-component';
+import SampleComponent from './sample-component';
 
 beforeEach(angular.mock.module(SampleComponent));
 
@@ -35,7 +35,7 @@ describe('sample-component', () => {
             it('should set dependencies on the instance object.', () => {
                 spyOn(Object, 'assign').and.callFake(angular.noop);
 
-                SampleComponentController = $componentController(SampleComponentInjectable);
+                SampleComponentController = $componentController('sampleComponent');
                 expect(Object.assign).toHaveBeenCalledWith(SampleComponentController, { $log });
             });
         });
@@ -44,7 +44,7 @@ describe('sample-component', () => {
             let SampleComponentController;
 
             beforeEach(() => {
-                SampleComponentController = $componentController(SampleComponentInjectable);
+                SampleComponentController = $componentController('sampleComponent');
             });
 
             describe('$onInit', () => {

@@ -10,7 +10,6 @@ loader-spinner {
         stroke: #673ab7;
         stroke-width: 3px;
         transform-origin: 50%;
-
         animation:
             loader-spinner-line 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite,
             loader-spinner-rotate 1.6s linear infinite;

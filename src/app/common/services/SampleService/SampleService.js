@@ -1,6 +1,7 @@
 import angular from 'angular';
 
 class SampleService {
+
     static get $inject() { return ['$log', '$q']; }
     constructor($log, $q) {
         Object.assign(this, { $log, $q });
@@ -14,9 +15,7 @@ class SampleService {
         this.$log.log('Sample Service: log message.');
     }
 }
-const { name: SampleServiceInjectable } = SampleService;
 
-export { SampleServiceInjectable };
 export default angular.module('app.services.SampleService', [])
-    .service(SampleServiceInjectable, SampleService)
+    .service('SampleService', SampleService)
     .name;

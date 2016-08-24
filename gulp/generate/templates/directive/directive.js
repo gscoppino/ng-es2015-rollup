@@ -7,9 +7,7 @@ function <%= lowerCamelCaseName %>() {
         link: function (scope, element, attrs) {}
     };
 }
-const { name: <%= UpperCamelCaseName %>DirectiveInjectable } = <%= lowerCamelCaseName %>;
 
-export { <%= UpperCamelCaseName %>DirectiveInjectable };
 export default angular.module('app.directives.<%= name %>', [])
-    .directive(<%= UpperCamelCaseName %>DirectiveInjectable, <%= lowerCamelCaseName %>)
+    .directive('<%= lowerCamelCaseName %>', <%= lowerCamelCaseName %>)
     .name;

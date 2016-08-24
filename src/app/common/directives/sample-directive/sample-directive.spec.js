@@ -1,6 +1,5 @@
 import angular from 'angular';
 import SampleDirective from './sample-directive';
-import { SampleServiceInjectable } from 'app/common/services/SampleService/SampleService';
 
 beforeEach(angular.mock.module(SampleDirective));
 
@@ -10,7 +9,7 @@ describe('sample-directive', ()=> {
     beforeEach(angular.mock.inject(($injector) => {
         $rootScope = $injector.get('$rootScope');
         $compile = $injector.get('$compile');
-        SampleService = $injector.get(SampleServiceInjectable);
+        SampleService = $injector.get('SampleService');
 
         spyOn(SampleService, 'log').and.callFake(angular.noop);
 

@@ -1,7 +1,7 @@
 import angular from 'angular';
-import SampleService, { SampleServiceInjectable } from 'app/common/services/SampleService/SampleService';
+import SampleService from 'app/common/services/SampleService/SampleService';
 
-sampleDirective.$inject = [SampleServiceInjectable];
+sampleDirective.$inject = ['SampleService'];
 function sampleDirective(SampleService) {
     return {
         restrict: 'A',
@@ -11,9 +11,7 @@ function sampleDirective(SampleService) {
         }
     };
 }
-const { name: SampleDirectiveInjectable } = sampleDirective;
 
-export { SampleDirectiveInjectable };
 export default angular.module('app.directives.sample-directive', [SampleService])
-    .directive(SampleDirectiveInjectable, sampleDirective)
+    .directive('sampleDirective', sampleDirective)
     .name;

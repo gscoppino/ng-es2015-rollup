@@ -2,18 +2,12 @@ import angular from 'angular';
 import SampleComponentTemplate from './sample-component.html';
 
 class SampleComponentController {
+
     static get $inject() { return ['$log']; }
     constructor($log) {
         Object.assign(this, { $log });
     }
 
-    static get bindings() {
-        return {
-            input1: '<',
-            input2: '@',
-            output1: '&'
-        };
-    }
     $onInit() {
         this.$log.log('component initialized.');
     }
@@ -38,14 +32,16 @@ class SampleComponentController {
     }
 }
 
-const SampleComponentInjectable = 'sampleComponent',
-    SampleComponent = {
-        template: SampleComponentTemplate,
-        controller: SampleComponentController,
-        bindings: SampleComponentController.bindings
-    };
+const SampleComponent = {
+    template: SampleComponentTemplate,
+    controller: SampleComponentController,
+    bindings: {
+        input1: '<',
+        input2: '@',
+        output1: '&'
+    }
+};
 
-export { SampleComponentInjectable };
 export default angular.module('app.components.sample-component', [])
-    .component(SampleComponentInjectable, SampleComponent)
+    .component('sampleComponent', SampleComponent)
     .name;

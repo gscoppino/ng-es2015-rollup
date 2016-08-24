@@ -1,5 +1,5 @@
 import angular from 'angular';
-import SampleService, { SampleServiceInjectable } from './SampleService';
+import SampleService from './SampleService';
 
 beforeEach(angular.mock.module(SampleService));
 
@@ -18,7 +18,7 @@ describe('SampleService', () => {
         it('should set dependencies on the instance object.', angular.mock.inject(($injector) => {
             spyOn(Object, 'assign').and.callFake(angular.noop);
 
-            SampleService = $injector.get(SampleServiceInjectable);
+            SampleService = $injector.get('SampleService');
             expect(Object.assign).toHaveBeenCalledWith(SampleService, { $log, $q });
         }));
     });
@@ -27,7 +27,7 @@ describe('SampleService', () => {
         let SampleService;
 
         beforeEach(angular.mock.inject(($injector) => {
-            SampleService = $injector.get(SampleServiceInjectable);
+            SampleService = $injector.get('SampleService');
         }));
 
         describe('resolve', () => {

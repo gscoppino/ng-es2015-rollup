@@ -1,5 +1,5 @@
 import angular from 'angular';
-import <%= UpperCamelCaseName %>Component, { <%= UpperCamelCaseName %>ComponentInjectable } from './<%= name %>';
+import <%= UpperCamelCaseName %>Component from './<%= name %>';
 
 beforeEach(angular.mock.module(<%= UpperCamelCaseName %>Component));
 
@@ -34,7 +34,7 @@ describe('<%= name %>', () => {
             it('should set dependencies on the instance object.', () => {
                 spyOn(Object, 'assign').and.callFake(angular.noop);
 
-                <%= UpperCamelCaseName %>Controller = $componentController(<%= UpperCamelCaseName %>ComponentInjectable);
+                <%= UpperCamelCaseName %>Controller = $componentController('<%= lowerCamelCaseName %>');
                 expect(Object.assign).toHaveBeenCalledWith(<%= UpperCamelCaseName %>Controller, {});
             });
         });

@@ -2,14 +2,12 @@ import angular from 'angular';
 import <%= UpperCamelCaseName %>Template from './<%= name %>';
 
 class <%= UpperCamelCaseName %>Controller {
+
     static get $inject() { return []; }
     constructor() {
         Object.assign(this, {});
     }
 
-    static get bindings() {
-        return {};
-    }
     $onInit() {}
 
     $onChanges(changes) {}
@@ -21,12 +19,11 @@ class <%= UpperCamelCaseName %>Controller {
     $postLink() {}
 }
 
-const <%= UpperCamelCaseName %>ComponentInjectable = '<%= lowerCamelCaseName %>',
-    <%= UpperCamelCaseName %>Component = {
-        template: <%= UpperCamelCaseName %>Template,
-        controller: <%= UpperCamelCaseName %>Controller
-        bindings: <%= UpperCamelCaseName %>Controller.bindings
-    };
+const <%= UpperCamelCaseName %>Component = {
+    template: <%= UpperCamelCaseName %>Template,
+    controller: <%= UpperCamelCaseName %>Controller
+    bindings: {}
+};
 
 createComponentRoute.$inject = ['$stateProvider'];
 function createComponentRoute($stateProvider) {
@@ -37,9 +34,7 @@ function createComponentRoute($stateProvider) {
     });
 }
 
-export { <%= UpperCamelCaseName %>ComponentInjectable };
-export { <%= name %> as <%= UpperCamelCaseName %>ComponentRoute };
 export default angular.module('app.components.<%= name %>', [])
-    .component(<%= UpperCamelCaseName %>ComponentInjectable, <%= UpperCamelCaseName %>Component)
+    .component('<%= lowerCamelCaseName %>', <%= UpperCamelCaseName %>Component)
     .config(createComponentRoute)
     .name;

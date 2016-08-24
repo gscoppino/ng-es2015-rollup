@@ -26,8 +26,8 @@ class AppController {
         this.listeners.push(listener);
     }
 
-    _updateDecorationsState(event, toState={ data: {} }) {
-        this.showDecorations = !!toState.data.showAppShellDecorations;
+    _updateDecorationsState(event, toState={}) {
+        this.showDecorations = (toState.data && typeof toState.data.showAppShellDecorations === 'boolean') ? toState.data.showAppShellDecorations : true;
     }
 
     $onDestroy() {

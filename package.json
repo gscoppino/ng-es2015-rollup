@@ -39,7 +39,7 @@
     "gulp-postcss": "~6.1.x",
     "gulp-rename": "~1.2.x",
     "gulp-template": "~4.0.x",
-    "jasmine-core": "~2.4.x",
+    "jasmine-core": "~2.5.x",
     "json-server": "~0.8.x",
     "karma": "~1.2.x",
     "karma-coverage": "~1.1.x",

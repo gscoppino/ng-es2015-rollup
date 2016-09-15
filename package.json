@@ -36,7 +36,7 @@
     "gulp": "~3.9.x",
     "gulp-htmlmin": "~2.0.x",
     "gulp-inject": "~4.1.x",
-    "gulp-postcss": "~6.1.x",
+    "gulp-postcss": "~6.2.0",
     "gulp-rename": "~1.2.x",
     "gulp-template": "~4.0.x",
     "jasmine-core": "~2.5.x",

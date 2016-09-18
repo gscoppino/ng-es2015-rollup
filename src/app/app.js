@@ -20,7 +20,7 @@ class AppController {
         /**
          * @member {boolean} showDecorations
          * @memberof AppController#
-         * @desc Controls whether the application shell is rendered.
+         * @desc A flag indicating whether the application shell should be rendered.
          */
         this.showDecorations = null;
 

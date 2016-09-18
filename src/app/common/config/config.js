@@ -46,6 +46,10 @@ function HttpConfig($httpProvider) {
     $httpProvider.useLegacyPromiseExtensions = false;
 }
 
+/**
+ * @namespace app/config
+ * @desc Configures core Angular services.
+ */
 export default angular.module('app.config', [ngAria])
     .config(RootscopeConfig)
     .config(CompilerConfig)

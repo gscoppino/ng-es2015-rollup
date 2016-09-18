@@ -1,0 +1,1 @@
+This is the readme for ng-es2015-webpack.

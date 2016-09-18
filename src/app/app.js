@@ -14,20 +14,25 @@ class AppController {
         Object.assign(this, { $rootScope });
 
         this.showDecorations = null;
+        this.isLoading = false;
         this.listeners = [];
 
         $log.log('Loaded!');
     }
 
     $onInit() {
-        let listener =  this.$rootScope
-            .$on('$stateChangeStart', this._updateDecorationsState.bind(this));
+        let update = this._update.bind(this);
 
-        this.listeners.push(listener);
+        this.listeners.push(
+            this.$rootScope.$on('$stateChangeStart', update),
+            this.$rootScope.$on('$stateChangeSuccess', update),
+            this.$rootScope.$on('$stateChangeError', update)
+        );
     }
 
-    _updateDecorationsState(event, toState={}) {
+    _update(event, toState={}) {
         this.showDecorations = (toState.data && typeof toState.data.showAppShellDecorations === 'boolean') ? toState.data.showAppShellDecorations : true;
+        this.isLoading = (event.name === '$stateChangeStart') ? true : false;
     }
 
     $onDestroy() {

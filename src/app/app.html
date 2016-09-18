@@ -1,8 +1,8 @@
 <app-shell show-decorations="$ctrl.showDecorations">
-    <main ui-view>
-        <loader-spinner>
+    <loader-spinner ng-if="$ctrl.isLoading">
 <!-- inject:loader-spinner -->
 <!-- endinject -->
-        </loader-spinner>
+    </loader-spinner>
+    <main ui-view>
     </main>
 </app-shell>

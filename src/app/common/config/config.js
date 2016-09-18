@@ -1,3 +1,4 @@
+/** @module app/common/config/config */
 import angular from 'angular';
 import ngAria from 'angular-aria';
 
@@ -46,6 +47,11 @@ function HttpConfig($httpProvider) {
     $httpProvider.useLegacyPromiseExtensions = false;
 }
 
+/**
+ * @member AppConfigModule
+ * @memberof module:app/common/config/config#
+ * @desc Configures core Angular services.
+ */
 export default angular.module('app.config', [ngAria])
     .config(RootscopeConfig)
     .config(CompilerConfig)

@@ -1,3 +1,4 @@
+/** @module app/routes/routes */
 import angular from 'angular';
 import UIRouter from 'angular-ui-router';
 
@@ -12,6 +13,11 @@ function RouterConfig($locationProvider) {
     $locationProvider.html5Mode(true);
 }
 
+/**
+ * @member AppRoutingModule
+ * @memberof module:app/routes/routes#
+ * @desc Configures the frontend routing.
+ */
 export default angular.module('app.routes', [UIRouter])
     .config(RouterConfig)
     .name;

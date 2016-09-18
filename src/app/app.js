@@ -1,3 +1,4 @@
+/** @module app/app */
 import angular from 'angular';
 import UIRouter from 'angular-ui-router';
 import Config from './common/config/config';
@@ -7,19 +8,40 @@ import AppShell from './app-shell/app-shell';
 import LoaderSpinner from './common/components/loader-spinner/loader-spinner';
 import AppTemplate from './app.html';
 
+/**
+ * @class
+ * @classdesc Component Class for the application top-level component.
+ */
 class AppController {
 
     static get $inject() { return ['$rootScope', '$log']; }
     constructor($rootScope, $log) {
         Object.assign(this, { $rootScope });
 
+        /**
+         * @member {boolean} showDecorations
+         * @memberof module:app/app~AppController#
+         * @desc Controls whether the application shell is rendered.
+         */
         this.showDecorations = null;
+
+        /**
+         * @member {boolean} isLoading
+         * @memberof module:app/app~AppController#
+         * @desc A flag indicating whether the application is in a state transition.
+         */
         this.isLoading = false;
+
         this.listeners = [];
 
         $log.log('Loaded!');
     }
 
+    /**
+     * Schedules a UI update to to be called whenever a
+     * ui-router state change event occurs, passing it the parameters from
+     * the event.
+     */
     $onInit() {
         let update = this._update.bind(this);
 
@@ -30,16 +52,29 @@ class AppController {
         );
     }
 
+    /**
+     * Updates the Application UI in response to state change events.
+     * @param event - the state change event (from ui-router)
+     * @param toState - the state definition object for the destination state (from ui-router)
+     */
     _update(event, toState={}) {
         this.showDecorations = (toState.data && typeof toState.data.showAppShellDecorations === 'boolean') ? toState.data.showAppShellDecorations : true;
         this.isLoading = (event.name === '$stateChangeStart') ? true : false;
     }
 
+    /**
+     * Deregisters all event listeners attached during the lifetime of this instance.
+     */
     $onDestroy() {
         this.listeners.forEach(deregister => deregister());
     }
 }
 
+/**
+ * @memberof module:app/app#
+ * @desc The top level application component.
+ * @property controller {function} - [AppController]{@link module:app/app~AppController}
+ */
 const AppComponent = {
     template: AppTemplate,
     controller: AppController,

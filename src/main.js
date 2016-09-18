@@ -1,3 +1,4 @@
+import './vendor';
 import angular from 'angular';
 import App from './app/app';
 

@@ -8,7 +8,6 @@ import LoaderSpinner from './common/components/loader-spinner/loader-spinner';
 import AppTemplate from './app.html';
 
 /**
- * @memberof app
  * @class
  * @classdesc Component Class for the application top-level component.
  */
@@ -20,14 +19,14 @@ class AppController {
 
         /**
          * @member {boolean} showDecorations
-         * @memberof app.AppController#
+         * @memberof AppController#
          * @desc Controls whether the application shell is rendered.
          */
         this.showDecorations = null;
 
         /**
          * @member {boolean} isLoading
-         * @memberof app.AppController#
+         * @memberof AppController#
          * @desc A flag indicating whether the application is in a state transition.
          */
         this.isLoading = false;
@@ -73,7 +72,7 @@ class AppController {
 /**
  * @memberof app
  * @desc The top level application component.
- * @property controller {function} - [AppController]{@link app.AppController}
+ * @property controller {function} - [AppController]{@link AppController}
  */
 const AppComponent = {
     template: AppTemplate,

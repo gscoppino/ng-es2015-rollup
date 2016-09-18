@@ -1,4 +1,3 @@
-/** @module app/api/api */
 import angular from 'angular';
 import Restangular from 'restangular-umd';
 
@@ -8,8 +7,7 @@ function ApiConfig(RestangularProvider) {
 }
 
 /**
- * @member AppApiModule
- * @memberof module:app/api/api#
+ * @namespace app/api
  * @desc Configures the application to work with its API.
  */
 export default angular.module('app.api', [Restangular])

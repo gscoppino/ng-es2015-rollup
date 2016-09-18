@@ -1,8 +1,8 @@
-/** @module app/app-shell/app-shell */
 import angular from 'angular';
 import AppShellTemplate from './app-shell.html';
 
 /**
+ * @memberof app/components/app-shell
  * @class
  * @classdesc Component Class for the application shell.
  */
@@ -11,9 +11,9 @@ class AppShellController {
 }
 
 /**
- * @memberof module:app/app-shell/app-shell#
+ * @memberof app/components/app-shell
  * @desc The component responsible for rendering the application shell, as well as the application itself.
- * @property controller {function} - [AppShellController]{@link module:app/app-shell/app-shell~AppShellController}
+ * @property controller {function} - [AppShellController]{@link app/components/app-shell.AppShellController}
  * @property bindings.showDecorations {boolean} - Controls whether the application shell is rendered.
  */
 const AppShellComponent = {
@@ -25,6 +25,9 @@ const AppShellComponent = {
     }
 };
 
+/**
+ * @namespace app/components/app-shell
+ */
 export default angular.module('app.components.app-shell', [])
     .component('appShell', AppShellComponent)
     .name;

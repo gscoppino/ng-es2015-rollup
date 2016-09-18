@@ -1,4 +1,3 @@
-/** @module app/app */
 import angular from 'angular';
 import UIRouter from 'angular-ui-router';
 import Config from './common/config/config';
@@ -9,6 +8,7 @@ import LoaderSpinner from './common/components/loader-spinner/loader-spinner';
 import AppTemplate from './app.html';
 
 /**
+ * @memberof app
  * @class
  * @classdesc Component Class for the application top-level component.
  */
@@ -20,14 +20,14 @@ class AppController {
 
         /**
          * @member {boolean} showDecorations
-         * @memberof module:app/app~AppController#
+         * @memberof app.AppController#
          * @desc Controls whether the application shell is rendered.
          */
         this.showDecorations = null;
 
         /**
          * @member {boolean} isLoading
-         * @memberof module:app/app~AppController#
+         * @memberof app.AppController#
          * @desc A flag indicating whether the application is in a state transition.
          */
         this.isLoading = false;
@@ -71,9 +71,9 @@ class AppController {
 }
 
 /**
- * @memberof module:app/app#
+ * @memberof app
  * @desc The top level application component.
- * @property controller {function} - [AppController]{@link module:app/app~AppController}
+ * @property controller {function} - [AppController]{@link app.AppController}
  */
 const AppComponent = {
     template: AppTemplate,
@@ -81,6 +81,9 @@ const AppComponent = {
     bindings: {}
 };
 
+/**
+ * @namespace app
+ */
 export default angular.module('app', [
     Config,
     Api,

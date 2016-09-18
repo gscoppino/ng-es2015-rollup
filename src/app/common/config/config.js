@@ -1,4 +1,3 @@
-/** @module app/common/config/config */
 import angular from 'angular';
 import ngAria from 'angular-aria';
 
@@ -48,8 +47,7 @@ function HttpConfig($httpProvider) {
 }
 
 /**
- * @member AppConfigModule
- * @memberof module:app/common/config/config#
+ * @namespace app/config
  * @desc Configures core Angular services.
  */
 export default angular.module('app.config', [ngAria])

@@ -1,4 +1,3 @@
-/** @module app/routes/routes */
 import angular from 'angular';
 import UIRouter from 'angular-ui-router';
 
@@ -14,8 +13,7 @@ function RouterConfig($locationProvider) {
 }
 
 /**
- * @member AppRoutingModule
- * @memberof module:app/routes/routes#
+ * @namespace app/routes
  * @desc Configures the frontend routing.
  */
 export default angular.module('app.routes', [UIRouter])

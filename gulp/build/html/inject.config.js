@@ -15,6 +15,6 @@ export default {
         'src/app/common/components/loader-spinner/loader-spinner.css',
         'src/main.css',
         'src/app/app.css',
-        'src/app/app-shell/app-shell.css',
+        'src/app/core/app-shell/app-shell.css',
     ]
 };

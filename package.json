@@ -13,7 +13,7 @@
     "production": "gulp production",
     "test": "gulp test",
     "test-ci": "gulp watch:test",
-    "docs": "jsdoc -R README.md -P package.json -r src -d dist/documentation",
+    "doc-generator": "jsdoc -R README.md -P package.json -r src -d dist/documentation",
     "generate:directive": "gulp generate:directive",
     "generate:component": "gulp generate:component",
     "generate:service": "gulp generate:service",

@@ -79,5 +79,5 @@ gulp.task('generate:route', ()=> {
         .pipe(rename((path) => {
             path.basename = path.basename.replace('route', name);
         }))
-        .pipe(gulp.dest(`src/app/routes/${name}`));
+        .pipe(gulp.dest(`src/app/core/routes/${name}`));
 });

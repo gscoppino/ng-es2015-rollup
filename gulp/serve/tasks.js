@@ -1,7 +1,6 @@
 import gulp from 'gulp';
 import browserSync from 'browser-sync';
 import historyApiMiddleware from 'connect-history-api-fallback';
-import mockApiMiddleware from './mockApiMiddleware';
 
 gulp.task('devserver', ()=> {
     let staticServer = browserSync.create();
@@ -12,7 +11,6 @@ gulp.task('devserver', ()=> {
         server: {
             baseDir: 'dist',
             middleware: [
-                { route: '/api', handle: mockApiMiddleware },
                 historyApiMiddleware({ index: '/index.html' })
             ]
         }

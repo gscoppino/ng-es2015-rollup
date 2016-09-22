@@ -1,6 +1,6 @@
 {
   "name": "ng-es2015-webpack",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Seed project for frontend development with PostCSS for CSS, ES2015 for Javascript, Webpack for dependency management, and Angular with Karma+Jasmine for a development framework.",
   "main": "dist/main.js",
   "scripts": {

@@ -12,6 +12,8 @@ function RouterConfig($locationProvider) {
     $locationProvider.html5Mode(true);
 }
 
+export { RouterConfig };
+
 /**
  * @namespace app/routes
  * @desc Configures the frontend routing.

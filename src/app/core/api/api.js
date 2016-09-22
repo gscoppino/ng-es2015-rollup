@@ -9,7 +9,7 @@ function ApiConfig(RestangularProvider) {
     RestangularProvider.setBaseUrl(apiBase);
 }
 
-export { apiBase };
+export { apiBase, ApiConfig };
 
 /**
  * @namespace app/api

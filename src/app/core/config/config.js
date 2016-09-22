@@ -12,6 +12,8 @@ function RootscopeConfig($rootScopeProvider) {
 
 CompilerConfig.$inject = ['$compileProvider'];
 function CompilerConfig($compileProvider) {
+    let hostname = (this || location).hostname;
+
     /*
      * Disable debug mode if not running in a dev environment, for performance.
      * `location.hostname` is actually not a safe way to check where we are
@@ -20,7 +22,7 @@ function CompilerConfig($compileProvider) {
      * Debug mode can be re-enabled in production environments by running
      * `angular.reloadWithDebugInfo()` from dev tools.
      */
-    if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
         $compileProvider.debugInfoEnabled(false);
     }
 
@@ -45,6 +47,8 @@ function HttpConfig($httpProvider) {
      */
     $httpProvider.useLegacyPromiseExtensions = false;
 }
+
+export { RootscopeConfig, CompilerConfig, HttpConfig };
 
 /**
  * @namespace app/config

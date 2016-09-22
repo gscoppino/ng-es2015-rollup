@@ -3,7 +3,6 @@ import UIRouter from 'angular-ui-router';
 import Config from './core/config/config';
 import Api from './core/api/api';
 import Routes from './core/routes/routes';
-import AppShell from './core/app-shell/app-shell';
 import LoaderSpinner from './common/components/loader-spinner/loader-spinner';
 import AppTemplate from './app.html';
 
@@ -16,13 +15,6 @@ class AppController {
     static get $inject() { return ['$rootScope', '$log']; }
     constructor($rootScope, $log) {
         Object.assign(this, { $rootScope });
-
-        /**
-         * @member {boolean} showDecorations
-         * @memberof AppController#
-         * @desc A flag indicating whether the application shell should be rendered.
-         */
-        this.showDecorations = null;
 
         /**
          * @member {boolean} isLoading
@@ -54,10 +46,8 @@ class AppController {
     /**
      * Updates the Application UI in response to state change events.
      * @param event - the state change event (from ui-router)
-     * @param toState - the state definition object for the destination state (from ui-router)
      */
-    _update(event, toState={}) {
-        this.showDecorations = (toState.data && typeof toState.data.showAppShellDecorations === 'boolean') ? toState.data.showAppShellDecorations : true;
+    _update(event) {
         this.isLoading = (event.name === '$stateChangeStart') ? true : false;
     }
 
@@ -88,7 +78,6 @@ export default angular.module('app', [
     Api,
     UIRouter,
     Routes,
-    AppShell,
     LoaderSpinner
 ])
     .component('app', AppComponent)

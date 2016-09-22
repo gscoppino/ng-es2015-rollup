@@ -46,13 +46,6 @@ describe('App Component', () => {
                 expect(AppController.listeners.length).toBe(0);
             });
 
-            it(`should set a flag to not show app shell decorations by default, to avoid flickering in the
-            case that the initially rendered view does not have them enabled.`, () => {
-                let AppController = $componentController('app');
-
-                expect(AppController.showDecorations).toBeFalsy();
-            });
-
             it(`should set a flag to indicate that no further loading is expected (since as of this writing,
             there are no states to load).`, () => {
                 let AppController = $componentController('app');
@@ -99,30 +92,6 @@ describe('App Component', () => {
                 beforeEach(angular.mock.inject(($injector) => {
                     $rootScope = $injector.get('$rootScope');
                 }));
-
-                describe('$stateChange*', () => {
-                    it(`should toggle a flag for app decorations on the instance, using the new state\'s
-                    configuration (or true if not specified).`, angular.mock.inject(($rootScope) => {
-                        AppController.$onInit();
-
-                        for (let stateChange of ['$stateChangeStart', '$stateChangeSuccess', '$stateChangeError']) {
-                            $rootScope.$broadcast(stateChange);
-                            expect(AppController.showDecorations).toBe(true);
-
-                            $rootScope.$broadcast(stateChange, {});
-                            expect(AppController.showDecorations).toBe(true);
-
-                            $rootScope.$broadcast(stateChange, { data: { showAppShellDecorations: undefined }});
-                            expect(AppController.showDecorations).toBe(true);
-
-                            $rootScope.$broadcast(stateChange, { data: { showAppShellDecorations: true }});
-                            expect(AppController.showDecorations).toBe(true);
-
-                            $rootScope.$broadcast(stateChange, { data: { showAppShellDecorations: false }});
-                            expect(AppController.showDecorations).toBe(false);
-                        }
-                    }));
-                });
 
                 describe('$stateChangeStart', () => {
                     it('should set the loading flag on the instance to true.', () => {

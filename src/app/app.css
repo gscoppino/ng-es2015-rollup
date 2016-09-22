@@ -1,5 +1,4 @@
 @import './common/styles/box-model.css';
-@import './core/app-shell/app-shell.css';
 @import './common/components/loader-spinner/loader-spinner.css';
 
 body {

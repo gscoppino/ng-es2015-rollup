@@ -1,7 +1,7 @@
 export default {
     html: {
         'src/app/app.html': {
-            tag: 'app-shell',
+            tag: 'app',
             childInjects: {
                 'src/app/common/components/loader-spinner/loader-spinner.html': {
                     tag: 'loader-spinner',
@@ -14,7 +14,6 @@ export default {
         'src/app/common/styles/**/*.css',
         'src/app/common/components/loader-spinner/loader-spinner.css',
         'src/main.css',
-        'src/app/app.css',
-        'src/app/core/app-shell/app-shell.css',
+        'src/app/app.css'
     ]
 };

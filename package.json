@@ -65,7 +65,7 @@
     "angular": "~1.5.x",
     "angular-aria": "~1.5.x",
     "angular-mocks": "~1.5.x",
-    "angular-ui-router": "~0.3.x",
+    "angular-ui-router": "~0.3.1",
     "restangular-umd": "~1.0.1"
   }
 }

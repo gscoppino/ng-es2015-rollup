@@ -54,6 +54,7 @@
     "postcss-import": "~8.1.x",
     "postcss-reporter": "~1.4.x",
     "raw-loader": "~0.5.x",
+    "redux-logger": "^2.6.1",
     "rollup": "~0.36.x",
     "rollup-plugin-babel": "~2.6.x",
     "stylelint": "~7.2.x",
@@ -66,6 +67,8 @@
     "angular-aria": "~1.5.x",
     "angular-mocks": "~1.5.x",
     "angular-ui-router": "~0.3.x",
+    "ng-redux": "^3.4.0-beta.1",
+    "redux-thunk": "^2.1.0",
     "restangular-umd": "~1.0.1"
   }
 }

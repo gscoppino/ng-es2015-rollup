@@ -1,0 +1,6 @@
+<user ng-repeat="user in $ctrl.state.usersList track by user.id" model="user" on-remove="$ctrl.deleteUser(user)" style="display:block"></user>
+<form ng-submit="$ctrl.submitNewUser()">
+    <input type="text" ng-model="$ctrl.newUser.first_name" />
+    <input type="text" ng-model="$ctrl.newUser.last_name" />
+    <button type="submit">Submit New User</button>
+</form>

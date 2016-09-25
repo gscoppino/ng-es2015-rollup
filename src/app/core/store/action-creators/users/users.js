@@ -1,12 +1,15 @@
+import angular from 'angular';
+import _ from 'lodash';
 import actions from 'app/core/store/actions/users/users';
+import UserService from 'app/core/api/services/users/users';
 
-function getList(api) {
+function getList(UserService) {
     return function (dispatch) {
         dispatch({
             type: actions.REQUEST_USERS
         });
 
-        return api.getList()
+        return UserService.getList()
             .then((users) => dispatch({
                 type: actions.RESOLVE_USERS,
                 users: users.plain()
@@ -17,13 +20,13 @@ function getList(api) {
     }
 }
 
-function get(api, id) {
+function get(UserService, id) {
     return function (dispatch) {
         dispatch({
             type: actions.REQUEST_USER
         });
 
-        return api.one(id).get()
+        return UserService.one(id).get()
             .then((user) => dispatch({
                 type: actions.RESOLVE_USER,
                 user: user.plain()
@@ -34,13 +37,13 @@ function get(api, id) {
     }
 }
 
-function post(api, data) {
+function post(UserService, data) {
     return function (dispatch) {
         dispatch({
             type: actions.REQUEST_ADD_USER,
         });
 
-        return api.post(data)
+        return UserService.post(data)
             .then((user) => dispatch({
                 type: actions.RESOLVE_ADD_USER,
                 user: user.plain()
@@ -51,13 +54,13 @@ function post(api, data) {
     }
 }
 
-function put(api, data) {
+function put(UserService, data) {
     return function (dispatch) {
         dispatch({
             type: actions.REQUEST_UPDATE_USER
         });
 
-        return Object.assign(api.one(data.id), data).put()
+        return Object.assign(UserService.one(data.id), data).put()
             .then((user) => dispatch({
                 type: actions.RESOLVE_UPDATE_USER,
                 user: user.plain()
@@ -68,13 +71,13 @@ function put(api, data) {
     }
 }
 
-function remove(api, data) {
+function remove(UserService, data) {
     return function (dispatch) {
         dispatch({
             type: actions.REQUEST_DELETE_USER
         });
 
-        return api.one(data.id).remove()
+        return UserService.one(data.id).remove()
             .then((user) => dispatch({
                 type: actions.RESOLVE_DELETE_USER,
                 user: user.plain()
@@ -85,10 +88,19 @@ function remove(api, data) {
     }
 }
 
-export {
-    getList,
-    get,
-    post,
-    put,
-    remove
-};
+UserActions.$inject = ['UserService'];
+function UserActions(UserService) {
+    return {
+        getList: _.partial(getList, UserService),
+        get: _.partial(get, UserService),
+        post: _.partial(post, UserService),
+        put: _.partial(put, UserService),
+        remove: _.partial(remove, UserService),
+    };
+}
+
+export { getList, get, post, put, remove };
+
+export default angular.module('app.store.action-creators.users', [UserService])
+    .factory('UserActions', UserActions)
+    .name;

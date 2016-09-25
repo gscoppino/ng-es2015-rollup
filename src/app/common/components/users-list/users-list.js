@@ -1,28 +1,27 @@
 import angular from 'angular';
 import ngRedux from 'ng-redux';
-import UserService from 'app/core/api/services/users/users';
-import * as UserActions from 'app/core/store/action-creators/users/users';
+import UserActions from 'app/core/store/action-creators/users/users';
 import UsersListItem from 'app/common/components/users-list-item/users-list-item';
 import AddEditUserItem from 'app/common/components/add-edit-user-item/add-edit-user-item';
 import UsersListTemplate from './users-list.html';
 
 class UsersListController {
 
-    static get $inject() { return ['$ngRedux', 'UserService']; }
-    constructor($ngRedux, UserService) {
-        Object.assign(this, { $ngRedux, UserService });
+    static get $inject() { return ['$ngRedux', 'UserActions']; }
+    constructor($ngRedux, UserActions) {
+        Object.assign(this, { $ngRedux, UserActions });
         this._listeners = [];
     }
 
     $onInit() {
-        let listener = this.$ngRedux.connect(this.mapStateToThis, UserActions)((state, actions) => {
+        let listener = this.$ngRedux.connect(this.mapStateToThis, this.UserActions)((state, actions) => {
             this.state = state;
             this.actions = actions;
         });
 
         this._listeners.push(listener);
 
-        this.actions.getList(this.UserService);
+        this.actions.getList();
     }
 
     $onChanges(changes) {}
@@ -42,15 +41,15 @@ class UsersListController {
     }
 
     submitNewUser(user) {
-        this.actions.post(this.UserService, user);
+        this.actions.post(user);
     }
 
     editUser(user) {
-        this.actions.put(this.UserService, user);
+        this.actions.put(user);
     }
 
     deleteUser(user) {
-        this.actions.remove(this.UserService, user);
+        this.actions.remove(user);
     }
 }
 
@@ -60,6 +59,6 @@ const UsersListComponent = {
     bindings: {}
 };
 
-export default angular.module('app.components.users-list', [ngRedux, UserService, UsersListItem, AddEditUserItem])
+export default angular.module('app.components.users-list', [ngRedux, UserActions, UsersListItem, AddEditUserItem])
     .component('usersList', UsersListComponent)
     .name;

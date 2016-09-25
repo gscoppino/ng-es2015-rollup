@@ -2,7 +2,8 @@ import angular from 'angular';
 import ngRedux from 'ng-redux';
 import UserService from 'app/core/api/services/users/users';
 import * as UserActions from 'app/core/store/action-creators/users/users';
-import User from 'app/common/components/user/user';
+import UsersListItem from 'app/common/components/users-list-item/users-list-item';
+import AddEditUserItem from 'app/common/components/add-edit-user-item/add-edit-user-item';
 import UsersListTemplate from './users-list.html';
 
 class UsersListController {
@@ -11,10 +12,6 @@ class UsersListController {
     constructor($ngRedux, UserService) {
         Object.assign(this, { $ngRedux, UserService });
         this._listeners = [];
-        this.newUser = {
-            first_name: null,
-            last_name: null
-        };
     }
 
     $onInit() {
@@ -44,11 +41,12 @@ class UsersListController {
         };
     }
 
-    submitNewUser() {
-        this.actions.post(this.UserService, this.newUser)
-            .then(() => {
-                this.newUser = {};
-            });
+    submitNewUser(user) {
+        this.actions.post(this.UserService, user);
+    }
+
+    editUser(user) {
+        this.actions.put(this.UserService, user);
     }
 
     deleteUser(user) {
@@ -62,6 +60,6 @@ const UsersListComponent = {
     bindings: {}
 };
 
-export default angular.module('app.components.users-list', [ngRedux, UserService, User])
+export default angular.module('app.components.users-list', [ngRedux, UserService, UsersListItem, AddEditUserItem])
     .component('usersList', UsersListComponent)
     .name;

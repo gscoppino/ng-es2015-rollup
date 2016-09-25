@@ -1,9 +1,9 @@
 import angular from 'angular';
-import UserComponent from './user';
+import AddEditUserItemComponent from './add-edit-user-item';
 
-beforeEach(angular.mock.module(UserComponent));
+beforeEach(angular.mock.module(AddEditUserItemComponent));
 
-describe('user', () => {
+describe('add-edit-user-item', () => {
     describe('Component', () => {
         let $rootScope, $compile;
 
@@ -14,7 +14,7 @@ describe('user', () => {
 
         it('should compile and link successfully.', () => {
             let scope = $rootScope.$new(),
-                element = $compile('<user></user>')(scope);
+                element = $compile('<add-edit-user-item></add-edit-user-item>')(scope);
 
             scope.$digest();
             expect(element).toBeDefined();
@@ -29,13 +29,13 @@ describe('user', () => {
         }));
 
         describe('Constructor', () => {
-            let UserController;
+            let AddEditUserItemController;
 
             it('should set dependencies on the instance object.', () => {
                 spyOn(Object, 'assign').and.callFake(angular.noop);
 
-                UserController = $componentController('user');
-                expect(Object.assign).toHaveBeenCalledWith(UserController, {});
+                AddEditUserItemController = $componentController('addEditUserItem');
+                expect(Object.assign).toHaveBeenCalledWith(AddEditUserItemController, {});
             });
         });
 

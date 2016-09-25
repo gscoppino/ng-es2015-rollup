@@ -1,0 +1,9 @@
+<form ng-submit="$ctrl.submitUser($ctrl.user)">
+    <input type="text" ng-model="$ctrl.user.first_name" />
+    <input type="text" ng-model="$ctrl.user.last_name" />
+    <button type="submit">
+        <span ng-if="::!$ctrl.editing">Add</span>
+        <span ng-if="::$ctrl.editing">Edit</span>
+        <span>User</span>
+    </button>
+</form>

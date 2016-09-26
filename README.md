@@ -9,6 +9,7 @@ RESTful interfaces available through [Restangular](https://github.com/mgonto/res
 * Linting of CSS and Javascript in place, using [Stylelint](http://stylelint.io/) for the former, and [ESLint](http://eslint.org/) for the latter. Sensible defaults
 in place through `stylelint-config-standard` and `eslint:recommended` presets, respectively.
 * Automatic generation of app documentation available via [JSDoc](http://usejsdoc.org/).
+* Offline support via [sw-precache](https://github.com/GoogleChrome/sw-precache).
 * Development server provided using [BrowserSync](https://www.browsersync.io/), allowing for simultaneous multi-device runtime testing. Supports use of HTML5 History API
 for frontend routing, and incremental builds (LiveReload). Can also simulate a production server by minifying assets and inlining critical HTML and CSS.
 

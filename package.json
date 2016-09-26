@@ -49,7 +49,7 @@
     "karma-sourcemap-loader": "~0.3.x",
     "karma-webpack": "~1.8.x",
     "phantomjs-prebuilt": "~2.1.x",
-    "postcss": "~5.2.x",
+    "postcss": "~5.2.2",
     "postcss-cssnext": "~2.8.x",
     "postcss-import": "~8.1.x",
     "postcss-reporter": "~1.4.x",

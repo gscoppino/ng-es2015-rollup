@@ -4,7 +4,7 @@ import swPrecache from 'sw-precache';
 
 gulp.task('clean:worker', () => del('dist/sw.js'));
 
-gulp.task('build:worker', (done) => {
+gulp.task('build:worker', ['clean:worker'], (done) => {
     swPrecache.write('./dist/sw.js', {
         staticFileGlobs: [
             'src/index.html',

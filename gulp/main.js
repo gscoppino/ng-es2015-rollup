@@ -5,11 +5,13 @@ import './build/html/tasks';
 import './build/css/tasks';
 import './build/js/tasks';
 import './build/images/tasks';
+import './build/docs/tasks';
 import './test/tasks';
 import './serve/tasks';
 import './generate/tasks';
 
-gulp.task('clean', ['clean:markup', 'clean:css', 'clean:js', 'clean:images']);
+gulp.task('clean', ['clean:markup', 'clean:css', 'clean:js', 'clean:images',
+                    'clean:docs', 'clean:test-coverage']);
 
 gulp.task('build', ['build:markup', 'build:css', 'build:js', 'build:images']);
 

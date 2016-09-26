@@ -1,6 +1,9 @@
 import gulp from 'gulp';
+import del from 'del';
 import karma from 'karma';
 import KARMA_CONFIG from './karma.config';
+
+gulp.task('clean:test-coverage', () => del('dist/coverage'));
 
 gulp.task('test', (done)=> {
     KARMA_CONFIG.singleRun = true;

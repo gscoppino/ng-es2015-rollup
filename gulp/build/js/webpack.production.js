@@ -6,6 +6,9 @@ const WEBPACK_PRODUCTION_CONFIG = Object.assign({}, WEBPACK_CONFIG, {
     devtool: undefined
 });
 
+// Disable the stubbed production worker from the development build.
+WEBPACK_PRODUCTION_CONFIG.entry = WEBPACK_PRODUCTION_CONFIG.entry.main;
+
 // Disable sourcemap output.
 WEBPACK_PRODUCTION_CONFIG.output = Object.assign({}, WEBPACK_PRODUCTION_CONFIG.output, {
     filename: 'main.js',

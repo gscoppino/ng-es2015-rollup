@@ -4,17 +4,21 @@ export default {
     // Output bundle as IIFE.
     target: 'web',
 
-    entry: [
-        // All entries are loaded into the bundle,
-        // but only the last is exported.
-        path.resolve(process.cwd(), 'node_modules', 'babel-polyfill', 'dist', 'polyfill.js'),
-        path.resolve(process.cwd(), 'src', 'main.js'),
-    ],
+    entry: {
+        main: [
+            // All entries are loaded into the bundle,
+            // but only the last is exported.
+            path.resolve(process.cwd(), 'node_modules', 'babel-polyfill', 'dist', 'polyfill.js'),
+            path.resolve(process.cwd(), 'src', 'main.js')
+        ],
+        // Use a stub for the production service worker to prevent errors in development.
+        sw: path.resolve(process.cwd(), 'src', 'sw.js')
+    },
 
     output: {
         // Output bundle and sourcemap.
         path: path.resolve(process.cwd(), 'dist'),
-        filename: 'main.js',
+        filename: '[name].js',
         sourceMapFilename: '[file].map',
 
         // Make the sourcemaps show on the same

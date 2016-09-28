@@ -54,7 +54,7 @@
     "postcss-import": "~8.1.x",
     "postcss-reporter": "~1.4.x",
     "raw-loader": "~0.5.x",
-    "rollup": "~0.36.x",
+    "rollup": "~0.36.1",
     "rollup-plugin-babel": "~2.6.x",
     "stylelint": "~7.2.x",
     "stylelint-config-standard": "~13.0.x",

@@ -60,7 +60,7 @@
     "stylelint-config-standard": "~13.0.x",
     "sw-precache": "~4.1.x",
     "webpack": "~1.13.x",
-    "yargs": "~5.0.x"
+    "yargs": "~5.0.0"
   },
   "dependencies": {
     "angular": "~1.5.x",

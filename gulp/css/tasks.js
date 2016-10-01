@@ -1,8 +1,8 @@
 import gulp from 'gulp';
-import del from 'del';
-import fs from 'fs';
-import postcss from 'postcss';
 import System from 'systemjs';
+import fs from 'fs';
+import del from 'del';
+import postcss from 'postcss';
 import pathconfig from './pathconfig.js';
 
 function lazyLoadPostcssConfig (type) {
@@ -17,17 +17,19 @@ function lazyLoadPostcssConfig (type) {
     });
 
     if (type === 'dev') {
-        return System.import('gulp/build/css/postcss.dev.js')
+        return System.import('gulp/css/postcss.dev.js')
             .then(m => m.default);
     }
 
     if (type === 'production') {
-        return System.import('gulp/build/css/postcss.production.js')
+        return System.import('gulp/css/postcss.production.js')
             .then(m => m.default);
     }
+
+    return Promise.reject('Please specify one of "dev" or "production".');
 }
 
-gulp.task('clean:css', ()=> {
+gulp.task('clean:css', () => {
     return del([
         pathconfig.out.devPath,
         pathconfig.out.prodPath,
@@ -35,28 +37,30 @@ gulp.task('clean:css', ()=> {
     ]);
 });
 
-gulp.task('build:css', ['clean:css'], ()=> {
+gulp.task('build:css', ['clean:css'], () => {
     return lazyLoadPostcssConfig('dev').then((POSTCSS_DEV_CONFIG) => {
+
         return postcss(POSTCSS_DEV_CONFIG.plugins)
             .process(fs.readFileSync(pathconfig.in.path), POSTCSS_DEV_CONFIG)
             .then((result)=> {
                 return Promise.all([
-                    new Promise((resolve)=> fs.writeFile(pathconfig.out.devPath, result.css, resolve)),
-                    new Promise((resolve)=> fs.writeFile(pathconfig.map.path, result.map, resolve))
+                    new Promise((resolve) => fs.writeFile(pathconfig.out.devPath, result.css, resolve)),
+                    new Promise((resolve) => fs.writeFile(pathconfig.map.path, result.map, resolve))
                 ]);
             });
+
     });
 });
 
-gulp.task('watch:css', ['build:css'], ()=> gulp.watch('src/**/*.css', ['build:css']));
+gulp.task('watch:css', ['build:css'], () => gulp.watch('src/**/*.css', ['build:css']));
 
-gulp.task('build:css-production', ['clean:css'], ()=> {
+gulp.task('build:css-production', ['clean:css'], () => {
     return lazyLoadPostcssConfig('production').then((POSTCSS_PRODUCTION_CONFIG) => {
         return postcss(POSTCSS_PRODUCTION_CONFIG.plugins)
             .process(fs.readFileSync(pathconfig.in.path), POSTCSS_PRODUCTION_CONFIG)
             .then((result)=> {
                 return Promise.all([
-                    new Promise((resolve)=> fs.writeFile(pathconfig.out.prodPath, result.css, resolve))
+                    new Promise((resolve) => fs.writeFile(pathconfig.out.prodPath, result.css, resolve))
                 ]);
             });
     });

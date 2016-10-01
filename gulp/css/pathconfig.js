@@ -1,4 +1,4 @@
-import { getPathConfig } from '../../util/pathconfig.js';
+import { getPathConfig } from '../util/pathconfig.js';
 
 const INPUT_DIR = 'src';
 const INPUT_FILE = 'main.css';

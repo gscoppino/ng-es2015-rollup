@@ -3,9 +3,8 @@ import gulp from 'gulp';
 import './git/tasks';
 import './html/tasks';
 import './css/tasks';
-import './js/tasks';
+import './javascript/tasks';
 import './images/tasks';
-import './worker/tasks';
 import './docs/tasks';
 import './test/tasks';
 import './serve/tasks';
@@ -16,7 +15,6 @@ gulp.task('clean', [
     'clean:css',
     'clean:js',
     'clean:images',
-    'clean:worker',
     'clean:docs',
     'clean:test-coverage'
 ]);
@@ -40,8 +38,7 @@ gulp.task('build-production', [
     'build:markup-production',
     'build:css-production',
     'build:js-production',
-    'build:images',
-    'build:worker'
+    'build:images'
 ]);
 
 gulp.task('develop', ['watch'], ()=> gulp.start('devserver'));

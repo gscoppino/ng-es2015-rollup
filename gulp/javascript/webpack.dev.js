@@ -6,7 +6,7 @@ export default {
     target: 'web',
 
     entry: {
-        main: [
+        [pathconfig.out.devFilename.split('.')[0]]: [
             // All entries are loaded into the bundle,
             // but only the last is exported.
             path.resolve(process.cwd(), 'node_modules', 'babel-polyfill', 'dist', 'polyfill.js'),

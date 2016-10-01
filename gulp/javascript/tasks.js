@@ -1,59 +1,70 @@
 import gulp from 'gulp';
+import System from 'systemjs';
 import path from 'path';
 import del from 'del';
 import webpack from 'webpack';
-import System from 'systemjs';
 import pathconfig from './pathconfig.js';
 
 function lazyLoadWebpackConfig (type) {
     System.config({
         map: {
             'path': '@node/path',
-            'webpack': '@node/webpack'
+            'webpack': '@node/webpack',
+            'sw-precache-webpack-plugin': '@node/sw-precache-webpack-plugin'
         }
     });
 
     if (type === 'dev') {
-        return System.import('gulp/build/js/webpack.dev.js')
+        return System.import('gulp/javascript/webpack.dev.js')
             .then(m => m.default);
     }
     if (type === 'production') {
-        return System.import('gulp/build/js/webpack.production.js')
+        return System.import('gulp/javascript/webpack.production.js')
             .then(m => m.default);
     }
+
+    return Promise.reject('Please specify one of "dev" or "production".');
 }
 
-gulp.task('clean:js', ()=> {
+gulp.task('clean:js', () => {
     return del([
         pathconfig.out.devPath,
         pathconfig.map.path,
-        pathconfig.out.prodPath
+        pathconfig.out.prodPath,
+        pathconfig.out.directory + '/sw.js',
+        pathconfig.out.directory + '/sw.js.map'
     ]);
 });
 
-gulp.task('build:js', ['clean:js'], (fin)=> {
+gulp.task('build:js', ['clean:js'], (fin) => {
     lazyLoadWebpackConfig('dev').then((WEBPACK_DEV_CONFIG) => {
-        webpack(WEBPACK_DEV_CONFIG).run((error)=> {
+
+        webpack(WEBPACK_DEV_CONFIG).run((error) => {
             if (error) throw new Error('webpack', error);
             else fin();
         });
+
     });
 });
 
-gulp.task('watch:js', ['clean:js'], ()=> {
+gulp.task('watch:js', ['clean:js'], () => {
     return lazyLoadWebpackConfig('dev').then((WEBPACK_DEV_CONFIG) => {
-        webpack(WEBPACK_DEV_CONFIG).watch({}, (error)=> {
+
+        webpack(WEBPACK_DEV_CONFIG).watch({}, (error) => {
             if (error) throw new Error('webpack', error);
             else console.log('webpack rebundle complete.');
         });
+
     });
 });
 
-gulp.task('build:js-production', ['clean:js'], (fin)=> {
+gulp.task('build:js-production', ['clean:js'], (fin) => {
     lazyLoadWebpackConfig('production').then((WEBPACK_PRODUCTION_CONFIG) => {
-        return webpack(WEBPACK_PRODUCTION_CONFIG).run((error)=> {
+
+        return webpack(WEBPACK_PRODUCTION_CONFIG).run((error) => {
             if (error) throw new Error('webpack', error);
             else fin();
         });
+
     });
 });

@@ -10,5 +10,5 @@ export default {
     ],
     format: 'cjs',
     interop: false,
-    sourceMap: 'inline'
+    sourceMap: false
 };

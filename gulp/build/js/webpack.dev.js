@@ -1,4 +1,5 @@
 import path from 'path';
+import pathconfig from './pathconfig.js';
 
 export default {
     // Output bundle as IIFE.
@@ -9,7 +10,7 @@ export default {
             // All entries are loaded into the bundle,
             // but only the last is exported.
             path.resolve(process.cwd(), 'node_modules', 'babel-polyfill', 'dist', 'polyfill.js'),
-            path.resolve(process.cwd(), 'src', 'main.js')
+            pathconfig.in.path
         ],
         // Use a stub for the production service worker to prevent errors in development.
         sw: path.resolve(process.cwd(), 'src', 'sw.js')
@@ -17,7 +18,7 @@ export default {
 
     output: {
         // Output bundle and sourcemap.
-        path: path.resolve(process.cwd(), 'dist'),
+        path: pathconfig.out.directory,
         filename: '[name].js',
         sourceMapFilename: '[file].map',
 

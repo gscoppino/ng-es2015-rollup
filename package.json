@@ -55,10 +55,10 @@
     "postcss-reporter": "~1.4.x",
     "raw-loader": "~0.5.x",
     "rollup": "~0.36.x",
-    "rollup-plugin-babel": "~2.6.x",
     "stylelint": "~7.2.x",
     "stylelint-config-standard": "~13.0.x",
     "sw-precache": "~4.1.x",
+    "systemjs": "~0.19.x",
     "webpack": "~1.13.x",
     "yargs": "~5.0.x"
   },

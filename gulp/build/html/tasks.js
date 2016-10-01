@@ -4,9 +4,16 @@ import htmlmin from 'gulp-htmlmin';
 import postcss from 'gulp-postcss';
 import cssnext from 'postcss-cssnext';
 import cssnano from 'cssnano';
-import BROWSERS from '../css/browserslist';
-import INJECT_CRITICAL from './inject.config';
+import System from 'systemjs';
 import del from 'del';
+
+function lazyLoadInjectConfig() {
+    return Promise.all([
+        System.import('gulp/build/html/inject.config.js'),
+        System.import('gulp/build/css/browserslist.js')
+    ])
+        .then(modules => modules.map(m => m.default));
+}
 
 gulp.task('clean:markup', ()=> del('dist/*.html'));
 
@@ -49,11 +56,12 @@ function injectHTML(target, injectConfig) {
  * Injects an ordered list of CSS files into the target stream.
  * @param target - a stream of HTML file(s) created via gulp.src(...)
  * @param source - an array of source CSS files to be inlined into the stream file(s)
+ * @param browsers - the browserlist formatted configuration of browsers to compile for.
  */
-function injectCSS(target, source) {
+function injectCSS(target, source, browsers) {
     let transformedCSS = gulp.src(source)
         .pipe(postcss([
-            cssnext({ browsers: BROWSERS })
+            cssnext({ browsers })
         ]));
 
     console.log("Injecting critical CSS from: ", source);
@@ -72,12 +80,15 @@ function injectCSS(target, source) {
 
 gulp.task('build:markup-production', ['clean:markup'], ()=> {
     let target = gulp.src('src/*.html');
+    return lazyLoadInjectConfig().then((modules) => {
+        let [INJECT_CRITICAL, BROWSERS, ] = modules;
 
-    return injectCSS(injectHTML(target, INJECT_CRITICAL.html), INJECT_CRITICAL.css)
-        .pipe(htmlmin({
-            collapseWhitespace: true,
-            removeComments: true, // NOTE: This is safe to use with conditional comments,
-            minifyCSS: true
-        }))
-        .pipe(gulp.dest('dist'));
+        return injectCSS(injectHTML(target, INJECT_CRITICAL.html), INJECT_CRITICAL.css, BROWSERS)
+            .pipe(htmlmin({
+                collapseWhitespace: true,
+                removeComments: true, // NOTE: This is safe to use with conditional comments,
+                minifyCSS: true
+            }))
+            .pipe(gulp.dest('dist'));
+    });
 });

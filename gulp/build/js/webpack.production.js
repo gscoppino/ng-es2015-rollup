@@ -1,5 +1,6 @@
 import webpack from 'webpack';
-import WEBPACK_CONFIG from './webpack.dev';
+import WEBPACK_CONFIG from './webpack.dev.js';
+import pathconfig from './pathconfig.js';
 
 // Disable emitting of sourcemaps.
 const WEBPACK_PRODUCTION_CONFIG = Object.assign({}, WEBPACK_CONFIG, {
@@ -11,7 +12,7 @@ WEBPACK_PRODUCTION_CONFIG.entry = WEBPACK_PRODUCTION_CONFIG.entry.main;
 
 // Disable sourcemap output.
 WEBPACK_PRODUCTION_CONFIG.output = Object.assign({}, WEBPACK_PRODUCTION_CONFIG.output, {
-    filename: 'main.js',
+    filename: pathconfig.out.filename,
     sourceMapFilename: undefined,
     devtoolModuleFilenameTemplate: undefined
 });

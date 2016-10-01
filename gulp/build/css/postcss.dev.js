@@ -2,11 +2,12 @@ import stylelint from 'stylelint';
 import reporter from 'postcss-reporter';
 import cssimport from 'postcss-import';
 import cssnext from 'postcss-cssnext';
-import BROWSERS from './browserslist';
+import pathconfig from './pathconfig.js';
+import BROWSERS from './browserslist.js';
 
 export default {
-    from: 'src/main.css',
-    to: 'dist/main.css',
+    from: pathconfig.in.path,
+    to: pathconfig.out.devPath,
     map: { inline: false },
     plugins: [
         stylelint(),

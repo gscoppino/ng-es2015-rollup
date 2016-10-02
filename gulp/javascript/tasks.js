@@ -28,11 +28,12 @@ function lazyLoadWebpackConfig (type) {
 
 gulp.task('clean:js', () => {
     return del([
-        pathconfig.out.devPath,
-        pathconfig.map.path,
-        pathconfig.out.prodPath,
-        pathconfig.out.directory + '/sw.js',
-        pathconfig.out.directory + '/sw.js.map'
+        pathconfig.devBundle,
+        `${pathconfig.devBundle}.map`,
+        pathconfig.productionBundle,
+        `${pathconfig.productionBundle}.map`,
+        ...pathconfig.otherOutputs,
+        ...pathconfig.otherOutputs.map(output => `${output}.map`)
     ]);
 });
 

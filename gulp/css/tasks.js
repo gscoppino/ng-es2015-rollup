@@ -31,9 +31,12 @@ function lazyLoadPostcssConfig (type) {
 
 gulp.task('clean:css', () => {
     return del([
-        pathconfig.out.devPath,
-        pathconfig.out.prodPath,
-        pathconfig.map.path
+        pathconfig.devBundle,
+        `${pathconfig.devBundle}.map`,
+        pathconfig.productionBundle,
+        `${pathconfig.productionBundle}.map`,
+        ...pathconfig.otherOutputs,
+        ...pathconfig.otherOutputs.map(output => `${output}.map`)
     ]);
 });
 
@@ -41,11 +44,11 @@ gulp.task('build:css', ['clean:css'], () => {
     return lazyLoadPostcssConfig('dev').then((POSTCSS_DEV_CONFIG) => {
 
         return postcss(POSTCSS_DEV_CONFIG.plugins)
-            .process(fs.readFileSync(pathconfig.in.path), POSTCSS_DEV_CONFIG)
+            .process(fs.readFileSync(pathconfig.entry), POSTCSS_DEV_CONFIG)
             .then((result)=> {
                 return Promise.all([
-                    new Promise((resolve) => fs.writeFile(pathconfig.out.devPath, result.css, resolve)),
-                    new Promise((resolve) => fs.writeFile(pathconfig.map.path, result.map, resolve))
+                    new Promise((resolve) => fs.writeFile(pathconfig.devBundle, result.css, resolve)),
+                    new Promise((resolve) => fs.writeFile(`${pathconfig.devBundle}.map`, result.map, resolve))
                 ]);
             });
 
@@ -56,12 +59,14 @@ gulp.task('watch:css', ['build:css'], () => gulp.watch('src/**/*.css', ['build:c
 
 gulp.task('build:css-production', ['clean:css'], () => {
     return lazyLoadPostcssConfig('production').then((POSTCSS_PRODUCTION_CONFIG) => {
+
         return postcss(POSTCSS_PRODUCTION_CONFIG.plugins)
-            .process(fs.readFileSync(pathconfig.in.path), POSTCSS_PRODUCTION_CONFIG)
+            .process(fs.readFileSync(pathconfig.entry), POSTCSS_PRODUCTION_CONFIG)
             .then((result)=> {
                 return Promise.all([
-                    new Promise((resolve) => fs.writeFile(pathconfig.out.prodPath, result.css, resolve))
+                    new Promise((resolve) => fs.writeFile(pathconfig.productionBundle, result.css, resolve))
                 ]);
             });
+
     });
 });

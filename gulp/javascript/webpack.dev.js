@@ -6,11 +6,11 @@ export default {
     target: 'web',
 
     entry: {
-        [pathconfig.out.devFilename.split('.')[0]]: [
+        [path.basename(pathconfig.devBundle, '.js')]: [
             // All entries are loaded into the bundle,
             // but only the last is exported.
             path.resolve(process.cwd(), 'node_modules', 'babel-polyfill', 'dist', 'polyfill.js'),
-            pathconfig.in.path
+            pathconfig.entry
         ],
         // Use a stub for the production service worker to prevent errors in development.
         sw: path.resolve(process.cwd(), 'src', 'sw.js')
@@ -18,7 +18,7 @@ export default {
 
     output: {
         // Output bundle and sourcemap.
-        path: pathconfig.out.directory,
+        path: path.dirname(pathconfig.devBundle),
         filename: '[name].js',
         sourceMapFilename: '[file].map',
 

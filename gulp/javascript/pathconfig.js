@@ -1,10 +1,18 @@
-import { getPathConfig } from '../util/pathconfig.js';
+import path from 'path';
 
 const INPUT_DIR = 'src';
-const INPUT_FILE = 'main.js';
+const ENTRY_FILENAME = 'main.js';
 
 const OUTPUT_DIR = 'dist';
-const DEV_OUTPUT_FILE = 'main.js';
-const PROD_OUTPUT_FILE = 'main.js';
+const DEV_BUNDLE_FILENAME = 'main.js';
+const PROD_BUNDLE_FILENAME = 'main.js';
+const OTHER_OUTPUTS = [
+    'sw.js'
+];
 
-export default getPathConfig(INPUT_DIR, INPUT_FILE, OUTPUT_DIR, DEV_OUTPUT_FILE, PROD_OUTPUT_FILE);
+export default {
+    entry: path.resolve(process.cwd(), INPUT_DIR, ENTRY_FILENAME),
+    devBundle: path.resolve(process.cwd(), OUTPUT_DIR, DEV_BUNDLE_FILENAME),
+    productionBundle: path.resolve(process.cwd(), OUTPUT_DIR, PROD_BUNDLE_FILENAME),
+    otherOutputs: OTHER_OUTPUTS.map(output => path.resolve(process.cwd(), OUTPUT_DIR, output))
+}

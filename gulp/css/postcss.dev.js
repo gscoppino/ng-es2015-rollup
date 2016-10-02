@@ -6,8 +6,8 @@ import pathconfig from './pathconfig.js';
 import BROWSERS from './browserslist.js';
 
 export default {
-    from: pathconfig.in.path,
-    to: pathconfig.out.devPath,
+    from: pathconfig.entry,
+    to: pathconfig.devBundle,
     map: { inline: false },
     plugins: [
         stylelint(),

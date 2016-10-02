@@ -6,7 +6,8 @@ import cssnano from 'cssnano';
 // Write to different file than dev version
 // Add minification step
 const POSTCSS_PRODUCTION_CONFIG = Object.assign({}, POSTCSS_CONFIG, {
-    to: pathconfig.out.prodPath,
+    from: pathconfig.entry,
+    to: pathconfig.productionBundle,
     map: false,
     plugins: [
         ...POSTCSS_CONFIG.plugins,

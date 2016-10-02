@@ -1,4 +1,4 @@
-import WEBPACK_TESTING_CONFIG from './webpack.testing';
+import WEBPACK_TESTING_CONFIG from './webpack.testing.js';
 
 export default {
     frameworks: ['jasmine'],

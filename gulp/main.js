@@ -1,14 +1,14 @@
 import gulp from 'gulp';
 
-import './git/tasks';
-import './html/tasks';
-import './css/tasks';
-import './javascript/tasks';
-import './images/tasks';
-import './docs/tasks';
-import './test/tasks';
-import './serve/tasks';
-import './generate/tasks';
+import './git/tasks.js';
+import './html/tasks.js';
+import './css/tasks.js';
+import './javascript/tasks.js';
+import './images/tasks.js';
+import './docs/tasks.js';
+import './test/tasks.js';
+import './serve/tasks.js';
+import './generate/tasks.js';
 
 gulp.task('clean', [
     'clean:markup',

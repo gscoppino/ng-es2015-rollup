@@ -60,6 +60,7 @@
     "stylelint-config-standard": "~13.0.x",
     "sw-precache-webpack-plugin": "~0.5.x",
     "systemjs": "~0.19.x",
+    "systemjs-plugin-babel": "~0.0.15",
     "webpack": "~1.13.x",
     "yargs": "~5.0.x"
   },

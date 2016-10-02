@@ -1,4 +1,5 @@
 import gulp from 'gulp';
+import System from 'systemjs';
 
 import './git/tasks.js';
 import './html/tasks.js';
@@ -9,6 +10,16 @@ import './docs/tasks.js';
 import './test/tasks.js';
 import './serve/tasks.js';
 import './generate/tasks.js';
+
+System.config({
+    map: {
+        'babel': 'node_modules/systemjs-plugin-babel/plugin-babel.js',
+        'systemjs-babel-build': 'node_modules/systemjs-plugin-babel/systemjs-babel-browser.js'
+    },
+    meta: {
+        'gulp/**/*.js': { loader: 'babel' }
+    }
+});
 
 gulp.task('clean', [
     'clean:markup',

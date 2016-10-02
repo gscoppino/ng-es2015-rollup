@@ -80,9 +80,7 @@ function injectCSS(target, source, browsers) {
 
 gulp.task('build:markup-production', ['clean:markup'], ()=> {
     let target = gulp.src('src/*.html');
-    return lazyLoadInjectConfig().then((modules) => {
-        let [INJECT_CRITICAL, BROWSERS, ] = modules;
-
+    return lazyLoadInjectConfig().then(([INJECT_CRITICAL, BROWSERS]) => {
         return injectCSS(injectHTML(target, INJECT_CRITICAL.html), INJECT_CRITICAL.css, BROWSERS)
             .pipe(htmlmin({
                 collapseWhitespace: true,

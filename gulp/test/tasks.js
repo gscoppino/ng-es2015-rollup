@@ -10,18 +10,14 @@ function lazyLoadKarmaConfig() {
         }
     });
 
-    return Promise.all([
-        System.import('gulp/test/karma.config.js')
-    ])
-        .then(modules => modules.map(m => m.default));
+    return System.import('gulp/test/karma.config.js')
+        .then(m => m.default);
 }
 
 gulp.task('clean:test-coverage', () => del('dist/coverage'));
 
 gulp.task('test', ['clean:test-coverage'], (fin)=> {
-    lazyLoadKarmaConfig().then((modules) => {
-        let [KARMA_CONFIG, ] = modules;
-
+    lazyLoadKarmaConfig().then((KARMA_CONFIG) => {
         KARMA_CONFIG.singleRun = true;
         KARMA_CONFIG.autoWatch = false;
         new karma.Server(KARMA_CONFIG, (exitCode) => {
@@ -32,9 +28,7 @@ gulp.task('test', ['clean:test-coverage'], (fin)=> {
 });
 
 gulp.task('watch:test', ['clean:test-coverage'], ()=> {
-    return lazyLoadKarmaConfig().then((modules) => {
-        let [KARMA_CONFIG, ] = modules;
-
+    return lazyLoadKarmaConfig().then((KARMA_CONFIG) => {
         KARMA_CONFIG.singleRun = false;
         KARMA_CONFIG.autoWatch = true;
         new karma.Server(KARMA_CONFIG).start();

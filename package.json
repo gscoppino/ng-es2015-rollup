@@ -22,7 +22,7 @@
   "author": "Giuseppe Scoppino <scoppino.giuseppe@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "~6.14.x",
+    "babel-core": "~6.16.0",
     "babel-istanbul-loader": "~0.1.x",
     "babel-loader": "~6.2.x",
     "babel-plugin-external-helpers": "~6.8.x",

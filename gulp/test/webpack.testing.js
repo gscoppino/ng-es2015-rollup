@@ -34,17 +34,11 @@ export default {
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
                 loaders: ['raw-loader']
             },
-            // Transform ES2015 syntax to ES5 for all source files, and instrument
-            // the code so we can obtain coverage metrics at runtime.
+            // Transform ES2015 syntax to ES5 for all source and spec files.
+            // Instrumentation of source files for code coverage is done
+            // internally by Babel itself via a plugin (see src/.babelrc).
             {
                 test: /\.js$/,
-                include: [path.resolve(process.cwd(), 'src')],
-                exclude: [/\.spec\.js$/, path.resolve(process.cwd(), 'node_modules')],
-                loaders: ['babel-istanbul']
-            },
-            // Transform ES2015 syntax to ES5 for all spec files.
-            {
-                test: /\.spec\.js$/,
                 include: [path.resolve(process.cwd(), 'src')],
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
                 loaders: ['babel-loader']

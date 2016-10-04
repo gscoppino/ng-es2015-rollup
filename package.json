@@ -30,7 +30,7 @@
     "babel-preset-es2015": "~6.14.x",
     "browser-sync": "~2.17.x",
     "connect-history-api-fallback": "~1.3.x",
-    "cssnano": "~3.7.x",
+    "cssnano": "~3.7.5",
     "del": "~2.2.x",
     "eslint": "~3.5.x",
     "eslint-loader": "~1.5.x",

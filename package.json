@@ -35,7 +35,7 @@
     "eslint": "~3.5.x",
     "eslint-loader": "~1.5.x",
     "gulp": "~3.9.x",
-    "gulp-htmlmin": "~2.0.x",
+    "gulp-htmlmin": "~3.0.0",
     "gulp-inject": "~4.1.x",
     "gulp-postcss": "~6.2.x",
     "gulp-rename": "~1.2.x",

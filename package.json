@@ -36,7 +36,7 @@
     "eslint": "~3.7.x",
     "eslint-loader": "~1.5.x",
     "gulp": "~3.9.x",
-    "gulp-htmlmin": "~2.0.x",
+    "gulp-htmlmin": "~3.0.x",
     "gulp-inject": "~4.1.x",
     "gulp-postcss": "~6.2.x",
     "gulp-rename": "~1.2.x",
@@ -57,13 +57,13 @@
     "raw-loader": "~0.5.x",
     "rollup": "~0.36.x",
     "rollup-plugin-babel": "~2.6.x",
-    "stylelint": "~7.2.x",
+    "stylelint": "~7.3.x",
     "stylelint-config-standard": "~13.0.x",
     "sw-precache-webpack-plugin": "~0.5.x",
     "systemjs": "~0.19.x",
     "systemjs-plugin-babel": "~0.0.16",
     "webpack": "~1.13.x",
-    "yargs": "~5.0.x"
+    "yargs": "~6.0.x"
   },
   "dependencies": {
     "angular": "~1.5.x",

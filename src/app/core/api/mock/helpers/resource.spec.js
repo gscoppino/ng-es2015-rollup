@@ -148,13 +148,11 @@ describe('MockResourceFactory', () => {
         it('should create correct GET/POST/PUT/DELETE routes for the passed collection name and define responses.', () => {
             MockResourceFactory.create('users');
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('GET', `${apiBase}/users/:id?`);
-            expect(mockRespondDefinitionFn).toHaveBeenCalledWith(MockResource.prototype.respondToGET);
+            expect($httpBackend.whenRoute).toHaveBeenCalledWith('POST', `${apiBase}/users`);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('POST', `${apiBase}/users/`);
-            expect(mockRespondDefinitionFn).toHaveBeenCalledWith(MockResource.prototype.respondToPOST);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('PUT', `${apiBase}/users/:id`);
-            expect(mockRespondDefinitionFn).toHaveBeenCalledWith(MockResource.prototype.respondToPUT);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('DELETE', `${apiBase}/users/:id`);
-            expect(mockRespondDefinitionFn).toHaveBeenCalledWith(MockResource.prototype.respondToDELETE);
+            expect(mockRespondDefinitionFn.calls.count()).toBe(5);
         });
     });
 });

@@ -9,14 +9,16 @@ RESTful interfaces available through [Restangular](https://github.com/mgonto/res
 * Linting of CSS and Javascript in place, using [Stylelint](http://stylelint.io/) for the former, and [ESLint](http://eslint.org/) for the latter. Sensible defaults
 in place through `stylelint-config-standard` and `eslint:recommended` presets, respectively.
 * Automatic generation of app documentation available via [JSDoc](http://usejsdoc.org/).
+* Offline support via [sw-precache](https://github.com/GoogleChrome/sw-precache).
 * Development server provided using [BrowserSync](https://www.browsersync.io/), allowing for simultaneous multi-device runtime testing. Supports use of HTML5 History API
 for frontend routing, and incremental builds (LiveReload). Can also simulate a production server by minifying assets and inlining critical HTML and CSS.
 
 Features:
 * ES2015. Everywhere. Write source code and unit tests in ES2015, import modules locally or from NPM using ES2015 `import` syntax, and get documentation and coverage reports
-in ES2015. The build system, too, is written completely in ES2015. This is made possible thanks to [Webpack](https://webpack.github.io/) and [Babel](https://babeljs.io/).
-Webpack creates a bundle out of the tree of application imports, and Babel transpiles the source code in the bundle to ES5. `babel-polyfill` is also included in the final
-bundle, in order to polyfill ES2015 features into whatever browser the code is running in.
+in ES2015. The build system, too, is written completely in ES2015. This is made possible thanks to [Webpack](https://webpack.github.io/), [SystemJS](https://github.com/systemjs/systemjs) and
+[Babel](https://babeljs.io/). Webpack creates a bundle out of the tree of application imports, and Babel transpiles the source code in the bundle to ES5. SystemJS allows for
+dynamic imports, which facilitates lazy loading. `babel-polyfill` is also included in the final bundle, in order to polyfill ES2015 features into whatever browser
+the code is running in.
 * Inline Angular component templates made possible through Webpack [raw-loader](https://github.com/webpack/raw-loader). Just import your templates using ES2015 `import` syntax.
 * Use future CSS features now. Write stylesheets using upcoming CSS features such as selector nesting, variables, and the latest CSS properties (without vendor prefixes).
 Import your local CSS or CSS from NPM using spec-compliant `@import` syntax.  This is made possible using [PostCSS](http://postcss.org/), [CSSNext](http://cssnext.io/),

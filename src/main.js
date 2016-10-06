@@ -1,4 +1,5 @@
 /** @module main */
+import './sw-init';
 import './vendor';
 import angular from 'angular';
 import App from './app/app';

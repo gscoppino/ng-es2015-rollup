@@ -35,7 +35,7 @@ describe('users-list', () => {
                 spyOn(Object, 'assign').and.callFake(angular.noop);
 
                 UsersListController = $componentController('usersList');
-                expect(Object.assign).toHaveBeenCalledWith(UsersListController, {});
+                expect(Object.assign).toHaveBeenCalledWith(UsersListController, jasmine.any(Object));
             });
         });
 

@@ -110,10 +110,11 @@ function MockResourceFactory($httpBackend) {
     factory.create = function(name, collection=[]) {
         let resource = new MockResource(name, collection);
 
-        $httpBackend.whenRoute('GET', `${apiBase}/${name}/:id?`).respond(resource.respondToGET);
-        $httpBackend.whenRoute('POST', `${apiBase}/${name}/`).respond(resource.respondToPOST);
-        $httpBackend.whenRoute('PUT', `${apiBase}/${name}/:id`).respond(resource.respondToPUT);
-        $httpBackend.whenRoute('DELETE', `${apiBase}/${name}/:id`).respond(resource.respondToDELETE);
+        $httpBackend.whenRoute('GET', `${apiBase}/${name}/:id?`).respond(resource.respondToGET.bind(resource));
+        $httpBackend.whenRoute('POST', `${apiBase}/${name}/`).respond(resource.respondToPOST.bind(resource));
+        $httpBackend.whenRoute('POST', `${apiBase}/${name}`).respond(resource.respondToPOST.bind(resource));
+        $httpBackend.whenRoute('PUT', `${apiBase}/${name}/:id`).respond(resource.respondToPUT.bind(resource));
+        $httpBackend.whenRoute('DELETE', `${apiBase}/${name}/:id`).respond(resource.respondToDELETE.bind(resource));
     };
 
     return factory;

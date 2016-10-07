@@ -2,7 +2,7 @@ import angular from 'angular';
 import { combineReducers } from 'redux';
 
 // Import individual reducers
-import * as userReducers from './users/users';
+import { users } from './users/users';
 
 /**
  * @class
@@ -22,7 +22,9 @@ class RootReducerProvider {
      */
     createReducer() {
         if (!this._instance) {
-            this._instance = combineReducers(userReducers);
+            this._instance = combineReducers({
+                users
+            });
         }
 
         return this._instance;

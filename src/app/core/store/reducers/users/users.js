@@ -1,6 +1,6 @@
 import actions from 'app/core/store/actions/users/users';
 
-export function users(state = {
+export function usersReducer(state = {
     list: []
 }, action) {
 

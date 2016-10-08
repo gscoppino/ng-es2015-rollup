@@ -4,6 +4,7 @@
 body {
     background-color: color(white shade(2%));
 
+    /* stylelint-disable-next-line selector-type-no-unknown */
     & > app {
         display: block;
     }

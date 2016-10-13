@@ -7,15 +7,30 @@
 
 <!-- Test Reactive -->
 <div>
-    <label>Users in the Store</label>
+    <h3>Users in the Store</h3>
     <ul>
         <li ng-repeat="user in $ctrl.state.users">
-            <span ng-bind="user.name"></span>
-            <span style="cursor: pointer; color: red;" ng-click="$ctrl.deleteUser(user.name)">&times</span>
+            <span ng-bind="user.first_name"></span>
+            <span ng-bind="user.last_name"></span>
+            <span style="cursor:pointer; color: green;" ng-click="$ctrl.beginEditingUser(user)">&Delta;</span>
+            <span style="cursor: pointer; color: red;" ng-click="$ctrl.deleteUser(user.id)">&times;</span>
         </li>
     </ul>
-    <form ng-submit="$ctrl.addUser($ctrl.newUsername)">
-        <input type="text" ng-model="$ctrl.newUsername" />
-        <button type="submit">Submit</button>
+    <form ng-show="$ctrl.state.editingUser.id" ng-submit="$ctrl.editUser($ctrl.state.editingUser)">
+        <h3>Editing User</h3>
+        <div>
+            <input type="text" ng-model="$ctrl.state.editingUser.first_name" />
+            <input type="text" ng-model="$ctrl.state.editingUser.last_name" />
+            <button type="button" ng-click="$ctrl.stopEditingUser()">Cancel</button>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <form ng-submit="$ctrl.addUser($ctrl.state.newUser)">
+        <h3>New User</h3>
+        <div>
+            <input type="text" ng-model="$ctrl.state.newUser.first_name" />
+            <input type="text" ng-model="$ctrl.state.newUser.last_name" />
+            <button type="submit">Submit</button>
+        </div>
     </form>
 </div>

@@ -1,5 +1,9 @@
 import angular from 'angular';
 
+/**
+ * @class
+ * @classdesc Service Class for the application root store.
+ */
 class Store {
     static get $inject() { return ['$rootScope']; }
 
@@ -12,6 +16,10 @@ class Store {
         return this._state;
     }
 
+    /*
+     * Updates the state object with the new partial state slice,
+     * then synchronously notifies all store subscribers.
+     */
     update(newState) {
         Object.assign(this._state, JSON.parse(JSON.stringify(newState)));
         this.$rootScope.$emit('change');

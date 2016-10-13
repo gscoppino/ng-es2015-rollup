@@ -17,6 +17,7 @@ class AppController {
     static get $inject() { return ['$rootScope', '$log', 'Store', 'UserActions']; }
     constructor($rootScope, $log, Store, UserActions) {
         Object.assign(this, { $rootScope, Store, UserActions });
+        $log.log('Loaded!');
 
         /**
          * @member {boolean} isLoading
@@ -27,7 +28,18 @@ class AppController {
 
         this.listeners = [];
 
-        $log.log('Loaded!');
+        this.state = {
+            users: getState(this.Store.state.users),
+            newUser: {
+                first_name: '',
+                last_name: ''
+            },
+            editingUser: null
+        };
+
+        this.actions = {
+            users: this.UserActions
+        };
     }
 
     /**
@@ -36,14 +48,6 @@ class AppController {
      * the event.
      */
     $onInit() {
-        this.state = {
-            users: getState(this.Store.state.users)
-        };
-
-        this.actions = {
-            user: this.UserActions
-        };
-
         let update = this._update.bind(this);
 
         this.listeners.push(
@@ -53,8 +57,12 @@ class AppController {
 
             this.$rootScope.$on('$stateChangeStart', update),
             this.$rootScope.$on('$stateChangeSuccess', update),
-            this.$rootScope.$on('$stateChangeError', update),
+            this.$rootScope.$on('$stateChangeError', update)
         );
+
+        if (!this.state.users || !this.state.users.length) {
+            this.actions.users.sync();
+        }
     }
 
     /**
@@ -65,12 +73,31 @@ class AppController {
         this.isLoading = (event.name === '$stateChangeStart') ? true : false;
     }
 
-    addUser(username="") {
-        this.actions.user.add(username);
+    beginEditingUser(user={}) {
+        this.state.editingUser = JSON.parse(JSON.stringify(user));
+    }
+
+    stopEditingUser() {
+        this.state.editingUser = null;
+    }
+
+    editUser(user={}) {
+        this.actions.users.edit(user)
+            .then(this.stopEditingUser());
+    }
+
+    addUser(user={}) {
+        this.actions.users.add(user)
+            .then(() => {
+                this.state.newUser = {
+                    first_name: '',
+                    last_name: ''
+                };
+            });
     }
 
     deleteUser(username) {
-        this.actions.user.remove(username);
+        this.actions.users.remove(username);
     }
 
     /**

@@ -1,8 +1,10 @@
 import angular from 'angular';
 import UIRouter from 'angular-ui-router';
 import Config from './core/config/config';
+import Store, { getState } from './core/store/store';
 import Api from './core/api/api';
 import Routes from './core/routes/routes';
+import UserActions from './core/store/slices/users';
 import LoaderSpinner from './common/components/loader-spinner/loader-spinner';
 import AppTemplate from './app.html';
 
@@ -12,9 +14,9 @@ import AppTemplate from './app.html';
  */
 class AppController {
 
-    static get $inject() { return ['$rootScope', '$log']; }
-    constructor($rootScope, $log) {
-        Object.assign(this, { $rootScope });
+    static get $inject() { return ['$rootScope', '$log', 'Store', 'UserActions']; }
+    constructor($rootScope, $log, Store, UserActions) {
+        Object.assign(this, { $rootScope, Store, UserActions });
 
         /**
          * @member {boolean} isLoading
@@ -34,12 +36,24 @@ class AppController {
      * the event.
      */
     $onInit() {
+        this.state = {
+            users: getState(this.Store.state.users)
+        };
+
+        this.actions = {
+            user: this.UserActions
+        };
+
         let update = this._update.bind(this);
 
         this.listeners.push(
+            this.Store.subscribe(state => {
+                this.state.users = getState(state.users);
+            }),
+
             this.$rootScope.$on('$stateChangeStart', update),
             this.$rootScope.$on('$stateChangeSuccess', update),
-            this.$rootScope.$on('$stateChangeError', update)
+            this.$rootScope.$on('$stateChangeError', update),
         );
     }
 
@@ -49,6 +63,14 @@ class AppController {
      */
     _update(event) {
         this.isLoading = (event.name === '$stateChangeStart') ? true : false;
+    }
+
+    addUser(username="") {
+        this.actions.user.add(username);
+    }
+
+    deleteUser(username) {
+        this.actions.user.remove(username);
     }
 
     /**
@@ -75,9 +97,11 @@ const AppComponent = {
  */
 export default angular.module('app', [
     Config,
+    Store,
     Api,
     UIRouter,
     Routes,
+    UserActions,
     LoaderSpinner
 ])
     .component('app', AppComponent)

@@ -4,3 +4,18 @@
 </loader-spinner>
 
 <main ui-view></main>
+
+<!-- Test Reactive -->
+<div>
+    <label>Users in the Store</label>
+    <ul>
+        <li ng-repeat="user in $ctrl.state.users">
+            <span ng-bind="user.name"></span>
+            <span style="cursor: pointer; color: red;" ng-click="$ctrl.deleteUser(user.name)">&times</span>
+        </li>
+    </ul>
+    <form ng-submit="$ctrl.addUser($ctrl.newUsername)">
+        <input type="text" ng-model="$ctrl.newUsername" />
+        <button type="submit">Submit</button>
+    </form>
+</div>

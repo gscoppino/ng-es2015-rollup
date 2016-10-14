@@ -34,13 +34,13 @@ function UserActions(Store, UserService) {
 
         edit(editedUser={}) {
             if (!Number.isInteger(editedUser.id)) {
-                console.error('Treied to edit a user without an id (or a malformed id)!');
+                console.error('Tried to edit a user without an id (or a malformed id)!');
                 return;
             }
 
             return Object.assign(UserService.one(editedUser.id), editedUser).put()
                 .then((editedUser) => {
-                    editedUser.plain();
+                    editedUser = editedUser.plain();
 
                     Store.update({
                         users: Store.state.users.map(user => {

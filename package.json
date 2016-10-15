@@ -63,7 +63,7 @@
     "systemjs": "~0.19.x",
     "systemjs-plugin-babel": "~0.0.16",
     "webpack": "~1.13.x",
-    "yargs": "~6.0.x"
+    "yargs": "~6.1.1"
   },
   "dependencies": {
     "angular": "~1.5.x",

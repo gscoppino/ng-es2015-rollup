@@ -12,6 +12,14 @@ class Store {
         this._state = {};
     }
 
+    /*
+     * Returns the reference to the state tree.
+     * Recommendations:
+     * Don't use this to get the state by itself, wrap the lookup
+     * in the getState() helper to retrieve a copy of the state slice (to avoid mutation).
+     * Don't use this to modify the state. Modify the state
+     * using the update() method instead, which will also notify store subscribers of the change.
+     */
     get state() {
         return this._state;
     }

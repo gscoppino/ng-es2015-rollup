@@ -10,7 +10,7 @@ function lazyLoadKarmaConfig() {
         }
     });
 
-    return System.import('gulp/test/karma.config.js')
+    return System.import('tasks/test/karma.config.js')
         .then(m => m.default);
 }
 

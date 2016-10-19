@@ -1,7 +1,7 @@
 import babel from 'rollup-plugin-babel';
 
 export default {
-    entry: 'gulp/main.js',
+    entry: 'tasks/main.js',
     dest: 'gulpfile.js',
     plugins: [
         babel({

@@ -1,4 +1,4 @@
 node_modules
 dist
 gulpfile.js
-gulp/serve/db.json
+tasks/serve/db.json

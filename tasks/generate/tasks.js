@@ -17,7 +17,7 @@ gulp.task('generate:component', ()=> {
             sample-component, sample-component-child`);
     }
 
-    return gulp.src('gulp/generate/templates/component/*')
+    return gulp.src('tasks/generate/templates/component/*')
         .pipe(template({
             name: name,
             lowerCamelCaseName: name.split('-').map((part, i) => i === 0 ? part : part.substring(0, 1).toUpperCase() + part.substring(1)).join(''),
@@ -36,7 +36,7 @@ gulp.task('generate:directive', ()=> {
             sample-directive, sample-directive-sibling`);
     }
 
-    return gulp.src('gulp/generate/templates/directive/*')
+    return gulp.src('tasks/generate/templates/directive/*')
         .pipe(template({
             name: name,
             lowerCamelCaseName: name.split('-').map((part, i) => i === 0 ? part : part.substring(0, 1).toUpperCase() + part.substring(1)).join(''),
@@ -55,7 +55,7 @@ gulp.task('generate:service', ()=> {
             SampleService`);
     }
 
-    return gulp.src('gulp/generate/templates/service/*')
+    return gulp.src('tasks/generate/templates/service/*')
         .pipe(template({ name }))
         .pipe(rename((path) => {
             path.basename = path.basename.replace('service', name);
@@ -70,7 +70,7 @@ gulp.task('generate:route', ()=> {
             sample-route, sample-route-child`);
     }
 
-    return gulp.src('gulp/generate/templates/route/*')
+    return gulp.src('tasks/generate/templates/route/*')
         .pipe(template({
             name: name,
             lowerCamelCaseName: name.split('-').map((part, i) => i === 0 ? part : part.substring(0, 1).toUpperCase() + part.substring(1)).join(''),

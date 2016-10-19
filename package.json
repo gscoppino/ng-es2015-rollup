@@ -4,11 +4,11 @@
   "description": "Seed project for frontend development with PostCSS for CSS, ES2015 for Javascript, Webpack for dependency management, and Angular with Karma+Jasmine for a development framework.",
   "main": "dist/main.js",
   "scripts": {
-    "postinstall": "npm run setup-gulp",
+    "postinstall": "npm run setup-tasks",
     "test": "jasmine package.e2e.js",
     "start": "gulp production",
 
-    "setup-gulp": "rollup -c gulp/rollup.config.js",
+    "setup-tasks": "rollup -c tasks/rollup.config.js",
     "clean": "gulp clean",
     "build": "gulp build",
     "build-production": "gulp build-production",

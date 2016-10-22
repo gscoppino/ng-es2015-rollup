@@ -56,7 +56,7 @@ function UserActions(Store, UserService) {
             if (editingUserMap.has(editedUser.id)) {
                 return editingUserMap.get(editedUser.id)
                     .finally(() => {
-                        return edit(editedUser);
+                        return this.edit(editedUser);
                     });
             }
 
@@ -66,7 +66,7 @@ function UserActions(Store, UserService) {
 
                     Store.update({
                         users: Store.state.users.map(user => {
-                            return user.id !== editedUser.id ? user : Object.assign({}, user, editedUser)
+                            return user.id !== editedUser.id ? user : Object.assign({}, user, editedUser);
                         })
                     });
 

@@ -34,7 +34,7 @@ describe('App Component', () => {
 
         describe('Constructor', () => {
             it('should assign dependencies onto the instance object.', () => {
-                spyOn(Object, 'assign').and.callFake(angular.noop);
+                spyOn(Object, 'assign').and.callThrough();
                 $componentController('app');
 
                 expect(Object.assign).toHaveBeenCalled();
@@ -82,7 +82,7 @@ describe('App Component', () => {
                 it('should store references to all watcher deregistration functions in a list, on the instance object.', () => {
                     AppController.$onInit();
 
-                    expect(AppController.listeners.length).toBe(3);
+                    expect(AppController.listeners.length).toBe(4);
                 });
             });
 

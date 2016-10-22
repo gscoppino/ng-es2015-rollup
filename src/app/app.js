@@ -30,11 +30,11 @@ class AppController {
 
         this.state = {
             users: immutable(this.Store.state.users),
+            editingUser: null,
             newUser: {
                 first_name: '',
                 last_name: ''
-            },
-            editingUser: null
+            }
         };
 
         this.actions = {

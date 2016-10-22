@@ -10,6 +10,11 @@ function initStore(Store) {
 
 UserActions.$inject = ['Store', 'UserService'];
 function UserActions(Store, UserService) {
+    let addingUserMap = new Map();
+    let editingUserMap = new Map();
+    let removingUserMap = new Map();
+    let syncingUsers = false;
+
     return {
         add(newUser={}) {
             if (newUser.id) {
@@ -17,7 +22,11 @@ function UserActions(Store, UserService) {
                 return;
             }
 
-            return UserService.post(newUser)
+            if (addingUserMap.has(newUser)) {
+                return addingUserMap.get(newUser);
+            }
+
+            let promise = UserService.post(newUser)
                 .then((newUser) => {
                     newUser = newUser.plain();
 
@@ -29,7 +38,13 @@ function UserActions(Store, UserService) {
                     });
 
                     return newUser;
+                })
+                .finally(() => {
+                    addingUserMap.delete(newUser);
                 });
+
+            addingUserMap.set(newUser, promise);
+            return promise;
         },
 
         edit(editedUser={}) {
@@ -38,7 +53,14 @@ function UserActions(Store, UserService) {
                 return;
             }
 
-            return Object.assign(UserService.one(editedUser.id), editedUser).put()
+            if (editingUserMap.has(editedUser.id)) {
+                return editingUserMap.get(editedUser.id)
+                    .finally(() => {
+                        return edit(editedUser);
+                    });
+            }
+
+            let promise = Object.assign(UserService.one(editedUser.id), editedUser).put()
                 .then((editedUser) => {
                     editedUser = editedUser.plain();
 
@@ -49,13 +71,23 @@ function UserActions(Store, UserService) {
                     });
 
                     return editedUser;
+                })
+                .finally(() => {
+                    editingUserMap.delete(editedUser.id);
                 });
+
+            editingUserMap.set(editedUser.id, promise);
+            return promise;
         },
 
         remove(id=null) {
             if (!Number.isInteger(id)) { return; }
 
-            return UserService.one(id).remove()
+            if (removingUserMap.has(id)) {
+                return removingUserMap.get(id);
+            }
+
+            let promise = UserService.one(id).remove()
                 .then((removedUser) => {
                     removedUser = removedUser.plain();
 
@@ -64,11 +96,21 @@ function UserActions(Store, UserService) {
                     });
 
                     return removedUser;
+                })
+                .finally(() => {
+                    removingUserMap.delete(id);
                 });
+
+            removingUserMap.set(id, promise);
+            return promise;
         },
 
         sync() {
-            return UserService.getList()
+            if (syncingUsers) {
+                return syncingUsers;
+            }
+
+            syncingUsers = UserService.getList()
                 .then((users) => {
                     users = users.plain();
 
@@ -77,7 +119,12 @@ function UserActions(Store, UserService) {
                     });
 
                     return users;
+                })
+                .finally(() => {
+                    syncingUsers = false;
                 });
+
+            return syncingUsers;
         }
     };
 }

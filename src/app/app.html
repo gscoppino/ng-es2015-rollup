@@ -9,7 +9,7 @@
 <div>
     <h3>Users in the Store</h3>
     <ul>
-        <li ng-repeat="user in $ctrl.state.users">
+        <li ng-repeat="user in $ctrl.state.users track by user.id">
             <span ng-bind="user.first_name"></span>
             <span ng-bind="user.last_name"></span>
             <span style="cursor:pointer; color: green;" ng-click="$ctrl.beginEditingUser(user)">&Delta;</span>

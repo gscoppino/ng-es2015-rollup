@@ -48,7 +48,7 @@ class Store {
      * to determine whether to notify them of the state change or not.
      *
      * @param callback {Function} - the function to call with the changed state.
-     * @param selectorFns {Array} - an array of functions that return slices of state.
+     * @param selectorFns {Function[]} - an array of functions that return slices of state.
      * @returns {Function} - the deregistration function for this listener.
      */
     subscribe(callback, selectorFns=[]) {

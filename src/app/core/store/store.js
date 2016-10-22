@@ -16,7 +16,7 @@ class Store {
      * Returns the reference to the state tree.
      * Recommendations:
      * Don't use this to get the state by itself, wrap the lookup
-     * in the getState() helper to retrieve a copy of the state slice (to avoid mutation).
+     * in the immutable() helper to retrieve a copy of the state slice (to avoid mutation).
      * Don't use this to modify the state. Modify the state
      * using the update() method instead, which will also notify store subscribers of the change.
      */
@@ -35,7 +35,7 @@ class Store {
      * into the state.
      */
     update(newState={}) {
-        Object.assign(this._state, JSON.parse(JSON.stringify(newState)));
+        Object.assign(this._state, immutable(newState));
         this.$rootScope.$emit('change');
         this.$rootScope.$evalAsync();
     }
@@ -52,11 +52,20 @@ class Store {
     }
 }
 
-function getState(stateSlice) {
+/*
+ * Deep clones a valid JSON object.
+ * This function uses the browsers built-in JSON methods to do the cloning,
+ * so the typical restrictions/quirks apply.
+ * 1) Function properties will be dropped.
+ * 2) Properties with a value of "undefined" will be dropped.
+ * 3) Any Date objects will be replaced with the equivalent ISO 8601 string.
+ * ...and maybe some other things.
+ */
+function immutable(stateSlice) {
     return JSON.parse(JSON.stringify(stateSlice));
 }
 
-export { getState };
+export { immutable };
 export default angular.module('app.store', [])
     .service('Store', Store)
     .name;

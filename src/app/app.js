@@ -1,7 +1,7 @@
 import angular from 'angular';
 import UIRouter from 'angular-ui-router';
 import Config from './core/config/config';
-import Store, { getState } from './core/store/store';
+import Store, { immutable } from './core/store/store';
 import Api from './core/api/api';
 import Routes from './core/routes/routes';
 import UserActions from './core/store/slices/users';
@@ -29,7 +29,7 @@ class AppController {
         this.listeners = [];
 
         this.state = {
-            users: getState(this.Store.state.users),
+            users: immutable(this.Store.state.users),
             newUser: {
                 first_name: '',
                 last_name: ''
@@ -52,7 +52,7 @@ class AppController {
 
         this.listeners.push(
             this.Store.subscribe(state => {
-                this.state.users = getState(state.users);
+                this.state.users = immutable(state.users);
             }),
 
             this.$rootScope.$on('$stateChangeStart', update),
@@ -74,7 +74,7 @@ class AppController {
     }
 
     beginEditingUser(user={}) {
-        this.state.editingUser = JSON.parse(JSON.stringify(user));
+        this.state.editingUser = immutable(user);
     }
 
     stopEditingUser() {

@@ -96,8 +96,8 @@ class AppController {
             });
     }
 
-    deleteUser(username) {
-        this.actions.users.remove(username);
+    deleteUser(id) {
+        this.actions.users.remove(id);
     }
 
     /**

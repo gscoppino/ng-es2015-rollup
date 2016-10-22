@@ -1,5 +1,7 @@
 Boilerplate for developing a new AngularJS 1.x single page application.
 
+[![Build Status](https://travis-ci.org/gscoppino/ng-es2015-webpack.svg?branch=master)](https://travis-ci.org/gscoppino/ng-es2015-webpack)
+
 Contents:
 * Core skeleton of an Angular application using component architecture, with routing provided by [AngularUI Router](https://github.com/angular-ui/ui-router),
 RESTful interfaces available through [Restangular](https://github.com/mgonto/restangular), and accessibility addressed by [ngAria](https://angularjs.org/).

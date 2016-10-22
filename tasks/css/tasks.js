@@ -17,12 +17,12 @@ function lazyLoadPostcssConfig (type) {
     });
 
     if (type === 'dev') {
-        return System.import('gulp/css/postcss.dev.js')
+        return System.import('tasks/css/postcss.dev.js')
             .then(m => m.default);
     }
 
     if (type === 'production') {
-        return System.import('gulp/css/postcss.production.js')
+        return System.import('tasks/css/postcss.production.js')
             .then(m => m.default);
     }
 

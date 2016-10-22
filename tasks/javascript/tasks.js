@@ -15,11 +15,11 @@ function lazyLoadWebpackConfig (type) {
     });
 
     if (type === 'dev') {
-        return System.import('gulp/javascript/webpack.dev.js')
+        return System.import('tasks/javascript/webpack.dev.js')
             .then(m => m.default);
     }
     if (type === 'production') {
-        return System.import('gulp/javascript/webpack.production.js')
+        return System.import('tasks/javascript/webpack.production.js')
             .then(m => m.default);
     }
 

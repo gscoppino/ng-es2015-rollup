@@ -36,19 +36,34 @@ class Store {
      */
     update(newState={}) {
         Object.assign(this._state, immutable(newState));
-        this.$rootScope.$emit('change');
+        this.$rootScope.$emit('change', Object.keys(newState));
         this.$rootScope.$evalAsync();
     }
 
     /*
      * Notifies a callback function of changes to the state,
-     * passing it the new state.
+     * passing it the new state. Optionally accepts an array of
+     * selector functions, that will be used to test if the state change
+     * has affected a part of the tree relevant to the subscriber, in order
+     * to determine whether to notify them of the state change or not.
      *
      * @param callback {Function} - the function to call with the changed state.
+     * @param selectorFns {Array} - an array of functions that return slices of state.
      * @returns {Function} - the deregistration function for this listener.
      */
-    subscribe(callback) {
-        return this.$rootScope.$on('change', callback.bind(null, this._state));
+    subscribe(callback, selectorFns=[]) {
+        return this.$rootScope.$on('change', (event, changedProps) => {
+            let match  = !selectorFns.length ? true : selectorFns.some((selectorFn) => {
+                let stateSlice = selectorFn(this._state);
+                return changedProps.some((prop) => {
+                    return stateSlice === this._state[prop];
+                });
+            });
+
+            if (match) {
+                callback(this._state);
+            }
+        });
     }
 }
 

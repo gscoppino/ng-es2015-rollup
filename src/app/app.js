@@ -53,7 +53,7 @@ class AppController {
         this.listeners.push(
             this.Store.subscribe(state => {
                 this.state.users = immutable(state.users);
-            }),
+            }, [(state) => state.users]),
 
             this.$rootScope.$on('$stateChangeStart', update),
             this.$rootScope.$on('$stateChangeSuccess', update),

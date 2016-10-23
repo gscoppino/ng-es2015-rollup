@@ -2,4 +2,3 @@
 import 'angular';
 import 'angular-aria';
 import 'angular-ui-router';
-import 'restangular-umd';

@@ -1,12 +1,12 @@
 import angular from 'angular';
-import Restangular from 'restangular-umd';
+import ApiFactory from './factory/factory';
 import MockBackend from './mock/mock'; // Remove this import and the its use in this file to disable the mock backend.
 
 const apiBase = '/api';
 
-ApiConfig.$inject = ['RestangularProvider'];
-function ApiConfig(RestangularProvider) {
-    RestangularProvider.setBaseUrl(apiBase);
+ApiConfig.$inject = ['ApiFactoryProvider'];
+function ApiConfig(ApiFactoryProvider) {
+    ApiFactoryProvider.setBaseUrl(apiBase);
 }
 
 export { apiBase, ApiConfig };
@@ -16,7 +16,7 @@ export { apiBase, ApiConfig };
  * @desc Configures the application to work with its API.
  */
 export default angular.module('app.api', [
-    Restangular,
+    ApiFactory,
     MockBackend
 ])
     .config(ApiConfig)

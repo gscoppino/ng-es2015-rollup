@@ -7,7 +7,6 @@
     "postinstall": "npm run setup-tasks",
     "test": "jasmine package.e2e.js",
     "start": "gulp production",
-
     "setup-tasks": "rollup -c tasks/rollup.config.js",
     "clean": "gulp clean",
     "build": "gulp build",
@@ -71,7 +70,6 @@
     "angular": "~1.5.x",
     "angular-aria": "~1.5.x",
     "angular-mocks": "~1.5.x",
-    "angular-ui-router": "~0.3.x",
-    "restangular-umd": "~1.0.1"
+    "angular-ui-router": "~0.3.x"
   }
 }

@@ -60,7 +60,7 @@
     "rollup": "~0.36.x",
     "rollup-plugin-babel": "~2.6.x",
     "stylelint": "~7.5.x",
-    "stylelint-config-standard": "~13.0.x",
+    "stylelint-config-standard": "~14.0.x",
     "sw-precache-webpack-plugin": "~0.5.x",
     "systemjs": "~0.19.x",
     "systemjs-plugin-babel": "~0.0.16",

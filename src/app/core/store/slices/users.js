@@ -18,6 +18,7 @@ class UserActions {
             add: new Map(),
             edit: new Map(),
             remove: new Map(),
+            syncOne: new Map(),
             sync : false
         };
     }
@@ -135,6 +136,38 @@ class UserActions {
             });
 
         return this._pendingActions.sync;
+    }
+
+    syncOne(id=null) {
+        if (!Number.isInteger(id)) {
+            console.error('Tried to get a user without an id (or a malformed id)!');
+            return;
+        }
+
+        if (this._pendingActions.syncOne.has(id)) {
+            return this._pendingActions.syncOne.get(id);
+        }
+
+        let promise = this.UserService.get(id)
+            .then((syncedUser) => {
+                syncedUser = syncedUser.plain();
+
+                this.Store.update({
+                    users: this.Store
+                        .get(state => state.users)
+                        .map((user) => {
+                            return user.id !== syncedUser.id ? user : Object.assign({}, user, syncedUser);
+                        })
+                });
+
+                return users;
+            })
+            .finally(() => {
+                this._pendingActions.syncOne.delete(id);
+            });
+
+        this._pendingActions.syncOne.set(id, promise);
+        return promise;
     }
 }
 

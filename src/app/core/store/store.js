@@ -19,6 +19,10 @@ class Store {
      * @returns the immutable slice of state
      */
     get(sliceFn) {
+        if (typeof sliceFn !== 'function') {
+            return immutable(this._state);
+        }
+
         return immutable(sliceFn(this._state));
     }
 

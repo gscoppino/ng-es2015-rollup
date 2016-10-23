@@ -29,7 +29,7 @@ class AppController {
         this.listeners = [];
 
         this.state = {
-            users: immutable(this.Store.state.users),
+            users: this.Store.get(state => state.users),
             editingUser: null,
             newUser: {
                 first_name: '',
@@ -52,7 +52,7 @@ class AppController {
 
         this.listeners.push(
             this.Store.subscribe(state => {
-                this.state.users = immutable(state.users);
+                this.state.users = state.users;
             }, [(state) => state.users]),
 
             this.$rootScope.$on('$stateChangeStart', update),

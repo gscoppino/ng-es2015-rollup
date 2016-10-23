@@ -5,7 +5,9 @@ import UserService from 'app/core/api/services/users/users';
 
 initStore.$inject = ['Store'];
 function initStore(Store) {
-    Store.state.users = [];
+    Store.update({
+        users: []
+    });
 }
 
 class UserActions {
@@ -36,7 +38,7 @@ class UserActions {
 
                 this.Store.update({
                     users: [
-                        ...this.Store.state.users,
+                        ...this.Store.get(state => state.users),
                         newUser
                     ]
                 });
@@ -69,9 +71,11 @@ class UserActions {
                 editedUser = editedUser.plain();
 
                 this.Store.update({
-                    users: this.Store.state.users.map(user => {
-                        return user.id !== editedUser.id ? user : Object.assign({}, user, editedUser);
-                    })
+                    users: this.Store
+                        .get(state => state.users)
+                        .map(user => {
+                            return user.id !== editedUser.id ? user : Object.assign({}, user, editedUser);
+                        })
                 });
 
                 return editedUser;
@@ -96,7 +100,9 @@ class UserActions {
                 removedUser = removedUser.plain();
 
                 this.Store.update({
-                    users: this.Store.state.users.filter(user => user.id !== removedUser.id)
+                    users: this.Store
+                        .get(state => state.users)
+                        .filter(user => user.id !== removedUser.id)
                 });
 
                 return removedUser;

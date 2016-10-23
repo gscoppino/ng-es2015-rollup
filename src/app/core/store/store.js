@@ -13,15 +13,13 @@ class Store {
     }
 
     /*
-     * Returns the reference to the state tree.
-     * Recommendations:
-     * Don't use this to get the state by itself, wrap the lookup
-     * in the immutable() helper to retrieve a copy of the state slice (to avoid mutation).
-     * Don't use this to modify the state. Modify the state
-     * using the update() method instead, which will also notify store subscribers of the change.
+     * Returns an immutable copy of the part of the state tree specified.
+     * @param sliceFn {Function} - the function, which is passed the state, and
+     * return the slice of state needed.
+     * @returns the immutable slice of state
      */
-    get state() {
-        return this._state;
+    get(sliceFn) {
+        return immutable(sliceFn(this._state));
     }
 
     /*
@@ -61,7 +59,7 @@ class Store {
             });
 
             if (match) {
-                callback(this._state);
+                callback(immutable(this._state));
             }
         });
     }

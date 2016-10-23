@@ -1,5 +1,5 @@
 import angular from 'angular';
-import Store from '../store';
+import Store from 'app/core/store/store';
 import UserService from 'app/core/api/services/users/users';
 
 
@@ -14,13 +14,6 @@ class UserActions {
     static get $inject() { return ['Store', 'UserService']; }
     constructor(Store, UserService) {
         Object.assign(this, { Store, UserService });
-        this._pendingActions = {
-            add: new Map(),
-            edit: new Map(),
-            remove: new Map(),
-            syncOne: new Map(),
-            sync : false
-        };
     }
 
     add(newUser={}) {
@@ -29,14 +22,8 @@ class UserActions {
             return;
         }
 
-        if (this._pendingActions.add.has(newUser)) {
-            return this._pendingActions.add.get(newUser);
-        }
-
-        let promise = this.UserService.post(newUser)
+        return this.UserService.post(newUser)
             .then((newUser) => {
-                newUser = newUser.plain();
-
                 this.Store.update({
                     users: [
                         ...this.Store.get(state => state.users),
@@ -45,13 +32,7 @@ class UserActions {
                 });
 
                 return newUser;
-            })
-            .finally(() => {
-                this._pendingActions.add.delete(newUser);
             });
-
-        this._pendingActions.add.set(newUser, promise);
-        return promise;
     }
 
     edit(editedUser={}) {
@@ -60,17 +41,8 @@ class UserActions {
             return;
         }
 
-        if (this._pendingActions.edit.has(editedUser.id)) {
-            return this._pendingActions.edit.get(editedUser.id)
-                .finally(() => {
-                    return this.edit(editedUser);
-                });
-        }
-
-        let promise = Object.assign(this.UserService.one(editedUser.id), editedUser).put()
+        return this.UserService.put(editedUser)
             .then((editedUser) => {
-                editedUser = editedUser.plain();
-
                 this.Store.update({
                     users: this.Store
                         .get(state => state.users)
@@ -80,26 +52,14 @@ class UserActions {
                 });
 
                 return editedUser;
-            })
-            .finally(() => {
-                this._pendingActions.edit.delete(editedUser.id);
             });
-
-        this._pendingActions.edit.set(editedUser.id, promise);
-        return promise;
     }
 
     remove(id=null) {
         if (!Number.isInteger(id)) { return; }
 
-        if (this._pendingActions.remove.has(id)) {
-            return this._pendingActions.remove.get(id);
-        }
-
-        let promise = this.UserService.one(id).remove()
+        return this.UserService.delete(id)
             .then((removedUser) => {
-                removedUser = removedUser.plain();
-
                 this.Store.update({
                     users: this.Store
                         .get(state => state.users)
@@ -107,35 +67,18 @@ class UserActions {
                 });
 
                 return removedUser;
-            })
-            .finally(() => {
-                this._pendingActions.remove.delete(id);
             });
-
-        this._pendingActions.remove.set(id, promise);
-        return promise;
     }
 
     sync() {
-        if (this._pendingActions.sync) {
-            return this._pendingActions.sync;
-        }
-
-        this._pendingActions.sync = this.UserService.getList()
+        return this.UserService.getList()
             .then((users) => {
-                users = users.plain();
-
                 this.Store.update({
                     users
                 });
 
                 return users;
-            })
-            .finally(() => {
-                this._pendingActions.sync = false;
             });
-
-        return this._pendingActions.sync;
     }
 
     syncOne(id=null) {
@@ -144,14 +87,8 @@ class UserActions {
             return;
         }
 
-        if (this._pendingActions.syncOne.has(id)) {
-            return this._pendingActions.syncOne.get(id);
-        }
-
-        let promise = this.UserService.get(id)
+        return this.UserService.get(id)
             .then((syncedUser) => {
-                syncedUser = syncedUser.plain();
-
                 this.Store.update({
                     users: this.Store
                         .get(state => state.users)
@@ -160,14 +97,8 @@ class UserActions {
                         })
                 });
 
-                return users;
-            })
-            .finally(() => {
-                this._pendingActions.syncOne.delete(id);
+                return syncedUser;
             });
-
-        this._pendingActions.syncOne.set(id, promise);
-        return promise;
     }
 }
 

@@ -3,6 +3,7 @@ import UIRouter from 'angular-ui-router';
 import Config from './core/config/config';
 import Store, { immutable } from './core/store/store';
 import Api from './core/api/api';
+import Store from './core/store/store';
 import Routes from './core/routes/routes';
 import UserActions from './core/store/slices/users';
 import LoaderSpinner from './common/components/loader-spinner/loader-spinner';
@@ -126,6 +127,7 @@ export default angular.module('app', [
     Config,
     Store,
     Api,
+    Store,
     UIRouter,
     Routes,
     UserActions,

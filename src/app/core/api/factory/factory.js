@@ -2,9 +2,9 @@ import angular from 'angular';
 import { Http } from 'app/common/services/Http/Http';
 
 class RESTApi extends Http {
-    static get $inject() { return ['$http', 'name', 'baseUrl']; }
-    constructor($http, name='', baseUrl='') {
-        super($http);
+    static get $inject() { return ['$q', '$http', 'name', 'baseUrl']; }
+    constructor($q, $http, name='', baseUrl='') {
+        super($q, $http);
         this.name = name;
         this.baseUrl = baseUrl;
     }

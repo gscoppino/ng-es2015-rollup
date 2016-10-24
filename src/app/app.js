@@ -2,6 +2,7 @@ import angular from 'angular';
 import UIRouter from 'angular-ui-router';
 import Config from './core/config/config';
 import Api from './core/api/api';
+import Store from './core/store/store';
 import Routes from './core/routes/routes';
 import LoaderSpinner from './common/components/loader-spinner/loader-spinner';
 import AppTemplate from './app.html';
@@ -76,6 +77,7 @@ const AppComponent = {
 export default angular.module('app', [
     Config,
     Api,
+    Store,
     UIRouter,
     Routes,
     LoaderSpinner

@@ -3,9 +3,11 @@ import Store from 'app/core/store/store';
 import ApiSlice from 'app/core/store/slices/api/api';
 import UserService from 'app/core/api/services/users/users';
 
+const STORE_SLICE = (state) => state.api;
+
 initStore.$inject = ['Store'];
 function initStore(Store) {
-    Store.update(state => state.api, {
+    Store.update(STORE_SLICE, {
         users: []
     });
 }
@@ -19,7 +21,7 @@ class UserActions {
     add(newUser={}) {
         return this.UserService.post(newUser)
             .then((newUser) => {
-                this.Store.update(state => state.api, {
+                this.Store.update(STORE_SLICE, {
                     users: [
                         ...this.Store.get(state => state.api.users),
                         newUser
@@ -33,7 +35,7 @@ class UserActions {
     edit(editedUser={}) {
         return this.UserService.put(editedUser)
             .then((editedUser) => {
-                this.Store.update(state => state.api, {
+                this.Store.update(STORE_SLICE, {
                     users: this.Store
                         .get(state => state.api.users)
                         .map(user => {
@@ -48,7 +50,7 @@ class UserActions {
     remove(id=null) {
         return this.UserService.delete(id)
             .then((removedUser) => {
-                this.Store.update(state => state.api, {
+                this.Store.update(STORE_SLICE, {
                     users: this.Store
                         .get(state => state.api.users)
                         .filter(user => user.id !== removedUser.id)
@@ -61,7 +63,7 @@ class UserActions {
     sync() {
         return this.UserService.getList()
             .then((users) => {
-                this.Store.update(state => state.api, {
+                this.Store.update(STORE_SLICE, {
                     users
                 });
 
@@ -72,7 +74,7 @@ class UserActions {
     syncOne(id=null) {
         return this.UserService.get(id)
             .then((syncedUser) => {
-                this.Store.update(state => state.api, {
+                this.Store.update(STORE_SLICE, {
                     users: this.Store
                         .get(state => state.api.users)
                         .map((user) => {

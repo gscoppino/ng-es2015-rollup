@@ -17,11 +17,6 @@ class UserActions {
     }
 
     add(newUser={}) {
-        if (newUser.id) {
-            console.error('Tried to add a new user with an id!');
-            return;
-        }
-
         return this.UserService.post(newUser)
             .then((newUser) => {
                 this.Store.update({
@@ -36,11 +31,6 @@ class UserActions {
     }
 
     edit(editedUser={}) {
-        if (!Number.isInteger(editedUser.id)) {
-            console.error('Tried to edit a user without an id (or a malformed id)!');
-            return;
-        }
-
         return this.UserService.put(editedUser)
             .then((editedUser) => {
                 this.Store.update({
@@ -56,8 +46,6 @@ class UserActions {
     }
 
     remove(id=null) {
-        if (!Number.isInteger(id)) { return; }
-
         return this.UserService.delete(id)
             .then((removedUser) => {
                 this.Store.update({
@@ -82,11 +70,6 @@ class UserActions {
     }
 
     syncOne(id=null) {
-        if (!Number.isInteger(id)) {
-            console.error('Tried to get a user without an id (or a malformed id)!');
-            return;
-        }
-
         return this.UserService.get(id)
             .then((syncedUser) => {
                 this.Store.update({

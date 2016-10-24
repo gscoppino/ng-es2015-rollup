@@ -1,9 +1,9 @@
 import angular from 'angular';
 
 class Http {
-    static get $inject() { return ['$http']; }
-    constructor($http) {
-        Object.assign(this, { $http });
+    static get $inject() { return ['$q', '$http']; }
+    constructor($q, $http) {
+        Object.assign(this, { $q, $http });
         this.pendingRequests = {
             get: new Map(),
             put: new Map(),
@@ -34,18 +34,30 @@ class Http {
     }
 
     /*
-     * Stock $http.post. Parameters and return values are identical.
+     * Stock $http.post. Parameters and return values are identical, except
+     * in the case that an object with a id is passed as the payload, in which
+     * case the function will return a promise rejection.
      */
     post(...args) {
+        let [url, data] = args;
+        if (data.id) {
+            return this.$q.reject('Tried to POST an payload with an id!');
+        }
+
         return this.$http.post(...args);
     }
 
     /*
      * $http.put, with enforced sequencing of requests, to prevent race conditions.
-     * Parameters and return values are identical.
+     * Parameters and return values are identical, except in the case that an
+     * object without an id is passed as the payload, in which case the function
+     * will return a promise rejection.
      */
     put(...args) {
-        let [url] = args;
+        let [url, data] = args;
+        if (!Number.isInteger(data.id)) {
+            return this.$q.reject('Tried to PUT a payload without an id!');
+        }
 
         if (this.pendingRequests.put.has(url)) {
             return this.pendingRequests.put.get(url)
@@ -66,10 +78,15 @@ class Http {
 
     /*
      * $http.patch, with enforced sequencing of requests, to prevent race conditions.
-     * Parameters and return values are identical.
+     * Parameters and return values are identical, except in the case that an
+     * object without an id is passed as the payload, in which case the function
+     * will return a promise rejection.
      */
     patch(...args) {
-        let [url] = args;
+        let [url, data] = args;
+        if (!Number.isInteger(data.id)) {
+            return this.$q.reject('Tried to PATCH a payload without an id!');
+        }
 
         if (this.pendingRequests.patch.has(url)) {
             return this.pendingRequests.patch.get(url)

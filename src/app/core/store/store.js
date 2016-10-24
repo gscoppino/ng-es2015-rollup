@@ -63,7 +63,7 @@ class Store {
             });
 
             if (match) {
-                callback(immutable(this._state));
+                callback();
             }
         });
     }

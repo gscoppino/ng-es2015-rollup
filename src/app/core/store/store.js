@@ -38,7 +38,7 @@ class Store {
      */
     update(newState={}) {
         Object.assign(this._state, immutable(newState));
-        this.$rootScope.$emit('change', Object.keys(newState));
+        this.$rootScope.$emit('change');
         this.$rootScope.$evalAsync();
     }
 
@@ -54,15 +54,21 @@ class Store {
      * @returns {Function} - the deregistration function for this listener.
      */
     subscribe(callback, selectorFns=[]) {
-        return this.$rootScope.$on('change', (event, changedProps) => {
-            let match  = !selectorFns.length ? true : selectorFns.some((selectorFn) => {
-                let stateSlice = selectorFn(this._state);
-                return changedProps.some((prop) => {
-                    return stateSlice === this._state[prop];
-                });
-            });
 
-            if (match) {
+        // Memoize selector functions. This will allow us to
+        // determine when the selected values have changed.
+        selectorFns = selectorFns.map(fn => () => {
+            let currentValue = fn(this._state);
+            if (currentValue === fn.lastValue) {
+                return false;
+            } else {
+                fn.lastValue = currentValue;
+                return true;
+            }
+        });
+
+        return this.$rootScope.$on('change', () => {
+            if (!selectorFns.length || selectorFns.some(selectorFn => selectorFn(this._state))) {
                 callback();
             }
         });

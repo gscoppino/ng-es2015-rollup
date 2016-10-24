@@ -51,8 +51,8 @@ class AppController {
         let update = this._update.bind(this);
 
         this.listeners.push(
-            this.Store.subscribe(state => {
-                this.state.users = state.users;
+            this.Store.subscribe(() => {
+                this.state.users = this.Store.get(state => state.users);
             }, [(state) => state.users]),
 
             this.$rootScope.$on('$stateChangeStart', update),

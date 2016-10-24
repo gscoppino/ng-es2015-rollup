@@ -33,11 +33,13 @@ class Store {
      * most likely have changed watched values in response to a change in
      * state).
      *
+     * @param sliceFn {Function} - the function, which is passed the state, and
+     * returns the slice of state to modify.
      * @param newState {Object} - the partial state tree, which will be merged
      * into the state.
      */
-    update(newState={}) {
-        Object.assign(this._state, immutable(newState));
+    update(sliceFn, newState={}) {
+        Object.assign(sliceFn(this._state), immutable(newState));
         this.$rootScope.$emit('change');
         this.$rootScope.$evalAsync();
     }

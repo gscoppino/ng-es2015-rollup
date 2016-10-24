@@ -4,7 +4,7 @@ import Config from './core/config/config';
 import Api from './core/api/api';
 import Store, { immutable } from './core/store/store';
 import Routes from './core/routes/routes';
-import UserActions from './core/store/slices/users';
+import UserActions from './core/store/slices/api/users/users';
 import LoaderSpinner from './common/components/loader-spinner/loader-spinner';
 import AppTemplate from './app.html';
 
@@ -29,7 +29,7 @@ class AppController {
         this.listeners = [];
 
         this.state = {
-            users: this.Store.get(state => state.users),
+            users: this.Store.get(state => state.api.users),
             editingUser: null,
             newUser: {
                 first_name: '',
@@ -52,8 +52,8 @@ class AppController {
 
         this.listeners.push(
             this.Store.subscribe(() => {
-                this.state.users = this.Store.get(state => state.users);
-            }, [(state) => state.users]),
+                this.state.users = this.Store.get(state => state.api.users);
+            }, [(state) => state.api.users]),
 
             this.$rootScope.$on('$stateChangeStart', update),
             this.$rootScope.$on('$stateChangeSuccess', update),

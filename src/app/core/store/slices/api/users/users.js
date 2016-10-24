@@ -1,11 +1,11 @@
 import angular from 'angular';
 import Store from 'app/core/store/store';
+import ApiSlice from 'app/core/store/slices/api/api';
 import UserService from 'app/core/api/services/users/users';
-
 
 initStore.$inject = ['Store'];
 function initStore(Store) {
-    Store.update({
+    Store.update(state => state.api, {
         users: []
     });
 }
@@ -19,9 +19,9 @@ class UserActions {
     add(newUser={}) {
         return this.UserService.post(newUser)
             .then((newUser) => {
-                this.Store.update({
+                this.Store.update(state => state.api, {
                     users: [
-                        ...this.Store.get(state => state.users),
+                        ...this.Store.get(state => state.api.users),
                         newUser
                     ]
                 });
@@ -33,9 +33,9 @@ class UserActions {
     edit(editedUser={}) {
         return this.UserService.put(editedUser)
             .then((editedUser) => {
-                this.Store.update({
+                this.Store.update(state => state.api, {
                     users: this.Store
-                        .get(state => state.users)
+                        .get(state => state.api.users)
                         .map(user => {
                             return user.id !== editedUser.id ? user : Object.assign({}, user, editedUser);
                         })
@@ -48,9 +48,9 @@ class UserActions {
     remove(id=null) {
         return this.UserService.delete(id)
             .then((removedUser) => {
-                this.Store.update({
+                this.Store.update(state => state.api, {
                     users: this.Store
-                        .get(state => state.users)
+                        .get(state => state.api.users)
                         .filter(user => user.id !== removedUser.id)
                 });
 
@@ -61,7 +61,7 @@ class UserActions {
     sync() {
         return this.UserService.getList()
             .then((users) => {
-                this.Store.update({
+                this.Store.update(state => state.api, {
                     users
                 });
 
@@ -72,9 +72,9 @@ class UserActions {
     syncOne(id=null) {
         return this.UserService.get(id)
             .then((syncedUser) => {
-                this.Store.update({
+                this.Store.update(state => state.api, {
                     users: this.Store
-                        .get(state => state.users)
+                        .get(state => state.api.users)
                         .map((user) => {
                             return user.id !== syncedUser.id ? user : Object.assign({}, user, syncedUser);
                         })
@@ -85,7 +85,7 @@ class UserActions {
     }
 }
 
-export default angular.module('app.store.users', [Store, UserService])
+export default angular.module('app.store.users', [Store, ApiSlice, UserService])
     .run(initStore)
     .service('UserActions', UserActions)
     .name;

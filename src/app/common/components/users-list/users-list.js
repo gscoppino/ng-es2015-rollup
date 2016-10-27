@@ -11,7 +11,9 @@ class UsersListController {
     constructor($ngRedux, UserActions) {
         Object.assign(this, { $ngRedux, UserActions });
         this._listeners = [];
-        this.state = {};
+        this.state = {
+            usersList: this.$ngRedux.getState().users.list
+        };
         this.actions = {
             users: this.UserActions
         };

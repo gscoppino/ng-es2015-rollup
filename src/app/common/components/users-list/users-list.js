@@ -11,18 +11,20 @@ class UsersListController {
     constructor($ngRedux, UserActions) {
         Object.assign(this, { $ngRedux, UserActions });
         this._listeners = [];
-    }
-
-    $onInit() {
-        let listener = this.$ngRedux.connect(this.mapStateToThis)((state) => {
-            this.state = state;
-        });
-
-        this._listeners.push(listener);
-
+        this.state = {};
         this.actions = {
             users: this.UserActions
         };
+    }
+
+    $onInit() {
+        this._listeners.push(
+            this.$ngRedux.subscribe(() => {
+                let state = this.$ngRedux.getState();
+
+                this.state.usersList = state.users.list;
+            })
+        );
 
         this.actions.users.getList();
     }
@@ -36,12 +38,6 @@ class UsersListController {
     }
 
     $postLink() {}
-
-    mapStateToThis(state) {
-        return {
-            usersList: state.users.list
-        };
-    }
 
     submitNewUser(user) {
         this.actions.users.post(user);

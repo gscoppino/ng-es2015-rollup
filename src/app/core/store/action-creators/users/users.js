@@ -12,7 +12,7 @@ function getList(UserService) {
         return UserService.getList()
             .then((users) => dispatch({
                 type: actions.RESOLVE_USERS,
-                users: users.plain()
+                users: users
             }))
             .catch(() => dispatch({
                 type: actions.REJECT_USERS
@@ -26,10 +26,10 @@ function get(UserService, id) {
             type: actions.REQUEST_USER
         });
 
-        return UserService.one(id).get()
+        return UserService.get(id)
             .then((user) => dispatch({
                 type: actions.RESOLVE_USER,
-                user: user.plain()
+                user: user
             }))
             .catch(() => dispatch({
                 type: actions.REJECT_USER
@@ -46,7 +46,7 @@ function post(UserService, data) {
         return UserService.post(data)
             .then((user) => dispatch({
                 type: actions.RESOLVE_ADD_USER,
-                user: user.plain()
+                user: user
             }))
             .catch(() => dispatch({
                 type: actions.REJECT_ADD_USER
@@ -60,10 +60,10 @@ function put(UserService, data) {
             type: actions.REQUEST_UPDATE_USER
         });
 
-        return Object.assign(UserService.one(data.id), data).put()
+        return UserService.put(data)
             .then((user) => dispatch({
                 type: actions.RESOLVE_UPDATE_USER,
-                user: user.plain()
+                user: user
             }))
             .catch(() => dispatch({
                 type: actions.REJECT_UPDATE_USER
@@ -77,10 +77,10 @@ function remove(UserService, data) {
             type: actions.REQUEST_DELETE_USER
         });
 
-        return UserService.one(data.id).remove()
+        return UserService.delete(data.id)
             .then((user) => dispatch({
                 type: actions.RESOLVE_DELETE_USER,
-                user: user.plain()
+                user: user
             }))
             .catch(() => dispatch({
                 type: actions.REJECT_DELETE_USER

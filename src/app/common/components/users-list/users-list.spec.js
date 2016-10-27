@@ -32,10 +32,10 @@ describe('users-list', () => {
             let UsersListController;
 
             it('should set dependencies on the instance object.', () => {
-                spyOn(Object, 'assign').and.callFake(angular.noop);
+                spyOn(Object, 'assign').and.callThrough();
 
                 UsersListController = $componentController('usersList');
-                expect(Object.assign).toHaveBeenCalledWith(UsersListController, jasmine.any(Object));
+                expect(Object.assign).toHaveBeenCalled();
             });
         });
 

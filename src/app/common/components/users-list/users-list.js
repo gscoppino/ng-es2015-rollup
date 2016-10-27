@@ -22,7 +22,7 @@ class UsersListController {
 
         this.actions = {
             users: this.UserActions
-        }
+        };
 
         this.actions.users.getList();
     }

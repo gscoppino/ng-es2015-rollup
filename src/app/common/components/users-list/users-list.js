@@ -14,14 +14,17 @@ class UsersListController {
     }
 
     $onInit() {
-        let listener = this.$ngRedux.connect(this.mapStateToThis, this.UserActions)((state, actions) => {
+        let listener = this.$ngRedux.connect(this.mapStateToThis)((state) => {
             this.state = state;
-            this.actions = actions;
         });
 
         this._listeners.push(listener);
 
-        this.actions.getList();
+        this.actions = {
+            users: this.UserActions
+        }
+
+        this.actions.users.getList();
     }
 
     $onChanges(changes) {}
@@ -41,15 +44,15 @@ class UsersListController {
     }
 
     submitNewUser(user) {
-        this.actions.post(user);
+        this.actions.users.post(user);
     }
 
     editUser(user) {
-        this.actions.put(user);
+        this.actions.users.put(user);
     }
 
     deleteUser(user) {
-        this.actions.remove(user);
+        this.actions.users.remove(user);
     }
 }
 

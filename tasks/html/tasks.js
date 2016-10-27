@@ -9,8 +9,8 @@ import del from 'del';
 
 function lazyLoadInjectConfig() {
     return Promise.all([
-        System.import('gulp/html/inject.config.js'),
-        System.import('gulp/css/browserslist.js')
+        System.import('tasks/html/inject.config.js'),
+        System.import('tasks/css/browserslist.js')
     ])
         .then(modules => modules.map(m => m.default));
 }

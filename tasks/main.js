@@ -17,7 +17,7 @@ System.config({
         'systemjs-babel-build': 'node_modules/systemjs-plugin-babel/systemjs-babel-browser.js'
     },
     meta: {
-        'gulp/**/*.js': { loader: 'babel' }
+        'tasks/**/*.js': { loader: 'babel' }
     }
 });
 

@@ -1,11 +1,11 @@
 import angular from 'angular';
-import Api from 'app/core/api/api';
+import ApiFactory from 'app/core/api/factory/factory';
 
-UserService.$inject = ['Restangular'];
-function UserService(Restangular) {
-    return Restangular.service('users');
+UserService.$inject = ['ApiFactory'];
+function UserService(ApiFactory) {
+    return ApiFactory.create('users');
 }
 
-export default angular.module('app.api.services.users', [Api])
+export default angular.module('app.api.services.users', [ApiFactory])
     .factory('UserService', UserService)
     .name;

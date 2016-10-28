@@ -9,19 +9,19 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
     switch(action.type) {
 
         // Get all users
-        case actions.REQUEST_USERS:
+        case actions.GET_USERS_REQUEST:
             return state;
-        case actions.RESOLVE_USERS:
+        case actions.GET_USERS_SUCCESS:
             return Object.assign({}, state, {
                 list: action.users
             });
-        case actions.REJECT_USERS:
+        case actions.GET_USERS_FAIL:
             return state;
 
         // Get a specific user
-        case actions.REQUEST_USER:
+        case actions.GET_USER_REQUEST:
             return state;
-        case actions.RESOLVE_USER:
+        case actions.GET_USER_SUCCESS:
             if (!state.list.find(user => user.id === action.user.id)) {
                 return [...state.list, action.user];
             } else {
@@ -35,24 +35,24 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
                     })
                 });
             }
-        case actions.REJECT_USER:
+        case actions.GET_USER_FAIL:
             return state;
 
         // Add a new user
-        case actions.REQUEST_ADD_USER:
+        case actions.ADD_USER_REQUEST:
             return state;
-        case actions.RESOLVE_ADD_USER:
+        case actions.ADD_USER_SUCCESS:
             return Object.assign({}, state, {
                 list: [...state.list, action.user]
             });
-        case actions.REJECT_ADD_USER:
+        case actions.ADD_USER_FAIL:
             return state;
 
 
         // Update a user
-        case actions.REQUEST_UPDATE_USER:
+        case actions.UPDATE_USER_REQUEST:
             return state;
-        case actions.RESOLVE_UPDATE_USER:
+        case actions.UPDATE_USER_SUCCESS:
             if (!state.list.find(user => user.id === action.user.id)) {
                 return [...state.list, action.user];
             } else {
@@ -66,14 +66,14 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
                     })
                 });
             }
-        case actions.REJECT_UPDATE_USER:
+        case actions.UPDATE_USER_FAIL:
             return state;
 
 
         // Delete a user
-        case actions.REQUEST_DELETE_USER:
+        case actions.DELETE_USER_REQUEST:
             return state;
-        case actions.RESOLVE_DELETE_USER:
+        case actions.DELETE_USER_SUCCESS:
             return Object.assign({}, state, {
                 list: state.list.filter((user) => {
                     if (user.id !== action.user.id) {
@@ -83,7 +83,7 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
                     }
                 })
             });
-        case actions.REJECT_DELETE_USER:
+        case actions.DELETE_USER_FAIL:
             return state;
 
         // If no actions match

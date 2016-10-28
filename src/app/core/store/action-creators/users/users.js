@@ -14,76 +14,76 @@ class UserActions {
 
     sync() {
         this.$ngRedux.dispatch({
-            type: actions.REQUEST_USERS
+            type: actions.GET_USERS_REQUEST
         });
 
         return this.UserService.getList()
             .then((users) => this.$ngRedux.dispatch({
-                type: actions.RESOLVE_USERS,
+                type: actions.GET_USERS_SUCCESS,
                 users: users
             }))
             .catch(() => this.$ngRedux.dispatch({
-                type: actions.REJECT_USERS
+                type: actions.GET_USERS_FAIL
             }));
     }
 
     syncOne(id=null) {
         this.$ngRedux.dispatch({
-            type: actions.REQUEST_USER
+            type: actions.GET_USER_REQUEST
         });
 
         return this.UserService.get(id)
             .then((user) => this.$ngRedux.dispatch({
-                type: actions.RESOLVE_USER,
+                type: actions.GET_USER_SUCCESS,
                 user: user
             }))
             .catch(() => this.$ngRedux.dispatch({
-                type: actions.REJECT_USER
+                type: actions.GET_USER_FAIL
             }));
     }
 
     create(data=null) {
         this.$ngRedux.dispatch({
-            type: actions.REQUEST_ADD_USER,
+            type: actions.ADD_USER_REQUEST,
         });
 
         return this.UserService.post(data)
             .then((user) => this.$ngRedux.dispatch({
-                type: actions.RESOLVE_ADD_USER,
+                type: actions.ADD_USER_SUCCESS,
                 user: user
             }))
             .catch(() => this.$ngRedux.dispatch({
-                type: actions.REJECT_ADD_USER
+                type: actions.ADD_USER_FAIL
             }));
     }
 
     update(data=null) {
         this.$ngRedux.dispatch({
-            type: actions.REQUEST_UPDATE_USER
+            type: actions.UPDATE_USER_REQUEST
         });
 
         return this.UserService.put(data)
             .then((user) => this.$ngRedux.dispatch({
-                type: actions.RESOLVE_UPDATE_USER,
+                type: actions.UPDATE_USER_SUCCESS,
                 user: user
             }))
             .catch(() => this.$ngRedux.dispatch({
-                type: actions.REJECT_UPDATE_USER
+                type: actions.UPDATE_USER_FAIL
             }));
     }
 
     delete(data=null) {
         this.$ngRedux.dispatch({
-            type: actions.REQUEST_DELETE_USER
+            type: actions.DELETE_USER_REQUEST
         });
 
         return this.UserService.delete(data.id)
             .then((user) => this.$ngRedux.dispatch({
-                type: actions.RESOLVE_DELETE_USER,
+                type: actions.DELETE_USER_SUCCESS,
                 user: user
             }))
             .catch(() => this.$ngRedux.dispatch({
-                type: actions.REJECT_DELETE_USER
+                type: actions.DELETE_USER_FAIL
             }));
     }
 }

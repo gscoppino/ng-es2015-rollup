@@ -10,6 +10,7 @@ class UsersListController {
     static get $inject() { return ['$ngRedux', 'UserActions']; }
     constructor($ngRedux, UserActions) {
         Object.assign(this, { $ngRedux, UserActions });
+
         this._listeners = [];
         this.state = {
             usersList: [...this.$ngRedux.getState().users.list]
@@ -28,7 +29,7 @@ class UsersListController {
             })
         );
 
-        this.actions.users.getList();
+        this.actions.users.sync();
     }
 
     $onChanges(changes) {}
@@ -41,16 +42,16 @@ class UsersListController {
 
     $postLink() {}
 
-    submitNewUser(user) {
-        this.actions.users.post(user);
+    submitNewUser(user=null) {
+        this.actions.users.create(user);
     }
 
-    editUser(user) {
-        this.actions.users.put(user);
+    editUser(user=null) {
+        this.actions.users.update(user);
     }
 
-    deleteUser(user) {
-        this.actions.users.remove(user);
+    deleteUser(user=null) {
+        this.actions.users.delete(user);
     }
 }
 

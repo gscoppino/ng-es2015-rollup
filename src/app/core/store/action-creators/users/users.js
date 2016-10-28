@@ -12,7 +12,7 @@ class UserActions {
         Object.assign(this, { $ngRedux, UserService });
     }
 
-    getList() {
+    sync() {
         this.$ngRedux.dispatch({
             type: actions.REQUEST_USERS
         });
@@ -27,7 +27,7 @@ class UserActions {
             }));
     }
 
-    get(id) {
+    syncOne(id=null) {
         this.$ngRedux.dispatch({
             type: actions.REQUEST_USER
         });
@@ -42,7 +42,7 @@ class UserActions {
             }));
     }
 
-    post(data) {
+    create(data=null) {
         this.$ngRedux.dispatch({
             type: actions.REQUEST_ADD_USER,
         });
@@ -57,7 +57,7 @@ class UserActions {
             }));
     }
 
-    put(data) {
+    update(data=null) {
         this.$ngRedux.dispatch({
             type: actions.REQUEST_UPDATE_USER
         });
@@ -72,7 +72,7 @@ class UserActions {
             }));
     }
 
-    remove(data) {
+    delete(data=null) {
         this.$ngRedux.dispatch({
             type: actions.REQUEST_DELETE_USER
         });

@@ -1,8 +1,10 @@
 import actions from 'app/core/store/actions/users/users';
 
-export function usersReducer(state = {
+const INITIAL_STATE = {
     list: []
-}, action) {
+};
+
+export function usersReducer(state=INITIAL_STATE, action=null) {
 
     switch(action.type) {
 
@@ -20,15 +22,19 @@ export function usersReducer(state = {
         case actions.REQUEST_USER:
             return state;
         case actions.RESOLVE_USER:
-            return Object.assign({}, state, {
-                list: state.list.map((user) => {
-                    if (user.id !== action.user.id) {
-                        return user;
-                    } else {
-                        return Object.assign({}, user, action.user);
-                    }
-                })
-            });
+            if (!state.list.find(user => user.id === action.user.id)) {
+                return [...state.list, action.user];
+            } else {
+                return Object.assign({}, state, {
+                    list: state.list.map((user) => {
+                        if (user.id !== action.user.id) {
+                            return user;
+                        } else {
+                            return Object.assign({}, user, action.user);
+                        }
+                    })
+                });
+            }
         case actions.REJECT_USER:
             return state;
 
@@ -47,15 +53,19 @@ export function usersReducer(state = {
         case actions.REQUEST_UPDATE_USER:
             return state;
         case actions.RESOLVE_UPDATE_USER:
-            return Object.assign({}, state, {
-                list: state.list.map((user) => {
-                    if (user.id !== action.user.id) {
-                        return user;
-                    } else {
-                        return Object.assign({}, user, action.user);
-                    }
-                })
-            });
+            if (!state.list.find(user => user.id === action.user.id)) {
+                return [...state.list, action.user];
+            } else {
+                return Object.assign({}, state, {
+                    list: state.list.map((user) => {
+                        if (user.id !== action.user.id) {
+                            return user;
+                        } else {
+                            return Object.assign({}, user, action.user);
+                        }
+                    })
+                });
+            }
         case actions.REJECT_UPDATE_USER:
             return state;
 

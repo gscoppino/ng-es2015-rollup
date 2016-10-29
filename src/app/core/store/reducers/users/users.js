@@ -1,8 +1,6 @@
 import actions from 'app/core/store/actions/users/users';
 
-const INITIAL_STATE = {
-    list: []
-};
+const INITIAL_STATE = [];
 
 export function usersReducer(state=INITIAL_STATE, action=null) {
 
@@ -12,9 +10,7 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.GET_USERS_REQUEST:
             return state;
         case actions.GET_USERS_SUCCESS:
-            return Object.assign({}, state, {
-                list: action.users
-            });
+            return [...action.users];
         case actions.GET_USERS_FAIL:
             return state;
 
@@ -22,19 +18,21 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.GET_USER_REQUEST:
             return state;
         case actions.GET_USER_SUCCESS:
-            if (!state.list.find(user => user.id === action.user.id)) {
-                return [...state.list, action.user];
+            var indexed = state.findIndex(user => user.id === action.user.id);
+
+            if (indexed !== -1) {
+                return [
+                    ...state.slice(0, indexed),
+                    Object.assign({}, state[indexed], action.user),
+                    ...state.slice(indexed + 1)
+                ];
             } else {
-                return Object.assign({}, state, {
-                    list: state.list.map((user) => {
-                        if (user.id !== action.user.id) {
-                            return user;
-                        } else {
-                            return Object.assign({}, user, action.user);
-                        }
-                    })
-                });
+                return [
+                    ...state,
+                    action.user
+                ];
             }
+
         case actions.GET_USER_FAIL:
             return state;
 
@@ -42,9 +40,7 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.ADD_USER_REQUEST:
             return state;
         case actions.ADD_USER_SUCCESS:
-            return Object.assign({}, state, {
-                list: [...state.list, action.user]
-            });
+            return [...state, action.user];
         case actions.ADD_USER_FAIL:
             return state;
 
@@ -53,19 +49,21 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.UPDATE_USER_REQUEST:
             return state;
         case actions.UPDATE_USER_SUCCESS:
-            if (!state.list.find(user => user.id === action.user.id)) {
-                return [...state.list, action.user];
+            var indexed = state.findIndex(user => user.id === action.user.id);
+
+            if (indexed !== -1) {
+                return [
+                    ...state.slice(0, indexed),
+                    Object.assign({}, state[indexed], action.user),
+                    ...state.slice(indexed + 1)
+                ];
             } else {
-                return Object.assign({}, state, {
-                    list: state.list.map((user) => {
-                        if (user.id !== action.user.id) {
-                            return user;
-                        } else {
-                            return Object.assign({}, user, action.user);
-                        }
-                    })
-                });
+                return [
+                    ...state,
+                    action.user
+                ]
             }
+
         case actions.UPDATE_USER_FAIL:
             return state;
 
@@ -74,15 +72,17 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.DELETE_USER_REQUEST:
             return state;
         case actions.DELETE_USER_SUCCESS:
-            return Object.assign({}, state, {
-                list: state.list.filter((user) => {
-                    if (user.id !== action.user.id) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                })
-            });
+            var indexed = state.findIndex(user => user.id === action.user.id);
+
+            if (indexed !== -1) {
+                return [
+                    ...state.slice(0, indexed),
+                    ...state.slice(indexed + 1)
+                ];
+            } else {
+                return [...state];
+            }
+
         case actions.DELETE_USER_FAIL:
             return state;
 

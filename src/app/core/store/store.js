@@ -4,6 +4,10 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import RootReducer from './reducers/reducers';
 
+function immutable(mutable) {
+    return JSON.parse(JSON.stringify(mutable));
+}
+
 StoreConfig.$inject = ['$ngReduxProvider', 'rootReducerProvider'];
 function StoreConfig($ngReduxProvider, rootReducerProvider) {
     let rootReducer = rootReducerProvider.createReducer();
@@ -15,7 +19,16 @@ function StoreConfig($ngReduxProvider, rootReducerProvider) {
     $ngReduxProvider.createStoreWith(rootReducer, middlewares);
 }
 
-export { StoreConfig };
+$ngReduxImmutableDecorator.$inject = ['$delegate'];
+function $ngReduxImmutableDecorator($delegate) {
+    const getState = $delegate.getState;
+
+    $delegate.getState = (stateFn) => immutable(stateFn(getState()));
+
+    return $delegate;
+}
+
+export { immutable, $ngReduxImmutableDecorator, StoreConfig };
 /**
  * @namespace app/store
  * @desc Configures the frontend singleton store with its
@@ -23,4 +36,5 @@ export { StoreConfig };
  */
 export default angular.module('app.store', [ngRedux, RootReducer])
     .config(StoreConfig)
+    .decorator('$ngRedux', $ngReduxImmutableDecorator)
     .name;

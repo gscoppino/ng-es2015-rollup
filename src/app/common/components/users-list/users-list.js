@@ -13,7 +13,7 @@ class UsersListController {
 
         this._listeners = [];
         this.state = {
-            usersList: [...this.$ngRedux.getState().users]
+            usersList: this.$ngRedux.getState(state => state.users)
         };
         this.actions = {
             users: this.UserActions
@@ -23,9 +23,7 @@ class UsersListController {
     $onInit() {
         this._listeners.push(
             this.$ngRedux.subscribe(() => {
-                let state = this.$ngRedux.getState();
-
-                this.state.usersList = [...state.users];
+                this.state.usersList = this.$ngRedux.getState(state => state.users);
             })
         );
 

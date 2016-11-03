@@ -21,9 +21,9 @@ function StoreConfig($ngReduxProvider, rootReducerProvider) {
 
 $ngReduxImmutableDecorator.$inject = ['$delegate'];
 function $ngReduxImmutableDecorator($delegate) {
-    const getState = $delegate.getState;
+    $delegate.getStateUnsafe = $delegate.getState;
 
-    $delegate.getState = (stateFn) => immutable(stateFn(getState()));
+    $delegate.getState = (stateFn) => immutable(stateFn($delegate.getStateUnsafe()));
 
     return $delegate;
 }

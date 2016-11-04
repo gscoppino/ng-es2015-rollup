@@ -2,7 +2,7 @@ import angular from 'angular';
 import ngRedux from 'ng-redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import RootReducer from './reducers/reducers';
+import RootReducer from './reducers/RootReducer';
 
 function immutable(mutable) {
     return JSON.parse(JSON.stringify(mutable));

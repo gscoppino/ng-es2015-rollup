@@ -1,6 +1,6 @@
 import angular from 'angular';
 import ngRedux from 'ng-redux';
-import actions from 'app/core/store/actions/users/users';
+import actions from 'app/core/store/action-constants/users/users';
 import UserService from 'app/core/api/services/users/users';
 
 class UserActions {

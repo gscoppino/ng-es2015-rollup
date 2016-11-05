@@ -56,7 +56,7 @@ class Http {
     put(...args) {
         let [url, data] = args;
         if (!Number.isInteger(data.id)) {
-            return this.$q.reject('Tried to PUT a payload without an id!');
+            return this.$q.reject('Tried to PUT a payload without an integer id!');
         }
 
         if (this.pendingRequests.put.has(url)) {
@@ -85,7 +85,7 @@ class Http {
     patch(...args) {
         let [url, data] = args;
         if (!Number.isInteger(data.id)) {
-            return this.$q.reject('Tried to PATCH a payload without an id!');
+            return this.$q.reject('Tried to PATCH a payload without an integer id!');
         }
 
         if (this.pendingRequests.patch.has(url)) {

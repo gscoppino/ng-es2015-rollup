@@ -23,7 +23,13 @@ $ngReduxImmutableDecorator.$inject = ['$delegate'];
 function $ngReduxImmutableDecorator($delegate) {
     $delegate.getStateUnsafe = $delegate.getState;
 
-    $delegate.getState = (stateFn) => immutable(stateFn($delegate.getStateUnsafe()));
+    $delegate.getState = (stateFn) => {
+        if (stateFn) {
+            return immutable(stateFn($delegate.getStateUnsafe()));
+        } else {
+            return immutable($delegate.getStateUnsafe());
+        }
+    };
 
     return $delegate;
 }

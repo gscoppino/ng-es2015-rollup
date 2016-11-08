@@ -5,6 +5,15 @@ import del from 'del';
 import webpack from 'webpack';
 import pathconfig from './pathconfig.js';
 
+function outputWebpackStats(stats) {
+    console.log('[webpack]', stats.toString({
+        hash: false,
+        version: false,
+        timings: false,
+        chunks: false
+    }));
+}
+
 function lazyLoadWebpackConfig (type) {
     System.config({
         map: {
@@ -40,9 +49,12 @@ gulp.task('clean:js', () => {
 gulp.task('build:js', ['clean:js'], (fin) => {
     lazyLoadWebpackConfig('dev').then((WEBPACK_DEV_CONFIG) => {
 
-        webpack(WEBPACK_DEV_CONFIG).run((error) => {
+        webpack(WEBPACK_DEV_CONFIG).run((error, stats) => {
             if (error) throw new Error('webpack', error);
-            else fin();
+            else {
+                outputWebpackStats(stats);
+                fin();
+            }
         });
 
     });
@@ -51,9 +63,12 @@ gulp.task('build:js', ['clean:js'], (fin) => {
 gulp.task('watch:js', ['clean:js'], () => {
     return lazyLoadWebpackConfig('dev').then((WEBPACK_DEV_CONFIG) => {
 
-        webpack(WEBPACK_DEV_CONFIG).watch({}, (error) => {
+        webpack(WEBPACK_DEV_CONFIG).watch({}, (error, stats) => {
             if (error) throw new Error('webpack', error);
-            else console.log('webpack rebundle complete.');
+            else {
+                outputWebpackStats(stats);
+                console.log('webpack rebundle complete.');
+            }
         });
 
     });
@@ -62,9 +77,12 @@ gulp.task('watch:js', ['clean:js'], () => {
 gulp.task('build:js-production', ['clean:js'], (fin) => {
     lazyLoadWebpackConfig('production').then((WEBPACK_PRODUCTION_CONFIG) => {
 
-        return webpack(WEBPACK_PRODUCTION_CONFIG).run((error) => {
+        return webpack(WEBPACK_PRODUCTION_CONFIG).run((error, stats) => {
             if (error) throw new Error('webpack', error);
-            else fin();
+            else {
+                outputWebpackStats(stats);
+                fin();
+            }
         });
 
     });

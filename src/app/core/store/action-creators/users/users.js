@@ -20,7 +20,7 @@ class UserActions {
         return this.UserService.getList()
             .then((users) => this.$ngRedux.dispatch({
                 type: actions.GET_USERS_SUCCESS,
-                users: users
+                payload: users
             }))
             .catch(() => this.$ngRedux.dispatch({
                 type: actions.GET_USERS_FAIL
@@ -35,7 +35,7 @@ class UserActions {
         return this.UserService.get(id)
             .then((user) => this.$ngRedux.dispatch({
                 type: actions.GET_USER_SUCCESS,
-                user: user
+                payload: user
             }))
             .catch(() => this.$ngRedux.dispatch({
                 type: actions.GET_USER_FAIL
@@ -50,7 +50,7 @@ class UserActions {
         return this.UserService.post(data)
             .then((user) => this.$ngRedux.dispatch({
                 type: actions.ADD_USER_SUCCESS,
-                user: user
+                payload: user
             }))
             .catch(() => this.$ngRedux.dispatch({
                 type: actions.ADD_USER_FAIL
@@ -65,7 +65,7 @@ class UserActions {
         return this.UserService.put(data)
             .then((user) => this.$ngRedux.dispatch({
                 type: actions.UPDATE_USER_SUCCESS,
-                user: user
+                payload: user
             }))
             .catch(() => this.$ngRedux.dispatch({
                 type: actions.UPDATE_USER_FAIL
@@ -80,7 +80,7 @@ class UserActions {
         return this.UserService.delete(data.id)
             .then((user) => this.$ngRedux.dispatch({
                 type: actions.DELETE_USER_SUCCESS,
-                user: user
+                payload: user
             }))
             .catch(() => this.$ngRedux.dispatch({
                 type: actions.DELETE_USER_FAIL

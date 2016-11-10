@@ -10,7 +10,7 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.GET_USERS_REQUEST:
             return state;
         case actions.GET_USERS_SUCCESS:
-            return [...action.users];
+            return [...action.payload];
         case actions.GET_USERS_FAIL:
             return state;
 
@@ -18,18 +18,18 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.GET_USER_REQUEST:
             return state;
         case actions.GET_USER_SUCCESS:
-            var indexed = state.findIndex(user => user.id === action.user.id);
+            var indexed = state.findIndex(user => user.id === action.payload.id);
 
             if (indexed !== -1) {
                 return [
                     ...state.slice(0, indexed),
-                    Object.assign({}, state[indexed], action.user),
+                    Object.assign({}, state[indexed], action.payload),
                     ...state.slice(indexed + 1)
                 ];
             } else {
                 return [
                     ...state,
-                    action.user
+                    action.payload
                 ];
             }
 
@@ -40,7 +40,7 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.ADD_USER_REQUEST:
             return state;
         case actions.ADD_USER_SUCCESS:
-            return [...state, action.user];
+            return [...state, action.payload];
         case actions.ADD_USER_FAIL:
             return state;
 
@@ -49,18 +49,18 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.UPDATE_USER_REQUEST:
             return state;
         case actions.UPDATE_USER_SUCCESS:
-            var indexed = state.findIndex(user => user.id === action.user.id);
+            var indexed = state.findIndex(user => user.id === action.payload.id);
 
             if (indexed !== -1) {
                 return [
                     ...state.slice(0, indexed),
-                    Object.assign({}, state[indexed], action.user),
+                    Object.assign({}, state[indexed], action.payload),
                     ...state.slice(indexed + 1)
                 ];
             } else {
                 return [
                     ...state,
-                    action.user
+                    action.payload
                 ]
             }
 
@@ -72,7 +72,7 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.DELETE_USER_REQUEST:
             return state;
         case actions.DELETE_USER_SUCCESS:
-            var indexed = state.findIndex(user => user.id === action.user.id);
+            var indexed = state.findIndex(user => user.id === action.payload.id);
 
             if (indexed !== -1) {
                 return [

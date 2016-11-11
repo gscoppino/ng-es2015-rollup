@@ -30,9 +30,10 @@ describe('Http Service', () => {
     });
 
     describe('get', () => {
-        let $q, $http, Http;
+        let $rootScope, $q, $http, Http;
 
         beforeEach(angular.mock.inject(($injector) => {
+            $rootScope = $injector.get('$rootScope');
             $q = $injector.get('$q');
             $http = $injector.get('$http');
             Http = $injector.get('Http');
@@ -44,10 +45,9 @@ describe('Http Service', () => {
             expect(Http.get(testUrl)).toBe('cached promise');
         });
 
-        it(`should call $http.get with the arguments provided, cache the promise, and then return it,
+        it(`should call $http.get with the arguments provided, and return the promise,
         if there is no pending request to the same URL in the cache.`, () => {
             let testUrl = '/test/url';
-            Http.pendingRequests.get.delete(testUrl);
 
             let promise = {
                 then: () => promise,
@@ -59,8 +59,38 @@ describe('Http Service', () => {
             let returnValue = Http.get(testUrl);
             expect($http.get).toHaveBeenCalledWith(testUrl);
             expect(returnValue).toBe(promise);
+        });
+
+        it('should cache the promise returned by $http.get.', () => {
+            let testUrl = '/test/url';
+
+            let promise = {
+                then: () => promise,
+                catch: () => promise,
+                finally: () => promise
+            };
+
+            spyOn($http, 'get').and.returnValue(promise);
+            Http.get(testUrl);
             expect(Http.pendingRequests.get.has(testUrl)).toBe(true);
             expect(Http.pendingRequests.get.get(testUrl)).toBe(promise);
+        });
+
+        it('should remove a cached promise once it resolves or rejects.', () => {
+            let testUrl = '/test/url',
+                spyOnHttp = spyOn($http, 'get');
+
+            spyOnHttp.and.returnValue($q.resolve());
+            Http.get(testUrl);
+            expect(Http.pendingRequests.get.has(testUrl)).toBe(true);
+            $rootScope.$digest();
+            expect(Http.pendingRequests.get.has(testUrl)).toBe(false);
+
+            spyOnHttp.and.returnValue($q.reject());
+            Http.get(testUrl);
+            expect(Http.pendingRequests.get.has(testUrl)).toBe(true);
+            $rootScope.$digest();
+            expect(Http.pendingRequests.get.has(testUrl)).toBe(false);
         });
     });
 

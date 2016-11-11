@@ -158,9 +158,10 @@ describe('Http Service', () => {
     });
 
     describe('delete', () => {
-        let $q, $http, Http;
+        let $rootScope, $q, $http, Http;
 
         beforeEach(angular.mock.inject(($injector) => {
+            $rootScope = $injector.get('$rootScope');
             $q = $injector.get('$q');
             $http = $injector.get('$http');
             Http = $injector.get('Http');
@@ -170,6 +171,54 @@ describe('Http Service', () => {
             let testUrl = '/test/url';
             Http.pendingRequests.delete.set(testUrl, 'cached promise');
             expect(Http.delete(testUrl)).toBe('cached promise');
+        });
+
+        it(`should call $http.delete with the arguments provided, and return the promise,
+        if there is no pending request to the same URL in the cache.`, () => {
+            let testUrl = '/test/url';
+
+            let promise = {
+                then: () => promise,
+                catch: () => promise,
+                finally: () => promise
+            };
+            spyOn($http, 'delete').and.returnValue(promise);
+
+            let returnValue = Http.delete(testUrl);
+            expect($http.delete).toHaveBeenCalledWith(testUrl);
+            expect(returnValue).toBe(promise);
+        });
+
+        it('should cache the promise returned by $http.delete.', () => {
+            let testUrl = '/test/url';
+
+            let promise = {
+                then: () => promise,
+                catch: () => promise,
+                finally: () => promise
+            };
+
+            spyOn($http, 'delete').and.returnValue(promise);
+            Http.delete(testUrl);
+            expect(Http.pendingRequests.delete.has(testUrl)).toBe(true);
+            expect(Http.pendingRequests.delete.get(testUrl)).toBe(promise);
+        });
+
+        it('should remove a cached promise once it resolves or rejects.', () => {
+            let testUrl = '/test/url',
+                spyOnHttp = spyOn($http, 'delete');
+
+            spyOnHttp.and.returnValue($q.resolve());
+            Http.delete(testUrl);
+            expect(Http.pendingRequests.delete.has(testUrl)).toBe(true);
+            $rootScope.$digest();
+            expect(Http.pendingRequests.delete.has(testUrl)).toBe(false);
+
+            spyOnHttp.and.returnValue($q.reject());
+            Http.delete(testUrl);
+            expect(Http.pendingRequests.delete.has(testUrl)).toBe(true);
+            $rootScope.$digest();
+            expect(Http.pendingRequests.delete.has(testUrl)).toBe(false);
         });
     });
 });

@@ -5,11 +5,11 @@ import UserService from 'app/core/api/services/users/users';
 
 class UserActions {
     static get $inject() {
-        return ['$ngRedux', 'UserService'];
+        return ['$q', '$ngRedux', 'UserService'];
     }
 
     constructor($ngRedux, UserService) {
-        Object.assign(this, { $ngRedux, UserService });
+        Object.assign(this, { $q, $ngRedux, UserService });
     }
 
     sync() {
@@ -18,13 +18,21 @@ class UserActions {
         });
 
         return this.UserService.getList()
-            .then((users) => this.$ngRedux.dispatch({
-                type: actions.GET_USERS_SUCCESS,
-                payload: users
-            }))
-            .catch(() => this.$ngRedux.dispatch({
-                type: actions.GET_USERS_FAIL
-            }));
+            .then((users) => {
+                this.$ngRedux.dispatch({
+                    type: actions.GET_USERS_SUCCESS,
+                    payload: users
+                });
+
+                return users;
+            })
+            .catch((response) => {
+                this.$ngRedux.dispatch({
+                    type: actions.GET_USERS_FAIL
+                });
+
+                return this.$q.reject(response);
+            });
     }
 
     syncOne(id=null) {
@@ -33,28 +41,44 @@ class UserActions {
         });
 
         return this.UserService.get(id)
-            .then((user) => this.$ngRedux.dispatch({
-                type: actions.GET_USER_SUCCESS,
-                payload: user
-            }))
-            .catch(() => this.$ngRedux.dispatch({
-                type: actions.GET_USER_FAIL
-            }));
+            .then((user) => {
+                this.$ngRedux.dispatch({
+                    type: actions.GET_USER_SUCCESS,
+                    payload: user
+                });
+
+                return user;
+            })
+            .catch((response) => {
+                this.$ngRedux.dispatch({
+                    type: actions.GET_USER_FAIL
+                });
+
+                return this.$q.reject(response);
+            });
     }
 
     create(data=null) {
         this.$ngRedux.dispatch({
-            type: actions.ADD_USER_REQUEST,
+            type: actions.ADD_USER_REQUEST
         });
 
         return this.UserService.post(data)
-            .then((user) => this.$ngRedux.dispatch({
-                type: actions.ADD_USER_SUCCESS,
-                payload: user
-            }))
-            .catch(() => this.$ngRedux.dispatch({
-                type: actions.ADD_USER_FAIL
-            }));
+            .then((user) => {
+                this.$ngRedux.dispatch({
+                    type: actions.ADD_USER_SUCCESS,
+                    payload: user
+                });
+
+                return user;
+            })
+            .catch((response) => {
+                this.$ngRedux.dispatch({
+                    type: actions.ADD_USER_FAIL
+                });
+
+                return this.$q.reject(response);
+            });
     }
 
     update(data=null) {
@@ -63,13 +87,21 @@ class UserActions {
         });
 
         return this.UserService.put(data)
-            .then((user) => this.$ngRedux.dispatch({
-                type: actions.UPDATE_USER_SUCCESS,
-                payload: user
-            }))
-            .catch(() => this.$ngRedux.dispatch({
-                type: actions.UPDATE_USER_FAIL
-            }));
+            .then((user) => {
+                this.$ngRedux.dispatch({
+                    type: actions.UPDATE_USER_SUCCESS,
+                    payload: user
+                });
+
+                return user;
+            })
+            .catch((response) => {
+                this.$ngRedux.dispatch({
+                    type: actions.UPDATE_USER_FAIL
+                });
+
+                return this.$q.reject(response);
+            });
     }
 
     delete(data=null) {
@@ -78,13 +110,21 @@ class UserActions {
         });
 
         return this.UserService.delete(data.id)
-            .then((user) => this.$ngRedux.dispatch({
-                type: actions.DELETE_USER_SUCCESS,
-                payload: user
-            }))
-            .catch(() => this.$ngRedux.dispatch({
-                type: actions.DELETE_USER_FAIL
-            }));
+            .then((user) => {
+                this.$ngRedux.dispatch({
+                    type: actions.DELETE_USER_SUCCESS,
+                    payload: user
+                });
+
+                return user;
+            })
+            .catch((response) => {
+                this.$ngRedux.dispatch({
+                    type: actions.DELETE_USER_FAIL
+                });
+
+                return this.$q.reject(response);
+            });
     }
 }
 

@@ -91,7 +91,7 @@ class Http {
         if (this.pendingRequests.patch.has(url)) {
             return this.pendingRequests.patch.get(url)
                 .finally(() => {
-                    return this._basePatch(...args);
+                    return this.patch(...args);
                 });
         }
 

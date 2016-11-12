@@ -95,7 +95,7 @@ class Http {
                 });
         }
 
-        let promise = this.$http.put(...args)
+        let promise = this.$http.patch(...args)
             .finally(() => {
                 this.pendingRequests.patch.delete(url);
             });

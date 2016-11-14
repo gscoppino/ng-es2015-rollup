@@ -54,7 +54,7 @@
     "postcss": "~5.2.x",
     "postcss-cssnext": "~2.8.x",
     "postcss-import": "~8.1.x",
-    "postcss-reporter": "~2.0.0",
+    "postcss-reporter": "~2.0.x",
     "raw-loader": "~0.5.x",
     "rollup": "~0.36.x",
     "rollup-plugin-babel": "~2.6.x",

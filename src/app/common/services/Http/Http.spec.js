@@ -95,10 +95,9 @@ describe('Http Service', () => {
     });
 
     describe('post', () => {
-        let $q, $http, Http;
+        let $http, Http;
 
         beforeEach(angular.mock.inject(($injector) => {
-            $q = $injector.get('$q');
             $http = $injector.get('$http');
             Http = $injector.get('Http');
         }));
@@ -150,6 +149,51 @@ describe('Http Service', () => {
 
             Http.pendingRequests.put.set(testUrl, promise);
             expect(Http.put(testUrl, mockData)).toBe(promise);
+        });
+
+        it(`should call itself with the arguments provided and return the promise,
+        if the data provided was valid, after the pending request
+        to the same URL in the cache resolves.`, () => {
+            let testUrl = '/test/url',
+                mockData = { id: 1 },
+                promise = {
+                    then: () => promise,
+                    catch: () => promise,
+                    finally: () => promise
+                };
+
+            Http.pendingRequests.put.set(testUrl, $q.resolve());
+            Http.put(testUrl, mockData)
+                .then((result) => expect(result).toBe(promise))
+                .catch(() => fail());
+
+            spyOn(Http, 'put').and.returnValue(promise);
+
+            expect(Http.put).not.toHaveBeenCalled();
+            $rootScope.$digest();
+            expect(Http.put).toHaveBeenCalledWith(testUrl, mockData);
+        });
+
+        it(`should return the rejected promise, if the data provided was valid,
+        after the pending request to the same URL in the cache rejects.`, () => {
+            let testUrl = '/test/url',
+                mockData = { id: 1 },
+                promise = {
+                    then: () => promise,
+                    catch: () => promise,
+                    finally: () => promise
+                };
+
+            Http.pendingRequests.put.set(testUrl, $q.reject('reason'));
+            Http.put(testUrl, mockData)
+                .then(() => fail())
+                .catch((result) => expect(result).toBe('reason'));
+
+            spyOn(Http, 'put').and.returnValue(promise);
+
+            expect(Http.put).not.toHaveBeenCalled();
+            $rootScope.$digest();
+            expect(Http.put).not.toHaveBeenCalled();
         });
 
         it(`should call $http.put with the arguments provided and return the promise,
@@ -234,6 +278,51 @@ describe('Http Service', () => {
                 .catch((rejection) => {
                     expect(rejection).toBeDefined();
                 });
+        });
+
+        it(`should call itself with the arguments provided and return the promise,
+        if the data provided was valid, after the pending request
+        to the same URL in the cache resolves.`, () => {
+            let testUrl = '/test/url',
+                mockData = { id: 1 },
+                promise = {
+                    then: () => promise,
+                    catch: () => promise,
+                    finally: () => promise
+                };
+
+            Http.pendingRequests.patch.set(testUrl, $q.resolve());
+            Http.patch(testUrl, mockData)
+                .then((result) => expect(result).toBe(promise))
+                .catch(() => fail());
+
+            spyOn(Http, 'patch').and.returnValue(promise);
+
+            expect(Http.patch).not.toHaveBeenCalled();
+            $rootScope.$digest();
+            expect(Http.patch).toHaveBeenCalledWith(testUrl, mockData);
+        });
+
+        it(`should return the rejected promise, if the data provided was valid,
+        after the pending request to the same URL in the cache rejects.`, () => {
+            let testUrl = '/test/url',
+                mockData = { id: 1 },
+                promise = {
+                    then: () => promise,
+                    catch: () => promise,
+                    finally: () => promise
+                };
+
+            Http.pendingRequests.patch.set(testUrl, $q.reject('reason'));
+            Http.patch(testUrl, mockData)
+                .then(() => fail())
+                .catch((result) => expect(result).toBe('reason'));
+
+            spyOn(Http, 'patch').and.returnValue(promise);
+
+            expect(Http.patch).not.toHaveBeenCalled();
+            $rootScope.$digest();
+            expect(Http.patch).not.toHaveBeenCalled();
         });
 
         it(`should call $http.patch with the arguments provided and return the promise,

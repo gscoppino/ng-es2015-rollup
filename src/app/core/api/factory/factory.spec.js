@@ -363,7 +363,7 @@ describe('RESTApi', () => {
             $q = $injector.get('$q');
         }));
 
-        it('should do a Http.put with resource url and the given path and the element, then return the promise.', () => {
+        it('should do a Http.patch with resource url and the given path and the element, then return the promise.', () => {
             let promise = {
                 then: () => promise,
                 catch: () => promise,

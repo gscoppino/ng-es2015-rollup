@@ -99,6 +99,8 @@ class ApiFactoryProvider {
     }
 }
 
+export { ApiFactoryProvider, RESTApi };
+
 export default angular.module('app.api.factory', [])
     .provider('ApiFactory', ApiFactoryProvider)
     .name;

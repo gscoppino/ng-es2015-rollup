@@ -61,7 +61,7 @@ class Http {
 
         if (this.pendingRequests.put.has(url)) {
             return this.pendingRequests.put.get(url)
-                .finally(() => {
+                .then(() => {
                     return this.put(...args);
                 });
         }
@@ -90,12 +90,12 @@ class Http {
 
         if (this.pendingRequests.patch.has(url)) {
             return this.pendingRequests.patch.get(url)
-                .finally(() => {
-                    return this._basePatch(...args);
+                .then(() => {
+                    return this.patch(...args);
                 });
         }
 
-        let promise = this.$http.put(...args)
+        let promise = this.$http.patch(...args)
             .finally(() => {
                 this.pendingRequests.patch.delete(url);
             });

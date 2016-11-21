@@ -8,7 +8,7 @@ class UserActions {
         return ['$q', '$ngRedux', 'UserService'];
     }
 
-    constructor($ngRedux, UserService) {
+    constructor($q, $ngRedux, UserService) {
         Object.assign(this, { $q, $ngRedux, UserService });
     }
 

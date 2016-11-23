@@ -1,8 +1,9 @@
 @import './common/styles/box-model.css';
 @import './common/components/loader-spinner/loader-spinner.css';
+@import './core/theme/variables.css';
 
 body {
-    background-color: color(white shade(2%));
+    background-color: var(--app-bg-color);
 
     /* stylelint-disable-next-line selector-type-no-unknown */
     & > app {

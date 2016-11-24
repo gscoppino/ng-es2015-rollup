@@ -12,7 +12,8 @@ function lazyLoadPostcssConfig (type) {
             'postcss-reporter': '@node/postcss-reporter',
             'postcss-import': '@node/postcss-import',
             'postcss-cssnext': '@node/postcss-cssnext',
-            'cssnano': '@node/cssnano'
+            'cssnano': '@node/cssnano',
+            'path': '@node/path'
         }
     });
 

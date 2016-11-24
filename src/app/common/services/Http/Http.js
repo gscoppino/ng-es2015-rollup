@@ -39,7 +39,7 @@ class Http {
      * case the function will return a promise rejection.
      */
     post(...args) {
-        let [url, data] = args;
+        let [, data] = args;
         if (data.id) {
             return this.$q.reject('Tried to POST an payload with an id!');
         }

@@ -9,7 +9,7 @@ export default {
         [path.basename(pathconfig.devBundle, '.js')]: [
             // All entries are loaded into the bundle,
             // but only the last is exported.
-            path.resolve(process.cwd(), 'node_modules', 'babel-polyfill', 'dist', 'polyfill.js'),
+            'babel-polyfill',
             pathconfig.entry
         ],
         // Use a stub for the production service worker to prevent errors in development.

@@ -38,8 +38,6 @@
     "eslint-loader": "~1.6.x",
     "gulp": "~3.9.x",
     "gulp-htmlmin": "~3.0.x",
-    "gulp-inject": "~4.1.x",
-    "gulp-postcss": "~6.2.x",
     "gulp-rename": "~1.2.x",
     "gulp-template": "~4.0.x",
     "jasmine": "~2.5.x",

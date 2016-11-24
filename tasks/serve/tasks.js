@@ -2,7 +2,7 @@ import gulp from 'gulp';
 import browserSync from 'browser-sync';
 import historyApiMiddleware from 'connect-history-api-fallback';
 
-gulp.task('devserver', ()=> {
+function startDevServer() {
     let staticServer = browserSync.create();
 
     staticServer.init({
@@ -17,4 +17,8 @@ gulp.task('devserver', ()=> {
     });
 
     gulp.watch('dist/**/*', staticServer.reload);
-});
+}
+
+gulp.task('devserver', startDevServer);
+
+export { startDevServer };

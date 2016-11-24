@@ -74,7 +74,7 @@ gulp.task('watch:js', ['clean:js'], () => {
     });
 });
 
-gulp.task('build:js-production', ['clean:js'], (fin) => {
+function buildJsProduction(fin) {
     lazyLoadWebpackConfig('production').then((WEBPACK_PRODUCTION_CONFIG) => {
 
         return webpack(WEBPACK_PRODUCTION_CONFIG).run((error, stats) => {
@@ -86,4 +86,7 @@ gulp.task('build:js-production', ['clean:js'], (fin) => {
         });
 
     });
-});
+}
+gulp.task('build:js-production', ['clean:js'], buildJsProduction);
+
+export { buildJsProduction };

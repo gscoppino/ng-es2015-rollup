@@ -11,6 +11,9 @@ import './test/tasks.js';
 import './serve/tasks.js';
 import './generate/tasks.js';
 
+import { buildJsProduction } from './javascript/tasks.js';
+import { startDevServer } from './serve/tasks.js';
+
 System.config({
     map: {
         'babel': 'node_modules/systemjs-plugin-babel/plugin-babel.js',
@@ -48,9 +51,8 @@ gulp.task('watch', [
 gulp.task('build-production', [
     'build:markup-production',
     'build:css-production',
-    'build:js-production',
     'build:images'
-]);
+], buildJsProduction);
 
-gulp.task('develop', ['watch'], ()=> gulp.start('devserver'));
-gulp.task('production', ['build-production'], ()=> gulp.start('devserver'));
+gulp.task('develop', ['watch'], startDevServer);
+gulp.task('production', ['build-production'], startDevServer);

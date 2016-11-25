@@ -18,7 +18,8 @@ export default {
         dir: 'dist/coverage',
         reporters: [
             { type: 'text' },
-            { type: 'html', subdir: 'html' }
+            { type: 'html', subdir: 'html' },
+            { type: 'lcovonly', subdir: 'lcov' }
         ]
     },
     colors: true

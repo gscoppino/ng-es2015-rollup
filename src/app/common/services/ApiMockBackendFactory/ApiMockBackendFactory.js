@@ -125,6 +125,6 @@ export { MockResource };
 /**
  * @namespace app/api/mock/resource
  */
-export default angular.module('app.api.mock.resource', ['ngMockE2E'])
+export default angular.module('app.services.ApiMockBackendFactory', ['ngMockE2E'])
     .service('MockResourceFactory', MockResourceFactory)
     .name;

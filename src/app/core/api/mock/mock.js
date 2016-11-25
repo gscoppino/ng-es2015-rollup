@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'angular-mocks';
 import { apiBase } from 'app/core/api/api.js';
-import MockResource from './helpers/resource.js';
+import ApiMockBackendFactory from 'app/common/services/ApiMockBackendFactory/ApiMockBackendFactory.js';
 import mockUsers from './fixtures/users.js';
 
 createMockApi.$inject = ['$httpBackend', 'MockResourceFactory'];
@@ -21,7 +21,7 @@ export { createMockApi };
  */
 export default angular.module('app.api.mock', [
     'ngMockE2E',
-    MockResource
+    ApiMockBackendFactory
 ])
     .run(createMockApi)
     .name;

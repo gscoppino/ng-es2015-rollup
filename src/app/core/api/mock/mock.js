@@ -1,8 +1,8 @@
 import angular from 'angular';
 import 'angular-mocks';
-import { apiBase } from 'app/core/api/api';
-import MockResource from './helpers/resource';
-import mockUsers from './fixtures/users';
+import { apiBase } from 'app/core/api/api.js';
+import MockResource from './helpers/resource.js';
+import mockUsers from './fixtures/users.js';
 
 createMockApi.$inject = ['$httpBackend', 'MockResourceFactory'];
 function createMockApi($httpBackend, MockResourceFactory) {

@@ -1,10 +1,10 @@
 import angular from 'angular';
 import UIRouter from 'angular-ui-router';
-import Config from './core/config/config';
-import Api from './core/api/api';
-import Store from './core/store/store';
-import Routes from './core/routes/routes';
-import LoaderSpinner from './common/components/loader-spinner/loader-spinner';
+import Config from './core/config/config.js';
+import Api from './core/api/api.js';
+import Store from './core/store/store.js';
+import Routes from './core/routes/routes.js';
+import LoaderSpinner from './common/components/loader-spinner/loader-spinner.js';
 import AppTemplate from './app.html';
 
 /**

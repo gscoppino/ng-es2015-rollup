@@ -1,6 +1,6 @@
 import angular from 'angular';
-import { apiBase } from 'app/core/api/api';
-import { createMockApi } from './mock';
+import { apiBase } from 'app/core/api/api.js';
+import { createMockApi } from './mock.js';
 
 describe('createMockApi', () => {
     let httpBackendCallbackTest, httpBackendResponseSpy, mockHttpBackend, mockMockResourceFactory;

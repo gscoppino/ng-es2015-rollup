@@ -7,6 +7,8 @@ describe('Compiler Configuration', () => {
 
     beforeEach(() => {
         mockCompileProvider.onChangesTtl = angular.noop;
+        mockCompileProvider.cssClassDirectivesEnabled = angular.noop;
+        mockCompileProvider.commentDirectivesEnabled = angular.noop;
         mockCompileProvider.debugInfoEnabled = jasmine.createSpy().and.callFake(angular.noop);
     });
 

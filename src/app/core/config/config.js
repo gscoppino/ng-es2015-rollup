@@ -31,6 +31,13 @@ function CompilerConfig($compileProvider) {
      * as low as possible. Never go above the Angular default of 10 iterations.
      */
     $compileProvider.onChangesTtl(0);
+
+    /*
+     * Save HTML compilation time by not attempting to match and compile
+     * classes/comments.
+     */
+    $compileProvider.cssClassDirectivesEnabled(false);
+    $compileProvider.commentDirectivesEnabled(false);
 }
 
 HttpConfig.$inject = ['$httpProvider'];

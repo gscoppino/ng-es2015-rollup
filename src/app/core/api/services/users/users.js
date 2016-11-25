@@ -1,5 +1,5 @@
 import angular from 'angular';
-import ApiFactory from 'app/common/services/ApiFactory/ApiFactory';
+import ApiFactory from 'app/common/services/ApiFactory/ApiFactory.js';
 
 UserService.$inject = ['ApiFactory'];
 function UserService(ApiFactory) {

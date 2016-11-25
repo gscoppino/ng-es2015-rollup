@@ -1,5 +1,5 @@
 import angular from 'angular';
-import AddEditUserItem from 'app/common/components/add-edit-user-item/add-edit-user-item';
+import AddEditUserItem from 'app/common/components/add-edit-user-item/add-edit-user-item.js';
 import UsersListItemTemplate from './users-list-item.html';
 
 class UsersListItemController {

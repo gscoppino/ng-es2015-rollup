@@ -1,4 +1,4 @@
-import actions from 'app/core/store/action-constants/users/users';
+import actions from 'app/core/store/action-constants/users/users.js';
 
 const INITIAL_STATE = [];
 

@@ -1,5 +1,5 @@
 import angular from 'angular';
-import { StoreConfig, $ngReduxImmutableDecorator } from './store';
+import { StoreConfig, $ngReduxImmutableDecorator } from './store.js';
 
 describe('Store Configuration', () => {
     let mockReduxProvider = {},

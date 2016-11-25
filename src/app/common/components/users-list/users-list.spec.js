@@ -1,5 +1,5 @@
 import angular from 'angular';
-import UsersListComponent from './users-list';
+import UsersListComponent from './users-list.js';
 
 beforeEach(angular.mock.module(UsersListComponent));
 

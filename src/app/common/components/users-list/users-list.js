@@ -1,8 +1,8 @@
 import angular from 'angular';
 import ngRedux from 'ng-redux';
-import UserActions from 'app/core/store/action-creators/users/users';
-import UsersListItem from 'app/common/components/users-list-item/users-list-item';
-import AddEditUserItem from 'app/common/components/add-edit-user-item/add-edit-user-item';
+import UserActions from 'app/core/store/action-creators/users/users.js';
+import UsersListItem from 'app/common/components/users-list-item/users-list-item.js';
+import AddEditUserItem from 'app/common/components/add-edit-user-item/add-edit-user-item.js';
 import UsersListTemplate from './users-list.html';
 
 class UsersListController {

@@ -2,7 +2,7 @@ import angular from 'angular';
 import { combineReducers } from 'redux';
 
 // Import individual reducers
-import { usersReducer as users } from './users/users';
+import { usersReducer as users } from './users/users.js';
 
 /**
  * @class

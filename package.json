@@ -7,7 +7,7 @@
     "build": "gulp build",
     "build-production": "gulp build-production",
     "clean": "gulp clean",
-    "coverage": "npm run test-unit && cat dist/coverage/lcov/lcov.info | node node_modules/coveralls/bin/coveralls.js",
+    "coverage-ci": "npm run test-unit && cat dist/coverage/lcov/lcov.info | node node_modules/coveralls/bin/coveralls.js",
     "develop": "gulp develop",
     "documentation": "jsdoc -R README.md -P package.json -r src -d dist/documentation",
     "generate-component": "gulp generate:component",

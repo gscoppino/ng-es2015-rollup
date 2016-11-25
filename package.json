@@ -8,7 +8,7 @@
     "build-production": "gulp build-production",
     "clean": "gulp clean",
     "develop": "gulp develop",
-    "doc-generator": "jsdoc -R README.md -P package.json -r src -d dist/documentation",
+    "documentation": "jsdoc -R README.md -P package.json -r src -d dist/documentation",
     "generate-component": "gulp generate:component",
     "generate-directive": "gulp generate:directive",
     "generate-route": "gulp generate:route",

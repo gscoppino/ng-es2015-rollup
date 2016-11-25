@@ -1,6 +1,6 @@
 import angular from 'angular';
 import 'angular-mocks';
-import { apiBase } from 'app/core/api/api';
+import { apiBase } from 'app/core/api/api.js';
 
 /**
  * @class

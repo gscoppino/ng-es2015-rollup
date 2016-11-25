@@ -1,5 +1,5 @@
 import angular from 'angular';
-import <%= UpperCamelCaseName %>Template from './<%= name %>';
+import <%= UpperCamelCaseName %>Template from './<%= name %>.html';
 
 class <%= UpperCamelCaseName %>Controller {
 

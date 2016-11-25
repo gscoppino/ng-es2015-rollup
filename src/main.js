@@ -1,8 +1,8 @@
 /** @module main */
-import './sw-init';
-import './vendor';
+import './sw-init.js';
+import './vendor.js';
 import angular from 'angular';
-import App from './app/app';
+import App from './app/app.js';
 
 /** Bootstraps the Angular application. */
 function bootstrap() {

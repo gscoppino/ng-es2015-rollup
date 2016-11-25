@@ -1,6 +1,6 @@
 import angular from 'angular';
-import { apiBase } from 'app/core/api/api';
-import MockResourceFactory, { MockResource } from './resource';
+import { apiBase } from 'app/core/api/api.js';
+import MockResourceFactory, { MockResource } from './resource.js';
 
 beforeEach(angular.mock.module(MockResourceFactory));
 

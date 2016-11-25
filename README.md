@@ -8,6 +8,7 @@ and accessibility addressed by [ngAria](https://angularjs.org/).
 * Unit test environment with code coverage in place via [Karma](https://karma-runner.github.io/1.0/index.html)+
 [Jasmine](http://jasmine.github.io/)+[Istanbul](http://gotwarlost.github.io/istanbul/)+
 [PhantomJS](http://phantomjs.org/), with boilerplate at 100% test coverage.
+* Integration test environment via [Protractor](http://www.protractortest.org/)+[Jasmine](http://jasmine.github.io/).
 * Linting of CSS and Javascript in place, using [Stylelint](http://stylelint.io/) for the former, and [ESLint](http://eslint.org/) for the latter. Sensible defaults
 in place through `stylelint-config-standard` and `eslint:recommended` presets, respectively.
 * Automatic generation of app documentation available via [JSDoc](http://usejsdoc.org/).
@@ -16,7 +17,7 @@ in place through `stylelint-config-standard` and `eslint:recommended` presets, r
 for frontend routing, and incremental builds (LiveReload). Can also simulate a production server by minifying assets and inlining critical HTML and CSS.
 
 Features:
-* ES2015. Everywhere. Write source code and unit tests in ES2015, import modules locally or from NPM using ES2015 `import` syntax, and get documentation and coverage reports
+* ES2015. Everywhere. Write source code, unit tests, and integration tests in ES2015, import modules locally or from NPM using ES2015 `import` syntax, and get documentation and coverage reports
 in ES2015. The build system, too, is written completely in ES2015. This is made possible thanks to [Webpack](https://webpack.github.io/), [SystemJS](https://github.com/systemjs/systemjs) and
 [Babel](https://babeljs.io/). Webpack creates a bundle out of the tree of application imports, and Babel transpiles the source code in the bundle to ES5. SystemJS allows for
 dynamic imports, which facilitates lazy loading. `babel-polyfill` is also included in the final bundle, in order to polyfill ES2015 features into whatever browser

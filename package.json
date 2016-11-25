@@ -18,7 +18,7 @@
     "start": "gulp production",
     "test": "jasmine package.e2e.js",
     "test-unit": "cross-env BABEL_ENV=test gulp test",
-    "test-unit-ci": "cross-env BABEL_ENV=test gulp watch:test"
+    "test-unit-dev": "cross-env BABEL_ENV=test gulp watch:test"
   },
   "author": "Giuseppe Scoppino <scoppino.giuseppe@gmail.com>",
   "license": "MIT",

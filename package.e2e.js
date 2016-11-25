@@ -103,9 +103,9 @@ describe('ng-es2015-webpack', () => {
         });
     });
 
-    describe('doc-generator', () => {
+    describe('documentation', () => {
         it('should generate docs for the source code.', () => {
-            expect(child_process.spawnSync(NPM, ['run', 'doc-generator']).status)
+            expect(child_process.spawnSync(NPM, ['run', 'documentation']).status)
                 .toBe(0);
 
             expect(fs.existsSync('dist/documentation')).toBe(true);

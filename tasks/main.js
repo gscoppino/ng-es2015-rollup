@@ -17,7 +17,7 @@ import { startDevServer } from './serve/tasks.js';
 System.config({
     map: {
         'babel': 'node_modules/systemjs-plugin-babel/plugin-babel.js',
-        'systemjs-babel-build': 'node_modules/systemjs-plugin-babel/systemjs-babel-browser.js'
+        'systemjs-babel-build': 'node_modules/systemjs-plugin-babel/systemjs-babel-node.js'
     },
     meta: {
         'tasks/**/*.js': { loader: 'babel' }

@@ -70,7 +70,7 @@
     "yargs": "~6.5.x"
   },
   "dependencies": {
-    "angular": "~1.5.x",
+    "angular": "~1.5.8",
     "angular-aria": "~1.5.x",
     "angular-mocks": "~1.5.x",
     "angular-ui-router": "~0.3.x"

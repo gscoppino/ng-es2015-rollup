@@ -72,7 +72,7 @@
   "dependencies": {
     "angular": "~1.6.x",
     "angular-aria": "~1.6.x",
-    "angular-mocks": "~1.5.x",
+    "angular-mocks": "~1.6.0",
     "angular-ui-router": "~0.3.x"
   }
 }

@@ -47,12 +47,6 @@ function HttpConfig($httpProvider) {
      * This is just a performance optimization.
      */
     $httpProvider.useApplyAsync(true);
-
-    /*
-     * Disable non-Promises/A+ handlers on promises returned by $http.
-     * `success` and `error` should not be used, use `then` and `catch` instead.
-     */
-    $httpProvider.useLegacyPromiseExtensions = false;
 }
 
 export { RootscopeConfig, CompilerConfig, HttpConfig };

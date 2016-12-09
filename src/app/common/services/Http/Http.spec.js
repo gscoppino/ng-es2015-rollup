@@ -86,7 +86,7 @@ describe('Http Service', () => {
             $rootScope.$digest();
             expect(Http.pendingRequests.get.has(testUrl)).toBe(false);
 
-            spyOnHttp.and.returnValue($q.reject());
+            spyOnHttp.and.returnValue($q.reject().catch(angular.noop));
             Http.get(testUrl);
             expect(Http.pendingRequests.get.has(testUrl)).toBe(true);
             $rootScope.$digest();
@@ -241,7 +241,7 @@ describe('Http Service', () => {
             $rootScope.$digest();
             expect(Http.pendingRequests.put.has(testUrl)).toBe(false);
 
-            spyOnHttp.and.returnValue($q.reject());
+            spyOnHttp.and.returnValue($q.reject().catch(angular.noop));
             Http.put(testUrl, mockData);
             expect(Http.pendingRequests.put.has(testUrl)).toBe(true);
             $rootScope.$digest();
@@ -370,7 +370,7 @@ describe('Http Service', () => {
             $rootScope.$digest();
             expect(Http.pendingRequests.patch.has(testUrl)).toBe(false);
 
-            spyOnHttp.and.returnValue($q.reject());
+            spyOnHttp.and.returnValue($q.reject().catch(angular.noop));
             Http.patch(testUrl, mockData);
             expect(Http.pendingRequests.patch.has(testUrl)).toBe(true);
             $rootScope.$digest();
@@ -435,7 +435,7 @@ describe('Http Service', () => {
             $rootScope.$digest();
             expect(Http.pendingRequests.delete.has(testUrl)).toBe(false);
 
-            spyOnHttp.and.returnValue($q.reject());
+            spyOnHttp.and.returnValue($q.reject().catch(angular.noop));
             Http.delete(testUrl);
             expect(Http.pendingRequests.delete.has(testUrl)).toBe(true);
             $rootScope.$digest();

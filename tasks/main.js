@@ -10,6 +10,7 @@ import './docs/tasks.js';
 import './test/tasks.js';
 import './serve/tasks.js';
 import './generate/tasks.js';
+import { buildMarkupProduction } from './html/tasks.js';
 import { buildJsProduction } from './javascript/tasks.js';
 import { startDevServer } from './serve/tasks.js';
 
@@ -50,10 +51,13 @@ gulp.task('watch', [
 ]);
 
 gulp.task('build-production', [
-    'build:markup-production',
     'build:css-production',
     'build:images'
-], buildJsProduction);
+], (fin) => {
+    buildMarkupProduction().on('end', () => {
+        buildJsProduction(fin);
+    });
+});
 
 gulp.task('develop', ['watch'], startDevServer);
 gulp.task('production', ['build-production'], startDevServer);

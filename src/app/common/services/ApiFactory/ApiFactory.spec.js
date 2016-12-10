@@ -1,5 +1,7 @@
 import angular from 'angular';
-import { Http } from '../Http/Http.js';
+
+import { Http } from 'app/common/services/Http/Http.js';
+
 import ApiFactory, { ApiFactoryProvider, RESTApi } from './ApiFactory.js';
 
 beforeEach(angular.mock.module(ApiFactory));

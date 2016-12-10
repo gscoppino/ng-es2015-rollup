@@ -4,8 +4,7 @@ Boilerplate for developing a new AngularJS 1.x single page application.
 [![Coverage Status](https://coveralls.io/repos/github/gscoppino/ng-es2015-webpack/badge.svg?branch=master)](https://coveralls.io/github/gscoppino/ng-es2015-webpack?branch=master)
 
 Contents:
-* Core skeleton of an Angular application using component architecture, with routing provided by [AngularUI Router](https://github.com/angular-ui/ui-router),
-and accessibility addressed by [ngAria](https://angularjs.org/).
+* Core skeleton of an Angular application using component architecture, with accessibility addressed by [ngAria](https://angularjs.org/).
 * Unit test environment with code coverage in place via [Karma](https://karma-runner.github.io/1.0/index.html)+
 [Jasmine](http://jasmine.github.io/)+[Istanbul](http://gotwarlost.github.io/istanbul/)+
 [PhantomJS](http://phantomjs.org/), with boilerplate at 100% test coverage.

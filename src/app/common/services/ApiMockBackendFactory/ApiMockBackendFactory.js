@@ -1,6 +1,7 @@
 import angular from 'angular';
 import 'angular-mocks';
-import { apiBase } from 'app/core/api/api.js';
+
+import { API_BASE } from 'app/core/api/api.js';
 
 /**
  * @class
@@ -110,11 +111,11 @@ function MockResourceFactory($httpBackend) {
     factory.create = function(name, collection=[]) {
         let resource = new MockResource(name, collection);
 
-        $httpBackend.whenRoute('GET', `${apiBase}/${name}/:id?`).respond(resource.respondToGET.bind(resource));
-        $httpBackend.whenRoute('POST', `${apiBase}/${name}/`).respond(resource.respondToPOST.bind(resource));
-        $httpBackend.whenRoute('POST', `${apiBase}/${name}`).respond(resource.respondToPOST.bind(resource));
-        $httpBackend.whenRoute('PUT', `${apiBase}/${name}/:id`).respond(resource.respondToPUT.bind(resource));
-        $httpBackend.whenRoute('DELETE', `${apiBase}/${name}/:id`).respond(resource.respondToDELETE.bind(resource));
+        $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id?`).respond(resource.respondToGET.bind(resource));
+        $httpBackend.whenRoute('POST', `${API_BASE}/${name}/`).respond(resource.respondToPOST.bind(resource));
+        $httpBackend.whenRoute('POST', `${API_BASE}/${name}`).respond(resource.respondToPOST.bind(resource));
+        $httpBackend.whenRoute('PUT', `${API_BASE}/${name}/:id`).respond(resource.respondToPUT.bind(resource));
+        $httpBackend.whenRoute('DELETE', `${API_BASE}/${name}/:id`).respond(resource.respondToDELETE.bind(resource));
     };
 
     return factory;
@@ -125,6 +126,8 @@ export { MockResource };
 /**
  * @namespace app/api/mock/resource
  */
-export default angular.module('app.services.ApiMockBackendFactory', ['ngMockE2E'])
+export default angular.module('app.services.ApiMockBackendFactory', [
+    'ngMockE2E'
+])
     .service('MockResourceFactory', MockResourceFactory)
     .name;

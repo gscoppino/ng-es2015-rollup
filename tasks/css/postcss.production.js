@@ -1,7 +1,8 @@
+import cssnano from 'cssnano';
+
 import POSTCSS_CONFIG from './postcss.dev.js';
 import BROWSERS from './browserslist.js';
 import pathconfig from './pathconfig.js';
-import cssnano from 'cssnano';
 
 // Write to different file than dev version
 // Add minification step

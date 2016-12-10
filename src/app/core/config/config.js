@@ -1,5 +1,5 @@
 import angular from 'angular';
-import ngAria from 'angular-aria';
+import AngularAria from 'angular-aria';
 
 RootscopeConfig.$inject = ['$rootScopeProvider'];
 function RootscopeConfig($rootScopeProvider) {
@@ -47,12 +47,6 @@ function HttpConfig($httpProvider) {
      * This is just a performance optimization.
      */
     $httpProvider.useApplyAsync(true);
-
-    /*
-     * Disable non-Promises/A+ handlers on promises returned by $http.
-     * `success` and `error` should not be used, use `then` and `catch` instead.
-     */
-    $httpProvider.useLegacyPromiseExtensions = false;
 }
 
 export { RootscopeConfig, CompilerConfig, HttpConfig };
@@ -61,7 +55,9 @@ export { RootscopeConfig, CompilerConfig, HttpConfig };
  * @namespace app/config
  * @desc Configures core Angular services.
  */
-export default angular.module('app.config', [ngAria])
+export default angular.module('app.config', [
+    AngularAria
+])
     .config(RootscopeConfig)
     .config(CompilerConfig)
     .config(HttpConfig)

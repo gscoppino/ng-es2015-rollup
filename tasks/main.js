@@ -10,17 +10,18 @@ import './docs/tasks.js';
 import './test/tasks.js';
 import './serve/tasks.js';
 import './generate/tasks.js';
-
 import { buildJsProduction } from './javascript/tasks.js';
 import { startDevServer } from './serve/tasks.js';
 
 System.config({
+    transpiler: 'plugin-babel',
     map: {
-        'babel': 'node_modules/systemjs-plugin-babel/plugin-babel.js',
-        'systemjs-babel-build': 'node_modules/systemjs-plugin-babel/systemjs-babel-browser.js'
+        'plugin-babel': 'node_modules/systemjs-plugin-babel/plugin-babel.js',
+        'systemjs-babel-build': 'node_modules/systemjs-plugin-babel/systemjs-babel-node.js'
     },
     meta: {
-        'tasks/**/*.js': { loader: 'babel' }
+        'tasks/**/*.js':        { loader: 'plugin-babel', babelOptions: { es2015: true,  stage1: false, stage2: false, stage3: false } },
+        'node_modules/**/*.js': { loader: 'plugin-babel', babelOptions: { es2015: false, stage1: false, stage2: false, stage3: false } }
     }
 });
 

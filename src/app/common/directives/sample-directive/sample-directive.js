@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import SampleService from 'app/common/services/SampleService/SampleService.js';
 
 sampleDirective.$inject = ['SampleService'];

@@ -1,4 +1,5 @@
 import path from 'path';
+
 import pathconfig from './pathconfig.js';
 
 export default {

@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import App from './app.js';
 
 beforeEach(angular.mock.module(App));
@@ -69,20 +70,19 @@ describe('App Component', () => {
             });
 
             describe('$onInit', () => {
-                it(`should listen for the $stateChangeStart, $stateChangeSuccess, and $stateChangeError
-                events, in order to properly update the application state.`,angular.mock.inject(($rootScope) => {
+                it(`should listen for the route change events, in order to properly update the application state.`,
+                angular.mock.inject(($rootScope) => {
                     spyOn($rootScope, '$on').and.callFake(angular.noop);
                     AppController.$onInit();
 
-                    expect($rootScope.$on).toHaveBeenCalledWith('$stateChangeStart', jasmine.any(Function));
-                    expect($rootScope.$on).toHaveBeenCalledWith('$stateChangeSuccess', jasmine.any(Function));
-                    expect($rootScope.$on).toHaveBeenCalledWith('$stateChangeError', jasmine.any(Function));
+                    expect($rootScope.$on).toHaveBeenCalledWith('$locationChangeStart', jasmine.any(Function));
+                    expect($rootScope.$on).toHaveBeenCalledWith('$locationChangeSuccess', jasmine.any(Function));
                 }));
 
                 it('should store references to all watcher deregistration functions in a list, on the instance object.', () => {
                     AppController.$onInit();
 
-                    expect(AppController.listeners.length).toBe(3);
+                    expect(AppController.listeners.length).toBe(2);
                 });
             });
 
@@ -93,32 +93,22 @@ describe('App Component', () => {
                     $rootScope = $injector.get('$rootScope');
                 }));
 
-                describe('$stateChangeStart', () => {
+                describe('route changes', () => {
                     it('should set the loading flag on the instance to true.', () => {
                         AppController.$onInit();
 
                         AppController.isLoading = false;
-                        $rootScope.$broadcast('$stateChangeStart');
+                        $rootScope.$broadcast('$locationChangeStart');
                         expect(AppController.isLoading).toBe(true);
                     });
                 });
 
-                describe('$stateChangeSuccess', () => {
+                describe('route change successful', () => {
                     it('should set the loading flag on the instance to false.', () => {
                         AppController.$onInit();
 
                         AppController.isLoading = true;
-                        $rootScope.$broadcast('$stateChangeSuccess');
-                        expect(AppController.isLoading).toBe(false);
-                    });
-                });
-
-                describe('$stateChangeError', () => {
-                    it('should set the loading flag on the instance to false.', () => {
-                        AppController.$onInit();
-
-                        AppController.isLoading = true;
-                        $rootScope.$broadcast('$stateChangeError');
+                        $rootScope.$broadcast('$locationChangeSuccess');
                         expect(AppController.isLoading).toBe(false);
                     });
                 });

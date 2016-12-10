@@ -3,6 +3,7 @@ import System from 'systemjs';
 import fs from 'fs';
 import del from 'del';
 import postcss from 'postcss';
+
 import pathconfig from './pathconfig.js';
 
 function lazyLoadPostcssConfig (type) {

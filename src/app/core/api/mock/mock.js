@@ -1,15 +1,17 @@
 import angular from 'angular';
 import 'angular-mocks';
-import { apiBase } from 'app/core/api/api.js';
+
+import { API_BASE } from 'app/core/api/api.js';
+import { MOCK_USERS } from 'app/core/api/mock/fixtures/users.js';
 import ApiMockBackendFactory from 'app/common/services/ApiMockBackendFactory/ApiMockBackendFactory.js';
-import mockUsers from './fixtures/users.js';
+
 
 createMockApi.$inject = ['$httpBackend', 'MockResourceFactory'];
 function createMockApi($httpBackend, MockResourceFactory) {
 
-    MockResourceFactory.create('users', mockUsers);
+    MockResourceFactory.create('users', MOCK_USERS);
 
-    $httpBackend.whenRoute('GET', apiBase)
+    $httpBackend.whenRoute('GET', API_BASE)
         .respond(() => [200, 'You have hit the mock api! If this is in error, remove any dependencies to mock.js in the app.']);
 }
 

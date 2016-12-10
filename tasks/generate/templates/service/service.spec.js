@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import <%= name %>Service from './<%= name %>';
 
 beforeEach(angular.mock.module(<%= name %>Service));

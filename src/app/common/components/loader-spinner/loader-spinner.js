@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import LoaderSpinnerTemplate from './loader-spinner.html';
 
 /**

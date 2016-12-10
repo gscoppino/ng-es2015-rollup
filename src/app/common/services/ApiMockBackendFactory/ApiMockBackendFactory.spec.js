@@ -1,5 +1,7 @@
 import angular from 'angular';
-import { apiBase } from 'app/core/api/api.js';
+
+import { API_BASE } from 'app/core/api/api.js';
+
 import ApiMockBackendFactory, { MockResource } from './ApiMockBackendFactory.js';
 
 beforeEach(angular.mock.module(ApiMockBackendFactory));
@@ -147,11 +149,11 @@ describe('MockResourceFactory', () => {
 
         it('should create correct GET/POST/PUT/DELETE routes for the passed collection name and define responses.', () => {
             MockResourceFactory.create('users');
-            expect($httpBackend.whenRoute).toHaveBeenCalledWith('GET', `${apiBase}/users/:id?`);
-            expect($httpBackend.whenRoute).toHaveBeenCalledWith('POST', `${apiBase}/users`);
-            expect($httpBackend.whenRoute).toHaveBeenCalledWith('POST', `${apiBase}/users/`);
-            expect($httpBackend.whenRoute).toHaveBeenCalledWith('PUT', `${apiBase}/users/:id`);
-            expect($httpBackend.whenRoute).toHaveBeenCalledWith('DELETE', `${apiBase}/users/:id`);
+            expect($httpBackend.whenRoute).toHaveBeenCalledWith('GET', `${API_BASE}/users/:id?`);
+            expect($httpBackend.whenRoute).toHaveBeenCalledWith('POST', `${API_BASE}/users`);
+            expect($httpBackend.whenRoute).toHaveBeenCalledWith('POST', `${API_BASE}/users/`);
+            expect($httpBackend.whenRoute).toHaveBeenCalledWith('PUT', `${API_BASE}/users/:id`);
+            expect($httpBackend.whenRoute).toHaveBeenCalledWith('DELETE', `${API_BASE}/users/:id`);
             expect(mockRespondDefinitionFn.calls.count()).toBe(5);
         });
     });

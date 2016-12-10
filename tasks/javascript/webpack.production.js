@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin';
+
 import WEBPACK_CONFIG from './webpack.dev.js';
 import pathconfig from './pathconfig.js';
 

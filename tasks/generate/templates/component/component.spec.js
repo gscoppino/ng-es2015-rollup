@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import <%= UpperCamelCaseName %>Component from './<%= name %>';
 
 beforeEach(angular.mock.module(<%= UpperCamelCaseName %>Component));

@@ -1,11 +1,12 @@
 import angular from 'angular';
-import UIRouter from 'angular-ui-router';
-import Config from './core/config/config.js';
-import Api from './core/api/api.js';
-import Store from './core/store/store.js';
-import Routes from './core/routes/routes.js';
-import LoaderSpinner from './common/components/loader-spinner/loader-spinner.js';
-import UsersList from './common/components/users-list/users-list.js';
+
+import Config from 'app/core/config/config.js';
+import Api from 'app/core/api/api.js';
+import Store from 'app/core/store/store.js';
+import Routes from 'app/core/routes/routes.js';
+import LoaderSpinner from 'app/common/components/loader-spinner/loader-spinner.js';
+import UsersList from 'app/common/components/users-list/users-list.js';
+
 import AppTemplate from './app.html';
 
 /**
@@ -32,25 +33,24 @@ class AppController {
 
     /**
      * Schedules a UI update to to be called whenever a
-     * ui-router state change event occurs, passing it the parameters from
+     * route change event occurs, passing it the parameters from
      * the event.
      */
     $onInit() {
         let update = this._update.bind(this);
 
         this.listeners.push(
-            this.$rootScope.$on('$stateChangeStart', update),
-            this.$rootScope.$on('$stateChangeSuccess', update),
-            this.$rootScope.$on('$stateChangeError', update)
+            this.$rootScope.$on('$locationChangeStart', update),
+            this.$rootScope.$on('$locationChangeSuccess', update),
         );
     }
 
     /**
      * Updates the Application UI in response to state change events.
-     * @param event - the state change event (from ui-router)
+     * @param event - the state change event
      */
     _update(event) {
-        this.isLoading = (event.name === '$stateChangeStart') ? true : false;
+        this.isLoading = (event.name === '$locationChangeStart') ? true : false;
     }
 
     /**
@@ -79,7 +79,6 @@ export default angular.module('app', [
     Config,
     Api,
     Store,
-    UIRouter,
     Routes,
     LoaderSpinner,
     UsersList

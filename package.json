@@ -12,7 +12,6 @@
     "documentation": "jsdoc -R README.md -P package.json -r src -d dist/documentation",
     "generate-component": "gulp generate:component",
     "generate-directive": "gulp generate:directive",
-    "generate-route": "gulp generate:route",
     "generate-service": "gulp generate:service",
     "postinstall": "npm run setup-tasks && npm run setup-protractor",
     "setup-tasks": "rollup -c tasks/rollup.config.js",
@@ -72,7 +71,6 @@
   "dependencies": {
     "angular": "~1.6.x",
     "angular-aria": "~1.6.x",
-    "angular-mocks": "~1.6.x",
-    "angular-ui-router": "~0.3.x"
+    "angular-mocks": "~1.6.x"
   }
 }

@@ -1,5 +1,4 @@
 import angular from 'angular';
-import AngularUIRouter from 'angular-ui-router';
 
 import Config from 'app/core/config/config.js';
 import Api from 'app/core/api/api.js';
@@ -33,25 +32,24 @@ class AppController {
 
     /**
      * Schedules a UI update to to be called whenever a
-     * ui-router state change event occurs, passing it the parameters from
+     * route change event occurs, passing it the parameters from
      * the event.
      */
     $onInit() {
         let update = this._update.bind(this);
 
         this.listeners.push(
-            this.$rootScope.$on('$stateChangeStart', update),
-            this.$rootScope.$on('$stateChangeSuccess', update),
-            this.$rootScope.$on('$stateChangeError', update)
+            this.$rootScope.$on('$locationChangeStart', update),
+            this.$rootScope.$on('$locationChangeSuccess', update),
         );
     }
 
     /**
      * Updates the Application UI in response to state change events.
-     * @param event - the state change event (from ui-router)
+     * @param event - the state change event
      */
     _update(event) {
-        this.isLoading = (event.name === '$stateChangeStart') ? true : false;
+        this.isLoading = (event.name === '$locationChangeStart') ? true : false;
     }
 
     /**
@@ -77,7 +75,6 @@ const AppComponent = {
  * @namespace app
  */
 export default angular.module('app', [
-    AngularUIRouter,
     Config,
     Api,
     Store,

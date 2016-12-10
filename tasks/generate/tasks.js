@@ -62,22 +62,3 @@ gulp.task('generate:service', ()=> {
         }))
         .pipe(gulp.dest(`src/app/common/services/${name}`));
 });
-
-gulp.task('generate:route', ()=> {
-    if (!name) { throw new Error('Must use -n switch to specify name'); }
-    if (name.search(WEB_COMPONENT_REGEX) === -1) {
-        throw new Error(`Route name should be kebab cased e.g. sample,
-            sample-route, sample-route-child`);
-    }
-
-    return gulp.src('tasks/generate/templates/route/*')
-        .pipe(template({
-            name: name,
-            lowerCamelCaseName: name.split('-').map((part, i) => i === 0 ? part : part.substring(0, 1).toUpperCase() + part.substring(1)).join(''),
-            UpperCamelCaseName: name.split('-').map(part => part.substring(0, 1).toUpperCase() + part.substring(1)).join('')
-        }))
-        .pipe(rename((path) => {
-            path.basename = path.basename.replace('route', name);
-        }))
-        .pipe(gulp.dest(`src/app/core/routes/${name}`));
-});

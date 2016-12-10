@@ -1,5 +1,6 @@
 import angular from 'angular';
-import { Http } from '../Http/Http.js';
+
+import { Http } from 'app/common/services/Http/Http.js';
 
 class RESTApi extends Http {
     static get $inject() { return ['$q', '$http', 'name', 'baseUrl']; }

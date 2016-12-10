@@ -1,23 +1,24 @@
 import angular from 'angular';
-import ApiFactory from 'app/common/services/ApiFactory/ApiFactory.js';
-import MockBackend from './mock/mock.js'; // Remove this import and the its use in this file to disable the mock backend.
 
-const apiBase = '/api';
+import MockBackend from 'app/core/api/mock/mock.js'; // Remove to disable the mock backend.
+import ApiFactory from 'app/common/services/ApiFactory/ApiFactory.js';
+
+const API_BASE = '/api';
 
 ApiConfig.$inject = ['ApiFactoryProvider'];
 function ApiConfig(ApiFactoryProvider) {
-    ApiFactoryProvider.setBaseUrl(apiBase);
+    ApiFactoryProvider.setBaseUrl(API_BASE);
 }
 
-export { apiBase, ApiConfig };
+export { API_BASE, ApiConfig };
 
 /**
  * @namespace app/api
  * @desc Configures the application to work with its API.
  */
 export default angular.module('app.api', [
-    ApiFactory,
-    MockBackend
+    MockBackend, // Remove if disabling the mock backend
+    ApiFactory
 ])
     .config(ApiConfig)
     .name;

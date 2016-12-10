@@ -1,5 +1,7 @@
 import angular from 'angular';
-import { apiBase } from 'app/core/api/api.js';
+
+import { API_BASE } from 'app/core/api/api.js';
+
 import { createMockApi } from './mock.js';
 
 describe('createMockApi', () => {
@@ -25,7 +27,7 @@ describe('createMockApi', () => {
 
     it('should set up a mock api response to the root api endpoint.', () => {
         createMockApi(mockHttpBackend, mockMockResourceFactory);
-        expect(mockHttpBackend.whenRoute).toHaveBeenCalledWith('GET', apiBase);
+        expect(mockHttpBackend.whenRoute).toHaveBeenCalledWith('GET', API_BASE);
         expect(httpBackendResponseSpy).toHaveBeenCalledWith(jasmine.any(Function));
     });
 });

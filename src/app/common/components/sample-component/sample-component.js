@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import SampleComponentTemplate from './sample-component.html';
 
 class SampleComponentController {

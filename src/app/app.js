@@ -1,10 +1,12 @@
 import angular from 'angular';
-import UIRouter from 'angular-ui-router';
-import Config from './core/config/config.js';
-import Api from './core/api/api.js';
-import Store from './core/store/store.js';
-import Routes from './core/routes/routes.js';
-import LoaderSpinner from './common/components/loader-spinner/loader-spinner.js';
+import AngularUIRouter from 'angular-ui-router';
+
+import Config from 'app/core/config/config.js';
+import Api from 'app/core/api/api.js';
+import Store from 'app/core/store/store.js';
+import Routes from 'app/core/routes/routes.js';
+import LoaderSpinner from 'app/common/components/loader-spinner/loader-spinner.js';
+
 import AppTemplate from './app.html';
 
 /**
@@ -75,10 +77,10 @@ const AppComponent = {
  * @namespace app
  */
 export default angular.module('app', [
+    AngularUIRouter,
     Config,
     Api,
     Store,
-    UIRouter,
     Routes,
     LoaderSpinner
 ])

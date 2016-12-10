@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import SampleComponent from './sample-component.js';
 
 beforeEach(angular.mock.module(SampleComponent));

@@ -10,7 +10,6 @@ import './docs/tasks.js';
 import './test/tasks.js';
 import './serve/tasks.js';
 import './generate/tasks.js';
-
 import { buildJsProduction } from './javascript/tasks.js';
 import { startDevServer } from './serve/tasks.js';
 

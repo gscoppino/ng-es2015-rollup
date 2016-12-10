@@ -1,5 +1,5 @@
 import angular from 'angular';
-import UIRouter from 'angular-ui-router';
+import AngularUIRouter from 'angular-ui-router';
 
 RouterConfig.$inject = ['$locationProvider'];
 function RouterConfig($locationProvider) {
@@ -18,6 +18,8 @@ export { RouterConfig };
  * @namespace app/routes
  * @desc Configures the frontend routing.
  */
-export default angular.module('app.routes', [UIRouter])
+export default angular.module('app.routes', [
+    AngularUIRouter
+])
     .config(RouterConfig)
     .name;

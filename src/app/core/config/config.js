@@ -1,5 +1,5 @@
 import angular from 'angular';
-import ngAria from 'angular-aria';
+import AngularAria from 'angular-aria';
 
 RootscopeConfig.$inject = ['$rootScopeProvider'];
 function RootscopeConfig($rootScopeProvider) {
@@ -55,7 +55,9 @@ export { RootscopeConfig, CompilerConfig, HttpConfig };
  * @namespace app/config
  * @desc Configures core Angular services.
  */
-export default angular.module('app.config', [ngAria])
+export default angular.module('app.config', [
+    AngularAria
+])
     .config(RootscopeConfig)
     .config(CompilerConfig)
     .config(HttpConfig)

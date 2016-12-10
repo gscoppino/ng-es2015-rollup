@@ -41,7 +41,7 @@ class AppController {
 
         this.listeners.push(
             this.$rootScope.$on('$locationChangeStart', update),
-            this.$rootScope.$on('$locationChangeSuccess', update),
+            this.$rootScope.$on('$locationChangeSuccess', update)
         );
     }
 

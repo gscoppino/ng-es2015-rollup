@@ -2,4 +2,4 @@
 import 'angular';
 import 'angular-aria';
 import 'ng-redux';
-import 'redux-thunk';
+import 'seamless-immutable';

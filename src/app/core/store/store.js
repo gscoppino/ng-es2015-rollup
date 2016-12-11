@@ -1,18 +1,13 @@
 import angular from 'angular';
+import Immutable from 'seamless-immutable';
 import ngRedux from 'ng-redux';
-import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import RootReducer from './reducers/RootReducer.js';
-
-function immutable(mutable) {
-    return JSON.parse(JSON.stringify(mutable));
-}
 
 StoreConfig.$inject = ['$ngReduxProvider', 'rootReducerProvider'];
 function StoreConfig($ngReduxProvider, rootReducerProvider) {
     let rootReducer = rootReducerProvider.createReducer();
     let middlewares = [
-        thunk,
         createLogger({ level: 'info', collapsed: true })
     ];
 
@@ -25,16 +20,18 @@ function $ngReduxImmutableDecorator($delegate) {
 
     $delegate.getState = (stateFn) => {
         if (stateFn) {
-            return immutable(stateFn($delegate.getStateUnsafe()));
+            return stateFn($delegate.getStateUnsafe())
+                .asMutable({ deep: true });
         } else {
-            return immutable($delegate.getStateUnsafe());
+            return $delegate.getStateUnsafe()
+                .asMutable({ deep: true });
         }
     };
 
     return $delegate;
 }
 
-export { immutable, $ngReduxImmutableDecorator, StoreConfig };
+export { $ngReduxImmutableDecorator, StoreConfig };
 /**
  * @namespace app/store
  * @desc Configures the frontend singleton store with its

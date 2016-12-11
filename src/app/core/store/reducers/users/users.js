@@ -1,6 +1,7 @@
+import Immutable from 'seamless-immutable';
 import actions from 'app/core/store/action-constants/users/users.js';
 
-const INITIAL_STATE = [];
+const INITIAL_STATE = Immutable.from([]);
 
 export function usersReducer(state=INITIAL_STATE, action=null) {
 
@@ -14,7 +15,7 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.GET_USERS_CACHE_MISS:
             return state;
         case actions.GET_USERS_SUCCESS:
-            return [...action.payload];
+            return Immutable.from(action.payload);
         case actions.GET_USERS_FAIL:
             return state;
 
@@ -29,16 +30,12 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
             var indexed = state.findIndex(user => user.id === action.payload.id);
 
             if (indexed !== -1) {
-                return [
-                    ...state.slice(0, indexed),
-                    Object.assign({}, state[indexed], action.payload),
-                    ...state.slice(indexed + 1)
-                ];
+                return state
+                    .slice(0, indexed)
+                    .concat(state[indexed].replace(action.payload))
+                    .concat(state.slice(indexed + 1));
             } else {
-                return [
-                    ...state,
-                    action.payload
-                ];
+                return state.concat(action.payload);
             }
 
         case actions.GET_USER_FAIL:
@@ -48,7 +45,7 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.ADD_USER_REQUEST:
             return state;
         case actions.ADD_USER_SUCCESS:
-            return [...state, action.payload];
+            return state.concat(action.payload);
         case actions.ADD_USER_FAIL:
             return state;
 
@@ -60,16 +57,12 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
             var indexed = state.findIndex(user => user.id === action.payload.id);
 
             if (indexed !== -1) {
-                return [
-                    ...state.slice(0, indexed),
-                    Object.assign({}, state[indexed], action.payload),
-                    ...state.slice(indexed + 1)
-                ];
+                return state
+                    .slice(0, indexed)
+                    .concat(state[indexed].merge(action.payload))
+                    .concat(state.slice(indexed + 1));
             } else {
-                return [
-                    ...state,
-                    action.payload
-                ]
+                return state.concat(action.payload);
             }
 
         case actions.UPDATE_USER_FAIL:
@@ -83,14 +76,12 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
             var indexed = state.findIndex(user => user.id === action.payload.id);
 
             if (indexed !== -1) {
-                return [
-                    ...state.slice(0, indexed),
-                    ...state.slice(indexed + 1)
-                ];
-            } else {
-                return [...state];
+                return state
+                    .slice(0, indexed)
+                    .concat(state.slice(indexed + 1));
             }
 
+            return state;
         case actions.DELETE_USER_FAIL:
             return state;
 

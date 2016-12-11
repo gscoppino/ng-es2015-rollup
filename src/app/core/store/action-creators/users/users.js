@@ -12,9 +12,24 @@ class UserActions {
         Object.assign(this, { $q, $ngRedux, UserService });
     }
 
-    sync() {
+    sync(forceGet=false) {
         this.$ngRedux.dispatch({
             type: actions.GET_USERS_REQUEST
+        });
+
+        if (!forceGet) {
+            let cachedUsers = this.$ngRedux.getStateUnsafe().users;
+            if (cachedUsers.length) {
+                this.$ngRedux.dispatch({
+                    type: actions.GET_USERS_CACHE_HIT
+                });
+
+                return this.$q.resolve(cachedUsers);
+            }
+        }
+
+        this.$ngRedux.dispatch({
+            type: actions.GET_USERS_CACHE_MISS
         });
 
         return this.UserService.getList()
@@ -35,9 +50,24 @@ class UserActions {
             });
     }
 
-    syncOne(id=null) {
+    syncOne(id=null, forceGet=false) {
         this.$ngRedux.dispatch({
             type: actions.GET_USER_REQUEST
+        });
+
+        if (!forceGet) {
+            let cachedUser = this.$ngRedux.getStateUnsafe().users.find(user => user.id === id);
+            if (cachedUser) {
+                this.$ngRedux.dispatch({
+                    type: actions.GET_USER_CACHE_HIT
+                });
+
+                return this.$q.resolve(cachedUser);
+            }
+        }
+
+        this.$ngRedux.dispatch({
+            type: actions.GET_USER_CACHE_MISS
         });
 
         return this.UserService.get(id)

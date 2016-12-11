@@ -9,6 +9,10 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         // Get all users
         case actions.GET_USERS_REQUEST:
             return state;
+        case actions.GET_USERS_CACHE_HIT:
+            return state;
+        case actions.GET_USERS_CACHE_MISS:
+            return state;
         case actions.GET_USERS_SUCCESS:
             return [...action.payload];
         case actions.GET_USERS_FAIL:
@@ -16,6 +20,10 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
 
         // Get a specific user
         case actions.GET_USER_REQUEST:
+            return state;
+        case actions.GET_USER_CACHE_HIT:
+            return state;
+        case actions.GET_USER_CACHE_MISS:
             return state;
         case actions.GET_USER_SUCCESS:
             var indexed = state.findIndex(user => user.id === action.payload.id);

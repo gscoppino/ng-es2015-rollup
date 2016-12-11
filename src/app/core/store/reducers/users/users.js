@@ -7,11 +7,11 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
     switch(action.type) {
 
         // Get all users
-        case actions.GET_USERS_REQUEST:
+        case actions.GET_ALL_USER_REQUEST:
             return state;
-        case actions.GET_USERS_SUCCESS:
+        case actions.GET_ALL_USER_SUCCESS:
             return [...action.payload];
-        case actions.GET_USERS_FAIL:
+        case actions.GET_ALL_USER_FAIL:
             return state;
 
         // Get a specific user

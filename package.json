@@ -59,7 +59,7 @@
     "postcss-reporter": "~2.0.x",
     "protractor": "~4.0.x",
     "raw-loader": "~0.5.x",
-    "rollup": "~0.36.x",
+    "rollup": "~0.36.1",
     "rollup-plugin-babel": "~2.6.x",
     "stylelint": "~7.6.x",
     "stylelint-config-standard": "~15.0.x",

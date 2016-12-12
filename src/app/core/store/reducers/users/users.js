@@ -1,11 +1,11 @@
-import Immutable from 'seamless-immutable';
+import { static as Immutable } from 'seamless-immutable';
 import actions from 'app/core/store/action-constants/users/users.js';
 
 const INITIAL_STATE = Immutable.from([]);
 
 export function usersReducer(state=INITIAL_STATE, action=null) {
 
-    switch(action.type) {
+    switch (action.type) {
 
         // Get all users
         case actions.GET_USERS_REQUEST:
@@ -32,7 +32,7 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
             if (indexed !== -1) {
                 return state
                     .slice(0, indexed)
-                    .concat(state[indexed].replace(action.payload))
+                    .concat(Immutable.replace(state[indexed], action.payload))
                     .concat(state.slice(indexed + 1));
             } else {
                 return state.concat(action.payload);
@@ -59,7 +59,7 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
             if (indexed !== -1) {
                 return state
                     .slice(0, indexed)
-                    .concat(state[indexed].merge(action.payload))
+                    .concat(Immutable.merge(state[indexed], action.payload))
                     .concat(state.slice(indexed + 1));
             } else {
                 return state.concat(action.payload);

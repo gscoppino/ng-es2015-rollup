@@ -1,4 +1,5 @@
 import angular from 'angular';
+import { static as Immutable } from 'seamless-immutable';
 import { StoreConfig, $ngReduxImmutableDecorator } from './store.js';
 
 describe('Store Configuration', () => {
@@ -23,11 +24,11 @@ describe('$ngRedux Decorator', () => {
 
     beforeEach(() => {
         mock_$ngRedux = {
-            state: {
+            state: Immutable.from({
                 slice: {
                     listField: []
                 }
-            },
+            }),
             getState: mockGetStateFn
         };
     });

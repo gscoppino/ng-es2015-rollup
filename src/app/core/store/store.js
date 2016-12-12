@@ -1,5 +1,5 @@
 import angular from 'angular';
-import Immutable from 'seamless-immutable';
+import { static as Immutable } from 'seamless-immutable';
 import ngRedux from 'ng-redux';
 import createLogger from 'redux-logger';
 import RootReducer from './reducers/RootReducer.js';
@@ -20,11 +20,9 @@ function $ngReduxImmutableDecorator($delegate) {
 
     $delegate.getState = (stateFn) => {
         if (stateFn) {
-            return stateFn($delegate.getStateUnsafe())
-                .asMutable({ deep: true });
+            return Immutable.asMutable(stateFn($delegate.getStateUnsafe()), { deep: true });
         } else {
-            return $delegate.getStateUnsafe()
-                .asMutable({ deep: true });
+            return Immutable.asMutable($delegate.getStateUnsafe(), { deep: true });
         }
     };
 

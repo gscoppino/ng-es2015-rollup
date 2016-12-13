@@ -2,7 +2,8 @@ import angular from 'angular';
 import { static as Immutable } from 'seamless-immutable';
 import ngRedux from 'ng-redux';
 import createLogger from 'redux-logger';
-import RootReducer from './reducers/RootReducer.js';
+
+import RootReducer from './reducer.js';
 
 StoreConfig.$inject = ['$ngReduxProvider', 'rootReducerProvider'];
 function StoreConfig($ngReduxProvider, rootReducerProvider) {

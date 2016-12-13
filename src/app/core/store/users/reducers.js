@@ -1,5 +1,6 @@
 import { static as Immutable } from 'seamless-immutable';
-import actions from 'app/core/store/action-constants/users/users.js';
+
+import actions from './constants.js';
 
 const INITIAL_STATE = Immutable.from([]);
 

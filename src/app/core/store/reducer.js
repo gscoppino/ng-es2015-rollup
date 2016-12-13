@@ -3,7 +3,7 @@ import { static as Immutable } from 'seamless-immutable';
 import { combineReducers } from 'redux';
 
 // Import individual reducers
-import { usersReducer as users } from './users/users.js';
+import { usersReducer as users } from './users/reducers.js';
 
 /**
  * @class

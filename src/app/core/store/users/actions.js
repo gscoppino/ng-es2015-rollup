@@ -1,7 +1,9 @@
 import angular from 'angular';
 import ngRedux from 'ng-redux';
-import actions from 'app/core/store/action-constants/users/users.js';
+
 import UserService from 'app/core/api/services/users/users.js';
+
+import actions from './constants.js';
 
 class UserActions {
     static get $inject() {

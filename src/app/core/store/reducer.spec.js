@@ -1,5 +1,5 @@
 import angular from 'angular';
-import RootReducer from './RootReducer.js';
+import RootReducer from './reducer.js';
 
 beforeEach(angular.mock.module(RootReducer));
 

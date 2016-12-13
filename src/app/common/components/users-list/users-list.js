@@ -1,6 +1,7 @@
 import angular from 'angular';
 import ngRedux from 'ng-redux';
 import UserActions from 'app/core/store/action-creators/users/users.js';
+import UserSelectors from 'app/core/store/selectors/users/users.js';
 import UsersListItem from 'app/common/components/users-list-item/users-list-item.js';
 import AddEditUserItem from 'app/common/components/add-edit-user-item/add-edit-user-item.js';
 import UsersListTemplate from './users-list.html';
@@ -25,7 +26,7 @@ class UsersListController {
             this.state.usersList = users;
             this._listeners.push(
                 this.$ngRedux.subscribe(() => {
-                    this.state.usersList = this.$ngRedux.getState(state => state.users);
+                    this.state.usersList = this.$ngRedux.getState(UserSelectors.list);
                 })
             );
         });

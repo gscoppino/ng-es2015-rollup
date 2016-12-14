@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 // Load angular and angular-mocks onto the global browser context.
 import 'angular';
 import 'angular-mocks';

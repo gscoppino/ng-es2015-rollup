@@ -42,6 +42,13 @@ export default {
     // NOTE: The pipeline is evaluated tail to head at each stage.
     module: {
         preLoaders: [
+            // Lint all HTML files.
+            {
+                test: /\.html$/,
+                include: [path.resolve(process.cwd(), 'src')],
+                exclude: [path.resolve(process.cwd(), 'node_modules')],
+                loaders: ['htmlhint']
+            },
             // Lint all Javascript files.
             {
                 test: /\.js$/,

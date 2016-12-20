@@ -14,6 +14,32 @@
     "rules": {
         "indent": ["error", 4],
         "quotes": ["error", "single"],
-        "semi": ["error", "always"]
+        "semi": ["error", "always"],
+        "require-jsdoc": ["error", {
+            "require": {
+                "ClassDeclaration": true,
+                "MethodDefinition": true,
+                "FunctionDeclaration": true,
+                "ArrowFunctionExpression": true
+            }
+        }],
+        "valid-jsdoc": ["error", {
+            "prefer": {
+                "arg": "param",
+                "argument": "param",
+                "return": "returns"
+            },
+            "preferType": {
+                "Boolean": "boolean",
+                "Number": "number",
+                "String": "string",
+                "object": "Object"
+            },
+            "requireParamDescription": true,
+            "requireReturn": false,
+            "requireReturnType": true,
+            "requireReturnDescription": true,
+            "matchDescription": ".+"
+        }]
     }
 }

@@ -9,20 +9,21 @@ import LoaderSpinner from 'app/common/components/loader-spinner/loader-spinner.j
 import AppTemplate from './app.html';
 
 /**
- * @class
- * @classdesc Component Class for the application top-level component.
+ * Component Controller for the top-level application component.
  */
 class AppController {
 
+    /** Annotation for ng $injector  */
     static get $inject() { return ['$rootScope', '$log']; }
+
+    /**
+     * Initialization
+     * @param {Object} $rootScope - ng
+     * @param {Object} $log - ng
+     */
     constructor($rootScope, $log) {
         Object.assign(this, { $rootScope });
 
-        /**
-         * @member {boolean} isLoading
-         * @memberof AppController#
-         * @desc A flag indicating whether the application is in a state transition.
-         */
         this.isLoading = false;
 
         this.listeners = [];
@@ -46,7 +47,7 @@ class AppController {
 
     /**
      * Updates the Application UI in response to state change events.
-     * @param event - the state change event
+     * @param {Object} event - the state change event
      */
     _update(event) {
         this.isLoading = (event.name === '$locationChangeStart') ? true : false;

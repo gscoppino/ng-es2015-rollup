@@ -1,5 +1,11 @@
 import angular from 'angular';
 
+/**
+ * @class
+ * @classdesc Class that proxies $http, adding some conveniences
+ * such as request memoization and sequencing.
+ * @memberof app/services/Http
+ */
 class Http {
     static get $inject() { return ['$q', '$http']; }
     constructor($q, $http) {
@@ -128,6 +134,9 @@ class Http {
 }
 
 export { Http };
+/**
+ * @namespace app/services/Http
+ */
 export default angular.module('app.services.Http', [])
     .service('Http', Http)
     .name;

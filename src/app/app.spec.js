@@ -70,7 +70,7 @@ describe('App Component', () => {
             });
 
             describe('$onInit', () => {
-                it(`should listen for the route change events, in order to properly update the application state.`,
+                it('should listen for the route change events, in order to properly update the application state.',
                 angular.mock.inject(($rootScope) => {
                     spyOn($rootScope, '$on').and.callFake(angular.noop);
                     AppController.$onInit();

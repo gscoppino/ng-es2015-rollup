@@ -25,8 +25,8 @@ class UsersListController {
         this.actions.users.sync().then(users => {
             this.state.usersList = users;
             this._listeners.push(
-                this.$ngRedux.subscribe(() => {
-                    this.state.usersList = this.$ngRedux.getState(UserSelectors.list);
+                this.$ngRedux.subscribe(UserSelectors.list, (usersList) => {
+                    this.state.usersList = usersList;
                 })
             );
         });

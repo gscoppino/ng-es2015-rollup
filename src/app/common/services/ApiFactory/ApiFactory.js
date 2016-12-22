@@ -1,6 +1,13 @@
 import angular from 'angular';
 
 import { Http } from 'app/common/services/Http/Http.js';
+import { providerProxy } from 'app/common/utils/utils.js';
+
+const MODULE_NAME = 'app.services.ApiFactory';
+
+const PROVIDERS = providerProxy(MODULE_NAME, {
+    ApiFactory: 'ApiFactory'
+});
 
 class RESTApi extends Http {
     static get $inject() { return ['$q', '$http', 'name', 'baseUrl']; }
@@ -102,6 +109,8 @@ class ApiFactoryProvider {
 
 export { ApiFactoryProvider, RESTApi };
 
-export default angular.module('app.services.ApiFactory', [])
-    .provider('ApiFactory', ApiFactoryProvider)
-    .name;
+angular.module(MODULE_NAME, [])
+    .provider(PROVIDERS.ApiFactory, ApiFactoryProvider);
+
+export default MODULE_NAME;
+export { PROVIDERS };

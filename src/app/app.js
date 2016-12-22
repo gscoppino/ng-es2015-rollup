@@ -1,12 +1,19 @@
 import angular from 'angular';
 
 import Config from 'app/core/config/config.js';
-import Api from 'app/core/api/api.js';
+import ApiModule from 'app/core/api/api.js';
 import Store from 'app/core/store/store.js';
 import Routes from 'app/core/routes/routes.js';
-import LoaderSpinner from 'app/common/components/loader-spinner/loader-spinner.js';
+import LoaderSpinnerModule from 'app/common/components/loader-spinner/loader-spinner.js';
+import { providerProxy } from 'app/common/utils/utils.js';
 
 import AppTemplate from './app.html';
+
+const MODULE_NAME = 'app';
+
+const PROVIDERS = providerProxy(MODULE_NAME, {
+    AppComponent: 'app'
+});
 
 /**
  * @class
@@ -74,12 +81,14 @@ const AppComponent = {
 /**
  * @namespace app
  */
-export default angular.module('app', [
+angular.module(MODULE_NAME, [
     Config,
-    Api,
+    ApiModule,
     Store,
     Routes,
-    LoaderSpinner
+    LoaderSpinnerModule
 ])
-    .component('app', AppComponent)
-    .name;
+    .component(PROVIDERS.AppComponent, AppComponent);
+
+export default MODULE_NAME;
+export { PROVIDERS };

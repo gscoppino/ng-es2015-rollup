@@ -2,9 +2,9 @@ import angular from 'angular';
 
 import { Http } from 'app/common/services/Http/Http.js';
 
-import ApiFactory, { ApiFactoryProvider, RESTApi } from './ApiFactory.js';
+import ApiFactoryModule, { PROVIDERS as ApiFactoryProviders, ApiFactoryProvider, RESTApi } from './ApiFactory.js';
 
-beforeEach(angular.mock.module(ApiFactory));
+beforeEach(angular.mock.module(ApiFactoryModule));
 
 describe('ApiFactoryProvider', () => {
     let _ApiFactoryProvider;
@@ -28,7 +28,7 @@ describe('ApiFactory', () => {
     let ApiFactory;
 
     beforeEach(angular.mock.inject(($injector) => {
-        ApiFactory = $injector.get('ApiFactory');
+        ApiFactory = $injector.get(ApiFactoryProviders.ApiFactory);
     }));
 
     describe('create', () => {

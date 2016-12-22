@@ -3,10 +3,11 @@ import 'angular-mocks';
 
 import { API_BASE } from 'app/core/api/api.js';
 import { MOCK_USERS } from 'app/core/api/mock/fixtures/users.js';
-import ApiMockBackendFactory from 'app/common/services/ApiMockBackendFactory/ApiMockBackendFactory.js';
+import ApiMockBackendFactoryModule, { PROVIDERS as ApiMockBackendFactoryProviders } from 'app/common/services/ApiMockBackendFactory/ApiMockBackendFactory.js';
 
+const MODULE_NAME = 'app.api.mock';
 
-createMockApi.$inject = ['$httpBackend', 'MockResourceFactory'];
+createMockApi.$inject = ['$httpBackend', ApiMockBackendFactoryProviders.MockResourceFactory];
 function createMockApi($httpBackend, MockResourceFactory) {
 
     MockResourceFactory.create('users', MOCK_USERS);
@@ -21,9 +22,10 @@ export { createMockApi };
  * @namespace app/api/mock
  * @desc Creates a fake implementation of the backend API.
  */
-export default angular.module('app.api.mock', [
+angular.module(MODULE_NAME, [
     'ngMockE2E',
-    ApiMockBackendFactory
+    ApiMockBackendFactoryModule
 ])
-    .run(createMockApi)
-    .name;
+    .run(createMockApi);
+
+export default MODULE_NAME;

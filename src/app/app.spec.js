@@ -1,12 +1,16 @@
 import angular from 'angular';
 
-import App from './app.js';
+import { directiveNormalize } from 'app/common/utils/utils.js';
 
-beforeEach(angular.mock.module(App));
+import AppModule, { PROVIDERS as AppProviders } from './app.js';
+
+beforeEach(angular.mock.module(AppModule));
 
 describe('App Component', () => {
     describe('View', () => {
-        let $rootScope, $compile;
+        let $rootScope, $compile,
+            tag = directiveNormalize(AppProviders.AppComponent);
+
         beforeEach(angular.mock.inject(($injector) => {
             $rootScope = $injector.get('$rootScope');
             $compile = $injector.get('$compile');
@@ -14,7 +18,7 @@ describe('App Component', () => {
 
         it('should compile', () => {
             let scope = $rootScope.$new(),
-                element = $compile('<app></app>')(scope);
+                element = $compile(`<${tag}></${tag}>`)(scope);
 
             scope.$digest();
             expect(element.html().trim().length).toBeGreaterThan(0);
@@ -29,34 +33,34 @@ describe('App Component', () => {
         }));
 
         it('should exist.', () => {
-            let controller = $componentController('app');
+            let controller = $componentController(AppProviders.AppComponent);
             expect(controller).toBeDefined();
         });
 
         describe('Constructor', () => {
             it('should assign dependencies onto the instance object.', () => {
                 spyOn(Object, 'assign').and.callFake(angular.noop);
-                $componentController('app');
+                $componentController(AppProviders.AppComponent);
 
                 expect(Object.assign).toHaveBeenCalled();
             });
 
             it('should not have any listeners initialized.', () => {
-                let AppController = $componentController('app');
+                let AppController = $componentController(AppProviders.AppComponent);
 
                 expect(AppController.listeners.length).toBe(0);
             });
 
             it(`should set a flag to indicate that no further loading is expected (since as of this writing,
             there are no states to load).`, () => {
-                let AppController = $componentController('app');
+                let AppController = $componentController(AppProviders.AppComponent);
 
                 expect(AppController.isLoading).toBe(false);
             });
 
             it('should log a message to the logger.', () => {
                 spyOn($log, 'log').and.callFake(angular.noop);
-                $componentController('app');
+                $componentController(AppProviders.AppComponent);
 
                 expect($log.log).toHaveBeenCalled();
             });
@@ -66,7 +70,7 @@ describe('App Component', () => {
             let AppController;
 
             beforeEach(() => {
-                AppController = $componentController('app');
+                AppController = $componentController(AppProviders.AppComponent);
             });
 
             describe('$onInit', () => {

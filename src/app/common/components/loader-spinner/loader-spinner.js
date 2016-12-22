@@ -1,6 +1,14 @@
 import angular from 'angular';
 
+import { providerProxy } from 'app/common/utils/utils.js';
+
 import LoaderSpinnerTemplate from './loader-spinner.html';
+
+const MODULE_NAME = 'app.components.loader-spinner';
+
+const PROVIDERS = providerProxy(MODULE_NAME, {
+    LoaderSpinnerComponent: 'loaderSpinner'
+});
 
 /**
  * @memberof app/components/loader-spinner
@@ -13,6 +21,8 @@ const LoaderSpinnerComponent = {
 /**
  * @namespace app/components/loader-spinner
  */
-export default angular.module('app.components.loader-spinner', [])
-    .component('loaderSpinner', LoaderSpinnerComponent)
-    .name;
+angular.module(MODULE_NAME, [])
+    .component(PROVIDERS.LoaderSpinnerComponent, LoaderSpinnerComponent);
+
+export default MODULE_NAME;
+export { PROVIDERS };

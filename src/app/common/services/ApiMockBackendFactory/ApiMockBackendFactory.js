@@ -2,6 +2,13 @@ import angular from 'angular';
 import 'angular-mocks';
 
 import { API_BASE } from 'app/core/api/api.js';
+import { providerProxy } from 'app/common/utils/utils.js';
+
+const MODULE_NAME = 'app.services.ApiMockBackendFactory';
+
+const PROVIDERS = providerProxy(MODULE_NAME, {
+    MockResourceFactory: 'MockResourceFactory'
+});
 
 /**
  * @class
@@ -126,8 +133,10 @@ export { MockResource };
 /**
  * @namespace app/services/ApiMockBackendFactory
  */
-export default angular.module('app.services.ApiMockBackendFactory', [
+angular.module(MODULE_NAME, [
     'ngMockE2E'
 ])
-    .service('MockResourceFactory', MockResourceFactory)
-    .name;
+    .service(PROVIDERS.MockResourceFactory, MockResourceFactory);
+
+export default MODULE_NAME;
+export { PROVIDERS };

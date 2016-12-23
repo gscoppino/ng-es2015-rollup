@@ -29,18 +29,19 @@ function $ngReduxImmutableDecorator($delegate) {
     };
 
     $delegate.subscribe = (stateFn, cb) => {
-        if (stateFn) {
-            let previousValue = stateFn($delegate.getStateUnsafe());
-            return $delegate.subscribeAll(() => {
-                let currentValue = stateFn($delegate.getStateUnsafe());
-                if (currentValue !== previousValue) {
-                    previousValue = stateFn($delegate.getStateUnsafe());
-                    cb(Immutable.asMutable(currentValue, { deep: true }));
-                }
-            });
-        } else {
+        cb = cb || stateFn;
+        if (cb === stateFn) {
             return $delegate.subscribeAll(cb);
         }
+
+        let previousValue = stateFn($delegate.getStateUnsafe());
+        return $delegate.subscribeAll(() => {
+            let currentValue = stateFn($delegate.getStateUnsafe());
+            if (currentValue !== previousValue) {
+                previousValue = stateFn($delegate.getStateUnsafe());
+                cb(Immutable.asMutable(currentValue, { deep: true }));
+            }
+        });
     };
 
     return $delegate;

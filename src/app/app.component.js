@@ -1,13 +1,3 @@
-import angular from 'angular';
-
-import ConfigModule from 'app/core/config/config.js';
-import ApiModule from 'app/core/api/api.js';
-import StoreModule from 'app/core/store/store.js';
-import RoutesModule from 'app/core/routes/routes.js';
-import LoaderSpinnerModule from 'app/common/components/loader-spinner/loader-spinner.js';
-
-import AppTemplate from './app.html';
-
 /**
  * @class
  * @classdesc Component Class for the application top-level component.
@@ -18,11 +8,6 @@ class AppController {
     constructor($rootScope, $log) {
         Object.assign(this, { $rootScope });
 
-        /**
-         * @member {boolean} isLoading
-         * @memberof AppController#
-         * @desc A flag indicating whether the application is in a state transition.
-         */
         this.isLoading = false;
 
         this.listeners = [];
@@ -65,21 +50,7 @@ class AppController {
  * @desc The top level application component.
  * @property controller {function} - [AppController]{@link AppController}
  */
-const AppComponent = {
-    template: AppTemplate,
+export default {
     controller: AppController,
     bindings: {}
 };
-
-/**
- * @namespace app
- */
-export default angular.module('app', [
-    ConfigModule,
-    ApiModule,
-    StoreModule,
-    RoutesModule,
-    LoaderSpinnerModule
-])
-    .component('app', AppComponent)
-    .name;

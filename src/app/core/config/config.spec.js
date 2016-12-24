@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import { CompilerConfig } from './config.js';
+import { CompilerConfig } from './config.module.js';
 
 describe('Compiler Configuration', () => {
     let mockLocationObj = {},

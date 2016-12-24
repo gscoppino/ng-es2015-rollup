@@ -1,5 +1,3 @@
-import angular from 'angular';
-
 /**
  * @class
  * @classdesc Class that proxies $http, adding some conveniences
@@ -133,10 +131,4 @@ class Http {
     }
 }
 
-export { Http };
-/**
- * @namespace app/services/Http
- */
-export default angular.module('app.services.Http', [])
-    .service('Http', Http)
-    .name;
+export default Http;

@@ -1,6 +1,4 @@
-import angular from 'angular';
-
-import { Http } from 'app/common/services/Http/Http.js';
+import { Http } from 'app/common/services/Http/Http.module.js';
 
 class RESTApi extends Http {
     static get $inject() { return ['$q', '$http', 'name', 'baseUrl']; }
@@ -100,8 +98,5 @@ class ApiFactoryProvider {
     }
 }
 
-export { ApiFactoryProvider, RESTApi };
-
-export default angular.module('app.services.ApiFactory', [])
-    .provider('ApiFactory', ApiFactoryProvider)
-    .name;
+export default ApiFactoryProvider;
+export { RESTApi };

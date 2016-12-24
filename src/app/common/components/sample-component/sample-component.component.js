@@ -1,7 +1,3 @@
-import angular from 'angular';
-
-import SampleComponentTemplate from './sample-component.html';
-
 class SampleComponentController {
 
     static get $inject() { return ['$log']; }
@@ -33,8 +29,7 @@ class SampleComponentController {
     }
 }
 
-const SampleComponent = {
-    template: SampleComponentTemplate,
+export default {
     controller: SampleComponentController,
     bindings: {
         input1: '<',
@@ -42,7 +37,3 @@ const SampleComponent = {
         output1: '&'
     }
 };
-
-export default angular.module('app.components.sample-component', [])
-    .component('sampleComponent', SampleComponent)
-    .name;

@@ -1,7 +1,4 @@
-import angular from 'angular';
-import 'angular-mocks';
-
-import { API_BASE } from 'app/core/api/api.js';
+import { API_BASE } from 'app/core/api/api.module.js';
 
 /**
  * @class
@@ -33,12 +30,12 @@ class MockResource {
     // eslint-disable-next-line no-unused-vars
     respondToGET(method, url, data, headers, params) {
         if (!params.id) {
-            return [200, this.collection.map(element => angular.copy(element))];
+            return [200, this.collection.map(element => Object.assign({}, element))];
         }
 
         let element = this.collection.find((element) => element.id === Number(params.id));
         if (element) {
-            return [200, angular.copy(element)];
+            return [200, Object.assign({}, element)];
         }
 
         return [404, `${name} with id ${params.id} not found.`];
@@ -55,7 +52,7 @@ class MockResource {
         newElement.id = ++this.highestId;
 
         this.collection.push(newElement);
-        return [201, angular.copy(newElement)];
+        return [201, Object.assign({}, newElement)];
     }
 
     /**
@@ -71,7 +68,7 @@ class MockResource {
         let element = this.collection.find((element) => element.id === Number(params.id));
         if (element) {
             Object.assign(element, updatedElement);
-            return [200, angular.copy(element)];
+            return [200, Object.assign({}, element)];
         }
 
         return [404, `${name} with id ${params.id} not found.`];
@@ -121,13 +118,5 @@ function MockResourceFactory($httpBackend) {
     return factory;
 }
 
+export default MockResourceFactory;
 export { MockResource };
-
-/**
- * @namespace app/services/ApiMockBackendFactory
- */
-export default angular.module('app.services.ApiMockBackendFactory', [
-    'ngMockE2E'
-])
-    .service('MockResourceFactory', MockResourceFactory)
-    .name;

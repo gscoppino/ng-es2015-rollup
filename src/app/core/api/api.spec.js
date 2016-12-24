@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import ApiModule, { API_BASE } from './api.js';
+import ApiModule, { API_BASE } from './api.module.js';
 
 beforeEach(angular.mock.module(ApiModule));
 describe('Api Configuration', () => {

@@ -1,9 +1,11 @@
 import angular from 'angular';
-import ngRedux from 'ng-redux';
-import UserActions from 'app/core/store/users/actions.js';
+import NgReduxModule from 'ng-redux';
+
+import UserActionsModule from 'app/core/store/users/actions.js';
+import UsersListItemModule from 'app/common/components/users-list-item/users-list-item.js';
+import AddEditUserItemModule from 'app/common/components/add-edit-user-item/add-edit-user-item.js';
 import UserSelectors from 'app/core/store/users/selectors.js';
-import UsersListItem from 'app/common/components/users-list-item/users-list-item.js';
-import AddEditUserItem from 'app/common/components/add-edit-user-item/add-edit-user-item.js';
+
 import UsersListTemplate from './users-list.html';
 
 class UsersListController {
@@ -61,6 +63,11 @@ const UsersListComponent = {
     bindings: {}
 };
 
-export default angular.module('app.components.users-list', [ngRedux, UserActions, UsersListItem, AddEditUserItem])
+export default angular.module('app.components.users-list', [
+    NgReduxModule,
+    UserActionsModule,
+    UsersListItemModule,
+    AddEditUserItemModule
+])
     .component('usersList', UsersListComponent)
     .name;

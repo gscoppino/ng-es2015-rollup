@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import AddEditUserItemTemplate from './add-edit-user-item.html';
 
 class AddEditUserItemController {

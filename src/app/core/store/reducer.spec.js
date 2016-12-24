@@ -1,7 +1,7 @@
 import angular from 'angular';
-import RootReducer from './reducer.js';
+import RootReducerModule from './reducer.js';
 
-beforeEach(angular.mock.module(RootReducer));
+beforeEach(angular.mock.module(RootReducerModule));
 
 describe('RootReducer Provider', () => {
     let _rootReducerProvider_;

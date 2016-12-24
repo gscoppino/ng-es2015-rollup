@@ -1,9 +1,9 @@
 import angular from 'angular';
-import { static as Immutable } from 'seamless-immutable';
-import ngRedux from 'ng-redux';
+import NgReduxModule from 'ng-redux';
 import createLogger from 'redux-logger';
+import { static as Immutable } from 'seamless-immutable';
 
-import RootReducer from './reducer.js';
+import RootReducerModule from './reducer.js';
 
 StoreConfig.$inject = ['$ngReduxProvider', 'rootReducerProvider'];
 function StoreConfig($ngReduxProvider, rootReducerProvider) {
@@ -53,7 +53,7 @@ export { $ngReduxImmutableDecorator, StoreConfig };
  * @desc Configures the frontend singleton store with its
  * reducers and middlewares.
  */
-export default angular.module('app.store', [ngRedux, RootReducer])
+export default angular.module('app.store', [NgReduxModule, RootReducerModule])
     .config(StoreConfig)
     .decorator('$ngRedux', $ngReduxImmutableDecorator)
     .name;

@@ -1,7 +1,7 @@
 import angular from 'angular';
-import UsersListItemComponent from './users-list-item.js';
+import UsersListItemModule from './users-list-item.js';
 
-beforeEach(angular.mock.module(UsersListItemComponent));
+beforeEach(angular.mock.module(UsersListItemModule));
 
 describe('users-list-item', () => {
     describe('Component', () => {

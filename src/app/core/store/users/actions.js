@@ -1,7 +1,7 @@
 import angular from 'angular';
-import ngRedux from 'ng-redux';
+import NgReduxModule from 'ng-redux';
 
-import UserService from 'app/core/api/services/users/users.js';
+import UserServiceModule from 'app/core/api/services/users/users.js';
 
 import actions from './constants.js';
 
@@ -161,8 +161,8 @@ class UserActions {
 }
 
 export default angular.module('app.store.action-creators.users', [
-    ngRedux,
-    UserService
+    NgReduxModule,
+    UserServiceModule
 ])
     .service('UserActions', UserActions)
     .name;

@@ -1,5 +1,7 @@
 import angular from 'angular';
-import AddEditUserItem from 'app/common/components/add-edit-user-item/add-edit-user-item.js';
+
+import AddEditUserItemModule from 'app/common/components/add-edit-user-item/add-edit-user-item.js';
+
 import UsersListItemTemplate from './users-list-item.html';
 
 class UsersListItemController {
@@ -48,6 +50,8 @@ const UsersListItemComponent = {
     }
 };
 
-export default angular.module('app.components.users-list-item', [AddEditUserItem])
+export default angular.module('app.components.users-list-item', [
+    AddEditUserItemModule
+])
     .component('usersListItem', UsersListItemComponent)
     .name;

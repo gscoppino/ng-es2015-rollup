@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import RoutesModule from './routes.js';
+import RoutesModule from './routes.module.js';
 
 beforeEach(angular.mock.module(RoutesModule));
 

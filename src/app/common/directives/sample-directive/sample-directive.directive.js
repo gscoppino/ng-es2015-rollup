@@ -1,7 +1,3 @@
-import angular from 'angular';
-
-import SampleServiceModule from 'app/common/services/SampleService/SampleService.js';
-
 sampleDirective.$inject = ['SampleService'];
 function sampleDirective(SampleService) {
     return {
@@ -13,6 +9,4 @@ function sampleDirective(SampleService) {
     };
 }
 
-export default angular.module('app.directives.sample-directive', [SampleServiceModule])
-    .directive('sampleDirective', sampleDirective)
-    .name;
+export default sampleDirective;

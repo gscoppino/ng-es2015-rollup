@@ -1,6 +1,6 @@
 @import './common/styles/box-model.css';
 @import './common/styles/layout.css';
-@import './common/components/loader-spinner/loader-spinner.css';
+@import './common/components/loader-spinner/loader-spinner.component.css';
 @import './core/theme/variables.css';
 
 body {

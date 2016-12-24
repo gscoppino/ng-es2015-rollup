@@ -1,6 +1,6 @@
 import angular from 'angular';
 import { static as Immutable } from 'seamless-immutable';
-import { StoreConfig, $ngReduxImmutableDecorator } from './store.js';
+import { StoreConfig, $ngReduxImmutableDecorator } from './store.module.js';
 
 describe('Store Configuration', () => {
     let mockReduxProvider = {},

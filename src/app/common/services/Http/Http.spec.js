@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-import Http from './Http.js';
+import HttpModule from './Http.js';
 
-beforeEach(angular.mock.module(Http));
+beforeEach(angular.mock.module(HttpModule));
 
 describe('Http Service', () => {
     let Http;

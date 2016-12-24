@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-import SampleDirective from './sample-directive.js';
+import SampleDirectiveModule from './sample-directive.js';
 
-beforeEach(angular.mock.module(SampleDirective));
+beforeEach(angular.mock.module(SampleDirectiveModule));
 
 describe('sample-directive', ()=> {
     let $rootScope, $compile, SampleService, element;

@@ -4,11 +4,11 @@ import './vendor.js';
 
 import angular from 'angular';
 
-import App from './app/app.js';
+import AppModule from './app/app.js';
 
 /** Bootstraps the Angular application. */
 function bootstrap() {
-    angular.bootstrap(document.documentElement, [App], { strictDi: true });
+    angular.bootstrap(document.documentElement, [AppModule], { strictDi: true });
 }
 
 /**

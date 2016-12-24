@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-import SampleComponent from './sample-component.js';
+import SampleComponentModule from './sample-component.js';
 
-beforeEach(angular.mock.module(SampleComponent));
+beforeEach(angular.mock.module(SampleComponentModule));
 
 describe('sample-component', () => {
     describe('Component', () => {

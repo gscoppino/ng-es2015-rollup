@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-import Routes from './routes.js';
+import RoutesModule from './routes.js';
 
-beforeEach(angular.mock.module(Routes));
+beforeEach(angular.mock.module(RoutesModule));
 
 describe('Routes Configuration', () => {
     it('should be in HTML5 mode.', angular.mock.inject(($location) => {

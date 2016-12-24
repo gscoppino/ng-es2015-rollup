@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-import LoaderSpinner from './loader-spinner.js';
+import LoaderSpinnerModule from './loader-spinner.js';
 
-beforeEach(angular.mock.module(LoaderSpinner));
+beforeEach(angular.mock.module(LoaderSpinnerModule));
 describe('Loader Spinner Component', () => {
     describe('View', () => {
         let $rootScope, $compile;

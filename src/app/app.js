@@ -1,10 +1,10 @@
 import angular from 'angular';
 
-import Config from 'app/core/config/config.js';
-import Api from 'app/core/api/api.js';
-import Store from 'app/core/store/store.js';
-import Routes from 'app/core/routes/routes.js';
-import LoaderSpinner from 'app/common/components/loader-spinner/loader-spinner.js';
+import ConfigModule from 'app/core/config/config.js';
+import ApiModule from 'app/core/api/api.js';
+import StoreModule from 'app/core/store/store.js';
+import RoutesModule from 'app/core/routes/routes.js';
+import LoaderSpinnerModule from 'app/common/components/loader-spinner/loader-spinner.js';
 
 import AppTemplate from './app.html';
 
@@ -75,11 +75,11 @@ const AppComponent = {
  * @namespace app
  */
 export default angular.module('app', [
-    Config,
-    Api,
-    Store,
-    Routes,
-    LoaderSpinner
+    ConfigModule,
+    ApiModule,
+    StoreModule,
+    RoutesModule,
+    LoaderSpinnerModule
 ])
     .component('app', AppComponent)
     .name;

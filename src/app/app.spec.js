@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-import App from './app.js';
+import AppModule from './app.js';
 
-beforeEach(angular.mock.module(App));
+beforeEach(angular.mock.module(AppModule));
 
 describe('App Component', () => {
     describe('View', () => {

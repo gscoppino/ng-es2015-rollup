@@ -2,9 +2,9 @@ import angular from 'angular';
 
 import { API_BASE } from 'app/core/api/api.js';
 
-import ApiMockBackendFactory, { MockResource } from './ApiMockBackendFactory.js';
+import ApiMockBackendFactoryModule, { MockResource } from './ApiMockBackendFactory.js';
 
-beforeEach(angular.mock.module(ApiMockBackendFactory));
+beforeEach(angular.mock.module(ApiMockBackendFactoryModule));
 
 describe('MockResource', () => {
     let mockCollection = [{ id: 0 }], resource;

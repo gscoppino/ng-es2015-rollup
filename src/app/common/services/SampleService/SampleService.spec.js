@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-import SampleService from './SampleService.js';
+import SampleServiceModule from './SampleService.js';
 
-beforeEach(angular.mock.module(SampleService));
+beforeEach(angular.mock.module(SampleServiceModule));
 
 describe('SampleService', () => {
     let $rootScope, $log, $q;

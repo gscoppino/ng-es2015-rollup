@@ -2,10 +2,7 @@ import angular from 'angular';
 
 import ApiFactoryModule from 'app/common/services/ApiFactory/ApiFactory.module.js';
 
-UserService.$inject = ['ApiFactory'];
-function UserService(ApiFactory) {
-    return ApiFactory.create('users');
-}
+import UserService from './users.service.js';
 
 export default angular.module('app.api.services.users', [
     ApiFactoryModule

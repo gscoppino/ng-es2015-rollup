@@ -1,7 +1,3 @@
-import angular from 'angular';
-
-import AddEditUserItemTemplate from './add-edit-user-item.html';
-
 class AddEditUserItemController {
 
     static get $inject() { return []; }
@@ -12,7 +8,7 @@ class AddEditUserItemController {
     $onInit() {
         this.editing = this.user ? true : false;
         this.user = Object.assign({}, this.user || {});
-        this.onSubmit = this.onSubmit || angular.noop;
+        this.onSubmit = this.onSubmit || function () {};
     }
 
     $onChanges(changes) {}
@@ -29,15 +25,10 @@ class AddEditUserItemController {
     }
 }
 
-const AddEditUserItemComponent = {
-    template: AddEditUserItemTemplate,
+export default  {
     controller: AddEditUserItemController,
     bindings: {
         user: '<?',
         onSubmit: '&?'
     }
 };
-
-export default angular.module('app.components.add-edit-user-item', [])
-    .component('addEditUserItem', AddEditUserItemComponent)
-    .name;

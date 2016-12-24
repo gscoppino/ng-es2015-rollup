@@ -1,4 +1,3 @@
-import angular from 'angular';
 import { static as Immutable } from 'seamless-immutable';
 import { combineReducers } from 'redux';
 
@@ -39,11 +38,4 @@ class RootReducerProvider {
     }
 }
 
-/**
- * @namespace app/store/reducer
- * @desc Provides a singleton reducer which is a combination
- * of every reducer in the application.
- */
-export default angular.module('app.store.reducer', [])
-    .provider('rootReducer', RootReducerProvider)
-    .name;
+export default RootReducerProvider;

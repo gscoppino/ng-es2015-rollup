@@ -1,5 +1,5 @@
 import angular from 'angular';
-import AddEditUserItemModule from './add-edit-user-item.js';
+import AddEditUserItemModule from './add-edit-user-item.module.js';
 
 beforeEach(angular.mock.module(AddEditUserItemModule));
 

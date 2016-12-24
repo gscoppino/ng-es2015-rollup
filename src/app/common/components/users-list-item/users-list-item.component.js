@@ -1,9 +1,3 @@
-import angular from 'angular';
-
-import AddEditUserItemModule from 'app/common/components/add-edit-user-item/add-edit-user-item.js';
-
-import UsersListItemTemplate from './users-list-item.html';
-
 class UsersListItemController {
 
     static get $inject() { return []; }
@@ -14,8 +8,8 @@ class UsersListItemController {
 
     $onInit() {
         this.model = Object.assign({}, this.model);
-        this.onEdit = this.onEdit || angular.noop;
-        this.onRemove = this.onRemove || angular.noop;
+        this.onEdit = this.onEdit || function () {};
+        this.onRemove = this.onRemove || function () {};
     }
 
     $onChanges(changes) {
@@ -40,8 +34,7 @@ class UsersListItemController {
     }
 }
 
-const UsersListItemComponent = {
-    template: UsersListItemTemplate,
+export default {
     controller: UsersListItemController,
     bindings: {
         model: '<',
@@ -49,9 +42,3 @@ const UsersListItemComponent = {
         onRemove: '&?'
     }
 };
-
-export default angular.module('app.components.users-list-item', [
-    AddEditUserItemModule
-])
-    .component('usersListItem', UsersListItemComponent)
-    .name;

@@ -1,12 +1,4 @@
-import angular from 'angular';
-import NgReduxModule from 'ng-redux';
-
-import UserActionsModule from 'app/core/store/users/actions.js';
-import UsersListItemModule from 'app/common/components/users-list-item/users-list-item.js';
-import AddEditUserItemModule from 'app/common/components/add-edit-user-item/add-edit-user-item.js';
 import UserSelectors from 'app/core/store/users/selectors.js';
-
-import UsersListTemplate from './users-list.html';
 
 class UsersListController {
 
@@ -57,17 +49,7 @@ class UsersListController {
     }
 }
 
-const UsersListComponent = {
-    template: UsersListTemplate,
+export default {
     controller: UsersListController,
     bindings: {}
 };
-
-export default angular.module('app.components.users-list', [
-    NgReduxModule,
-    UserActionsModule,
-    UsersListItemModule,
-    AddEditUserItemModule
-])
-    .component('usersList', UsersListComponent)
-    .name;

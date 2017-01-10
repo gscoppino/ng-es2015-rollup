@@ -57,7 +57,7 @@
     "phantomjs-prebuilt": "~2.1.x",
     "postcss": "~5.2.x",
     "postcss-cssnext": "~2.9.x",
-    "postcss-import": "~9.0.x",
+    "postcss-import": "~9.1.x",
     "postcss-reporter": "~3.0.x",
     "protractor": "~4.0.x",
     "raw-loader": "~0.5.x",

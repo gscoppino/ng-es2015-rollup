@@ -108,6 +108,17 @@ describe('ng-es2015-webpack', () => {
     });
 
     describe('test-integration', () => {
+        var originalTimeoutInterval;
+        
+        beforeEach(() => {
+            originalTimeoutInterval = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+        });
+        
+        afterEach(() => {
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeoutInterval;
+        });
+        
         it('should run the integration tests for the site successfully.', (done) => {
             let staticServer = browserSync.create();
 

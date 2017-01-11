@@ -2,6 +2,10 @@ var fs = require('fs');
 var path = require('path');
 var child_process = require('child_process');
 
+// For End to End Test
+var browserSync = require('browser-sync');
+var historyApiMiddleware = require('connect-history-api-fallback');
+
 describe('ng-es2015-webpack', () => {
     var DEV_ARTIFACTS = [
         'dist/fallback.html',
@@ -93,13 +97,38 @@ describe('ng-es2015-webpack', () => {
     });
 
     describe('test-unit', () => {
-        it('should run the unit tests for the source code, and output HTML coverage info.', () => {
+        it('should run the unit tests for the source code successfully, and output HTML coverage info.', () => {
             expect(child_process.spawnSync(NPM, ['run', 'test-unit']).status)
                 .toBe(0);
 
             expect(fs.existsSync('dist/coverage')).toBe(true);
             expect(fs.existsSync('dist/coverage/html')).toBe(true);
             expect(fs.existsSync('dist/coverage/html/index.html')).toBe(true);
+        });
+    });
+
+    describe('test-integration', () => {
+        it('should run the integration tests for the site successfully.', () => {
+            let staticServer = browserSync.create();
+
+            child_process.spawnSync(NPM, ['run', 'build']);
+
+            staticServer.init({
+                port: 3000,
+                ui: false,
+                browser: ['firefox'],
+                server: {
+                    baseDir: 'dist',
+                    middleware: [
+                        historyApiMiddleware({ index: '/index.html' })
+                    ]
+                }
+            }, () => {
+                expect(child_process.spawnSync(NPM, ['run', 'test-integration']).status)
+                    .toBe(0);
+
+                staticServer.exit();
+            });
         });
     });
 

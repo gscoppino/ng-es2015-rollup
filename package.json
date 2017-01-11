@@ -53,7 +53,7 @@
     "karma-jasmine": "~1.1.x",
     "karma-phantomjs-launcher": "~1.0.x",
     "karma-sourcemap-loader": "~0.3.x",
-    "karma-webpack": "~1.8.x",
+    "karma-webpack": "~2.0.0",
     "phantomjs-prebuilt": "~2.1.x",
     "postcss": "~5.2.x",
     "postcss-cssnext": "~2.9.x",

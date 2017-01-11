@@ -108,7 +108,7 @@ describe('ng-es2015-webpack', () => {
     });
 
     describe('test-integration', () => {
-        it('should run the integration tests for the site successfully.', () => {
+        it('should run the integration tests for the site successfully.', (done) => {
             let staticServer = browserSync.create();
 
             child_process.spawnSync(NPM, ['run', 'build']);
@@ -128,6 +128,7 @@ describe('ng-es2015-webpack', () => {
                     .toBe(0);
 
                 staticServer.exit();
+                done();
             });
         });
     });

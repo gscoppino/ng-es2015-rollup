@@ -127,6 +127,8 @@ describe('ng-es2015-webpack', () => {
             staticServer.init({
                 port: 3000,
                 ui: false,
+                open: false,
+                online: false,
                 browser: ['firefox'],
                 server: {
                     baseDir: 'dist',

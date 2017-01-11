@@ -8,6 +8,6 @@ describe('App Start', () => {
             .toBe(true);
 
         expect(appElement.isElementPresent(by.css('main[ui-view]')))
-            .toBe(false);
+            .toBe(true);
     });
 });

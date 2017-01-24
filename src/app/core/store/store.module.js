@@ -1,6 +1,7 @@
 import angular from 'angular';
 import NgReduxModule from 'ng-redux';
 import createLogger from 'redux-logger';
+import { static as Immutable } from 'seamless-immutable';
 
 import $ngReduxImmutableDecorator from './store.decorator.js';
 import RootReducerModule from './reducer.module.js';
@@ -12,7 +13,7 @@ function StoreConfig($ngReduxProvider, rootReducerProvider) {
         createLogger({ level: 'info', collapsed: true })
     ];
 
-    $ngReduxProvider.createStoreWith(rootReducer, middlewares);
+    $ngReduxProvider.createStoreWith(rootReducer, middlewares, null, Immutable.from({}));
 }
 
 export { $ngReduxImmutableDecorator, StoreConfig };

@@ -1,4 +1,3 @@
-import { static as Immutable } from 'seamless-immutable';
 import { combineReducers } from 'redux';
 
 // Import individual reducers
@@ -22,9 +21,9 @@ class RootReducerProvider {
      */
     createReducer() {
         if (!this._instance) {
-            this._instance = Immutable.from(combineReducers({
+            this._instance = combineReducers({
                 users
-            }));
+            });
         }
 
         return this._instance;

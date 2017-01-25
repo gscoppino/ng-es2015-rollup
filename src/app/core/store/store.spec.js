@@ -14,7 +14,7 @@ describe('Store Configuration', () => {
 
     it('should create the store correctly.', () => {
         StoreConfig(mockReduxProvider, mockRootReducerProvider);
-        expect(mockReduxProvider.createStoreWith).toHaveBeenCalledWith(reducerStub, jasmine.any(Array), null, {});
+        expect(mockReduxProvider.createStoreWith).toHaveBeenCalledWith(reducerStub, jasmine.any(Array));
     });
 });
 

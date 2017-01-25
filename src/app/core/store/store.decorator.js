@@ -15,6 +15,11 @@ function $ngReduxImmutableDecorator($delegate) {
 
     $delegate.subscribe = (stateFn, cb) => {
         cb = cb || stateFn;
+
+        if (!stateFn) {
+            return;
+        }
+
         if (cb === stateFn) {
             return $delegate.subscribeAll(cb);
         }

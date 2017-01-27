@@ -7,16 +7,17 @@ class UsersListController {
         Object.assign(this, { $ngRedux, UserActions });
 
         this._listeners = [];
-        this.state = {
-            usersList: []
-        };
+        this.state = null;
         this.actions = {
             users: this.UserActions
         };
     }
 
     $onInit() {
-        this.state.usersList = this.$ngRedux.getState(UserSelectors.list);
+        this.state = {
+            usersList: this.$ngRedux.getState(UserSelectors.list)
+        };
+
         if (!this.state.usersList.length) {
             this.actions.users.sync();
         }

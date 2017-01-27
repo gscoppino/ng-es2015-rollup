@@ -32,8 +32,8 @@ function $ngReduxImmutableDecorator($delegate) {
         return $delegate.subscribeAll(() => {
             let nextValue = stateFn($delegate.getStateUnsafe());
             if (nextValue !== value) {
-                cb(Immutable.asMutable(nextValue, { deep: true }));
                 value = nextValue;
+                cb(Immutable.asMutable(nextValue, { deep: true }));
             }
         });
     };

@@ -27,7 +27,8 @@ describe('$ngRedux Decorator', () => {
         mock_$ngRedux = {
             state: {
                 slice: Immutable.from({
-                    listField: Immutable.from([])
+                    listField: Immutable.from([]),
+                    testUndefinedProp: undefined
                 })
             },
             getState: mockGetStateFn,
@@ -112,7 +113,37 @@ describe('$ngRedux Decorator', () => {
             expect(deregisterFn).toBe(angular.noop);
         });
 
-        it(`should call the subscription callback only if the value returned by the state callback has changed
+        it(`should call the subscription callback immediately if the value returned by the state callback
+        is defined at the time.`, () => {
+            const $ngRedux = $ngReduxImmutableDecorator(mock_$ngRedux);
+
+            spyOn($ngRedux, 'subscribeAll').and.callFake(angular.noop);
+
+            // Add a spy function to represent the user provided callback
+            // function, which will also test that the data provided
+            // to the subscriber is correct (equal by value to the store state,
+            // but not by reference).
+            const subscriberCallback = jasmine.createSpy().and.callFake(slice => {
+                expect(slice).toEqual($ngRedux.getStateUnsafe().slice);
+                expect(slice).not.toBe($ngRedux.getStateUnsafe().slice);
+            });
+
+            $ngRedux.subscribe(state => state.slice, subscriberCallback);
+            expect(subscriberCallback).toHaveBeenCalled();
+        });
+
+        it(`should not call the subscription callback immediately if the value returned by the state callback
+        is not defined at the time.`, () => {
+            const $ngRedux = $ngReduxImmutableDecorator(mock_$ngRedux);
+
+            spyOn($ngRedux, 'subscribeAll').and.callFake(angular.noop);
+            const subscriberCallback = jasmine.createSpy().and.callFake(angular.noop);
+
+            $ngRedux.subscribe(state => state.slice.testUndefinedProp, subscriberCallback);
+            expect(subscriberCallback).not.toHaveBeenCalled();
+        });
+
+        it(`should call the subscription callback if the value returned by the state callback has changed
         since the last check.`, () => {
             const $ngRedux = $ngReduxImmutableDecorator(mock_$ngRedux);
 
@@ -135,10 +166,8 @@ describe('$ngRedux Decorator', () => {
 
             // Open a new subscription
             $ngRedux.subscribe(state => state.slice, subscriberCallback);
-
-            // There should not be any calls at the time right after subscription
-            expect(internalCallback).not.toHaveBeenCalled();
-            expect(subscriberCallback).not.toHaveBeenCalled();
+            // Reset initial call
+            subscriberCallback.calls.reset();
 
             // No changes, subscriber should not be notified
             internalCallback();

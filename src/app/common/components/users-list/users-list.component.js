@@ -7,27 +7,23 @@ class UsersListController {
         Object.assign(this, { $ngRedux, UserActions });
 
         this._listeners = [];
-        this.state = null;
+        this.state = {
+            usersList: []
+        };
         this.actions = {
             users: this.UserActions
         };
     }
 
     $onInit() {
-        this.state = {
-            usersList: this.$ngRedux.getState(UserSelectors.list)
-        };
-
-        if (!this.state.usersList.length) {
-            this.actions.users.sync();
-        }
+        // Ensure users store is initialized
+        this.actions.users.sync();
 
         this._listeners.push(
             this.$ngRedux.subscribe(UserSelectors.list, (usersList) => {
                 this.state.usersList = usersList;
             })
         );
-
     }
 
     $onChanges(changes) {}

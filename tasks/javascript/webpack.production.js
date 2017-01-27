@@ -34,6 +34,7 @@ WEBPACK_PRODUCTION_CONFIG.plugins = [
     }),
     new SWPrecacheWebpackPlugin({
         filename: 'sw.js',
+        minify: true,
         staticFileGlobs: [
             'dist/index.html',
             'dist/main.css',

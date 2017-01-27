@@ -16,13 +16,17 @@ class UsersListController {
     }
 
     $onInit() {
+        this.state.usersList = this.$ngRedux.getState(UserSelectors.list);
+        if (!this.state.usersList.length) {
+            this.actions.users.sync();
+        }
+
         this._listeners.push(
             this.$ngRedux.subscribe(UserSelectors.list, (usersList) => {
                 this.state.usersList = usersList;
             })
         );
 
-        this.actions.users.sync();
     }
 
     $onChanges(changes) {}

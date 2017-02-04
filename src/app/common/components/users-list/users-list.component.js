@@ -17,13 +17,15 @@ class UsersListController {
 
     $onInit() {
         // Ensure users store is initialized
-        this.actions.users.sync();
-
-        this._listeners.push(
-            this.$ngRedux.subscribe(UserSelectors.list, (usersList) => {
-                this.state.usersList = usersList;
-            })
-        );
+        this.actions.users.sync()
+            .then(() => {
+                this.state.usersList = this.$ngRedux.getState(UserSelectors.list);
+                this._listeners.push(
+                    this.$ngRedux.subscribe(UserSelectors.list, () => {
+                        this.state.usersList = this.$ngRedux.getState(UserSelectors.list);
+                    })
+                );
+            });
     }
 
     $onChanges(changes) {}

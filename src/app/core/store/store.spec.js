@@ -113,33 +113,13 @@ describe('$ngRedux Decorator', () => {
             expect(deregisterFn).toBe(angular.noop);
         });
 
-        it(`should call the subscription callback immediately if the value returned by the state callback
-        is defined at the time.`, () => {
-            const $ngRedux = $ngReduxImmutableDecorator(mock_$ngRedux);
-
-            spyOn($ngRedux, 'subscribeAll').and.callFake(angular.noop);
-
-            // Add a spy function to represent the user provided callback
-            // function, which will also test that the data provided
-            // to the subscriber is correct (equal by value to the store state,
-            // but not by reference).
-            const subscriberCallback = jasmine.createSpy().and.callFake(slice => {
-                expect(slice).toEqual($ngRedux.getStateUnsafe().slice);
-                expect(slice).not.toBe($ngRedux.getStateUnsafe().slice);
-            });
-
-            $ngRedux.subscribe(state => state.slice, subscriberCallback);
-            expect(subscriberCallback).toHaveBeenCalled();
-        });
-
-        it(`should not call the subscription callback immediately if the value returned by the state callback
-        is not defined at the time.`, () => {
+        it('should not call the subscription callback immediately.', () => {
             const $ngRedux = $ngReduxImmutableDecorator(mock_$ngRedux);
 
             spyOn($ngRedux, 'subscribeAll').and.callFake(angular.noop);
             const subscriberCallback = jasmine.createSpy().and.callFake(angular.noop);
 
-            $ngRedux.subscribe(state => state.slice.testUndefinedProp, subscriberCallback);
+            $ngRedux.subscribe(state => state.slice, subscriberCallback);
             expect(subscriberCallback).not.toHaveBeenCalled();
         });
 
@@ -155,19 +135,10 @@ describe('$ngRedux Decorator', () => {
                 internalCallback = jasmine.createSpy().and.callFake(cb);
             });
 
-            // Add a spy function to represent the user provided callback
-            // function, which will also test that the data provided
-            // to the subscriber is correct (equal by value to the store state,
-            // but not by reference).
-            const subscriberCallback = jasmine.createSpy().and.callFake(slice => {
-                expect(slice).toEqual($ngRedux.getStateUnsafe().slice);
-                expect(slice).not.toBe($ngRedux.getStateUnsafe().slice);
-            });
+            const subscriberCallback = jasmine.createSpy().and.callFake(angular.noop);
 
             // Open a new subscription
             $ngRedux.subscribe(state => state.slice, subscriberCallback);
-            // Reset initial call
-            subscriberCallback.calls.reset();
 
             // No changes, subscriber should not be notified
             internalCallback();

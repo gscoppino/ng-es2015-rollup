@@ -38,10 +38,10 @@ export default {
         ]
     },
 
-    // The section configures the pipeline that imports are applied against.
-    // Imports that match patterns in the pipeline will have those pipelines
+    // The section configures the rules that imports are applied against.
+    // Imports that match patterns in the rules will have those rules
     // applied to them (unless they are explicitly excluded).
-    // NOTE: The pipeline is evaluated tail to head.
+    // NOTE: The rules is evaluated in reverse order.
     module: {
         rules: [
             // Lint all Javascript files.

@@ -63,7 +63,7 @@
     "raw-loader": "~0.5.x",
     "rollup": "~0.41.x",
     "rollup-plugin-babel": "~2.7.x",
-    "stylelint": "~7.9.x",
+    "stylelint": "~7.10.x",
     "stylelint-config-standard": "~16.0.x",
     "sw-precache-webpack-plugin": "~0.9.x",
     "systemjs": "~0.20.x",

@@ -93,6 +93,44 @@ describe('RESTApi', () => {
         });
     });
 
+    describe('getSublist', () => {
+        let $rootScope, $q;
+
+        beforeEach(angular.mock.inject(($injector) => {
+            $rootScope = $injector.get('$rootScope');
+            $q = $injector.get('$q');
+        }));
+
+        it('should do a Http.get with resource url and query parameters, and return the promise.', () => {
+            let promise = {
+                then: () => promise,
+                catch: () => promise,
+                finally: () => promise
+            };
+            spyOn(Http.prototype, 'get').and.returnValue(promise);
+
+            let result = Api.getSublist({
+                param1: Number(0),
+                param2: String('hi'),
+                param3: Boolean(true)
+            });
+
+            expect(Http.prototype.get)
+                .toHaveBeenCalledWith('/test-api/test-resource?param1=0&param2=hi&param3=true');
+            expect(result).toBe(promise);
+        });
+
+        it('should return the data of the response after the request resolves.', () => {
+            spyOn(Http.prototype, 'get').and.returnValue($q.resolve({ data: 'the data' }));
+
+            Api.getSublist({})
+                .then((result) => expect(result).toBe('the data'))
+                .catch(() => fail());
+
+            $rootScope.$digest();
+        });
+    });
+
     describe('get', () => {
         let $rootScope, $q;
 

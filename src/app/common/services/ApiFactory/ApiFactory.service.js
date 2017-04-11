@@ -14,6 +14,19 @@ class RESTApi extends Http {
             .then(response => response.data);
     }
 
+    getSublist(query={}) {
+        let queryParams = Object
+            .keys(query)
+            .reduce((queryString, currentField) =>
+                queryString += `${currentField}=${query[currentField]}&`,
+            String())
+            .slice(0, -1); // Pluck the final '&' delimiter which is not needed
+
+        let url = `${this.baseUrl}/${this.name}?${queryParams}`;
+        return super.get(url)
+            .then(response => response.data);
+    }
+
     get(id=null) {
         let url = `${this.baseUrl}/${this.name}/${id}`;
         return super.get(url)

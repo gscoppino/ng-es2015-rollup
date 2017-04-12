@@ -51,31 +51,50 @@ class RESTApi extends Http {
             .then(response => response.data);
     }
 
-    nestedGet(...path) {
+    getNestedList(id=null, name='') {
+        let url = `${this.baseUrl}/${this.name}/${id}/${name}`;
+        return super.get(url)
+            .then(response => response.data);
+    }
+
+    getNestedSublist(id=null, name='', query={}) {
+        let queryString = RESTApi._generateQueryString(query);
+        let url = `${this.baseUrl}/${this.name}/${id}/${name}?${queryString}`;
+        return super.get(url)
+            .then(response => response.data);
+    }
+
+    nestedPost(id=null, name='', element={}) {
+        let url = `${this.baseUrl}/${this.name}/${id}/${name}`;
+        return super.post(url, element)
+            .then(response => response.data);
+    }
+
+    customGet(...path) {
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
         return super.get(url)
             .then(response => response.data);
     }
 
-    nestedPost(nestedElement={}, ...path) {
+    customPost(nestedElement={}, ...path) {
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
         return super.post(url, nestedElement)
             .then(response => response.data);
     }
 
-    nestedPut(nestedElement={ id: null }, ...path) {
+    customPut(nestedElement={ id: null }, ...path) {
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
         return super.put(url, nestedElement)
             .then(response => response.data);
     }
 
-    nestedPatch(nestedElement={ id: null }, ...path) {
+    customPatch(nestedElement={ id: null }, ...path) {
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
         return super.patch(url, nestedElement)
             .then(response => response.data);
     }
 
-    nestedDelete(...path) {
+    customDelete(...path) {
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
         return super.delete(url)
             .then(response => response.data);

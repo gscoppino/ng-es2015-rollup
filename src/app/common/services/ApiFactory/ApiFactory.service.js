@@ -15,14 +15,8 @@ class RESTApi extends Http {
     }
 
     getSublist(query={}) {
-        let queryParams = Object
-            .keys(query)
-            .reduce((queryString, currentField) =>
-                queryString += `${currentField}=${query[currentField]}&`,
-            String())
-            .slice(0, -1); // Pluck the final '&' delimiter which is not needed
-
-        let url = `${this.baseUrl}/${this.name}?${queryParams}`;
+        let queryString = RESTApi._generateQueryString(query);
+        let url = `${this.baseUrl}/${this.name}?${queryString}`;
         return super.get(url)
             .then(response => response.data);
     }
@@ -85,6 +79,15 @@ class RESTApi extends Http {
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
         return super.delete(url)
             .then(response => response.data);
+    }
+
+    static _generateQueryString(query={}) {
+        return Object
+            .keys(query)
+            .reduce((queryString, currentField) =>
+                queryString += `${currentField}=${query[currentField]}&`,
+            String())
+            .slice(0, -1); // Pluck the final '&' delimiter which is not needed
     }
 }
 

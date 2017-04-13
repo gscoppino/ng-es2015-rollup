@@ -1,6 +1,5 @@
 /**
- * @class
- * @classdesc Class that proxies $http, adding some conveniences
+ * Class that proxies $http, adding some conveniences
  * such as request memoization and sequencing.
  * @memberof app/services/Http
  */
@@ -16,7 +15,7 @@ class Http {
         };
     }
 
-    /*
+    /**
      * $http.get, memoized to coalesce multiple closely timed requests
      * into one. Parameters and return values are identical.
      */
@@ -37,7 +36,7 @@ class Http {
         return promise;
     }
 
-    /*
+    /**
      * Stock $http.post. Parameters and return values are identical, except
      * in the case that an object with a id is passed as the payload, in which
      * case the function will return a promise rejection.
@@ -51,7 +50,7 @@ class Http {
         return this.$http.post(...args);
     }
 
-    /*
+    /**
      * $http.put, with enforced sequencing of requests, to prevent race conditions.
      * Parameters and return values are identical, except in the case that an
      * object without an id is passed as the payload, in which case the function
@@ -80,7 +79,7 @@ class Http {
         return promise;
     }
 
-    /*
+    /**
      * $http.patch, with enforced sequencing of requests, to prevent race conditions.
      * Parameters and return values are identical, except in the case that an
      * object without an id is passed as the payload, in which case the function
@@ -109,7 +108,7 @@ class Http {
         return promise;
     }
 
-    /*
+    /**
      * $http.delete, memoized to coalesce multiple closely timed requests
      * into one. Parameters and return values are identical.
      */

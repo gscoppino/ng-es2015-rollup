@@ -28,7 +28,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-core": "~6.24.x",
-    "babel-loader": "~6.4.x",
+    "babel-loader": "~7.0.x",
     "babel-plugin-external-helpers": "~6.22.x",
     "babel-plugin-istanbul": "~4.1.x",
     "babel-polyfill": "~6.23.x",
@@ -68,8 +68,8 @@
     "sw-precache-webpack-plugin": "~0.9.x",
     "systemjs": "~0.20.x",
     "systemjs-plugin-babel": "~0.0.17",
-    "webpack": "~2.3.x",
-    "yargs": "~7.0.x"
+    "webpack": "~2.4.x",
+    "yargs": "~7.1.x"
   },
   "dependencies": {
     "angular": "~1.6.x",

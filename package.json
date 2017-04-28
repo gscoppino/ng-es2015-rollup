@@ -46,7 +46,7 @@
     "gulp-htmlmin": "~3.0.x",
     "gulp-rename": "~1.2.x",
     "gulp-template": "~4.0.x",
-    "jasmine": "~2.5.x",
+    "jasmine": "~2.6.x",
     "jsdoc": "~3.4.x",
     "karma": "~1.6.x",
     "karma-coverage": "~1.1.x",

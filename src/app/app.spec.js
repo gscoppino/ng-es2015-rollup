@@ -75,8 +75,8 @@ describe('App Component', () => {
                     spyOn($rootScope, '$on').and.callFake(angular.noop);
                     AppController.$onInit();
 
-                    expect($rootScope.$on).toHaveBeenCalledWith('$locationChangeStart', jasmine.any(Function));
-                    expect($rootScope.$on).toHaveBeenCalledWith('$locationChangeSuccess', jasmine.any(Function));
+                    expect($rootScope.$on).toHaveBeenCalledWith('$routeChangeStart', jasmine.any(Function));
+                    expect($rootScope.$on).toHaveBeenCalledWith('$routeChangeSuccess', jasmine.any(Function));
                 }));
 
                 it('should store references to all watcher deregistration functions in a list, on the instance object.', () => {
@@ -98,7 +98,7 @@ describe('App Component', () => {
                         AppController.$onInit();
 
                         AppController.isLoading = false;
-                        $rootScope.$broadcast('$locationChangeStart');
+                        $rootScope.$broadcast('$routeChangeStart');
                         expect(AppController.isLoading).toBe(true);
                     });
                 });
@@ -108,7 +108,7 @@ describe('App Component', () => {
                         AppController.$onInit();
 
                         AppController.isLoading = true;
-                        $rootScope.$broadcast('$locationChangeSuccess');
+                        $rootScope.$broadcast('$routeChangeSuccess');
                         expect(AppController.isLoading).toBe(false);
                     });
                 });

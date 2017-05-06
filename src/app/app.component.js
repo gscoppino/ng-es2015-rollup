@@ -24,8 +24,8 @@ class AppController {
         let update = this._update.bind(this);
 
         this.listeners.push(
-            this.$rootScope.$on('$locationChangeStart', update),
-            this.$rootScope.$on('$locationChangeSuccess', update)
+            this.$rootScope.$on('$routeChangeStart', update),
+            this.$rootScope.$on('$routeChangeSuccess', update)
         );
     }
 
@@ -34,7 +34,7 @@ class AppController {
      * @param event - the state change event
      */
     _update(event) {
-        this.isLoading = (event.name === '$locationChangeStart') ? true : false;
+        this.isLoading = (event.name === '$routeChangeStart') ? true : false;
     }
 
     /**

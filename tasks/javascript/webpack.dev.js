@@ -52,7 +52,19 @@ export default {
                 enforce: 'pre',
                 use: ['eslint-loader']
             },
-
+            // Preprocess all Javascript files.
+            {
+                test: /\.js$/,
+                include: [path.resolve(process.cwd(), 'src')],
+                exclude: [path.resolve(process.cwd(), 'node_modules')],
+                enforce: 'pre',
+                use: [{
+                    loader: 'preprocess-loader',
+                    options: {
+                        DEVELOPMENT_MODE: true
+                    }
+                }]
+            },
             // Import HTML as raw strings.
             {
                 test: /\.html$/,

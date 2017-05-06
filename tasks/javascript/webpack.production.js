@@ -26,6 +26,32 @@ WEBPACK_PRODUCTION_CONFIG.output = Object.assign({}, WEBPACK_PRODUCTION_CONFIG.o
     devtoolModuleFilenameTemplate: undefined
 });
 
+// Flip the development and production mode flags
+WEBPACK_PRODUCTION_CONFIG.module = Object.assign({}, WEBPACK_PRODUCTION_CONFIG.module, {
+    rules: WEBPACK_PRODUCTION_CONFIG.module.rules
+        .map(rule => {
+            let newRule = Object.assign({}, rule, {
+                use: rule.use.map(use => {
+                    if (typeof use === 'string') {
+                        return use;
+                    } else {
+                        return Object.assign({}, use);
+                    }
+                })
+            });
+
+            if (newRule.use[0] && newRule.use[0].loader === 'preprocess-loader') {
+                newRule.use[0] = Object.assign({}, newRule.use[0], {
+                    options: {
+                        PRODUCTION_MODE: true
+                    }
+                });
+            }
+
+            return newRule;
+        })
+});
+
 // Minify the resulting bundle.
 WEBPACK_PRODUCTION_CONFIG.plugins = [
     ...WEBPACK_PRODUCTION_CONFIG.plugins,

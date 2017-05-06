@@ -59,6 +59,7 @@
     "postcss-cssnext": "~2.10.x",
     "postcss-import": "~9.1.x",
     "postcss-reporter": "~3.0.x",
+    "preprocess-loader": "~0.2.x",
     "protractor": "~5.1.x",
     "raw-loader": "~0.5.x",
     "rollup": "~0.41.x",

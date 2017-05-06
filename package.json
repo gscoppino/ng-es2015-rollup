@@ -28,7 +28,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-core": "~6.24.x",
-    "babel-loader": "~6.4.x",
+    "babel-loader": "~7.0.x",
     "babel-plugin-external-helpers": "~6.22.x",
     "babel-plugin-istanbul": "~4.1.x",
     "babel-polyfill": "~6.23.x",
@@ -46,7 +46,7 @@
     "gulp-htmlmin": "~3.0.x",
     "gulp-rename": "~1.2.x",
     "gulp-template": "~4.0.x",
-    "jasmine": "~2.5.x",
+    "jasmine": "~2.6.x",
     "jsdoc": "~3.4.x",
     "karma": "~1.6.x",
     "karma-coverage": "~1.1.x",
@@ -69,8 +69,8 @@
     "sw-precache-webpack-plugin": "~0.9.x",
     "systemjs": "~0.20.x",
     "systemjs-plugin-babel": "~0.0.17",
-    "webpack": "~2.3.x",
-    "yargs": "~7.0.x"
+    "webpack": "~2.5.x",
+    "yargs": "~8.0.x"
   },
   "dependencies": {
     "angular": "~1.6.x",

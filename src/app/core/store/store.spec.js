@@ -44,31 +44,34 @@ describe('$ngRedux Decorator', () => {
             expect($ngRedux.getStateUnsafe).toBe(mockGetStateFn);
         });
 
-        it(`should override the original implementation with a function that returns the state immutably,
-        and accepts a callback to return a specific part of the state.`, () => {
+        it('should use the original implementation internally.', () => {
             const $ngRedux = $ngReduxImmutableDecorator(mock_$ngRedux);
-
-            // Test that the original getState implementation is used
-            // by the newly decorated function.
             spyOn($ngRedux, 'getStateUnsafe').and.callThrough();
             $ngRedux.getState();
-            expect($ngRedux.getStateUnsafe).toHaveBeenCalled();
 
-            // Test with no callback
+            expect($ngRedux.getStateUnsafe).toHaveBeenCalled();
+        });
+
+        it('should return the state immutably if not provided a callback.', () => {
+            const $ngRedux = $ngReduxImmutableDecorator(mock_$ngRedux);
+
             expect($ngRedux.getState()).toEqual(mock_$ngRedux.state);
             expect($ngRedux.getState()).not.toBe(mock_$ngRedux.state);
             expect($ngRedux.getState().slice).toEqual(mock_$ngRedux.state.slice);
             expect($ngRedux.getState().slice).not.toBe(mock_$ngRedux.state.slice);
             expect($ngRedux.getState().slice.listField).toEqual(mock_$ngRedux.state.slice.listField);
             expect($ngRedux.getState().slice.listField).not.toBe(mock_$ngRedux.state.slice.listField);
+        });
 
-            // Test with callback
+        it(`should return the selected part of the state immutably if provided
+        a callback.`, () => {
+            const $ngRedux = $ngReduxImmutableDecorator(mock_$ngRedux);
+
             expect($ngRedux.getState(state => state.slice)).toEqual(mock_$ngRedux.state.slice);
             expect($ngRedux.getState(state => state.slice)).not.toBe(mock_$ngRedux.state.slice);
             expect($ngRedux.getState(state => state.slice).listField).toEqual(mock_$ngRedux.state.slice.listField);
             expect($ngRedux.getState(state => state.slice).listField).not.toBe(mock_$ngRedux.state.slice.listField);
         });
-
     });
 
     describe('subscribe', () => {

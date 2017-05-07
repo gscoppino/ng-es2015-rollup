@@ -20,6 +20,6 @@ describe('Routes Configuration', () => {
         // This test could be better but is OK for now.
         expect($route.current).not.toBeDefined();
         $rootScope.$digest();
-        expect($route.current.locals.$template).toBe('<h1>App</h1>');
+        expect($route.current.locals.$template).toBe($route.routes['/'].template);
     }));
 });

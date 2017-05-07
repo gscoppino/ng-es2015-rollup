@@ -4,7 +4,7 @@ import angular from 'angular';
 function <%= lowerCamelCaseName %>() {
     return {
         restrict: 'A',
-        link: function (scope, element, attrs) {}
+        link(scope, element, attrs) {}
     };
 }
 

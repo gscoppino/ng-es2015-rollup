@@ -266,22 +266,25 @@ class RESTApi extends Http {
     }
 }
 
-ApiFactory.$inject = ['$injector'];
-function ApiFactory($injector) {
-    return {
-        create: (name) => {
-            return $injector.instantiate(RESTApi, {
-                name,
-                baseUrl: this.baseUrl
-            });
-        }
-    };
-}
-
 class ApiFactoryProvider {
     constructor() {
         this.baseUrl = '';
-        this.$get = ApiFactory;
+    }
+
+    get $get() {
+        ApiFactory.$inject = ['$injector'];
+        function ApiFactory($injector) {
+            return {
+                create: (name) => {
+                    return $injector.instantiate(RESTApi, {
+                        name,
+                        baseUrl: this.baseUrl
+                    });
+                }
+            };
+        }
+
+        return ApiFactory;
     }
 
     setBaseUrl(url='') {

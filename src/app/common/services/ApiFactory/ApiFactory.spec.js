@@ -2,47 +2,70 @@ import angular from 'angular';
 
 import { Http } from 'app/common/services/Http/Http.module.js';
 
-import ApiFactoryModule, { ApiFactoryProvider, RESTApi } from './ApiFactory.module.js';
+import { ApiFactoryProvider, RESTApi } from './ApiFactory.module.js';
 
-beforeEach(angular.mock.module(ApiFactoryModule));
+describe('Api Factory Module', () => {
+    let $providerInjector;
 
-describe('ApiFactoryProvider', () => {
-    let _ApiFactoryProvider;
-
-    beforeEach(angular.mock.inject(($injector) => {
-        _ApiFactoryProvider = $injector.instantiate(ApiFactoryProvider);
+    beforeEach(angular.mock.module(($injector) => {
+        $providerInjector = $injector;
     }));
 
-    it('should allow customization of base URL.', () => {
-        expect(_ApiFactoryProvider.baseUrl).toBe('');
-        _ApiFactoryProvider.setBaseUrl('/test/api');
-        expect(_ApiFactoryProvider.baseUrl).toBe('/test/api');
-    });
+    describe('ApiFactoryProvider', () => {
+        let instantiatedApiFactoryProvider;
 
-    it('should define a factory to be registered with the injector.', () => {
-        expect(_ApiFactoryProvider.$get).toEqual(jasmine.any(Function));
-    });
-});
+        beforeEach(angular.mock.inject(angular.noop));
+        beforeEach(() => {
+            instantiatedApiFactoryProvider = $providerInjector.instantiate(ApiFactoryProvider, {});
+        });
 
-describe('ApiFactory', () => {
-    let ApiFactory;
+        it('should have an empty base URL by default.', () => {
+            expect(instantiatedApiFactoryProvider.baseUrl).toBe('');
+        });
 
-    beforeEach(angular.mock.inject(($injector) => {
-        ApiFactory = $injector.get('ApiFactory');
-    }));
-
-    describe('create', () => {
-        it('should create a new RESTApi instance with the specified name passed as a local.',
-        angular.mock.inject(($injector) => {
-            spyOn($injector, 'instantiate').and.callThrough();
-            let TestApi = ApiFactory.create('test');
-
-            expect($injector.instantiate).toHaveBeenCalledWith(RESTApi, {
-                name: 'test',
-                baseUrl: jasmine.any(String)
+        describe('setBaseUrl', () => {
+            it('should allow customization of base URL.', () => {
+                instantiatedApiFactoryProvider.setBaseUrl('/test/api');
+                expect(instantiatedApiFactoryProvider.baseUrl).toBe('/test/api');
             });
-            expect(TestApi instanceof RESTApi).toBe(true);
-        }));
+        });
+
+        describe('$get', () => {
+
+            it('should be defined as an injectable factory function.', () => {
+                expect(instantiatedApiFactoryProvider.$get)
+                    .toEqual(jasmine.any(Function));
+                expect(instantiatedApiFactoryProvider.$get.$inject)
+                    .toEqual(jasmine.any(Array));
+            });
+
+            describe('ApiFactory', () => {
+                let ApiFactory;
+
+                beforeEach(angular.mock.inject(($injector) => {
+                    ApiFactory = $injector.invoke(
+                        instantiatedApiFactoryProvider.$get,
+                        instantiatedApiFactoryProvider, {});
+                }));
+
+                describe('create', () => {
+                    it(`should create a new RESTApi instance with the specified name and the configured
+                    baseUrl passed in as locals.`, angular.mock.inject(($injector) => {
+                        instantiatedApiFactoryProvider.setBaseUrl('/test/api');
+                        spyOn($injector, 'instantiate').and.callThrough();
+
+                        let TestApi = ApiFactory.create('test');
+
+                        expect($injector.instantiate).toHaveBeenCalledWith(RESTApi, {
+                            name: 'test',
+                            baseUrl: '/test/api'
+                        });
+
+                        expect(TestApi instanceof RESTApi).toBe(true);
+                    }));
+                });
+            });
+        });
     });
 });
 

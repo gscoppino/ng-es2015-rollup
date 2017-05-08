@@ -1,7 +1,7 @@
 import angular from 'angular';
 
-<%= lowerCamelCaseName %>Directive.$inject = [];
-function <%= lowerCamelCaseName %>() {
+<%= UpperCamelCaseName %>DirectiveFactory.$inject = [];
+function <%= UpperCamelCaseName %>DirectiveFactory() {
     return {
         restrict: 'A',
         link(scope, element, attrs) {}
@@ -9,5 +9,5 @@ function <%= lowerCamelCaseName %>() {
 }
 
 export default angular.module('app.directives.<%= name %>', [])
-    .directive('<%= lowerCamelCaseName %>', <%= lowerCamelCaseName %>)
+    .directive('<%= lowerCamelCaseName %>', <%= UpperCamelCaseName %>DirectiveFactory)
     .name;

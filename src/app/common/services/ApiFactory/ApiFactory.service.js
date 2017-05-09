@@ -196,12 +196,15 @@ class RESTApi extends Http {
      * @example
      * // Assuming an instance name of "user" and a baseUrl of "/api"
      * // performs a POST at /api/user/1/contacts/1 with {"prop1":true} and returns the deserialized JSON response.
-     * RESTApiInstance.customPost({ prop1: true }, 1, 'contacts', 1);
-     * @param {Object} nestedElement - The data representing the element to be created on the specified path.
+     * RESTApiInstance.customPost(1, 'contacts', 1, { prop1: true });
      * @param {...(String|Number)} pathSegment - A string or number representing one part of the path.
+     * @param {Object} nestedElement - The data representing the element to be created on the specified path.
      * @returns {Promise} A promise that will resolve with the data from the response.
      */
-    customPost(nestedElement={}, ...path) {
+    customPost(...args) {
+        let path = args.slice(0, -1),
+            nestedElement = args[args.length - 1];
+
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
         return super.post(url, nestedElement)
             .then(response => response.data);
@@ -212,13 +215,16 @@ class RESTApi extends Http {
      * @example
      * // Assuming an instance name of "user" and a baseUrl of "/api"
      * // performs a PUT at /api/user/1/contacts/1 with {"id":1,"prop1":true} and returns the deserialized JSON response.
-     * RESTApiInstance.customPut({ id: 1, prop1: true }, 1, 'contacts', 1);
+     * RESTApiInstance.customPut(1, 'contacts', 1, { id: 1, prop1: true });
+     * @param {...(String|Number)} pathSegment - A string or number representing one part of the path.
      * @param {Object} nestedElement - The data representing the element to be updated on the specified path.
      * @param {Number} nestedElement.id - The unique identifier for the nested element.
-     * @param {...(String|Number)} pathSegment - A string or number representing one part of the path.
      * @returns {Promise} A promise that will resolve with the data from the response.
      */
-    customPut(nestedElement={ id: null }, ...path) {
+    customPut(...args) {
+        let path = args.slice(0, -1),
+            nestedElement = args[args.length - 1];
+
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
         return super.put(url, nestedElement)
             .then(response => response.data);
@@ -229,13 +235,16 @@ class RESTApi extends Http {
      * @example
      * // Assuming an instance name of "user" and a baseUrl of "/api"
      * // performs a PATCH at /api/user/1/contacts/1 with {"id":1,"prop1":true} and returns the deserialized JSON response.
-     * RESTApiInstance.customPatch({ id: 1, prop1: true }, 1, 'contacts', 1);
+     * RESTApiInstance.customPatch(1, 'contacts', 1, { id: 1, prop1: true });
+     * @param {...(String|Number)} pathSegment - A string or number representing one part of the path.
      * @param {Object} nestedElement - The data representing the element to be patched on the specified path.
      * @param {Number} nestedElement.id - The unique identifier for the nested element.
-     * @param {...(String|Number)} pathSegment - A string or number representing one part of the path.
      * @returns {Promise} A promise that will resolve with the data from the response.
      */
-    customPatch(nestedElement={ id: null }, ...path) {
+    customPatch(...args) {
+        let path = args.slice(0, -1),
+            nestedElement = args[args.length - 1];
+
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
         return super.patch(url, nestedElement)
             .then(response => response.data);

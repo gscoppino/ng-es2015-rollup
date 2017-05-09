@@ -472,7 +472,7 @@ describe('RESTApi', () => {
             };
             spyOn(Http.prototype, 'post').and.returnValue(promise);
 
-            let result = Api.customPost({ the: 'element' }, ...[1, 'nested-resource']);
+            let result = Api.customPost(1, 'nested-resource', { the: 'element' });
             expect(Http.prototype.post).toHaveBeenCalledWith('/test-api/test-resource/1/nested-resource', { the: 'element' });
             expect(result).toBe(promise);
         });
@@ -480,7 +480,7 @@ describe('RESTApi', () => {
         it('should return the data of the response after the request resolves.', () => {
             spyOn(Http.prototype, 'post').and.returnValue($q.resolve({ data: 'the data' }));
 
-            Api.customPost({ the: 'element' }, ...[1, 'nested-resource'])
+            Api.customPost(1, 'nested-resource', { the: 'element' })
                 .then((result) => expect(result).toBe('the data'))
                 .catch(() => fail());
 
@@ -504,7 +504,7 @@ describe('RESTApi', () => {
             };
             spyOn(Http.prototype, 'put').and.returnValue(promise);
 
-            let result = Api.customPut({ id: 2, the: 'element' }, ...[1, 'nested-resource']);
+            let result = Api.customPut(1, 'nested-resource', { id: 2, the: 'element' });
             expect(Http.prototype.put).toHaveBeenCalledWith('/test-api/test-resource/1/nested-resource', { id: 2, the: 'element' });
             expect(result).toBe(promise);
         });
@@ -512,7 +512,7 @@ describe('RESTApi', () => {
         it('should return the data of the response after the request resolves.', () => {
             spyOn(Http.prototype, 'put').and.returnValue($q.resolve({ data: 'the data' }));
 
-            Api.customPut({ id: 2, the: 'element' }, ...[1, 'nested-resource'])
+            Api.customPut(1, 'nested-resource', { id: 2, the: 'element' })
                 .then((result) => expect(result).toBe('the data'))
                 .catch(() => fail());
 
@@ -536,7 +536,7 @@ describe('RESTApi', () => {
             };
             spyOn(Http.prototype, 'patch').and.returnValue(promise);
 
-            let result = Api.customPatch({ id: 2, the: 'element' }, ...[1, 'nested-resource']);
+            let result = Api.customPatch(1, 'nested-resource', { id: 2, the: 'element' });
             expect(Http.prototype.patch).toHaveBeenCalledWith('/test-api/test-resource/1/nested-resource', { id: 2, the: 'element' });
             expect(result).toBe(promise);
         });
@@ -544,7 +544,7 @@ describe('RESTApi', () => {
         it('should return the data of the response after the request resolves.', () => {
             spyOn(Http.prototype, 'patch').and.returnValue($q.resolve({ data: 'the data' }));
 
-            Api.customPatch({ id: 2, the: 'element' }, ...[1, 'nested-resource'])
+            Api.customPatch(1, 'nested-resource', { id: 2, the: 'element' })
                 .then((result) => expect(result).toBe('the data'))
                 .catch(() => fail());
 

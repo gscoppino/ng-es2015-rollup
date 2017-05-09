@@ -1,13 +1,18 @@
 /**
  * Class that models RESTful resources by providing methods to interact with a resource.
  * @memberof app/services/ApiFactory
- * @extends Http
  */
 class RESTApi {
     /**
      * Create a model of a RESTful resource.
      * @param {String} name - The endpoint name for the RESTful resource (case sensitive).
      * @param {String} baseUrl - the URL that the resource is mounted on.
+     * @param {Object} requestHandler - an implementation of relevant parts of the AngularJS $http interface.
+     * @param {Function} requestHandler.get - a function that adheres to the inteface of AngularJS $http.get.
+     * @param {Function} requestHandler.post - a function that adheres to the interface of AngularJS $http.post.
+     * @param {Function} requestHandler.put - a function that adheres to the inerface of AngularJS $http.put.
+     * @param {Function} requestHandler.patch - a function that adheres to the interface of AngularJS $http.patch.
+     * @param {Function} requestHandler.delete - a function that adheres to the interface of AngularJS $http.delete.
      */
     constructor(name='', baseUrl='', requestHandler) {
         this.name = name;

@@ -1,7 +1,5 @@
 import angular from 'angular';
 
-import { Http } from 'app/common/services/Http/Http.module.js';
-
 import { ApiFactoryProvider, RESTApi } from './ApiFactory.module.js';
 
 describe('Api Factory Module', () => {
@@ -71,11 +69,11 @@ describe('RESTApi', () => {
         Api = new RESTApi('test-resource', '/test-api', Http);
     }));
 
-    it('should have the right name, baseUrl, and request handler.', () => {
+    it('should have the right name, baseUrl, and request handler.', angular.mock.inject((Http) => {
         expect(Api.name).toBe('test-resource');
         expect(Api.baseUrl).toBe('/test-api');
-        expect(Api.http instanceof Http).toBe(true);
-    });
+        expect(Api.http).toBe(Http);
+    }));
 
     describe('getList', () => {
         let $rootScope, $q;

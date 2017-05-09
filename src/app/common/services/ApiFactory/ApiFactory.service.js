@@ -1,21 +1,18 @@
-import { Http } from 'app/common/services/Http/Http.module.js';
-
 /**
  * Class that models RESTful resources by providing methods to interact with a resource.
  * @memberof app/services/ApiFactory
  * @extends Http
  */
-class RESTApi extends Http {
-    static get $inject() { return ['$q', '$http', 'name', 'baseUrl']; }
+class RESTApi {
     /**
      * Create a model of a RESTful resource.
      * @param {String} name - The endpoint name for the RESTful resource (case sensitive).
      * @param {String} baseUrl - the URL that the resource is mounted on.
      */
-    constructor($q, $http, name='', baseUrl='') {
-        super($q, $http);
+    constructor(name='', baseUrl='', requestHandler) {
         this.name = name;
         this.baseUrl = baseUrl;
+        this.http = requestHandler;
     }
 
     /**
@@ -28,7 +25,7 @@ class RESTApi extends Http {
      */
     getList() {
         let url = `${this.baseUrl}/${this.name}`;
-        return super.get(url)
+        return this.http.get(url)
             .then(response => response.data);
     }
 
@@ -44,7 +41,7 @@ class RESTApi extends Http {
     getSublist(query={}) {
         let queryString = RESTApi._generateQueryString(query);
         let url = `${this.baseUrl}/${this.name}?${queryString}`;
-        return super.get(url)
+        return this.http.get(url)
             .then(response => response.data);
     }
 
@@ -59,7 +56,7 @@ class RESTApi extends Http {
      */
     get(id=null) {
         let url = `${this.baseUrl}/${this.name}/${id}`;
-        return super.get(url)
+        return this.http.get(url)
             .then(response => response.data);
     }
 
@@ -74,7 +71,7 @@ class RESTApi extends Http {
      */
     post(element={}) {
         let url = `${this.baseUrl}/${this.name}`;
-        return super.post(url, element)
+        return this.http.post(url, element)
             .then(response => response.data);
     }
 
@@ -90,7 +87,7 @@ class RESTApi extends Http {
      */
     put(element={ id: null }) {
         let url = `${this.baseUrl}/${this.name}/${element.id}`;
-        return super.put(url, element)
+        return this.http.put(url, element)
             .then(response => response.data);
     }
 
@@ -106,7 +103,7 @@ class RESTApi extends Http {
      */
     patch(element={ id: null }) {
         let url = `${this.baseUrl}/${this.name}/${element.id}`;
-        return super.patch(url, element)
+        return this.http.patch(url, element)
             .then(response => response.data);
     }
 
@@ -121,7 +118,7 @@ class RESTApi extends Http {
      */
     delete(id=null) {
         let url = `${this.baseUrl}/${this.name}/${id}`;
-        return super.delete(url)
+        return this.http.delete(url)
             .then(response => response.data);
     }
 
@@ -137,7 +134,7 @@ class RESTApi extends Http {
      */
     getNestedList(id=null, name='') {
         let url = `${this.baseUrl}/${this.name}/${id}/${name}`;
-        return super.get(url)
+        return this.http.get(url)
             .then(response => response.data);
     }
 
@@ -155,7 +152,7 @@ class RESTApi extends Http {
     getNestedSublist(id=null, name='', query={}) {
         let queryString = RESTApi._generateQueryString(query);
         let url = `${this.baseUrl}/${this.name}/${id}/${name}?${queryString}`;
-        return super.get(url)
+        return this.http.get(url)
             .then(response => response.data);
     }
 
@@ -172,7 +169,7 @@ class RESTApi extends Http {
      */
     nestedPost(id=null, name='', element={}) {
         let url = `${this.baseUrl}/${this.name}/${id}/${name}`;
-        return super.post(url, element)
+        return this.http.post(url, element)
             .then(response => response.data);
     }
 
@@ -187,7 +184,7 @@ class RESTApi extends Http {
      */
     customGet(...path) {
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
-        return super.get(url)
+        return this.http.get(url)
             .then(response => response.data);
     }
 
@@ -206,7 +203,7 @@ class RESTApi extends Http {
             nestedElement = args[args.length - 1];
 
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
-        return super.post(url, nestedElement)
+        return this.http.post(url, nestedElement)
             .then(response => response.data);
     }
 
@@ -226,7 +223,7 @@ class RESTApi extends Http {
             nestedElement = args[args.length - 1];
 
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
-        return super.put(url, nestedElement)
+        return this.http.put(url, nestedElement)
             .then(response => response.data);
     }
 
@@ -246,7 +243,7 @@ class RESTApi extends Http {
             nestedElement = args[args.length - 1];
 
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
-        return super.patch(url, nestedElement)
+        return this.http.patch(url, nestedElement)
             .then(response => response.data);
     }
 
@@ -261,7 +258,7 @@ class RESTApi extends Http {
      */
     customDelete(...path) {
         let url = `${this.baseUrl}/${this.name}/${path.join('/')}`;
-        return super.delete(url)
+        return this.http.delete(url)
             .then(response => response.data);
     }
 
@@ -281,14 +278,11 @@ class ApiFactoryProvider {
     }
 
     get $get() {
-        ApiFactory.$inject = ['$injector'];
-        function ApiFactory($injector) {
+        ApiFactory.$inject = ['Http'];
+        function ApiFactory(Http) {
             return {
                 create: (name) => {
-                    return $injector.instantiate(RESTApi, {
-                        name,
-                        baseUrl: this.baseUrl
-                    });
+                    return new RESTApi(name, this.baseUrl, Http);
                 }
             };
         }

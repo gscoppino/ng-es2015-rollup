@@ -1,6 +1,5 @@
 /**
- * @class
- * @classdesc Component Class for the application top-level component.
+ * Controller for the application root component.
  */
 class AppController {
 
@@ -8,11 +7,22 @@ class AppController {
     constructor($rootScope, $log) {
         Object.assign(this, { $rootScope });
 
+        /**
+         * Is a state change in progress?
+         * @member {Boolean}
+         */
         this.isLoading = false;
 
-        this.listeners = [];
+        this._listeners = [];
 
         $log.log('Loaded!');
+    }
+
+    /**
+     * @property {Object} bindings - The inputs/outputs for this controller.
+     */
+    static get bindings() {
+        return {};
     }
 
     /**
@@ -23,9 +33,9 @@ class AppController {
     $onInit() {
         let update = this._update.bind(this);
 
-        this.listeners.push(
-            this.$rootScope.$on('$locationChangeStart', update),
-            this.$rootScope.$on('$locationChangeSuccess', update)
+        this._listeners.push(
+            this.$rootScope.$on('$routeChangeStart', update),
+            this.$rootScope.$on('$routeChangeSuccess', update)
         );
     }
 
@@ -34,23 +44,25 @@ class AppController {
      * @param event - the state change event
      */
     _update(event) {
-        this.isLoading = (event.name === '$locationChangeStart') ? true : false;
+        this.isLoading = (event.name === '$routeChangeStart') ? true : false;
     }
 
     /**
      * Deregisters all event listeners attached during the lifetime of this instance.
      */
     $onDestroy() {
-        this.listeners.forEach(deregister => deregister());
+        this._listeners.forEach(deregister => deregister());
     }
 }
 
 /**
  * @memberof app
- * @desc The top level application component.
+ * @name AppComponent
+ * @desc The root component of the application.
  * @property controller {function} - [AppController]{@link AppController}
+ * @property bindings {object} - [AppController.bindings]{@link AppController.bindings}
  */
 export default {
     controller: AppController,
-    bindings: {}
+    bindings: AppController.bindings
 };

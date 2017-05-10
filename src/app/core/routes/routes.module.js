@@ -1,7 +1,8 @@
 import angular from 'angular';
+import AngularRoute from 'angular-route';
 
-RouterConfig.$inject = ['$locationProvider'];
-function RouterConfig($locationProvider) {
+RouterConfig.$inject = ['$locationProvider', '$routeProvider'];
+function RouterConfig($locationProvider, $routeProvider) {
     /*
      * Attempt to use HTML5 History API for routing, if available.
      * Otherwise, route using hashbangs.
@@ -9,6 +10,10 @@ function RouterConfig($locationProvider) {
      * NOTE: HTML5 mode requires the existence of a <base> tag in HTML.
      */
     $locationProvider.html5Mode(true);
+
+    $routeProvider.when('/', {
+        template: '<h1>App</h1>'
+    });
 }
 
 export { RouterConfig };
@@ -17,6 +22,8 @@ export { RouterConfig };
  * @namespace app/routes
  * @desc Configures the frontend routing.
  */
-export default angular.module('app.routes', [])
+export default angular.module('app.routes', [
+    AngularRoute
+])
     .config(RouterConfig)
     .name;

@@ -1,12 +1,12 @@
-sampleDirective.$inject = ['SampleService'];
-function sampleDirective(SampleService) {
+SampleDirectiveFactory.$inject = ['SampleService'];
+function SampleDirectiveFactory(SampleService) {
     return {
         restrict: 'A',
-        link: function (scope, element) {
+        link(scope, element) {
             SampleService.log();
             element.prepend('<div>Sample Text</div>');
         }
     };
 }
 
-export default sampleDirective;
+export default SampleDirectiveFactory;

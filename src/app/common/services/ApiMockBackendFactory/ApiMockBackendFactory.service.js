@@ -1,8 +1,7 @@
 import { API_BASE } from 'app/core/api/api.module.js';
 
 /**
- * @class
- * @classdesc An instance of the class represents a mocked RESTful resource.
+ * An instance of the class represents a mocked RESTful resource.
  * @memberof app/services/ApiMockBackendFactory
  */
 class MockResource {
@@ -12,10 +11,6 @@ class MockResource {
         this.highestId = MockResource._getHighestId(collection);
     }
 
-    /**
-     * Gets the highest "id" value in a collection. Used to determine what id to assign to new elements.
-     * @param collection {Object[]} - the collection to find the highest existing id of.
-     */
     static _getHighestId(collection) {
         return collection
             .map((resource) => resource.id)
@@ -95,25 +90,32 @@ MockResourceFactory.$inject = ['$httpBackend'];
 /**
  * Factory to create mock RESTful resources.
  * @memberof app/services/ApiMockBackendFactory
+ * @returns {MockResourceFactory}
  */
 function MockResourceFactory($httpBackend) {
-    let factory = {};
-
     /**
-     * Creates a mock RESTful resource.
-     * @param name {string} - the name of the resource.
-     * @param [collection=[]] {Object[]} - the collection representing the resource.
-     * @param collection[].id {number} - the id of the element.
+     * @interface MockResourceFactory
      */
-    factory.create = function(name, collection=[]) {
-        let resource = new MockResource(name, collection);
+    let factory = {    
+        /**
+         * Creates a mock RESTful resource.
+         * @name MockResourceFactory#create
+         * @function
+         * @param name {string} - the name of the resource.
+         * @param [collection=[]] {Object[]} - the collection representing the resource.
+         * @param collection[].id {number} - the id of the element.
+         */
+        create: function(name, collection=[]) {
+            let resource = new MockResource(name, collection);
 
-        $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id?`).respond(resource.respondToGET.bind(resource));
-        $httpBackend.whenRoute('POST', `${API_BASE}/${name}/`).respond(resource.respondToPOST.bind(resource));
-        $httpBackend.whenRoute('POST', `${API_BASE}/${name}`).respond(resource.respondToPOST.bind(resource));
-        $httpBackend.whenRoute('PUT', `${API_BASE}/${name}/:id`).respond(resource.respondToPUT.bind(resource));
-        $httpBackend.whenRoute('DELETE', `${API_BASE}/${name}/:id`).respond(resource.respondToDELETE.bind(resource));
+            $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id?`).respond(resource.respondToGET.bind(resource));
+            $httpBackend.whenRoute('POST', `${API_BASE}/${name}/`).respond(resource.respondToPOST.bind(resource));
+            $httpBackend.whenRoute('POST', `${API_BASE}/${name}`).respond(resource.respondToPOST.bind(resource));
+            $httpBackend.whenRoute('PUT', `${API_BASE}/${name}/:id`).respond(resource.respondToPUT.bind(resource));
+            $httpBackend.whenRoute('DELETE', `${API_BASE}/${name}/:id`).respond(resource.respondToDELETE.bind(resource));
+        }
     };
+
 
     return factory;
 }

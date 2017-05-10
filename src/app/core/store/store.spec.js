@@ -27,8 +27,12 @@ describe('$ngRedux Decorator', () => {
         mockNgRedux = {
             state: {
                 slice: Immutable.from({
+                    nullField: null,
+                    booleanField: false,
+                    numberField: 0,
+                    stringField: '',
                     listField: Immutable.from([]),
-                    testUndefinedProp: undefined
+                    objectField: Immutable.from({})
                 })
             },
             getState: mockGetStateFn,
@@ -59,8 +63,18 @@ describe('$ngRedux Decorator', () => {
             expect($ngRedux.getState()).not.toBe(mockNgRedux.state);
             expect($ngRedux.getState().slice).toEqual(mockNgRedux.state.slice);
             expect($ngRedux.getState().slice).not.toBe(mockNgRedux.state.slice);
+
+            // Should return primitives as is, since they are immutable by default
+            expect($ngRedux.getState().slice.nullField).toBe(mockNgRedux.state.slice.nullField);
+            expect($ngRedux.getState().slice.booleanField).toBe(mockNgRedux.state.slice.booleanField);
+            expect($ngRedux.getState().slice.numberField).toBe(mockNgRedux.state.slice.numberField);
+            expect($ngRedux.getState().slice.stringField).toBe(mockNgRedux.state.slice.stringField);
+
+            // Should return copies of objects, since they are not immutable by default
             expect($ngRedux.getState().slice.listField).toEqual(mockNgRedux.state.slice.listField);
             expect($ngRedux.getState().slice.listField).not.toBe(mockNgRedux.state.slice.listField);
+            expect($ngRedux.getState().slice.objectField).toEqual(mockNgRedux.state.slice.objectField);
+            expect($ngRedux.getState().slice.objectField).not.toBe(mockNgRedux.state.slice.objectField);
         });
 
         it(`should return the selected part of the state immutably if provided
@@ -69,8 +83,18 @@ describe('$ngRedux Decorator', () => {
 
             expect($ngRedux.getState(state => state.slice)).toEqual(mockNgRedux.state.slice);
             expect($ngRedux.getState(state => state.slice)).not.toBe(mockNgRedux.state.slice);
+
+            // Should return primitives as is, since they are immutable by default
+            expect($ngRedux.getState(state => state.slice).nullField).toBe(mockNgRedux.state.slice.nullField);
+            expect($ngRedux.getState(state => state.slice).booleanField).toBe(mockNgRedux.state.slice.booleanField);
+            expect($ngRedux.getState(state => state.slice).numberField).toBe(mockNgRedux.state.slice.numberField);
+            expect($ngRedux.getState(state => state.slice).stringField).toBe(mockNgRedux.state.slice.stringField);
+
+            // Should return copies of objects, since they are not immutable by default
             expect($ngRedux.getState(state => state.slice).listField).toEqual(mockNgRedux.state.slice.listField);
             expect($ngRedux.getState(state => state.slice).listField).not.toBe(mockNgRedux.state.slice.listField);
+            expect($ngRedux.getState(state => state.slice).objectField).toEqual(mockNgRedux.state.slice.objectField);
+            expect($ngRedux.getState(state => state.slice).objectField).not.toBe(mockNgRedux.state.slice.objectField);
         });
     });
 

@@ -134,6 +134,21 @@ describe('RESTApi', () => {
             expect(result).toBe(promise);
         });
 
+        it('should not fail if query parameters are not passed.', () => {
+            let promise = {
+                then: () => promise,
+                catch: () => promise,
+                finally: () => promise
+            };
+            spyOn(Api.http, 'get').and.returnValue(promise);
+
+            let result = Api.getSublist();
+
+            expect(Api.http.get)
+                .toHaveBeenCalledWith('/test-api/test-resource?');
+            expect(result).toBe(promise);
+        });
+
         it('should return the data of the response after the request resolves.', () => {
             spyOn(Api.http, 'get').and.returnValue($q.resolve({ data: 'the data' }));
 
@@ -369,6 +384,21 @@ describe('RESTApi', () => {
 
             expect(Api.http.get)
                 .toHaveBeenCalledWith('/test-api/test-resource/1/nested-resource?param1=0&param2=hi&param3=true');
+            expect(result).toBe(promise);
+        });
+
+        it('should not fail if query parameters are not passed.', () => {
+            let promise = {
+                then: () => promise,
+                catch: () => promise,
+                finally: () => promise
+            };
+            spyOn(Api.http, 'get').and.returnValue(promise);
+
+            let result = Api.getNestedSublist(1, 'nested-resource');
+
+            expect(Api.http.get)
+                .toHaveBeenCalledWith('/test-api/test-resource/1/nested-resource?');
             expect(result).toBe(promise);
         });
 

@@ -14,7 +14,7 @@ class RESTApi {
      * @param {Function} requestHandler.patch - a function that adheres to the interface of AngularJS $http.patch.
      * @param {Function} requestHandler.delete - a function that adheres to the interface of AngularJS $http.delete.
      */
-    constructor(name='', baseUrl='', requestHandler) {
+    constructor(name, baseUrl, requestHandler) {
         this.name = name;
         this.baseUrl = baseUrl;
         this.http = requestHandler;
@@ -59,7 +59,7 @@ class RESTApi {
      * @param {Number} id - The unique identifier for the element of the resource.
      * @returns {Promise} A promise that will resolve with the data from the response.
      */
-    get(id=null) {
+    get(id) {
         let url = `${this.baseUrl}/${this.name}/${id}`;
         return this.http.get(url)
             .then(response => response.data);
@@ -74,7 +74,7 @@ class RESTApi {
      * @param {Object} element - The data representing the element to be created.
      * @returns {Promise} A promise that will resolve with the data from the response.
      */
-    post(element={}) {
+    post(element) {
         let url = `${this.baseUrl}/${this.name}`;
         return this.http.post(url, element)
             .then(response => response.data);
@@ -90,7 +90,7 @@ class RESTApi {
      * @param {Number} element.id - The unique identifier for the element.
      * @returns {Promise} A promise that will resolve with the data from the response.
      */
-    put(element={ id: null }) {
+    put(element) {
         let url = `${this.baseUrl}/${this.name}/${element.id}`;
         return this.http.put(url, element)
             .then(response => response.data);
@@ -106,7 +106,7 @@ class RESTApi {
      * @param {Number} element.id - The unique identifier for the element.
      * @returns {Promise} A promise that will resolve with the data from the response.
      */
-    patch(element={ id: null }) {
+    patch(element) {
         let url = `${this.baseUrl}/${this.name}/${element.id}`;
         return this.http.patch(url, element)
             .then(response => response.data);
@@ -121,7 +121,7 @@ class RESTApi {
      * @param {Number} id - The unique identifier for the element of the resource.
      * @returns {Promise} A promise that will resolve with the data from the response.
      */
-    delete(id=null) {
+    delete(id) {
         let url = `${this.baseUrl}/${this.name}/${id}`;
         return this.http.delete(url)
             .then(response => response.data);
@@ -137,7 +137,7 @@ class RESTApi {
      * @param {String} name - The name of the nested resource.
      * @returns {Promise} A promise that will resolve with the data from the response.
      */
-    getNestedList(id=null, name='') {
+    getNestedList(id, name) {
         let url = `${this.baseUrl}/${this.name}/${id}/${name}`;
         return this.http.get(url)
             .then(response => response.data);
@@ -154,7 +154,7 @@ class RESTApi {
      * @param {Object} query - A map of query field names to field values.
      * @returns {Promise} A promise that will resolve with the data from the response.
      */
-    getNestedSublist(id=null, name='', query={}) {
+    getNestedSublist(id, name, query={}) {
         let queryString = RESTApi._generateQueryString(query);
         let url = `${this.baseUrl}/${this.name}/${id}/${name}?${queryString}`;
         return this.http.get(url)
@@ -172,7 +172,7 @@ class RESTApi {
      * @param {Object} element - The data representing the element to be created on the nested resource.
      * @returns {Promise} A promise that will resolve with the data from the response.
      */
-    nestedPost(id=null, name='', element={}) {
+    nestedPost(id, name, element) {
         let url = `${this.baseUrl}/${this.name}/${id}/${name}`;
         return this.http.post(url, element)
             .then(response => response.data);
@@ -267,7 +267,7 @@ class RESTApi {
             .then(response => response.data);
     }
 
-    static _generateQueryString(query={}) {
+    static _generateQueryString(query) {
         return Object
             .keys(query)
             .reduce((queryString, currentField) =>
@@ -295,7 +295,7 @@ class ApiFactoryProvider {
         return ApiFactory;
     }
 
-    setBaseUrl(url='') {
+    setBaseUrl(url) {
         this.baseUrl = url;
     }
 }

@@ -12,10 +12,6 @@ class MockResource {
         this.highestId = MockResource._getHighestId(collection);
     }
 
-    /**
-     * Gets the highest "id" value in a collection. Used to determine what id to assign to new elements.
-     * @param collection {Object[]} - the collection to find the highest existing id of.
-     */
     static _getHighestId(collection) {
         return collection
             .map((resource) => resource.id)

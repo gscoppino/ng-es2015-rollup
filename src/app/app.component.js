@@ -15,6 +15,11 @@ class AppController {
         $log.log('Loaded!');
     }
 
+    /** @type {Object} */
+    static get bindings() {
+        return {};
+    }
+
     /**
      * Schedules a UI update to to be called whenever a
      * route change event occurs, passing it the parameters from
@@ -47,10 +52,12 @@ class AppController {
 
 /**
  * @memberof app
- * @desc The top level application component.
+ * @name AppComponent
+ * @desc The root component of the application.
  * @property controller {function} - [AppController]{@link AppController}
+ * @property bindings {object} - [AppController.bindings]{@link AppController.bindings}
  */
 export default {
     controller: AppController,
-    bindings: {}
+    bindings: AppController.bindings
 };

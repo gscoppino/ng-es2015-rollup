@@ -277,6 +277,9 @@ class RESTApi {
     }
 }
 
+/**
+ * @memberof app/services/ApiFactory
+ */
 class ApiFactoryProvider {
     constructor() {
         this.baseUrl = '';
@@ -284,17 +287,39 @@ class ApiFactoryProvider {
 
     get $get() {
         ApiFactory.$inject = ['Http'];
+        /**
+         * Factory for new RESTApi instances.
+         * @memberof app/services/ApiFactory
+         * @function
+         * @returns {ApiFactory}
+         */
         function ApiFactory(Http) {
-            return {
+            /**
+             * @interface ApiFactory
+             */
+            let factory = {
+                /**
+                 * Create a RESTApi
+                 * @name ApiFactory#create
+                 * @function
+                 * @param {String} name - the name of the API
+                 * @returns {RESTApi} a new RESTApi for the endpoint of baseUrl + name.
+                 */
                 create: (name) => {
                     return new RESTApi(name, this.baseUrl, Http);
                 }
             };
+
+            return factory;
         }
 
         return ApiFactory;
     }
 
+    /**
+     * Configure the base URL to use for creating RESTApi instances.
+     * @param {String} url - the base URL to use
+     */
     setBaseUrl(url) {
         this.baseUrl = url;
     }

@@ -33,3 +33,5 @@ Compatibility:
 
 Configurable, but by default targets: IE9+, and the last two versions of all mainstream desktop and mobile browsers. When the application is running on IE9,
 the HTML5 History API will not be used, and instead frontend routing will be done using hashbang url's.
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/gscoppino/ng-es2015-webpack.svg)](https://greenkeeper.io/)

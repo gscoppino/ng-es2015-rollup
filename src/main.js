@@ -1,4 +1,3 @@
-/** @module main */
 import './sw-init.js';
 import './vendor.js';
 

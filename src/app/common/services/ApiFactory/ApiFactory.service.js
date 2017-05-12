@@ -285,16 +285,16 @@ class ApiFactoryProvider {
         this.baseUrl = '';
     }
 
+    /**
+     * Get the ApiFactory.
+     * @method
+     * @returns {ApiFactory}
+     */
     get $get() {
         ApiFactory.$inject = ['Http'];
-        /**
-         * Factory for new RESTApi instances.
-         * @memberof app/services/ApiFactory
-         * @function
-         * @returns {ApiFactory}
-         */
         function ApiFactory(Http) {
             /**
+             * A factory for new RESTApi's.
              * @interface ApiFactory
              */
             let factory = {
@@ -303,7 +303,8 @@ class ApiFactoryProvider {
                  * @name ApiFactory#create
                  * @function
                  * @param {String} name - the name of the API
-                 * @returns {RESTApi} a new RESTApi for the endpoint of baseUrl + name.
+                 * @returns {RESTApi} a RESTApi for the API of the given name,
+                 *   under the configured baseUrl of ApiFactoryProvider.
                  */
                 create: (name) => {
                     return new RESTApi(name, this.baseUrl, Http);

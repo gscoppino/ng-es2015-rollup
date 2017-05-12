@@ -1,6 +1,5 @@
 /**
  * Controller for the application root component.
- * @memberof app
  */
 class AppController {
 
@@ -60,8 +59,8 @@ class AppController {
  * @memberof app
  * @name AppComponent
  * @desc The root component of the application.
- * @property controller {function} - [AppController]{@link app.AppController}
- * @property bindings {object} - [AppController.bindings]{@link app.AppController.bindings}
+ * @property controller {function} - [AppController]{@link AppController}
+ * @property bindings {object} - [AppController.bindings]{@link AppController.bindings}
  */
 export default {
     controller: AppController,

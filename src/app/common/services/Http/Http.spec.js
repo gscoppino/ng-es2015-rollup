@@ -17,16 +17,16 @@ describe('Http Service', () => {
         it('should have no pending requests.', angular.mock.inject(($injector) => {
             Http = $injector.get('Http');
 
-            expect(Http.pendingRequests).toEqual({
+            expect(Http._pendingRequests).toEqual({
                 get: jasmine.any(Map),
                 put: jasmine.any(Map),
                 patch: jasmine.any(Map),
                 delete: jasmine.any(Map)
             });
-            expect(Http.pendingRequests.get.size).toBe(0);
-            expect(Http.pendingRequests.put.size).toBe(0);
-            expect(Http.pendingRequests.patch.size).toBe(0);
-            expect(Http.pendingRequests.delete.size).toBe(0);
+            expect(Http._pendingRequests.get.size).toBe(0);
+            expect(Http._pendingRequests.put.size).toBe(0);
+            expect(Http._pendingRequests.patch.size).toBe(0);
+            expect(Http._pendingRequests.delete.size).toBe(0);
         }));
     });
 
@@ -42,7 +42,7 @@ describe('Http Service', () => {
 
         it('should return a pending $http.get promise to the same URL from the cache, if present.', () => {
             let testUrl = '/test/url';
-            Http.pendingRequests.get.set(testUrl, 'cached promise');
+            Http._pendingRequests.get.set(testUrl, 'cached promise');
             expect(Http.get(testUrl)).toBe('cached promise');
         });
 
@@ -73,8 +73,8 @@ describe('Http Service', () => {
 
             spyOn($http, 'get').and.returnValue(promise);
             Http.get(testUrl);
-            expect(Http.pendingRequests.get.has(testUrl)).toBe(true);
-            expect(Http.pendingRequests.get.get(testUrl)).toBe(promise);
+            expect(Http._pendingRequests.get.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.get.get(testUrl)).toBe(promise);
         });
 
         it('should remove a cached promise once it resolves or rejects.', () => {
@@ -83,15 +83,15 @@ describe('Http Service', () => {
 
             spyOnHttp.and.returnValue($q.resolve());
             Http.get(testUrl);
-            expect(Http.pendingRequests.get.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.get.has(testUrl)).toBe(true);
             $rootScope.$digest();
-            expect(Http.pendingRequests.get.has(testUrl)).toBe(false);
+            expect(Http._pendingRequests.get.has(testUrl)).toBe(false);
 
             spyOnHttp.and.returnValue($q.reject().catch(angular.noop));
             Http.get(testUrl);
-            expect(Http.pendingRequests.get.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.get.has(testUrl)).toBe(true);
             $rootScope.$digest();
-            expect(Http.pendingRequests.get.has(testUrl)).toBe(false);
+            expect(Http._pendingRequests.get.has(testUrl)).toBe(false);
         });
     });
 
@@ -148,7 +148,7 @@ describe('Http Service', () => {
                     finally: () => promise
                 };
 
-            Http.pendingRequests.put.set(testUrl, promise);
+            Http._pendingRequests.put.set(testUrl, promise);
             expect(Http.put(testUrl, mockData)).toBe(promise);
         });
 
@@ -163,7 +163,7 @@ describe('Http Service', () => {
                     finally: () => promise
                 };
 
-            Http.pendingRequests.put.set(testUrl, $q.resolve());
+            Http._pendingRequests.put.set(testUrl, $q.resolve());
             Http.put(testUrl, mockData)
                 .then((result) => expect(result).toBe(promise))
                 .catch(() => fail());
@@ -185,7 +185,7 @@ describe('Http Service', () => {
                     finally: () => promise
                 };
 
-            Http.pendingRequests.put.set(testUrl, $q.reject('reason'));
+            Http._pendingRequests.put.set(testUrl, $q.reject('reason'));
             Http.put(testUrl, mockData)
                 .then(() => fail())
                 .catch((result) => expect(result).toBe('reason'));
@@ -227,8 +227,8 @@ describe('Http Service', () => {
 
             spyOn($http, 'put').and.returnValue(promise);
             Http.put(testUrl, mockData);
-            expect(Http.pendingRequests.put.has(testUrl)).toBe(true);
-            expect(Http.pendingRequests.put.get(testUrl)).toBe(promise);
+            expect(Http._pendingRequests.put.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.put.get(testUrl)).toBe(promise);
         });
 
         it('should remove a cached promise once it resolves or rejects.', () => {
@@ -238,15 +238,15 @@ describe('Http Service', () => {
 
             spyOnHttp.and.returnValue($q.resolve());
             Http.put(testUrl, mockData);
-            expect(Http.pendingRequests.put.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.put.has(testUrl)).toBe(true);
             $rootScope.$digest();
-            expect(Http.pendingRequests.put.has(testUrl)).toBe(false);
+            expect(Http._pendingRequests.put.has(testUrl)).toBe(false);
 
             spyOnHttp.and.returnValue($q.reject().catch(angular.noop));
             Http.put(testUrl, mockData);
-            expect(Http.pendingRequests.put.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.put.has(testUrl)).toBe(true);
             $rootScope.$digest();
-            expect(Http.pendingRequests.put.has(testUrl)).toBe(false);
+            expect(Http._pendingRequests.put.has(testUrl)).toBe(false);
         });
     });
 
@@ -269,7 +269,7 @@ describe('Http Service', () => {
                     finally: () => promise
                 };
 
-            Http.pendingRequests.patch.set(testUrl, promise);
+            Http._pendingRequests.patch.set(testUrl, promise);
             expect(Http.patch(testUrl, mockData)).toBe(promise);
         });
 
@@ -292,7 +292,7 @@ describe('Http Service', () => {
                     finally: () => promise
                 };
 
-            Http.pendingRequests.patch.set(testUrl, $q.resolve());
+            Http._pendingRequests.patch.set(testUrl, $q.resolve());
             Http.patch(testUrl, mockData)
                 .then((result) => expect(result).toBe(promise))
                 .catch(() => fail());
@@ -314,7 +314,7 @@ describe('Http Service', () => {
                     finally: () => promise
                 };
 
-            Http.pendingRequests.patch.set(testUrl, $q.reject('reason'));
+            Http._pendingRequests.patch.set(testUrl, $q.reject('reason'));
             Http.patch(testUrl, mockData)
                 .then(() => fail())
                 .catch((result) => expect(result).toBe('reason'));
@@ -356,8 +356,8 @@ describe('Http Service', () => {
 
             spyOn($http, 'patch').and.returnValue(promise);
             Http.patch(testUrl, mockData);
-            expect(Http.pendingRequests.patch.has(testUrl)).toBe(true);
-            expect(Http.pendingRequests.patch.get(testUrl)).toBe(promise);
+            expect(Http._pendingRequests.patch.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.patch.get(testUrl)).toBe(promise);
         });
 
         it('should remove a cached promise once it resolves or rejects.', () => {
@@ -367,15 +367,15 @@ describe('Http Service', () => {
 
             spyOnHttp.and.returnValue($q.resolve());
             Http.patch(testUrl, mockData);
-            expect(Http.pendingRequests.patch.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.patch.has(testUrl)).toBe(true);
             $rootScope.$digest();
-            expect(Http.pendingRequests.patch.has(testUrl)).toBe(false);
+            expect(Http._pendingRequests.patch.has(testUrl)).toBe(false);
 
             spyOnHttp.and.returnValue($q.reject().catch(angular.noop));
             Http.patch(testUrl, mockData);
-            expect(Http.pendingRequests.patch.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.patch.has(testUrl)).toBe(true);
             $rootScope.$digest();
-            expect(Http.pendingRequests.patch.has(testUrl)).toBe(false);
+            expect(Http._pendingRequests.patch.has(testUrl)).toBe(false);
         });
     });
 
@@ -391,7 +391,7 @@ describe('Http Service', () => {
 
         it('should return a pending $http.delete promise to the same URL from the cache, if present.', () => {
             let testUrl = '/test/url';
-            Http.pendingRequests.delete.set(testUrl, 'cached promise');
+            Http._pendingRequests.delete.set(testUrl, 'cached promise');
             expect(Http.delete(testUrl)).toBe('cached promise');
         });
 
@@ -422,8 +422,8 @@ describe('Http Service', () => {
 
             spyOn($http, 'delete').and.returnValue(promise);
             Http.delete(testUrl);
-            expect(Http.pendingRequests.delete.has(testUrl)).toBe(true);
-            expect(Http.pendingRequests.delete.get(testUrl)).toBe(promise);
+            expect(Http._pendingRequests.delete.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.delete.get(testUrl)).toBe(promise);
         });
 
         it('should remove a cached promise once it resolves or rejects.', () => {
@@ -432,15 +432,15 @@ describe('Http Service', () => {
 
             spyOnHttp.and.returnValue($q.resolve());
             Http.delete(testUrl);
-            expect(Http.pendingRequests.delete.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.delete.has(testUrl)).toBe(true);
             $rootScope.$digest();
-            expect(Http.pendingRequests.delete.has(testUrl)).toBe(false);
+            expect(Http._pendingRequests.delete.has(testUrl)).toBe(false);
 
             spyOnHttp.and.returnValue($q.reject().catch(angular.noop));
             Http.delete(testUrl);
-            expect(Http.pendingRequests.delete.has(testUrl)).toBe(true);
+            expect(Http._pendingRequests.delete.has(testUrl)).toBe(true);
             $rootScope.$digest();
-            expect(Http.pendingRequests.delete.has(testUrl)).toBe(false);
+            expect(Http._pendingRequests.delete.has(testUrl)).toBe(false);
         });
     });
 });

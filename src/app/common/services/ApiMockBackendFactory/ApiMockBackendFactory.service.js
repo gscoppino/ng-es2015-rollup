@@ -94,11 +94,12 @@ MockResourceFactory.$inject = ['$httpBackend'];
  */
 function MockResourceFactory($httpBackend) {
     /**
+     * A factory for new MockResource's.
      * @interface MockResourceFactory
      */
     let factory = {    
         /**
-         * Creates a mock RESTful resource.
+         * Create a mock RESTful resource.
          * @name MockResourceFactory#create
          * @function
          * @param name {string} - the name of the resource.

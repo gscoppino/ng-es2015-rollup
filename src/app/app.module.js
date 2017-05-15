@@ -13,6 +13,7 @@ import AppComponent from './app.component.js';
 
 /**
  * @namespace app
+ * @desc The root module of the application.
  */
 export default angular.module('app', [
     AngularRouteModule,

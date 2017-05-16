@@ -1,5 +1,5 @@
 function selectUserList(state) {
-    return state.users;
+    return state.users.list;
 }
 
 export { selectUserList };

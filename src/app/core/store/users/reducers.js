@@ -2,7 +2,10 @@ import { static as Immutable } from 'seamless-immutable';
 
 import actions from './constants.js';
 
-const INITIAL_STATE = Immutable.from([]);
+const INITIAL_STATE = Immutable.from({
+    list: Immutable.from([]),
+    listHasFetched: false
+});
 
 export function usersReducer(state=INITIAL_STATE, action=null) {
 
@@ -16,7 +19,10 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.GET_USERS_CACHE_MISS:
             return state;
         case actions.GET_USERS_SUCCESS:
-            return Immutable.from(action.payload);
+            return Immutable.merge(state, {
+                list: action.payload,
+                listHasFetched: true
+            });
         case actions.GET_USERS_FAIL:
             return state;
 
@@ -28,15 +34,19 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.GET_USER_CACHE_MISS:
             return state;
         case actions.GET_USER_SUCCESS:
-            var indexed = state.findIndex(user => user.id === action.payload.id);
+            var indexed = state.list.findIndex(user => user.id === action.payload.id);
 
             if (indexed !== -1) {
-                return state
-                    .slice(0, indexed)
-                    .concat(Immutable.replace(state[indexed], action.payload))
-                    .concat(state.slice(indexed + 1));
+                return Immutable.merge(state, {
+                    list: state.list
+                        .slice(0, indexed)
+                        .concat(Immutable.replace(state.list[indexed], action.payload))
+                        .concat(state.list.slice(indexed + 1))
+                });
             } else {
-                return state.concat(action.payload);
+                return Immutable.merge(state, {
+                    list: state.list.concat(action.payload)
+                });
             }
 
         case actions.GET_USER_FAIL:
@@ -46,7 +56,9 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.ADD_USER_REQUEST:
             return state;
         case actions.ADD_USER_SUCCESS:
-            return state.concat(action.payload);
+            return Immutable.merge(state, {
+                list: state.list.concat(action.payload)
+            });
         case actions.ADD_USER_FAIL:
             return state;
 
@@ -55,15 +67,19 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.UPDATE_USER_REQUEST:
             return state;
         case actions.UPDATE_USER_SUCCESS:
-            var indexed = state.findIndex(user => user.id === action.payload.id);
+            var indexed = state.list.findIndex(user => user.id === action.payload.id);
 
             if (indexed !== -1) {
-                return state
-                    .slice(0, indexed)
-                    .concat(Immutable.merge(state[indexed], action.payload))
-                    .concat(state.slice(indexed + 1));
+                return Immutable.merge(state, {
+                    list: state.list
+                        .slice(0, indexed)
+                        .concat(Immutable.merge(state.list[indexed], action.payload))
+                        .concat(state.list.slice(indexed + 1))
+                });
             } else {
-                return state.concat(action.payload);
+                return Immutable.merge(state, {
+                    list: state.list.concat(action.payload)
+                });
             }
 
         case actions.UPDATE_USER_FAIL:
@@ -74,12 +90,14 @@ export function usersReducer(state=INITIAL_STATE, action=null) {
         case actions.DELETE_USER_REQUEST:
             return state;
         case actions.DELETE_USER_SUCCESS:
-            var indexed = state.findIndex(user => user.id === action.payload.id);
+            var indexed = state.list.findIndex(user => user.id === action.payload.id);
 
             if (indexed !== -1) {
-                return state
-                    .slice(0, indexed)
-                    .concat(state.slice(indexed + 1));
+                return Immutable.merge(state, {
+                    list: state.list
+                        .slice(0, indexed)
+                        .concat(state.list.slice(indexed + 1))
+                });
             }
 
             return state;

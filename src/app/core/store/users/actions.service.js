@@ -15,13 +15,14 @@ class UserActions {
         });
 
         if (!forceGet) {
-            let cachedUsers = this.$ngRedux.getStateUnsafe().users;
-            if (cachedUsers.length) {
+            let { users: userStore } = this.$ngRedux.getStateUnsafe();
+
+            if (userStore.listHasFetched) {
                 this.$ngRedux.dispatch({
                     type: actions.GET_USERS_CACHE_HIT
                 });
 
-                return this.$q.resolve(cachedUsers);
+                return this.$q.resolve(userStore.list);
             }
         }
 
@@ -53,7 +54,9 @@ class UserActions {
         });
 
         if (!forceGet) {
-            let cachedUser = this.$ngRedux.getStateUnsafe().users.find(user => user.id === id);
+            let { users: userStore } = this.$ngRedux.getStateUnsafe(),
+                cachedUser = userStore.list.find(user => user.id === id);
+
             if (cachedUser) {
                 this.$ngRedux.dispatch({
                     type: actions.GET_USER_CACHE_HIT

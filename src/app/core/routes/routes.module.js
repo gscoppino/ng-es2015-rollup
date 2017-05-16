@@ -1,6 +1,8 @@
 import angular from 'angular';
 import AngularRoute from 'angular-route';
 
+import UsersListModule from 'app/common/components/users-list/users-list.module.js';
+
 RouterConfig.$inject = ['$locationProvider', '$routeProvider'];
 function RouterConfig($locationProvider, $routeProvider) {
     /*
@@ -12,7 +14,10 @@ function RouterConfig($locationProvider, $routeProvider) {
     $locationProvider.html5Mode(true);
 
     $routeProvider.when('/', {
-        template: '<h1>App</h1>'
+        template: `
+            <h1>App</h1>
+            <users-list></users-list>
+        `
     });
 }
 
@@ -23,7 +28,8 @@ export { RouterConfig };
  * @desc Configures the frontend routing.
  */
 export default angular.module('app.routes', [
-    AngularRoute
+    AngularRoute,
+    UsersListModule
 ])
     .config(RouterConfig)
     .name;

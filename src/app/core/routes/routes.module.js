@@ -1,5 +1,5 @@
 import angular from 'angular';
-import AngularRoute from 'angular-route';
+import AngularRouteModule from 'angular-route';
 
 import UsersListModule from 'app/common/components/users-list/users-list.module.js';
 
@@ -28,7 +28,7 @@ export { RouterConfig };
  * @desc Configures the frontend routing.
  */
 export default angular.module('app.routes', [
-    AngularRoute,
+    AngularRouteModule,
     UsersListModule
 ])
     .config(RouterConfig)

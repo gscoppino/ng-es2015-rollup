@@ -1,5 +1,5 @@
 import angular from 'angular';
-import AngularRoute from 'angular-route';
+import AngularRouteModule from 'angular-route';
 
 RouterConfig.$inject = ['$locationProvider', '$routeProvider'];
 function RouterConfig($locationProvider, $routeProvider) {
@@ -23,7 +23,7 @@ export { RouterConfig };
  * @desc Configures the frontend routing.
  */
 export default angular.module('app.routes', [
-    AngularRoute
+    AngularRouteModule
 ])
     .config(RouterConfig)
     .name;

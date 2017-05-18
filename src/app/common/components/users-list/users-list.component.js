@@ -19,12 +19,10 @@ class UsersListController {
         // Ensure users store is initialized
         this.actions.users.sync()
             .then(() => {
-                this.state.usersList = this.$ngRedux.getState(UserSelectors.list);
-                this._listeners.push(
-                    this.$ngRedux.subscribe(UserSelectors.list, () => {
-                        this.state.usersList = this.$ngRedux.getState(UserSelectors.list);
-                    })
-                );
+                let userListSubscription = this.$ngRedux
+                    .autoSubscribe(this.state, 'usersList', UserSelectors.list);
+
+                this._listeners.push(userListSubscription);
             });
     }
 

@@ -35,6 +35,16 @@ function $ngReduxImmutableDecorator($delegate) {
         });
     };
 
+    $delegate.autoSubscribe = (object, path, stateFn, callback) => {
+        object[path] = $delegate.getState(stateFn);
+        return $delegate.subscribe(stateFn, () => {
+            object[path] = $delegate.getState(stateFn);
+            if (callback) {
+                callback();
+            }
+        });
+    };
+
     return $delegate;
 }
 

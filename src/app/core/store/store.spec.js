@@ -206,29 +206,59 @@ describe('$ngRedux Decorator', () => {
             expect(object.path).toBe('the state');
         });
 
-        it(`should subscribe to changes in the state selected by the state
-        function and update the given object at the given path, and
-        call a callback if provided.`, () => {
+        it(`should subscribe to changes in the store state selected by the state
+        function and update the given object at the given path.`, () => {
             const $ngRedux = $ngReduxImmutableDecorator(mockNgRedux);
+
+            // Stub out the subscribe implementation, and store the anonymous
+            // callback that would have been provided to it in a variable so that it can
+            // be called arbitrarily.
+            var internalCallback;
+            spyOn($ngRedux, 'subscribe').and.callFake((stateFn, callback) => {
+                internalCallback = callback;
+            });
+
             var spyOnGetState = spyOn($ngRedux, 'getState');
-            var stateFn = angular.noop;
-            var callbackFn = jasmine.createSpy();
+
             var object = {
                 path: null
             };
 
+            spyOnGetState.and.returnValue('the state');
+            $ngRedux.autoSubscribe(object, 'path', angular.noop);
+            expect($ngRedux.subscribe).toHaveBeenCalledWith(angular.noop, jasmine.any(Function));
+
+            spyOnGetState.and.returnValue('an updated state');
+            internalCallback();
+            expect($ngRedux.getState).toHaveBeenCalledWith(angular.noop);
+            expect(object.path).toBe('an updated state');
+        });
+
+        it(`should subscribe to changes in the store state selected by the state
+        function and call the provided callback.`, () => {
+            const $ngRedux = $ngReduxImmutableDecorator(mockNgRedux);
+
+            // Stub out the subscribe implementation, and store the anonymous
+            // callback that would have been provided to it in a variable so that it can
+            // be called arbitrarily.
+            var internalCallback;
             spyOn($ngRedux, 'subscribe').and.callFake((stateFn, callback) => {
-                expect(object.path).toBe('the state');
-                expect(callbackFn).not.toHaveBeenCalled();
-                spyOnGetState.and.returnValue('an updated state');
-                callback();
-                expect(object.path).toBe('an updated state');
-                expect(callbackFn).toHaveBeenCalled();
+                internalCallback = callback;
             });
 
-            spyOnGetState.and.returnValue('the state');
-            $ngRedux.autoSubscribe(object, 'path', stateFn, callbackFn);
-            expect($ngRedux.subscribe).toHaveBeenCalledWith(stateFn, jasmine.any(Function));
+            spyOn($ngRedux, 'getState').and.returnValue('the state');
+
+            const subscriberCallback = jasmine.createSpy().and.callFake(angular.noop);
+            var object = {
+                path: null
+            };
+
+            $ngRedux.autoSubscribe(object, 'path', angular.noop, subscriberCallback);
+            expect($ngRedux.subscribe).toHaveBeenCalledWith(angular.noop, jasmine.any(Function));
+            expect(subscriberCallback).not.toHaveBeenCalled();
+
+            internalCallback();
+            expect(subscriberCallback).toHaveBeenCalled();
         });
     });
 });

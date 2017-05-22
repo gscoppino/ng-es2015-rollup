@@ -206,6 +206,22 @@ describe('$ngRedux Decorator', () => {
             expect(object.path).toBe('the state');
         });
 
+        it('should call the callback provided after updating the given object.', () => {
+            const $ngRedux = $ngReduxImmutableDecorator(mockNgRedux);
+
+            spyOn($ngRedux, 'getState').and.returnValue('the state');
+            var stateFn = angular.noop;
+            var subscriberCallback = jasmine.createSpy().and.callFake(() => {
+                expect(object.path).toBe('the state');
+            });
+            var object = {
+                path: null
+            };
+
+            $ngRedux.autoSubscribe(object, 'path', stateFn, subscriberCallback);
+            expect(subscriberCallback).toHaveBeenCalled();
+        });
+
         it(`should subscribe to changes in the store state selected by the state
         function and update the given object at the given path.`, () => {
             const $ngRedux = $ngReduxImmutableDecorator(mockNgRedux);
@@ -255,7 +271,7 @@ describe('$ngRedux Decorator', () => {
 
             $ngRedux.autoSubscribe(object, 'path', angular.noop, subscriberCallback);
             expect($ngRedux.subscribe).toHaveBeenCalledWith(angular.noop, jasmine.any(Function));
-            expect(subscriberCallback).not.toHaveBeenCalled();
+            subscriberCallback.calls.reset();
 
             internalCallback();
             expect(subscriberCallback).toHaveBeenCalled();

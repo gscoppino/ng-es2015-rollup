@@ -17,7 +17,10 @@ describe('MockResource', () => {
         resource = new MockResource('test', mockCollection);
     });
 
-    it('should create a shallow clone of the collection passed in, for immutability.', () => {
+    it('should initialize with the given collection, if passed.', () => {
+        expect(resource.collection).toEqual(mockCollection);
+
+        // Ensure immutability
         expect(resource.collection).not.toBe(mockCollection);
     });
 

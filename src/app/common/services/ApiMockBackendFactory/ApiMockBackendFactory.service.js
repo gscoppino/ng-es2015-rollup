@@ -7,7 +7,7 @@ import { API_BASE } from 'app/core/api/api.module.js';
 class MockResource {
     constructor(name, collection=[]) {
         this.name = name;
-        this.collection = [...collection];
+        this.collection = MockResource._immutable(collection);
         this.highestId = MockResource._getHighestId(collection);
     }
 
@@ -15,6 +15,10 @@ class MockResource {
         return collection
             .map((resource) => resource.id)
             .reduce((prevId, nextId) => nextId > prevId ? nextId : prevId, 0);
+    }
+
+    static _immutable(value) {
+        return JSON.parse(JSON.stringify(value));
     }
 
     /**
@@ -25,12 +29,12 @@ class MockResource {
     // eslint-disable-next-line no-unused-vars
     respondToGET(method, url, data, headers, params) {
         if (!params.id) {
-            return [200, this.collection.map(element => Object.assign({}, element))];
+            return [200, MockResource._immutable(this.collection)];
         }
 
         let element = this.collection.find((element) => element.id === Number(params.id));
         if (element) {
-            return [200, Object.assign({}, element)];
+            return [200, MockResource._immutable(element)];
         }
 
         return [404, `${name} with id ${params.id} not found.`];
@@ -47,7 +51,7 @@ class MockResource {
         newElement.id = ++this.highestId;
 
         this.collection.push(newElement);
-        return [201, Object.assign({}, newElement)];
+        return [201, MockResource._immutable(newElement)];
     }
 
     /**
@@ -63,7 +67,7 @@ class MockResource {
         let element = this.collection.find((element) => element.id === Number(params.id));
         if (element) {
             Object.assign(element, updatedElement);
-            return [200, Object.assign({}, element)];
+            return [200, MockResource._immutable(element)];
         }
 
         return [404, `${name} with id ${params.id} not found.`];

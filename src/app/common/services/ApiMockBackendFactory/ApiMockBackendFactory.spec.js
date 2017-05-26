@@ -44,8 +44,8 @@ describe('MockResource', () => {
     });
 
     describe('respondToGET', () => {
-        it('should return a 200 OK with the entire collection if an id is not provided.', () => {
-            let response = resource.respondToGET(null, null, null, null, {});
+        it('should return a 200 OK with the entire collection if an there are no params provided.', () => {
+            let response = resource.respondToGET(null, null, null, null, null);
             expect(response[0]).toBe(200);
             expect(response[1]).toEqual(mockCollection);
 
@@ -53,7 +53,19 @@ describe('MockResource', () => {
             expect(response[1]).not.toBe(resource.collection);
         });
 
-        it('should return a 200 OK with the element of the specified id.', () => {
+        it('should return a 200 OK with a filtered collection if there are params provided, but no id.', () => {
+            let mockElement = { name: 'John' };
+            resource.collection.push(mockElement);
+
+            let response = resource.respondToGET(null, null, null, null, { name: 'John' });
+            expect(response[0]).toBe(200);
+            expect(response[1]).toEqual([mockElement]);
+
+            // Ensure immutability
+            expect(response[1][0]).not.toBe(mockElement);
+        });
+
+        it('should return a 200 OK with the element of the specified id, if id param is provided.', () => {
             let mockElement = { id: 1 };
             resource.collection.push(mockElement);
 

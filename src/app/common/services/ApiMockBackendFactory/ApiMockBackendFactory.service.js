@@ -28,8 +28,16 @@ class MockResource {
      */
     // eslint-disable-next-line no-unused-vars
     respondToGET(method, url, data, headers, params) {
-        if (!params.id) {
+        if (!params) {
             return [200, MockResource._immutable(this.collection)];
+        }
+
+        if (!params.id) {
+            return [200, MockResource._immutable(this.collection
+                .filter(element =>
+                    Object.keys(params)
+                        .reduce((accumulator, currentParam) =>
+                            accumulator === true && element[currentParam] === params[currentParam], true)))];
         }
 
         let element = this.collection.find((element) => element.id === Number(params.id));

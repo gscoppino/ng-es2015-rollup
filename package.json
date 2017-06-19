@@ -3,6 +3,10 @@
   "version": "1.0.0-beta",
   "description": "Seed project for frontend development with PostCSS for CSS, ES2015 for Javascript, Webpack for dependency management, and Angular with Karma+Jasmine for a development framework.",
   "main": "dist/main.js",
+  "engines": {
+    "node": "~8.x",
+    "npm": "~5.x"
+  },
   "scripts": {
     "build": "gulp build",
     "build-production": "gulp build-production",

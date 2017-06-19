@@ -41,7 +41,7 @@
     "cssnano": "~3.10.x",
     "del": "~3.0.x",
     "eslint": "~3.19.x",
-    "eslint-loader": "~1.8.0",
+    "eslint-loader": "~1.8.x",
     "gulp": "~3.9.x",
     "gulp-htmlmin": "~3.0.x",
     "gulp-rename": "~1.2.x",

@@ -60,7 +60,7 @@
     "karma-webpack": "~2.0.x",
     "phantomjs-prebuilt": "~2.1.x",
     "postcss": "~6.0.x",
-    "postcss-cssnext": "~3.0.0",
+    "postcss-cssnext": "~3.0.x",
     "postcss-import": "~10.0.x",
     "postcss-reporter": "~4.0.x",
     "protractor": "~5.1.x",

@@ -81,7 +81,7 @@
     "angular-aria": "~1.6.x",
     "angular-mocks": "~1.6.x",
     "angular-route": "~1.6.x",
-    "ng-redux": "^3.4.0-beta.1",
+    "ng-redux": "~3.4.x",
     "seamless-immutable": "~7.0.x"
   }
 }

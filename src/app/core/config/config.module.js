@@ -27,6 +27,12 @@ function CompilerConfig($compileProvider) {
     }
 
     /*
+     * Enforce strict component bindings so that non-optional attributes
+     * must be provided to components at compile time.
+     */
+    $compileProvider.strictComponentBindingsEnabled(true);
+
+    /*
      * Keep the limit on how many times $onChanges can trigger new model updates,
      * as low as possible. Never go above the Angular default of 10 iterations.
      */

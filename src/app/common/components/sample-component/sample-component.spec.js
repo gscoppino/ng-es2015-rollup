@@ -14,8 +14,18 @@ describe('sample-component', () => {
         }));
 
         it('should compile and link successfully.', () => {
-            let scope = $rootScope.$new(),
-                element = $compile('<sample-component></sample-component>')(scope);
+            let scope = Object.assign($rootScope.$new(), {
+                oneWayBinding: 'one way binding',
+                parentBoundExecutableExpression: angular.noop
+            });
+
+            let element = $compile(`
+                <sample-component
+                    input1="oneWayBinding"
+                    input2="valueBinding"
+                    output1="parentBoundExecutableExpression()">
+                </sample-component>
+            `)(scope);
 
             scope.$digest();
             expect(element).toBeDefined();

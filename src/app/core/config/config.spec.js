@@ -7,6 +7,7 @@ describe('Compiler Configuration', () => {
         mockCompileProvider = {};
 
     beforeEach(() => {
+        mockCompileProvider.strictComponentBindingsEnabled = angular.noop;
         mockCompileProvider.onChangesTtl = angular.noop;
         mockCompileProvider.cssClassDirectivesEnabled = angular.noop;
         mockCompileProvider.commentDirectivesEnabled = angular.noop;

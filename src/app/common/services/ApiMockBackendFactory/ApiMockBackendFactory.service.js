@@ -24,6 +24,39 @@ class MockResource {
         return JSON.parse(JSON.stringify(value));
     }
 
+    static _query(modelValue, queryValue, param) {
+        if (typeof modelValue !== typeof queryValue) {
+            return false;
+        }
+
+        switch(typeof modelValue) {
+            case 'string':
+                if (param.endsWith('_in')) {
+                    return modelValue.toLowerCase().includes(queryValue.toLowerCase());
+                } else {
+                    return modelValue.toLowerCase() === queryValue.toLowerCase();
+                }
+            case 'boolean':
+                return modelValue === queryValue;
+            case 'number':
+                if (param.endsWith('_lt')) {
+                    return modelValue < queryValue;
+                } else if (param.endsWith('_gt')) {
+                    return modelValue > queryValue;
+                } else {
+                    return modelValue === queryValue;
+                }
+            default:
+                // Object (object, array, or null)
+                if (modelValue === null) {
+                    return queryValue === null;
+                } else {
+                    // Not bothering to compare objects/arrays
+                    return false;
+                }
+        }
+    }
+
     /**
      * Sends fake response data for a GET request on this resource. The response data returned will be formatted correctly
      * by $http. Method signature matches that provided to $httpBackend.when(...).response(<function>);
@@ -39,8 +72,13 @@ class MockResource {
             return [200, MockResource._immutable(this.collection
                 .filter(element =>
                     Object.keys(params)
-                        .reduce((accumulator, currentParam) =>
-                            accumulator === true && element[currentParam] === params[currentParam], true)))];
+                        .reduce((accumulator, currentParam) => {
+                            let propName = currentParam.replace(/_in|_gt|_lt$/, '');
+                            // TODO: Keep match of operator string and pass into _query function instead of the whole parameter name.
+
+                            return accumulator === true && MockResource
+                                ._query(element[propName], params[currentParam], currentParam);
+                        }, true)))];
         }
 
         let element = this.collection.find((element) => element.id === Number(params.id));

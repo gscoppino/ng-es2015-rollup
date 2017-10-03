@@ -66,6 +66,82 @@ describe('MockResource', () => {
         });
     });
 
+    describe('_query', () => {
+        describe('string', () => {
+            it('should check that the string values are equivalent.', () => {
+                expect(MockResource._query('John', 'John', '')).toBe(true);
+            });
+
+            it('should check that the string values are equivalent, case-insensitive.', () => {
+                expect(MockResource._query('John', 'john', '')).toBe(true);
+            });
+
+            it('should check that string values are not equivalent.', () => {
+                expect(MockResource._query('John', 'jane', '')).toBe(false);
+            });
+
+            it('should check that the model string contains the query string.', () => {
+                expect(MockResource._query('John', 'Jo', '_in')).toBe(true);
+            });
+
+            it('should check that the model string contains the query string, case-insensitive.', () => {
+                expect(MockResource._query('John', 'jo', '_in')).toBe(true);
+            });
+
+            it('should check that the model string does not contain the query string.', () => {
+                expect(MockResource._query('John', 'ja', '_in')).toBe(false);
+            });
+        });
+
+        describe('boolean', () => {
+            it('should check that the values are equivalent.', () => {
+                expect(MockResource._query(true, true)).toBe(true);
+                expect(MockResource._query(false, false)).toBe(true);
+            });
+
+            it('should check that the values are not equivalent.', () => {
+                expect(MockResource._query(true, false)).toBe(false);
+                expect(MockResource._query(false, true)).toBe(false);
+            });
+        });
+
+        describe('number', () => {
+            it('should check that the values are equivalent.', () => {
+                expect(MockResource._query(1, 1, '')).toBe(true);
+            });
+
+            it('should check that the values are not equivalent.', () => {
+                expect(MockResource._query(1, 2, '')).toBe(false);
+            });
+
+            it('should check that the model value is less than the query value.', () => {
+                expect(MockResource._query(1, 2, '_lt')).toBe(true);
+                expect(MockResource._query(2, 1, '_lt')).toBe(false);
+            });
+
+            it('should check that the model value is greater than the query value.', () => {
+                expect(MockResource._query(2, 1, '_gt')).toBe(true);
+                expect(MockResource._query(1, 2, '_gt')).toBe(false);
+            });
+        });
+
+        describe('unknown', () => {
+            it('should return true when both model and query value are null', () => {
+                expect(MockResource._query(null, null, '')).toBe(true);
+            });
+
+            it('should return false when only one of model or query value is null.', () => {
+                expect(MockResource._query(null, undefined, '')).toBe(false);
+                expect(MockResource._query(undefined, null, '')).toBe(false);
+            });
+
+            it('should return false if the model value is an array or object (not attempting to compare).', () => {
+                expect(MockResource._query({}, {}, '')).toBe(false);
+                expect(MockResource._query([], [], '')).toBe(false);
+            });
+        });
+    });
+
     describe('respondToGET', () => {
         it('should return a 200 OK with the entire collection if there are no params provided.', () => {
             let response = resource.respondToGET(null, null, null, null, null);
@@ -79,8 +155,25 @@ describe('MockResource', () => {
         it('should return a 200 OK with a filtered collection if there are params provided, but no id.', () => {
             let mockElement = { name: 'John' };
             resource.collection.push(mockElement);
+            spyOn(MockResource, '_query').and.callThrough();
 
             let response = resource.respondToGET(null, null, null, null, { name: 'John' });
+            expect(MockResource._query).toHaveBeenCalledWith(mockElement.name, 'John', 'name');
+            expect(response[0]).toBe(200);
+            expect(response[1]).toEqual([mockElement]);
+
+            // Ensure immutability
+            expect(response[1][0]).not.toBe(mockElement);
+        });
+
+        it(`should return a 200 OK with a filtered collection that has been filtered using query operators
+        if there are params provided that contain query operators.`, () => {
+            let mockElement = { name: 'John' };
+            resource.collection.push(mockElement);
+            spyOn(MockResource, '_query').and.callThrough();
+
+            let response = resource.respondToGET(null, null, null, null, { name_in: 'jo' });
+            expect(MockResource._query).toHaveBeenCalledWith(mockElement.name, 'jo', 'name_in');
             expect(response[0]).toBe(200);
             expect(response[1]).toEqual([mockElement]);
 

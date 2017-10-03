@@ -158,7 +158,7 @@ describe('MockResource', () => {
             spyOn(MockResource, '_query').and.callThrough();
 
             let response = resource.respondToGET(null, null, null, null, { name: 'John' });
-            expect(MockResource._query).toHaveBeenCalledWith(mockElement.name, 'John', 'name');
+            expect(MockResource._query).toHaveBeenCalledWith(mockElement.name, 'John', null);
             expect(response[0]).toBe(200);
             expect(response[1]).toEqual([mockElement]);
 
@@ -173,7 +173,7 @@ describe('MockResource', () => {
             spyOn(MockResource, '_query').and.callThrough();
 
             let response = resource.respondToGET(null, null, null, null, { name_in: 'jo' });
-            expect(MockResource._query).toHaveBeenCalledWith(mockElement.name, 'jo', 'name_in');
+            expect(MockResource._query).toHaveBeenCalledWith(mockElement.name, 'jo', '_in');
             expect(response[0]).toBe(200);
             expect(response[1]).toEqual([mockElement]);
 

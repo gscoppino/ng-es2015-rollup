@@ -24,14 +24,14 @@ class MockResource {
         return JSON.parse(JSON.stringify(value));
     }
 
-    static _query(modelValue, queryValue, param) {
+    static _query(modelValue, queryValue, operator) {
         if (typeof modelValue !== typeof queryValue) {
             return false;
         }
 
         switch(typeof modelValue) {
             case 'string':
-                if (param.endsWith('_in')) {
+                if (operator === '_in') {
                     return modelValue.toLowerCase().includes(queryValue.toLowerCase());
                 } else {
                     return modelValue.toLowerCase() === queryValue.toLowerCase();
@@ -39,9 +39,9 @@ class MockResource {
             case 'boolean':
                 return modelValue === queryValue;
             case 'number':
-                if (param.endsWith('_lt')) {
+                if (operator === '_lt') {
                     return modelValue < queryValue;
-                } else if (param.endsWith('_gt')) {
+                } else if (operator === '_gt') {
                     return modelValue > queryValue;
                 } else {
                     return modelValue === queryValue;
@@ -73,11 +73,14 @@ class MockResource {
                 .filter(element =>
                     Object.keys(params)
                         .reduce((accumulator, currentParam) => {
-                            let propName = currentParam.replace(/_in|_gt|_lt$/, '');
-                            // TODO: Keep match of operator string and pass into _query function instead of the whole parameter name.
+                            let queryOperator = null;
+                            let propName = currentParam.replace(/_in|_gt|_lt$/, (match) => {
+                                queryOperator = match;
+                                return '';
+                            });
 
                             return accumulator === true && MockResource
-                                ._query(element[propName], params[currentParam], currentParam);
+                                ._query(element[propName], params[currentParam], queryOperator);
                         }, true)))];
         }
 

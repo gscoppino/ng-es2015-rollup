@@ -152,6 +152,9 @@ class MockResource {
             return [404, `Nested resource ${params.nestedName} for resource ${this.name} not found.`];
         }
 
+        // Avoid directly mutating params
+        params = MockResource._immutable(params);
+
         let id = params.id;
 
         // Reconfigure the params object to a form that can be used by the nested resource
@@ -176,18 +179,30 @@ class MockResource {
     }
 }
 
-MockResourceFactory.$inject = ['$httpBackend'];
+MockResourceFactory.$inject = ['$log', '$httpBackend'];
 /**
  * Factory to create mock RESTful resources.
  * @memberof app/services/ApiMockBackendFactory
  * @returns {MockResourceFactory}
  */
-function MockResourceFactory($httpBackend) {
+function MockResourceFactory($log, $httpBackend) {
     /**
      * A factory for new MockResource's.
      * @interface MockResourceFactory
      */
-    let factory = {    
+    let factory = {
+        _logHTTPEvent: function (request, response) {
+            $log.log('' +
+                '---------\n' +
+                'Request: ', request[0], request[1], '\n' +
+                '\t- Data: ', request[2], '\n' +
+                '\t- Headers: ', request[3], '\n' +
+                '\t- Params: ', request[4], '\n' +
+                'Response: ', response[0], '\n' +
+                '\t- Data: ', response[1], '\n' +
+                '---------');
+        },
+
         /**
          * Create a mock RESTful resource.
          * @name MockResourceFactory#create
@@ -196,16 +211,58 @@ function MockResourceFactory($httpBackend) {
          * @param [fixtureData=[]] {Object[]} - the initial data fixtures for the resource.
          * @param fixtureData[].id {number} - the id of the element.
          * @param [nestedMockResources=[]] {MockResource[]} - the nested resources of this MockResource.
+         * @param loggerEnabled {boolean} - whether to log requests and their responses.
          */
-        create: function(name, fixtureData=[], nestedMockResources=[]) {
+        create: function(name, fixtureData=[], nestedMockResources=[], loggerEnabled=false) {
             let resource = new MockResource(name, fixtureData, nestedMockResources);
 
-            $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id/:nestedName/:nestedId?`).respond(resource.respondToNestedGET.bind(resource));
-            $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id?`).respond(resource.respondToGET.bind(resource));
-            $httpBackend.whenRoute('POST', `${API_BASE}/${name}/`).respond(resource.respondToPOST.bind(resource));
-            $httpBackend.whenRoute('POST', `${API_BASE}/${name}`).respond(resource.respondToPOST.bind(resource));
-            $httpBackend.whenRoute('PUT', `${API_BASE}/${name}/:id`).respond(resource.respondToPUT.bind(resource));
-            $httpBackend.whenRoute('DELETE', `${API_BASE}/${name}/:id`).respond(resource.respondToDELETE.bind(resource));
+            $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id/:nestedName/:nestedId?`)
+                .respond((...request) => {
+                    let response = resource.respondToNestedGET(...request);
+                    if (loggerEnabled) this._logHTTPEvent(request, response);
+
+                    return response;
+                });
+
+            $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id?`)
+                .respond((...request) => {
+                    let response = resource.respondToGET(...request);
+                    if (loggerEnabled) this._logHTTPEvent(request, response);
+
+                    return response;
+                });
+
+            $httpBackend.whenRoute('POST', `${API_BASE}/${name}/`)
+                .respond((...request) => {
+                    let response = resource.respondToPOST(...request);
+                    if (loggerEnabled) this._logHTTPEvent(request, response);
+
+                    return response;
+                });
+
+            $httpBackend.whenRoute('POST', `${API_BASE}/${name}`)
+                .respond((...request) => {
+                    let response = resource.respondToPOST(...request);
+                    if (loggerEnabled) this._logHTTPEvent(request, response);
+
+                    return response;
+                });
+
+            $httpBackend.whenRoute('PUT', `${API_BASE}/${name}/:id`)
+                .respond((...request) => {
+                    let response = resource.respondToPUT(...request);
+                    if (loggerEnabled) this._logHTTPEvent(request, response);
+
+                    return response;
+                });
+
+            $httpBackend.whenRoute('DELETE', `${API_BASE}/${name}/:id`)
+                .respond((...request) => {
+                    let response = resource.respondToDELETE(...request);
+                    if (loggerEnabled) this._logHTTPEvent(request, response);
+
+                    return response;
+                });
 
             return resource;
         }

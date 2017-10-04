@@ -10,8 +10,8 @@ import ApiMockBackendFactoryModule from 'app/common/services/ApiMockBackendFacto
 createMockApi.$inject = ['$httpBackend', 'MockResourceFactory'];
 function createMockApi($httpBackend, MockResourceFactory) {
 
-    let usersResource = MockResourceFactory.create('users', MOCK_USERS);
-    MockResourceFactory.create('groups', MOCK_GROUPS, [usersResource]);
+    let usersResource = MockResourceFactory.create('users', MOCK_USERS, [], true);
+    MockResourceFactory.create('groups', MOCK_GROUPS, [usersResource], true);
 
     $httpBackend.whenRoute('GET', API_BASE)
         .respond(() => [200, 'You have hit the mock api! If this is in error, remove any dependencies to mock.js in the app.']);

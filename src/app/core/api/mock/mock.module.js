@@ -10,14 +10,13 @@ import ApiMockBackendFactoryModule from 'app/common/services/ApiMockBackendFacto
 createMockApi.$inject = ['$httpBackend', 'MockResourceFactory'];
 function createMockApi($httpBackend, MockResourceFactory) {
 
-    let usersResource = MockResourceFactory.create('users', {
+    MockResourceFactory.create('users', {
         fixtureData: MOCK_USERS,
         logHTTPEvents: true
     });
 
     MockResourceFactory.create('groups', {
         fixtureData: MOCK_GROUPS,
-        nestedResources: [usersResource],
         logHTTPEvents: true
     });
 

@@ -17,21 +17,10 @@ describe('MockResource', () => {
         expect(new MockResource('test').highestId).toBe(0);
     });
 
-    it('should not have any nested resources by default.', () => {
-        expect(new MockResource('test').nestedResources).toEqual([]);
-    });
-
-    it('should define a value that can be used to query a foreign relationship.', () => {
-        expect(new MockResource('test').nestedFK).toBe('test');
-        // Should convert resource name to singular if plural
-        expect(new MockResource('tests').nestedFK).toBe('test');
-    });
-
     beforeEach(() => {
         nestedResource = new MockResource('test2');
         resource = new MockResource('test', {
-            fixtureData: mockCollection,
-            nestedResources: [nestedResource]
+            fixtureData: mockCollection
         });
     });
 
@@ -44,10 +33,6 @@ describe('MockResource', () => {
 
     it('should start highest ID at the top value in the collection passed.', () => {
         expect(resource.highestId).toBe(1);
-    });
-
-    it('should initialize with the given nested resources, if passed.', () => {
-        expect(resource.nestedResources).toContain(nestedResource);
     });
 
     describe('_getHighestId', () => {
@@ -263,46 +248,6 @@ describe('MockResource', () => {
             expect(response[1]).toEqual(jasmine.any(String));
         });
     });
-
-    describe('respondToNestedGET', () => {
-        let newCollection = [{ id: 1 }], newResource;
-        beforeEach(() => {
-            newResource = new MockResource('test2', {
-                fixtureData: newCollection,
-                nestedResources: [resource]
-            });
-            spyOn(resource, 'respondToGET').and.callThrough();
-        });
-
-        it('should invoke the GET handler on the nested resource, passing the requested resource id as a foreign key.', () => {
-            newResource.respondToNestedGET(null, null, null, null, { id: 1, nestedName: resource.name });
-            expect(resource.respondToGET).toHaveBeenCalledWith(null, null, null, null, { [newResource.nestedFK]: 1 });
-        });
-
-        it('should invoke the GET handler on the nested resource, passing the requested resource id as a foreign key, and any query parameters through.', () => {
-            newResource.respondToNestedGET(null, null, null, null, { id: 1, nestedName: resource.name, foo: 'bar' });
-            expect(resource.respondToGET).toHaveBeenCalledWith(null, null, null, null, { [newResource.nestedFK]: 1, foo: 'bar' });
-        });
-
-        it('should invoke the GET handler on the nested resource, passing the nested id as the id, and not passing any query parameters through.', () => {
-            newResource.respondToNestedGET(null, null, null, null, { id: 1, nestedName: resource.name, nestedId: 1, foo: 'bar' });
-            expect(resource.respondToGET).toHaveBeenCalledWith(null, null, null, null, { id: 1 });
-        });
-
-        it('should return a 404 NOT FOUND when a resource with the nestedName is not present in its list of nested resources.', () => {
-            let response = newResource.respondToNestedGET(null, null, null, null, { id: 1, nestedName: null });
-            expect(resource.respondToGET).not.toHaveBeenCalled();
-            expect(response[0]).toBe(404);
-            expect(response[1]).toEqual(jasmine.any(String));
-        });
-
-        it('should return a 404 NOT FOUND when the nested resource with the nestedId is not associated with this resource.', () => {
-            let response = newResource.respondToNestedGET(null, null, null, null, { id: 1, nestedName: resource.name, nestedId: 1 });
-            expect(resource.respondToGET).toHaveBeenCalledWith(null, null, null, null, { id: 1 });
-            expect(response[0]).toBe(404);
-            expect(response[1]).toEqual(jasmine.any(String));
-        });
-    });
 });
 
 describe('MockResourceFactory', () => {
@@ -325,18 +270,16 @@ describe('MockResourceFactory', () => {
         it('should create correct GET/POST/PUT/DELETE routes for the passed collection name and define responses.', () => {
             let resource = MockResourceFactory.create('users');
 
-            expect($httpBackend.whenRoute).toHaveBeenCalledWith('GET', `${API_BASE}/users/:id/:nestedName/:nestedId?`);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('GET', `${API_BASE}/users/:id?`);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('POST', `${API_BASE}/users`);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('POST', `${API_BASE}/users/`);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('PUT', `${API_BASE}/users/:id`);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('DELETE', `${API_BASE}/users/:id`);
-            expect(mockRespondDefinitionFn.calls.count()).toBe(6);
+            expect(mockRespondDefinitionFn.calls.count()).toBe(5);
         });
 
         it('should call appropriate functions in response handlers.', () => {
             let resource = MockResourceFactory.create('users');
-            spyOn(resource, 'respondToNestedGET').and.returnValue('the response');
             spyOn(resource, 'respondToGET').and.returnValue('the response');
             spyOn(resource, 'respondToPOST').and.returnValue('the response');
             spyOn(resource, 'respondToPUT').and.returnValue('the response');
@@ -349,9 +292,7 @@ describe('MockResourceFactory', () => {
                     expect(response).toBe('the response');
                 });
 
-            expect(resource.respondToNestedGET).toHaveBeenCalled();
             expect(resource.respondToGET).toHaveBeenCalled();
-            expect(resource.respondToNestedGET).toHaveBeenCalled();
             expect(resource.respondToPOST).toHaveBeenCalled();
             expect(resource.respondToPUT).toHaveBeenCalled();
             expect(resource.respondToDELETE).toHaveBeenCalled();
@@ -361,7 +302,6 @@ describe('MockResourceFactory', () => {
             let resource = MockResourceFactory.create('users', {
                 logHTTPEvents: true
             });
-            spyOn(resource, 'respondToNestedGET').and.returnValue('the response');
             spyOn(resource, 'respondToGET').and.returnValue('the response');
             spyOn(resource, 'respondToPOST').and.returnValue('the response');
             spyOn(resource, 'respondToPUT').and.returnValue('the response');
@@ -378,7 +318,6 @@ describe('MockResourceFactory', () => {
 
         it('should not log HTTP data in response handlers if not configured.', () => {
             let resource = MockResourceFactory.create('users');
-            spyOn(resource, 'respondToNestedGET').and.returnValue('the response');
             spyOn(resource, 'respondToGET').and.returnValue('the response');
             spyOn(resource, 'respondToPOST').and.returnValue('the response');
             spyOn(resource, 'respondToPUT').and.returnValue('the response');

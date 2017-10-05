@@ -5,12 +5,12 @@ import { API_BASE } from 'app/core/api/api.module.js';
  * @memberof app/services/ApiMockBackendFactory
  */
 class MockResource {
-    constructor(name, fixtureData=[], nestedMockResources=[]) {
+    constructor(name, options={}) {
         this.name = name;
-        this.collection = MockResource._immutable(fixtureData);
-        this.highestId = MockResource._getHighestId(fixtureData);
+        this.collection = Array.isArray(options.fixtureData) ? MockResource._immutable(options.fixtureData) : [];
+        this.highestId = MockResource._getHighestId(this.collection);
 
-        this.nestedResources = nestedMockResources;
+        this.nestedResources = Array.isArray(options.nestedResources) ? options.nestedResources : [];
         this.nestedFK = name.endsWith('s') ? name.slice(0, -1) : name; // This is exposed as a convenience; its just the singular form of the resource name.
     }
 
@@ -207,19 +207,23 @@ function MockResourceFactory($log, $httpBackend) {
          * Create a mock RESTful resource.
          * @name MockResourceFactory#create
          * @function
-         * @param name {string} - the name of the resource. Must be pluralized.
-         * @param [fixtureData=[]] {Object[]} - the initial data fixtures for the resource.
-         * @param fixtureData[].id {number} - the id of the element.
-         * @param [nestedMockResources=[]] {MockResource[]} - the nested resources of this MockResource.
-         * @param loggerEnabled {boolean} - whether to log requests and their responses.
+         * @param name {string} - the name of the resource. Should be pluralized.
+         * @param [options] {Object}
+         * @param options.fixtureData {Object[]} - the initial data fixtures for the resource.
+         * @param options.fixtureData[].id {number} - the id of the element.
+         * @param options.nestedResources {MockResource[]} - the nested resources of this MockResource.
+         * @param options.logHTTPEvents {boolean} - whether to log requests and their responses.
          */
-        create: function(name, fixtureData=[], nestedMockResources=[], loggerEnabled=false) {
-            let resource = new MockResource(name, fixtureData, nestedMockResources);
+        create: function(name, options={}) {
+            const logHTTPEvents = options.logHTTPEvents;
+            delete options.logHTTPEvents;
+
+            let resource = new MockResource(name, options);
 
             $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id/:nestedName/:nestedId?`)
                 .respond((...request) => {
                     let response = resource.respondToNestedGET(...request);
-                    if (loggerEnabled) this._logHTTPEvent(request, response);
+                    if (logHTTPEvents) this._logHTTPEvent(request, response);
 
                     return response;
                 });
@@ -227,7 +231,7 @@ function MockResourceFactory($log, $httpBackend) {
             $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id?`)
                 .respond((...request) => {
                     let response = resource.respondToGET(...request);
-                    if (loggerEnabled) this._logHTTPEvent(request, response);
+                    if (logHTTPEvents) this._logHTTPEvent(request, response);
 
                     return response;
                 });
@@ -235,7 +239,7 @@ function MockResourceFactory($log, $httpBackend) {
             $httpBackend.whenRoute('POST', `${API_BASE}/${name}/`)
                 .respond((...request) => {
                     let response = resource.respondToPOST(...request);
-                    if (loggerEnabled) this._logHTTPEvent(request, response);
+                    if (logHTTPEvents) this._logHTTPEvent(request, response);
 
                     return response;
                 });
@@ -243,7 +247,7 @@ function MockResourceFactory($log, $httpBackend) {
             $httpBackend.whenRoute('POST', `${API_BASE}/${name}`)
                 .respond((...request) => {
                     let response = resource.respondToPOST(...request);
-                    if (loggerEnabled) this._logHTTPEvent(request, response);
+                    if (logHTTPEvents) this._logHTTPEvent(request, response);
 
                     return response;
                 });
@@ -251,7 +255,7 @@ function MockResourceFactory($log, $httpBackend) {
             $httpBackend.whenRoute('PUT', `${API_BASE}/${name}/:id`)
                 .respond((...request) => {
                     let response = resource.respondToPUT(...request);
-                    if (loggerEnabled) this._logHTTPEvent(request, response);
+                    if (logHTTPEvents) this._logHTTPEvent(request, response);
 
                     return response;
                 });
@@ -259,7 +263,7 @@ function MockResourceFactory($log, $httpBackend) {
             $httpBackend.whenRoute('DELETE', `${API_BASE}/${name}/:id`)
                 .respond((...request) => {
                     let response = resource.respondToDELETE(...request);
-                    if (loggerEnabled) this._logHTTPEvent(request, response);
+                    if (logHTTPEvents) this._logHTTPEvent(request, response);
 
                     return response;
                 });

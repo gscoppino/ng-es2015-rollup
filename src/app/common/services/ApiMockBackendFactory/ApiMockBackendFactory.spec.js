@@ -29,7 +29,10 @@ describe('MockResource', () => {
 
     beforeEach(() => {
         nestedResource = new MockResource('test2');
-        resource = new MockResource('test', mockCollection, [nestedResource]);
+        resource = new MockResource('test', {
+            fixtureData: mockCollection,
+            nestedResources: [nestedResource]
+        });
     });
 
     it('should initialize with the given collection, if passed.', () => {
@@ -264,7 +267,10 @@ describe('MockResource', () => {
     describe('respondToNestedGET', () => {
         let newCollection = [{ id: 1 }], newResource;
         beforeEach(() => {
-            newResource = new MockResource('test2', newCollection, [resource]);
+            newResource = new MockResource('test2', {
+                fixtureData: newCollection,
+                nestedResources: [resource]
+            });
             spyOn(resource, 'respondToGET').and.callThrough();
         });
 
@@ -300,9 +306,10 @@ describe('MockResource', () => {
 });
 
 describe('MockResourceFactory', () => {
-    let MockResourceFactory;
+    let $log, MockResourceFactory;
 
     beforeEach(angular.mock.inject(($injector) => {
+        $log = $injector.get('$log');
         MockResourceFactory = $injector.get('MockResourceFactory');
     }));
 
@@ -316,7 +323,8 @@ describe('MockResourceFactory', () => {
         }));
 
         it('should create correct GET/POST/PUT/DELETE routes for the passed collection name and define responses.', () => {
-            MockResourceFactory.create('users');
+            let resource = MockResourceFactory.create('users');
+
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('GET', `${API_BASE}/users/:id/:nestedName/:nestedId?`);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('GET', `${API_BASE}/users/:id?`);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('POST', `${API_BASE}/users`);
@@ -324,6 +332,65 @@ describe('MockResourceFactory', () => {
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('PUT', `${API_BASE}/users/:id`);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('DELETE', `${API_BASE}/users/:id`);
             expect(mockRespondDefinitionFn.calls.count()).toBe(6);
+        });
+
+        it('should call appropriate functions in response handlers.', () => {
+            let resource = MockResourceFactory.create('users');
+            spyOn(resource, 'respondToNestedGET').and.returnValue('the response');
+            spyOn(resource, 'respondToGET').and.returnValue('the response');
+            spyOn(resource, 'respondToPOST').and.returnValue('the response');
+            spyOn(resource, 'respondToPUT').and.returnValue('the response');
+            spyOn(resource, 'respondToDELETE').and.returnValue('the response');
+
+            mockRespondDefinitionFn.calls.allArgs()
+                .forEach(argsForCall => {
+                    expect(argsForCall[0]).toEqual(jasmine.any(Function));
+                    let response = argsForCall[0]();
+                    expect(response).toBe('the response');
+                });
+
+            expect(resource.respondToNestedGET).toHaveBeenCalled();
+            expect(resource.respondToGET).toHaveBeenCalled();
+            expect(resource.respondToNestedGET).toHaveBeenCalled();
+            expect(resource.respondToPOST).toHaveBeenCalled();
+            expect(resource.respondToPUT).toHaveBeenCalled();
+            expect(resource.respondToDELETE).toHaveBeenCalled();
+        });
+
+        it('should log HTTP data in response handlers if configured.', () => {
+            let resource = MockResourceFactory.create('users', {
+                logHTTPEvents: true
+            });
+            spyOn(resource, 'respondToNestedGET').and.returnValue('the response');
+            spyOn(resource, 'respondToGET').and.returnValue('the response');
+            spyOn(resource, 'respondToPOST').and.returnValue('the response');
+            spyOn(resource, 'respondToPUT').and.returnValue('the response');
+            spyOn(resource, 'respondToDELETE').and.returnValue('the response');
+
+            mockRespondDefinitionFn.calls.allArgs()
+                .forEach(argsForCall => {
+                    expect(argsForCall[0]).toEqual(jasmine.any(Function));
+                    $log.reset();
+                    argsForCall[0]();
+                    expect($log.log.logs.length).toBe(1);
+                });
+        });
+
+        it('should not log HTTP data in response handlers if not configured.', () => {
+            let resource = MockResourceFactory.create('users');
+            spyOn(resource, 'respondToNestedGET').and.returnValue('the response');
+            spyOn(resource, 'respondToGET').and.returnValue('the response');
+            spyOn(resource, 'respondToPOST').and.returnValue('the response');
+            spyOn(resource, 'respondToPUT').and.returnValue('the response');
+            spyOn(resource, 'respondToDELETE').and.returnValue('the response');
+
+            mockRespondDefinitionFn.calls.allArgs()
+                .forEach(argsForCall => {
+                    expect(argsForCall[0]).toEqual(jasmine.any(Function));
+                    $log.reset();
+                    argsForCall[0]();
+                    expect($log.log.logs.length).toBe(0);
+                });
         });
 
         it('should return the newly created MockResource.', () => {

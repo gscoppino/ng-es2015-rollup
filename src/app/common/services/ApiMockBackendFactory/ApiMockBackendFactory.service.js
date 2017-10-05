@@ -9,9 +9,6 @@ class MockResource {
         this.name = name;
         this.collection = Array.isArray(options.fixtureData) ? MockResource._immutable(options.fixtureData) : [];
         this.highestId = MockResource._getHighestId(this.collection);
-
-        this.nestedResources = Array.isArray(options.nestedResources) ? options.nestedResources : [];
-        this.nestedFK = name.endsWith('s') ? name.slice(0, -1) : name; // This is exposed as a convenience; its just the singular form of the resource name.
     }
 
     static _getHighestId(collection) {
@@ -140,43 +137,6 @@ class MockResource {
 
         return [200, `${name} with id ${params.id} not found.`];
     }
-
-    /**
-     * Sends fake response data for a GET request on the nested resource. The response data returned will be formatted correctly
-     * by $http. Method signature matches that provided to $httpBackend.when(...).response(<function>);
-     * This method does not modify the fake nested data store.
-     */
-    respondToNestedGET(method, url, data, headers, params) {
-        let nestedResource = this.nestedResources.find(resource => resource.name === params.nestedName);
-        if (!nestedResource) {
-            return [404, `Nested resource ${params.nestedName} for resource ${this.name} not found.`];
-        }
-
-        // Avoid directly mutating params
-        params = MockResource._immutable(params);
-
-        let id = params.id;
-
-        // Reconfigure the params object to a form that can be used by the nested resource
-        delete params.nestedName;
-
-        if (params.nestedId) {
-            params = { id: params.nestedId };
-        } else {
-            delete params.id;
-            delete params.nestedId;
-            params[this.nestedFK] = Number(id);
-        }
-
-        let response = nestedResource.respondToGET(method, url, data, headers, params);
-        // If we fetched an element of the nested resource by ID then we still need
-        // to check that the element found is associated with this resource.
-        if (!Array.isArray(response[1]) && response[1][this.nestedFK] !== Number(id)) {
-            return [404, 'Not Found'];
-        }
-
-        return response;
-    }
 }
 
 MockResourceFactory.$inject = ['$log', '$httpBackend'];
@@ -211,7 +171,6 @@ function MockResourceFactory($log, $httpBackend) {
          * @param [options] {Object}
          * @param options.fixtureData {Object[]} - the initial data fixtures for the resource.
          * @param options.fixtureData[].id {number} - the id of the element.
-         * @param options.nestedResources {MockResource[]} - the nested resources of this MockResource.
          * @param options.logHTTPEvents {boolean} - whether to log requests and their responses.
          */
         create: function(name, options={}) {
@@ -219,14 +178,6 @@ function MockResourceFactory($log, $httpBackend) {
             delete options.logHTTPEvents;
 
             let resource = new MockResource(name, options);
-
-            $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id/:nestedName/:nestedId?`)
-                .respond((...request) => {
-                    let response = resource.respondToNestedGET(...request);
-                    if (logHTTPEvents) this._logHTTPEvent(request, response);
-
-                    return response;
-                });
 
             $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id?`)
                 .respond((...request) => {

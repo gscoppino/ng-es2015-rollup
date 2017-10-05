@@ -27,8 +27,7 @@ the code is running in.
 * Use future CSS features now. Write stylesheets using upcoming CSS features such as selector nesting, variables, and the latest CSS properties (without vendor prefixes).
 Import your local CSS or CSS from NPM using spec-compliant `@import` syntax.  This is made possible using [PostCSS](http://postcss.org/), [CSSNext](http://cssnext.io/),
 and [Autoprefixer](https://autoprefixer.github.io/). The CSS will be bundled to work in today's browsers (with customizable ranges).
-* Supports backendless development (enabled by default). This is accomplished through the use of [ngMockE2E and $httpBackend](https://angularjs.org/). Nested resources with ManyToOne
-relationships are supported (and OneToOne, though a list structure of one element is returned).
+* Supports backendless development (enabled by default). This is accomplished through the use of [ngMockE2E and $httpBackend](https://angularjs.org/).
 * Generator scripts for scaffolding new directives, components, and services from the command line.
 
 Compatibility:

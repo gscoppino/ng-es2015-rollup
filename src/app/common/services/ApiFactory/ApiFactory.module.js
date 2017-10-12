@@ -9,6 +9,8 @@ export { ApiFactoryProvider, RESTApi };
 /**
  * @module ApiFactoryModule
  * @requires HttpModule
+ * @description Provides a configurable factory that can be
+ *   used to create objects to interface with REST API resources.
  */
 export default angular.module('app.services.ApiFactory', [
     HttpModule

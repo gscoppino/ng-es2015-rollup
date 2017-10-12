@@ -1,6 +1,6 @@
 /**
- * Class that models RESTful resources by providing methods to interact with a resource.
  * @memberof module:ApiFactoryModule
+ * @classdesc Models RESTful resources by providing methods to interact with a resource.
  */
 class RESTApi {
     /**
@@ -279,6 +279,9 @@ class RESTApi {
 
 /**
  * @memberof module:ApiFactoryModule
+ * @classdesc Takes an API base URL in the configuration phase and returns
+ *   a factory that can be used to create objects to interface with REST
+ *   API resources under the given base URL.
  */
 class ApiFactoryProvider {
     constructor() {
@@ -286,7 +289,7 @@ class ApiFactoryProvider {
     }
 
     /**
-     * Get the ApiFactory.
+     * Returns the ApiFactory.
      * @method
      * @returns {ApiFactory}
      */
@@ -299,7 +302,7 @@ class ApiFactoryProvider {
              */
             let factory = {
                 /**
-                 * Create a RESTApi
+                 * Create a RESTApi.
                  * @name ApiFactory#create
                  * @function
                  * @param {String} name - the name of the API

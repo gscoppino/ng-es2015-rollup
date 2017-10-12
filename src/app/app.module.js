@@ -17,7 +17,8 @@ import AppComponent from './app.component.js';
  * @requires StoreModule
  * @requires RoutesModule
  * @requires LoaderSpinnerModule
- * @desc The root module of the application.
+ * @description Provides the root component of the application and
+ *   initializes all other needed modules for the application.
  */
 export default angular.module('app', [
     AngularRouteModule,

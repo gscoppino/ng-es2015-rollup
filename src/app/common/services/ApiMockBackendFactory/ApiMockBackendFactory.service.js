@@ -142,7 +142,7 @@ class MockResource {
 MockResourceFactory.$inject = ['$log', '$httpBackend'];
 /**
  * Factory to create mock RESTful resources.
- * @memberof app/services/ApiMockBackendFactory
+ * @memberof module:ApiMockBackendFactoryModule
  * @returns {MockResourceFactory}
  */
 function MockResourceFactory($log, $httpBackend) {
@@ -172,6 +172,7 @@ function MockResourceFactory($log, $httpBackend) {
          * @param options.fixtureData {Object[]} - the initial data fixtures for the resource.
          * @param options.fixtureData[].id {number} - the id of the element.
          * @param options.logHTTPEvents {boolean} - whether to log requests and their responses.
+         * @returns {MockResource} the newly created mock resource.
          */
         create: function(name, options={}) {
             const logHTTPEvents = options.logHTTPEvents;

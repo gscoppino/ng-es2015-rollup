@@ -13,7 +13,7 @@
     "clean": "gulp clean",
     "coverage-ci": "npm run test-unit && cat dist/coverage/lcov/lcov.info | node node_modules/coveralls/bin/coveralls.js",
     "develop": "gulp develop",
-    "documentation": "jsdoc -R README.md -P package.json -r src -d dist/documentation",
+    "documentation": "gulp clean:docs && jsdoc -c jsdoc.conf.json",
     "generate-component": "gulp generate:component",
     "generate-directive": "gulp generate:directive",
     "generate-service": "gulp generate:service",

@@ -1,8 +1,6 @@
 /**
- * @memberof app/components/loader-spinner
+ * @memberof module:LoaderSpinnerModule
  * @name LoaderSpinnerComponent
- * @desc A component that renders an SVG loading spinner.
+ * @description A component that renders an SVG loading spinner.
  */
-export default {
-
-};
+export default {};

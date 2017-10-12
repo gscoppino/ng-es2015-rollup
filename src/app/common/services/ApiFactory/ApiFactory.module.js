@@ -7,7 +7,8 @@ import ApiFactoryProvider, { RESTApi } from './ApiFactory.service.js';
 export { ApiFactoryProvider, RESTApi };
 
 /**
- * @namespace app/services/ApiFactory
+ * @module ApiFactoryModule
+ * @requires HttpModule
  */
 export default angular.module('app.services.ApiFactory', [
     HttpModule

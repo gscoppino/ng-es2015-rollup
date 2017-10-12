@@ -1,6 +1,6 @@
 /**
  * Class that models RESTful resources by providing methods to interact with a resource.
- * @memberof app/services/ApiFactory
+ * @memberof module:ApiFactoryModule
  */
 class RESTApi {
     /**
@@ -278,7 +278,7 @@ class RESTApi {
 }
 
 /**
- * @memberof app/services/ApiFactory
+ * @memberof module:ApiFactoryModule
  */
 class ApiFactoryProvider {
     constructor() {

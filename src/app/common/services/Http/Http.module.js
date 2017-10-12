@@ -1,12 +1,12 @@
 import angular from 'angular';
 
-import Http from './Http.service.js';
+import HttpService from './Http.service.js';
 
-export { Http };
+export { HttpService };
 
 /**
- * @namespace app/services/Http
+ * @module HttpModule
  */
 export default angular.module('app.services.Http', [])
-    .service('Http', Http)
+    .service('Http', HttpService)
     .name;

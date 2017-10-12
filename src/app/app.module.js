@@ -11,7 +11,12 @@ import AppComponentTemplate from './app.component.html';
 import AppComponent from './app.component.js';
 
 /**
- * @namespace app
+ * @module AppModule
+ * @requires ConfigModule
+ * @requires ApiModule
+ * @requires StoreModule
+ * @requires RoutesModule
+ * @requires LoaderSpinnerModule
  * @desc The root module of the application.
  */
 export default angular.module('app', [

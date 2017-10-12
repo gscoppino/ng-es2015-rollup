@@ -6,7 +6,7 @@ import MockResourceFactoryService, { MockResource } from './ApiMockBackendFactor
 export { MockResource };
 
 /**
- * @namespace app/services/ApiMockBackendFactory
+ * @module ApiMockBackendFactoryModule
  */
 export default angular.module('app.services.ApiMockBackendFactory', [
     'ngMockE2E'

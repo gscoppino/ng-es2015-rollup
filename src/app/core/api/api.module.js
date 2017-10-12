@@ -6,6 +6,10 @@ import ApiFactoryModule from 'app/common/services/ApiFactory/ApiFactory.module.j
 const API_BASE = '/api';
 
 ApiConfig.$inject = ['ApiFactoryProvider'];
+/**
+ * @memberof module:ApiModule
+ * @description Configures [ApiFactoryProvider]{@link ApiFactoryProvider} with the API base URL.
+ */
 function ApiConfig(ApiFactoryProvider) {
     ApiFactoryProvider.setBaseUrl(API_BASE);
 }
@@ -13,8 +17,10 @@ function ApiConfig(ApiFactoryProvider) {
 export { API_BASE, ApiConfig };
 
 /**
- * @namespace app/api
- * @desc Configures the application to work with its API.
+ * @module ApiModule
+ * @requires MockBackendModule
+ * @requires ApiFactoryModule
+ * @description Configures the application to work with its API.
  */
 export default angular.module('app.api', [
     MockBackendModule, // Remove if disabling the mock backend

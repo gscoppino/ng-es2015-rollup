@@ -1,5 +1,5 @@
 /**
- * Controller for the application root component.
+ * @description Controller for the application root component.
  */
 class AppController {
 
@@ -56,13 +56,14 @@ class AppController {
 }
 
 /**
- * @memberof app
- * @name AppComponent
- * @desc The root component of the application.
+ * @memberof module:AppModule
+ * @description The root component of the application.
  * @property controller {function} - [AppController]{@link AppController}
  * @property bindings {object} - [AppController.bindings]{@link AppController.bindings}
  */
-export default {
+const AppComponent = {
     controller: AppController,
     bindings: AppController.bindings
 };
+
+export default AppComponent;

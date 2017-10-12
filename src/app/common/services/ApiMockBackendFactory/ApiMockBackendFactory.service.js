@@ -2,7 +2,7 @@ import { API_BASE } from 'app/core/api/api.module.js';
 
 /**
  * An instance of the class represents a mocked RESTful resource.
- * @memberof app/services/ApiMockBackendFactory
+ * @memberof module:ApiMockBackendFactoryModule
  */
 class MockResource {
     constructor(name, options={}) {

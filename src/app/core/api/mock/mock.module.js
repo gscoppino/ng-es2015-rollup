@@ -8,6 +8,10 @@ import ApiMockBackendFactoryModule from 'app/common/services/ApiMockBackendFacto
 
 
 createMockApi.$inject = ['$httpBackend', 'MockResourceFactory'];
+/**
+ * @memberof module:MockBackendModule
+ * @description Creates some mock API endpoints for use by the application.
+ */
 function createMockApi($httpBackend, MockResourceFactory) {
 
     MockResourceFactory.create('users', {
@@ -27,8 +31,9 @@ function createMockApi($httpBackend, MockResourceFactory) {
 export { createMockApi };
 
 /**
- * @namespace app/api/mock
- * @desc Creates a fake implementation of the backend API.
+ * @module MockBackendModule
+ * @requires ApiMockBackendFactoryModule
+ * @description Initializes the mock backend API.
  */
 export default angular.module('app.api.mock', [
     'ngMockE2E',

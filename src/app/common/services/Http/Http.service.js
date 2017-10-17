@@ -1,9 +1,9 @@
 /**
  * Class that proxies $http, adding some conveniences
  * such as request memoization and sequencing.
- * @memberof app/services/Http
+ * @memberof module:HttpModule
  */
-class Http {
+class HttpService {
     static get $inject() { return ['$q', '$http']; }
     constructor($q, $http) {
         Object.assign(this, { $q, $http });
@@ -130,4 +130,4 @@ class Http {
     }
 }
 
-export default Http;
+export default HttpService;

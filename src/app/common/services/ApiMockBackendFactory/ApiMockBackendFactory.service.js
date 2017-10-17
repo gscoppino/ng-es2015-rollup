@@ -2,13 +2,13 @@ import { API_BASE } from 'app/core/api/api.module.js';
 
 /**
  * An instance of the class represents a mocked RESTful resource.
- * @memberof app/services/ApiMockBackendFactory
+ * @memberof module:ApiMockBackendFactoryModule
  */
 class MockResource {
-    constructor(name, collection=[]) {
+    constructor(name, options={}) {
         this.name = name;
-        this.collection = MockResource._immutable(collection);
-        this.highestId = MockResource._getHighestId(collection);
+        this.collection = Array.isArray(options.fixtureData) ? MockResource._immutable(options.fixtureData) : [];
+        this.highestId = MockResource._getHighestId(this.collection);
     }
 
     static _getHighestId(collection) {
@@ -19,6 +19,39 @@ class MockResource {
 
     static _immutable(value) {
         return JSON.parse(JSON.stringify(value));
+    }
+
+    static _query(modelValue, queryValue, operator) {
+        if (typeof modelValue !== typeof queryValue) {
+            return false;
+        }
+
+        switch(typeof modelValue) {
+            case 'string':
+                if (operator === '_in') {
+                    return modelValue.toLowerCase().includes(queryValue.toLowerCase());
+                } else {
+                    return modelValue.toLowerCase() === queryValue.toLowerCase();
+                }
+            case 'boolean':
+                return modelValue === queryValue;
+            case 'number':
+                if (operator === '_lt') {
+                    return modelValue < queryValue;
+                } else if (operator === '_gt') {
+                    return modelValue > queryValue;
+                } else {
+                    return modelValue === queryValue;
+                }
+            default:
+                // Object (object, array, or null)
+                if (modelValue === null) {
+                    return queryValue === null;
+                } else {
+                    // Not bothering to compare objects/arrays
+                    return false;
+                }
+        }
     }
 
     /**
@@ -36,8 +69,16 @@ class MockResource {
             return [200, MockResource._immutable(this.collection
                 .filter(element =>
                     Object.keys(params)
-                        .reduce((accumulator, currentParam) =>
-                            accumulator === true && element[currentParam] === params[currentParam], true)))];
+                        .reduce((accumulator, currentParam) => {
+                            let queryOperator = null;
+                            let propName = currentParam.replace(/_in|_gt|_lt$/, (match) => {
+                                queryOperator = match;
+                                return '';
+                            });
+
+                            return accumulator === true && MockResource
+                                ._query(element[propName], params[currentParam], queryOperator);
+                        }, true)))];
         }
 
         let element = this.collection.find((element) => element.id === Number(params.id));
@@ -98,34 +139,88 @@ class MockResource {
     }
 }
 
-MockResourceFactory.$inject = ['$httpBackend'];
+MockResourceFactory.$inject = ['$log', '$httpBackend'];
 /**
  * Factory to create mock RESTful resources.
- * @memberof app/services/ApiMockBackendFactory
+ * @memberof module:ApiMockBackendFactoryModule
  * @returns {MockResourceFactory}
  */
-function MockResourceFactory($httpBackend) {
+function MockResourceFactory($log, $httpBackend) {
     /**
      * A factory for new MockResource's.
      * @interface MockResourceFactory
      */
-    let factory = {    
+    let factory = {
+        _logHTTPEvent: function (request, response) {
+            $log.log('' +
+                '---------\n' +
+                'Request: ', request[0], request[1], '\n' +
+                '\t- Data: ', request[2], '\n' +
+                '\t- Headers: ', request[3], '\n' +
+                '\t- Params: ', request[4], '\n' +
+                'Response: ', response[0], '\n' +
+                '\t- Data: ', response[1], '\n' +
+                '---------');
+        },
+
         /**
          * Create a mock RESTful resource.
          * @name MockResourceFactory#create
          * @function
-         * @param name {string} - the name of the resource.
-         * @param [collection=[]] {Object[]} - the collection representing the resource.
-         * @param collection[].id {number} - the id of the element.
+         * @param name {string} - the name of the resource. Should be pluralized.
+         * @param [options] {Object}
+         * @param options.fixtureData {Object[]} - the initial data fixtures for the resource.
+         * @param options.fixtureData[].id {number} - the id of the element.
+         * @param options.logHTTPEvents {boolean} - whether to log requests and their responses.
+         * @returns {MockResource} the newly created mock resource.
          */
-        create: function(name, collection=[]) {
-            let resource = new MockResource(name, collection);
+        create: function(name, options={}) {
+            const logHTTPEvents = options.logHTTPEvents;
+            delete options.logHTTPEvents;
 
-            $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id?`).respond(resource.respondToGET.bind(resource));
-            $httpBackend.whenRoute('POST', `${API_BASE}/${name}/`).respond(resource.respondToPOST.bind(resource));
-            $httpBackend.whenRoute('POST', `${API_BASE}/${name}`).respond(resource.respondToPOST.bind(resource));
-            $httpBackend.whenRoute('PUT', `${API_BASE}/${name}/:id`).respond(resource.respondToPUT.bind(resource));
-            $httpBackend.whenRoute('DELETE', `${API_BASE}/${name}/:id`).respond(resource.respondToDELETE.bind(resource));
+            let resource = new MockResource(name, options);
+
+            $httpBackend.whenRoute('GET', `${API_BASE}/${name}/:id?`)
+                .respond((...request) => {
+                    let response = resource.respondToGET(...request);
+                    if (logHTTPEvents) this._logHTTPEvent(request, response);
+
+                    return response;
+                });
+
+            $httpBackend.whenRoute('POST', `${API_BASE}/${name}/`)
+                .respond((...request) => {
+                    let response = resource.respondToPOST(...request);
+                    if (logHTTPEvents) this._logHTTPEvent(request, response);
+
+                    return response;
+                });
+
+            $httpBackend.whenRoute('POST', `${API_BASE}/${name}`)
+                .respond((...request) => {
+                    let response = resource.respondToPOST(...request);
+                    if (logHTTPEvents) this._logHTTPEvent(request, response);
+
+                    return response;
+                });
+
+            $httpBackend.whenRoute('PUT', `${API_BASE}/${name}/:id`)
+                .respond((...request) => {
+                    let response = resource.respondToPUT(...request);
+                    if (logHTTPEvents) this._logHTTPEvent(request, response);
+
+                    return response;
+                });
+
+            $httpBackend.whenRoute('DELETE', `${API_BASE}/${name}/:id`)
+                .respond((...request) => {
+                    let response = resource.respondToDELETE(...request);
+                    if (logHTTPEvents) this._logHTTPEvent(request, response);
+
+                    return response;
+                });
+
+            return resource;
         }
     };
 

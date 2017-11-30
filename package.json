@@ -72,7 +72,7 @@
     "sw-precache-webpack-plugin": "~0.11.x",
     "systemjs": "~0.20.x",
     "systemjs-plugin-babel": "~0.0.24",
-    "webpack": "~3.8.x",
+    "webpack": "~3.9.0",
     "yargs": "~8.0.x"
   },
   "dependencies": {

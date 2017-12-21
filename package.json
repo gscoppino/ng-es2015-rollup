@@ -52,7 +52,7 @@
     "gulp-template": "~4.0.x",
     "jasmine": "~2.8.x",
     "jsdoc": "~3.5.x",
-    "karma": "~1.7.x",
+    "karma": "~2.0.0",
     "karma-coverage": "~1.1.x",
     "karma-jasmine": "~1.1.x",
     "karma-phantomjs-launcher": "~1.0.x",

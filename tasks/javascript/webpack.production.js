@@ -7,6 +7,7 @@ import pathconfig from './pathconfig.js';
 
 // Disable emitting of sourcemaps.
 const WEBPACK_PRODUCTION_CONFIG = Object.assign({}, WEBPACK_CONFIG, {
+    mode: 'production',
     devtool: undefined
 });
 

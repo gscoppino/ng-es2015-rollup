@@ -30,9 +30,6 @@ WEBPACK_PRODUCTION_CONFIG.output = Object.assign({}, WEBPACK_PRODUCTION_CONFIG.o
 // Minify the resulting bundle.
 WEBPACK_PRODUCTION_CONFIG.plugins = [
     ...WEBPACK_PRODUCTION_CONFIG.plugins,
-    new webpack.optimize.UglifyJsPlugin({
-        sourceMap: false
-    }),
     new SWPrecacheWebpackPlugin({
         filename: 'sw.js',
         minify: true,

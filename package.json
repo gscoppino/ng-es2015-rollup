@@ -45,7 +45,7 @@
     "cssnano": "~3.10.x",
     "del": "~3.0.x",
     "eslint": "~4.8.x",
-    "eslint-loader": "~1.9.x",
+    "eslint-loader": "~2.0.x",
     "gulp": "~3.9.x",
     "gulp-htmlmin": "~3.0.x",
     "gulp-rename": "~1.2.x",
@@ -57,7 +57,7 @@
     "karma-jasmine": "~1.1.x",
     "karma-phantomjs-launcher": "~1.0.x",
     "karma-sourcemap-loader": "~0.3.x",
-    "karma-webpack": "~2.0.x",
+    "karma-webpack": "~3.0.x",
     "phantomjs-prebuilt": "~2.1.x",
     "postcss": "~6.0.x",
     "postcss-cssnext": "~3.0.x",
@@ -72,7 +72,7 @@
     "sw-precache-webpack-plugin": "~0.11.x",
     "systemjs": "~0.20.x",
     "systemjs-plugin-babel": "~0.0.24",
-    "webpack": "~3.8.x",
+    "webpack": "~4.8.x",
     "yargs": "~8.0.x"
   },
   "dependencies": {

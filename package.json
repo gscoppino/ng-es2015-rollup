@@ -39,7 +39,7 @@
     "babel-preset-es2015": "~6.24.x",
     "browser-sync": "~2.24.x",
     "coveralls": "~3.0.x",
-    "critical": "~0.8.x",
+    "critical": "~1.2.2",
     "cross-env": "~5.0.x",
     "cssnano": "~3.10.x",
     "del": "~3.0.x",

@@ -1,6 +1,5 @@
 import gulp from 'gulp';
 import browserSync from 'browser-sync';
-import historyApiMiddleware from 'connect-history-api-fallback';
 
 function startDevServer() {
     let staticServer = browserSync.create();
@@ -8,11 +7,9 @@ function startDevServer() {
     staticServer.init({
         port: 3000,
         ui: false,
+        single: true,
         server: {
-            baseDir: 'dist',
-            middleware: [
-                historyApiMiddleware({ index: '/index.html' })
-            ]
+            baseDir: 'dist'
         }
     });
 

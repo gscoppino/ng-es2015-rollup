@@ -11,13 +11,13 @@ export default {
     input: 'tasks/main.js',
     output: {
         file: 'gulpfile.js',
-        format: 'cjs'
+        sourcemap: false,
+        format: 'cjs',
+        interop: false
     },
     plugins: [
         babel({
             exclude: 'node_modules/**'
         })
-    ],
-    interop: false,
-    sourceMap: false
+    ]
 };

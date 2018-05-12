@@ -1,6 +1,8 @@
 import path from 'path';
 
 export default {
+    mode: 'development',
+
     // Output bundle as IIFE.
     target: 'web',
 

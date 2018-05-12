@@ -40,7 +40,7 @@
     "browser-sync": "~2.24.x",
     "coveralls": "~3.0.x",
     "critical": "~0.9.x",
-    "cross-env": "~5.0.x",
+    "cross-env": "~5.1.x",
     "cssnano": "~3.10.x",
     "del": "~3.0.x",
     "eslint": "~4.19.x",

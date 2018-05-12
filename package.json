@@ -43,7 +43,7 @@
     "cross-env": "~5.0.x",
     "cssnano": "~3.10.x",
     "del": "~3.0.x",
-    "eslint": "~4.8.x",
+    "eslint": "~4.19.x",
     "eslint-loader": "~2.0.x",
     "gulp": "~3.9.x",
     "gulp-htmlmin": "~4.0.x",

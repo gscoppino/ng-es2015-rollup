@@ -47,7 +47,7 @@
     "eslint": "~4.8.x",
     "eslint-loader": "~2.0.x",
     "gulp": "~3.9.x",
-    "gulp-htmlmin": "~4.0.0",
+    "gulp-htmlmin": "~4.0.x",
     "gulp-rename": "~1.2.x",
     "gulp-template": "~5.0.x",
     "jasmine": "~2.8.x",

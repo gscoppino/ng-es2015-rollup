@@ -20,7 +20,7 @@ function buildMarkupProduction() {
         }))
         .pipe(htmlmin({
             collapseWhitespace: true,
-            removeComments: true, // NOTE: This is safe to use with conditional comments,
+            removeComments: true, // NOTE: This is safe to use with conditional comments
             minifyCSS: true
         }))
         .pipe(gulp.dest('dist'));

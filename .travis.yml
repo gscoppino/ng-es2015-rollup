@@ -1,11 +1,8 @@
 language: node_js
 node_js:
     - "8"
-addons: # Literally taken from puppeteer's TravisCI config: https://github.com/GoogleChrome/puppeteer
-  apt:
-    packages:
-      # This is required to run new chrome on old trusty
-      - libnss3
+addons: # https://developers.google.com/web/updates/2017/06/headless-karma-mocha-chai
+  chrome: stable
 before_install:
     - npm install -g greenkeeper-lockfile@1
 before_script:

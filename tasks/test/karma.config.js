@@ -1,4 +1,8 @@
+import puppeteer from 'puppeteer';
 import WEBPACK_TESTING_CONFIG from './webpack.testing.js';
+
+// https://github.com/karma-runner/karma-chrome-launcher#headless-chromium-with-puppeteer
+process.env.CHROME_BIN = puppeteer.executablePath();
 
 export default {
     frameworks: ['jasmine'],
@@ -10,7 +14,7 @@ export default {
         'src/main.spec.js': ['webpack', 'sourcemap']
     },
     webpack: WEBPACK_TESTING_CONFIG,
-    browsers: ['PhantomJS'],
+    browsers: ['ChromeHeadless'],
     port: 9876,
     concurrency: Infinity,
     reporters: ['progress', 'coverage'],

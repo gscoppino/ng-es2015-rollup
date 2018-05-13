@@ -6,7 +6,8 @@ import System from 'systemjs';
 function lazyLoadKarmaConfig() {
     System.config({
         map: {
-            'path': '@node/path'
+            'path': '@node/path',
+            'puppeteer': '@node/puppeteer'
         }
     });
 

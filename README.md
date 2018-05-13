@@ -8,7 +8,7 @@ Contents:
 * Core skeleton of an Angular application using component architecture, with accessibility addressed by [ngAria](https://angularjs.org/).
 * Unit test environment with code coverage in place via [Karma](https://karma-runner.github.io/1.0/index.html)+
 [Jasmine](http://jasmine.github.io/)+[Istanbul](http://gotwarlost.github.io/istanbul/)+
-[PhantomJS](http://phantomjs.org/), with boilerplate at 100% test coverage.
+[Puppeteer](https://developers.google.com/web/tools/puppeteer/), with boilerplate at 100% test coverage.
 * Integration test environment via [Protractor](http://www.protractortest.org/)+[Jasmine](http://jasmine.github.io/).
 * Linting of CSS and Javascript in place, using [Stylelint](http://stylelint.io/) for the former, and [ESLint](http://eslint.org/) for the latter. Sensible defaults
 in place through `stylelint-config-standard` and `eslint:recommended` presets, respectively.

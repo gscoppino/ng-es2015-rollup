@@ -51,7 +51,9 @@ gulp.task('watch', [
 ]);
 
 gulp.task('build-production', [
+    'clean:markup',
     'build:css-production',
+    'clean:js',
     'build:images'
 ], (fin) => {
     // Production CSS is built before the markup, in

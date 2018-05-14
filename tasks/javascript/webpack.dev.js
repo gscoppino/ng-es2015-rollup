@@ -62,7 +62,7 @@ export default {
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
                 use: ['raw-loader']
             },
-            // Transform ES2015 syntax to ES5 for all source files.
+            // Transform syntax to a format supported by the target environment.
             {
                 test: /\.js$/,
                 include: [path.resolve(process.cwd(), 'src')],

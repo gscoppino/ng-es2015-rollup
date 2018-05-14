@@ -37,7 +37,7 @@ export default {
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
                 use: ['raw-loader']
             },
-            // Transform ES2015 syntax to ES5 for all source and spec files.
+            // Transform syntax to a format supported by the target environment, for all source and spec files.
             // Instrumentation of source files for code coverage is done
             // internally by Babel itself via a plugin (see src/.babelrc).
             {

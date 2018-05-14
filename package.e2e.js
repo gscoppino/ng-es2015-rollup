@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var child_process = require('child_process');
 
-describe('ng-es2015-webpack', () => {
+describe('ng-modern-boilerplate', () => {
     var DEV_ARTIFACTS = [
         'dist/fallback.html',
         'dist/index.html',
@@ -109,9 +109,9 @@ describe('ng-es2015-webpack', () => {
                 .toBe(0);
 
             expect(fs.existsSync('dist/documentation')).toBe(true);
-            expect(fs.existsSync('dist/documentation/ng-es2015-webpack')).toBe(true);
-            fs.readdirSync('dist/documentation/ng-es2015-webpack').forEach(function (file) {
-                expect(fs.existsSync(`dist/documentation/ng-es2015-webpack/${file}/index.html`)).toBe(true);
+            expect(fs.existsSync('dist/documentation/ng-modern-boilerplate')).toBe(true);
+            fs.readdirSync('dist/documentation/ng-modern-boilerplate').forEach(function (file) {
+                expect(fs.existsSync(`dist/documentation/ng-modern-boilerplate/${file}/index.html`)).toBe(true);
             });
         });
     });

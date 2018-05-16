@@ -9,12 +9,7 @@ export default {
     target: 'web',
 
     entry: {
-        [path.basename(pathconfig.devBundle, '.js')]: [
-            // All entries are loaded into the bundle,
-            // but only the last is exported.
-            'babel-polyfill',
-            pathconfig.entry
-        ],
+        [path.basename(pathconfig.devBundle, '.js')]: pathconfig.entry,
         // Use a stub for the production service worker to prevent errors in development.
         sw: path.resolve(process.cwd(), 'src', 'sw.js')
     },

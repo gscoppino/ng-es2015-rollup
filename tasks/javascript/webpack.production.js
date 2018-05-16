@@ -13,12 +13,7 @@ const WEBPACK_PRODUCTION_CONFIG = Object.assign({}, WEBPACK_CONFIG, {
 
 // Disable the mock service worker that is output in development mode.
 WEBPACK_PRODUCTION_CONFIG.entry = {
-    [path.basename(pathconfig.productionBundle, '.js')]: [
-        // All entries are loaded into the bundle,
-        // but only the last is exported.
-        'babel-polyfill',
-        pathconfig.entry
-    ]
+    [path.basename(pathconfig.productionBundle, '.js')]: pathconfig.entry
 };
 
 // Disable sourcemap output.

@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import './sw-init.js';
 import './vendor.js';
 

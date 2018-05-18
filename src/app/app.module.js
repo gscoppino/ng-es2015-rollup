@@ -1,5 +1,5 @@
 import angular from 'angular';
-import AngularRouteModule from 'angular-route';
+import UIRouterModule from '@uirouter/angularjs';
 
 import ConfigModule from 'app/core/config/config.module.js';
 import ApiModule from 'app/core/api/api.module.js';
@@ -21,7 +21,7 @@ import AppComponent from './app.component.js';
  *   initializes all other needed modules for the application.
  */
 export default angular.module('app', [
-    AngularRouteModule,
+    UIRouterModule,
     ConfigModule,
     ApiModule,
     StoreModule,

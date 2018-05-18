@@ -3,9 +3,9 @@
  */
 class AppController {
 
-    static get $inject() { return ['$rootScope', '$log']; }
-    constructor($rootScope, $log) {
-        Object.assign(this, { $rootScope });
+    static get $inject() { return ['$log', '$transitions']; }
+    constructor($log, $transitions) {
+        Object.assign(this, { $transitions });
 
         /**
          * Is a state change in progress?
@@ -33,18 +33,18 @@ class AppController {
     $onInit() {
         let update = this._update.bind(this);
 
-        this._listeners.push(
-            this.$rootScope.$on('$routeChangeStart', update),
-            this.$rootScope.$on('$routeChangeSuccess', update)
-        );
+        this.$transitions.onStart({}, update);
     }
 
     /**
      * Updates the Application UI in response to state change events.
-     * @param event - the state change event
+     * @param transition - the state transition event
      */
-    _update(event) {
-        this.isLoading = (event.name === '$routeChangeStart') ? true : false;
+    _update(transition) {
+        this.isLoading = true;
+        transition.promise.finally(() => {
+            this.isLoading = false;
+        });
     }
 
     /**

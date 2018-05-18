@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-import <%= UpperCamelCaseName %>Directive from './<%= name %>';
+import <%= UpperCamelCaseName %>Module from './<%= name %>.module.js';
 
-beforeEach(angular.mock.module(<%= UpperCamelCaseName %>Directive));
+beforeEach(angular.mock.module(<%= UpperCamelCaseName %>Module));
 
 describe('<%= name %>', ()=> {
     let $rootScope, $compile, element;

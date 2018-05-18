@@ -1,8 +1,8 @@
 Boilerplate for developing a new AngularJS 1.x single page application.
 
-[![Build Status](https://travis-ci.org/gscoppino/ng-es2015-webpack.svg?branch=master)](https://travis-ci.org/gscoppino/ng-es2015-webpack)
-[![Coverage Status](https://coveralls.io/repos/github/gscoppino/ng-es2015-webpack/badge.svg?branch=master)](https://coveralls.io/github/gscoppino/ng-es2015-webpack?branch=master)
-[![Greenkeeper badge](https://badges.greenkeeper.io/gscoppino/ng-es2015-webpack.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/gscoppino/ng-modern-boilerplate.svg?branch=master)](https://travis-ci.org/gscoppino/ng-modern-boilerplate)
+[![Coverage Status](https://coveralls.io/repos/github/gscoppino/ng-modern-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/gscoppino/ng-modern-boilerplate?branch=master)
+[![Greenkeeper badge](https://badges.greenkeeper.io/gscoppino/ng-modern-boilerplate.svg)](https://greenkeeper.io/)
 
 Contents:
 * Core skeleton of an Angular application using component architecture, with accessibility addressed by [ngAria](https://angularjs.org/).

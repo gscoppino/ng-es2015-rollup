@@ -1,14 +1,14 @@
 import angular from 'angular';
 
-import HttpService from './Http.service.js';
+import service from './http.service.js';
 
-export { HttpService };
+export { service };
 
 /**
  * @module HttpModule
  * @description Provides a service built on top of core AngularJS $http,
      that has improved handling of closely timed HTTP requests.
  */
-export default angular.module('app.services.Http', [])
-    .service('Http', HttpService)
+export default angular.module('app.services.http', [])
+    .service('Http', service)
     .name;

@@ -4,7 +4,7 @@ import 'angular-mocks';
 import { API_BASE } from 'app/core/api/api.module.js';
 import { MOCK_USERS } from 'app/core/api/mock/fixtures/users.js';
 import { MOCK_GROUPS } from 'app/core/api/mock/fixtures/groups.js';
-import ApiMockBackendFactoryModule from 'app/common/services/ApiMockBackendFactory/ApiMockBackendFactory.module.js';
+import ApiMockBackendFactoryModule from 'app/common/services/api-mock-backend-factory/api-mock-backend-factory.module.js';
 
 
 createMockApi.$inject = ['$httpBackend', 'MockResourceFactory'];

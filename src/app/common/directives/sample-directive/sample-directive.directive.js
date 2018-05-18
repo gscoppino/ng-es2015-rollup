@@ -1,5 +1,5 @@
-SampleDirectiveFactory.$inject = ['SampleService'];
-function SampleDirectiveFactory(SampleService) {
+SampleDirective.$inject = ['SampleService'];
+function SampleDirective(SampleService) {
     return {
         restrict: 'A',
         link(scope, element) {
@@ -9,4 +9,4 @@ function SampleDirectiveFactory(SampleService) {
     };
 }
 
-export default SampleDirectiveFactory;
+export default SampleDirective;

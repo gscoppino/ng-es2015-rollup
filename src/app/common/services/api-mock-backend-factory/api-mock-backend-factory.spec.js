@@ -2,7 +2,7 @@ import angular from 'angular';
 
 import { API_BASE } from 'app/core/api/api.module.js';
 
-import ApiMockBackendFactoryModule, { MockResource } from './ApiMockBackendFactory.module.js';
+import ApiMockBackendFactoryModule, { MockResource } from './api-mock-backend-factory.module.js';
 
 beforeEach(angular.mock.module(ApiMockBackendFactoryModule));
 

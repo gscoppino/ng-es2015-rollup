@@ -1,11 +1,11 @@
 import angular from 'angular';
 
-import SampleServiceModule from 'app/common/services/SampleService/SampleService.module.js';
+import SampleServiceModule from 'app/common/services/sample-service/sample-service.module.js';
 
-import SampleDirectiveFactory from './sample-directive.directive.js';
+import directive from './sample-directive.directive.js';
 
 export default angular.module('app.directives.sample-directive', [
     SampleServiceModule
 ])
-    .directive('sampleDirective', SampleDirectiveFactory)
+    .directive('sampleDirective', directive)
     .name;

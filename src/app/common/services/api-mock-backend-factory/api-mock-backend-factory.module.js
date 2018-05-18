@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'angular-mocks';
 
-import MockResourceFactoryService, { MockResource } from './ApiMockBackendFactory.service.js';
+import service, { MockResource } from './api-mock-backend-factory.service.js';
 
 export { MockResource };
 
@@ -11,8 +11,8 @@ export { MockResource };
  *   used to create objects that mock out requests to
  *   REST API resources.
  */
-export default angular.module('app.services.ApiMockBackendFactory', [
+export default angular.module('app.services.api-mock-backend-factory', [
     'ngMockE2E'
 ])
-    .service('MockResourceFactory', MockResourceFactoryService)
+    .service('MockResourceFactory', service)
     .name;

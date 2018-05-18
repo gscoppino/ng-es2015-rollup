@@ -13,8 +13,6 @@ class AppController {
          */
         this.isLoading = false;
 
-        this._listeners = [];
-
         $log.log('Loaded!');
     }
 
@@ -45,13 +43,6 @@ class AppController {
         transition.promise.finally(() => {
             this.isLoading = false;
         });
-    }
-
-    /**
-     * Deregisters all event listeners attached during the lifetime of this instance.
-     */
-    $onDestroy() {
-        this._listeners.forEach(deregister => deregister());
     }
 }
 

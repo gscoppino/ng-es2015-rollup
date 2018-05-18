@@ -16,10 +16,10 @@ describe('Routes Configuration', () => {
         }
     }));
 
-    it('should have loaded the default route.', angular.mock.inject(($rootScope, $route) => {
+    it('should have loaded the default route.', angular.mock.inject(($rootScope, $state) => {
         // This test could be better but is OK for now.
-        expect($route.current).not.toBeDefined();
+        expect($state.current.url).not.toBe('/');
         $rootScope.$digest();
-        expect($route.current.locals.$template).toBe($route.routes['/'].template);
+        expect($state.current.url).toBe('/');
     }));
 });

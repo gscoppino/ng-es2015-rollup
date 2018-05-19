@@ -12,3 +12,21 @@ describe('Routes Configuration', () => {
         expect($state.current.url).toBe('/');
     }));
 });
+
+describe('App Shell Component', () => {
+    describe('View', () => {
+        let $rootScope, $compile;
+        beforeEach(angular.mock.inject(($injector) => {
+            $rootScope = $injector.get('$rootScope');
+            $compile = $injector.get('$compile');
+        }));
+
+        it('should compile.', () => {
+            let scope = $rootScope.$new(),
+                element = $compile('<app-shell></app-shell>')(scope);
+
+            scope.$digest();
+            expect(element.html().trim().length).toBeGreaterThan(0);
+        });
+    });
+});

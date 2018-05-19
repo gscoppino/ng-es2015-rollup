@@ -7,6 +7,7 @@ function startDevServer() {
     staticServer.init({
         port: 3000,
         ui: false,
+        ghostMode: false,
         single: true,
         server: {
             baseDir: 'dist'

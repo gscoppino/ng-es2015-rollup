@@ -29,14 +29,13 @@ class AppController {
      * the event.
      */
     $onInit() {
-        let update = this._update.bind(this);
-
-        this.$transitions.onStart({}, update);
+        this.$transitions.onStart({}, this._update.bind(this));
     }
 
     /**
      * Updates the Application UI in response to state change events.
-     * @param transition - the state transition event
+     * @param {Object} transition - the state transition event
+     * @param {Promise} transition.promise - the promise indicating the state of the transition
      */
     _update(transition) {
         this.isLoading = true;

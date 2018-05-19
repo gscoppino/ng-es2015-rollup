@@ -3,9 +3,8 @@ import UIRouterModule from '@uirouter/angularjs';
 
 RouterConfig.$inject = ['$stateProvider'];
 /**
- * @memberof module:RoutesModule
- * @description Attempt to use HTML5 History API for routing, if available.
- *   Otherwise, route using hashbangs.
+ * @memberof module:AppRouterModule
+ * @description Configure the UI router state.
  */
 function RouterConfig($stateProvider) {
     $stateProvider.state('app', {
@@ -17,7 +16,7 @@ function RouterConfig($stateProvider) {
 export { RouterConfig };
 
 /**
- * @module RoutesModule
+ * @module AppRouterModule
  * @description Configures the frontend routing.
  */
 export default angular.module('app.routes.app', [

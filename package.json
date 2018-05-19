@@ -15,6 +15,7 @@
     "develop": "gulp develop",
     "documentation": "gulp clean:docs && jsdoc -c jsdoc.conf.json",
     "generate-component": "gulp generate:component",
+    "generate-route": "gulp generate:route",
     "generate-directive": "gulp generate:directive",
     "generate-service": "gulp generate:service",
     "lint-css": "stylelint \"src/**/*.css\"",

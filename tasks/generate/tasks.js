@@ -28,6 +28,25 @@ gulp.task('generate:component', ()=> {
         .pipe(gulp.dest(`src/app/components/${name}`));
 });
 
+gulp.task('generate:route', () => {
+    if (!name) { throw new Error('Must use -n switch to specify name'); }
+    if (name.search(NAME_REGEX) === -1) {
+        throw new Error(`Route name should be kebab cased e.g. sample,
+            sample-component, sample-component-two`);
+    }
+
+    return gulp.src('tasks/generate/templates/route/*')
+        .pipe(template({
+            name: name,
+            lowerCamelCaseName: name.split('-').map((part, i) => i === 0 ? part : part.substring(0, 1).toUpperCase() + part.substring(1)).join(''),
+            UpperCamelCaseName: name.split('-').map(part => part.substring(0, 1).toUpperCase() + part.substring(1)).join('')
+        }))
+        .pipe(rename((path) => {
+            path.basename = path.basename.replace('template', name);
+        }))
+        .pipe(gulp.dest(`src/app/routes/${name}`));
+});
+
 gulp.task('generate:directive', ()=> {
     if (!name) { throw new Error('Must use -n switch to specify name'); }
     if (name.search(NAME_REGEX) === -1) {

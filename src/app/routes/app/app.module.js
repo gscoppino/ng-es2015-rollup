@@ -12,7 +12,7 @@ RouterConfig.$inject = ['$stateProvider'];
 function RouterConfig($stateProvider) {
     $stateProvider.state('app', {
         url: '/',
-        template: '<app-shell></app-shell>'
+        component: 'appShell'
     });
 }
 

@@ -1,6 +1,11 @@
 import angular from 'angular';
 import AngularAriaModule from 'angular-aria';
 
+import ApiConfigModule from 'app/config/api/api.module.js';
+import ApiMockBackendConfigModule from 'app/config/mock-api/mock-api.module.js'; // Remove to disable the mock backend.
+import RouterConfigModule from 'app/config/routes/routes.module.js';
+import StoreConfigModule from 'app/config/store/store.module.js';
+
 RootscopeConfig.$inject = ['$rootScopeProvider'];
 /**
  * @memberof module:ConfigModule
@@ -64,10 +69,18 @@ export { RootscopeConfig, CompilerConfig, HttpConfig };
 
 /**
  * @module ConfigModule
- * @description Configures core AngularJS services.
+ * @requires ApiConfigModule
+ * @requires ApiMockBackendConfigModule
+ * @requires RouterConfigModule
+ * @requires StoreConfigModule
+ * @description Configures core AngularJS and application services.
  */
 export default angular.module('app.config', [
-    AngularAriaModule
+    AngularAriaModule,
+    ApiConfigModule,
+    ApiMockBackendConfigModule, // Remove if disabling the mock backend
+    RouterConfigModule,
+    StoreConfigModule
 ])
     .config(RootscopeConfig)
     .config(CompilerConfig)

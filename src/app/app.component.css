@@ -1,7 +1,7 @@
-@import './common/styles/box-model.css';
-@import './common/styles/layout.css';
-@import './common/components/loader-spinner/loader-spinner.component.css';
-@import './core/theme/variables.css';
+@import './styles/box-model.css';
+@import './styles/layout.css';
+@import './components/loader-spinner/loader-spinner.component.css';
+@import './theme/variables.css';
 
 body {
     background-color: var(--app-bg-color);

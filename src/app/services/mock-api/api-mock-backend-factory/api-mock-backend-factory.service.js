@@ -1,4 +1,4 @@
-import { API_BASE } from 'app/core/api/api.module.js';
+import { API_BASE } from 'app/config/api/api.module.js';
 
 /**
  * An instance of the class represents a mocked RESTful resource.

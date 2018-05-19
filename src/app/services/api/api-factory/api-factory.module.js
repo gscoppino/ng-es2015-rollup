@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import HttpModule from 'app/common/services/http/http.module.js';
+import HttpModule from 'app/services/api/http/http.module.js';
 
 import provider, { RESTApi } from './api-factory.service.js';
 
@@ -12,7 +12,7 @@ export { provider, RESTApi };
  * @description Provides a configurable factory that can be
  *   used to create objects to interface with REST API resources.
  */
-export default angular.module('app.services.api-factory', [
+export default angular.module('app.services.api.api-factory', [
     HttpModule
 ])
     .provider('ApiFactory', provider)

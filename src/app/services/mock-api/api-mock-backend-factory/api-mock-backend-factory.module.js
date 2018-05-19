@@ -11,7 +11,7 @@ export { MockResource };
  *   used to create objects that mock out requests to
  *   REST API resources.
  */
-export default angular.module('app.services.api-mock-backend-factory', [
+export default angular.module('app.services.mock-api.api-mock-backend-factory', [
     'ngMockE2E'
 ])
     .service('MockResourceFactory', service)

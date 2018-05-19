@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import SampleServiceModule from 'app/common/services/sample-service/sample-service.module.js';
+import SampleServiceModule from 'app/services/sample-service/sample-service.module.js';
 
 import directive from './sample-directive.directive.js';
 

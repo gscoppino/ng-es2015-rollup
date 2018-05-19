@@ -25,7 +25,7 @@ gulp.task('generate:component', ()=> {
         .pipe(rename((path) => {
             path.basename = path.basename.replace('template', name);
         }))
-        .pipe(gulp.dest(`src/app/common/components/${name}`));
+        .pipe(gulp.dest(`src/app/components/${name}`));
 });
 
 gulp.task('generate:directive', ()=> {
@@ -44,7 +44,7 @@ gulp.task('generate:directive', ()=> {
         .pipe(rename((path) => {
             path.basename = path.basename.replace('template', name);
         }))
-        .pipe(gulp.dest(`src/app/common/directives/${name}`));
+        .pipe(gulp.dest(`src/app/directives/${name}`));
 });
 
 gulp.task('generate:service', ()=> {
@@ -63,5 +63,5 @@ gulp.task('generate:service', ()=> {
         .pipe(rename((path) => {
             path.basename = path.basename.replace('template', name);
         }))
-        .pipe(gulp.dest(`src/app/common/services/${name}`));
+        .pipe(gulp.dest(`src/app/services/${name}`));
 });

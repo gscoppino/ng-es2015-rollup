@@ -110,9 +110,7 @@ describe('ng-modern-boilerplate', () => {
 
             expect(fs.existsSync('dist/documentation')).toBe(true);
             expect(fs.existsSync('dist/documentation/ng-modern-boilerplate')).toBe(true);
-            fs.readdirSync('dist/documentation/ng-modern-boilerplate').forEach(function (file) {
-                expect(fs.existsSync(`dist/documentation/ng-modern-boilerplate/${file}/index.html`)).toBe(true);
-            });
+            expect(fs.existsSync('dist/documentation/ng-modern-boilerplate/index.html')).toBe(true);
         });
     });
 });

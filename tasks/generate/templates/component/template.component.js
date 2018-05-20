@@ -7,6 +7,10 @@ class <%= UpperCamelCaseName %>Controller {
         Object.assign(this, {});
     }
 
+    static get bindings() {
+        return {};
+    }
+
     $onInit() {}
 
     $onChanges(changes) {}
@@ -21,7 +25,7 @@ class <%= UpperCamelCaseName %>Controller {
 export const <%= UpperCamelCaseName %>Component = {
     template: <%= UpperCamelCaseName %>Template,
     controller: <%= UpperCamelCaseName %>Controller,
-    bindings: {}
+    bindings: <%= UpperCamelCaseName %>Controller.bindings
 };
 
 export { <%= UpperCamelCaseName %>Template };

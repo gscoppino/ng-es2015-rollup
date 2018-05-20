@@ -109,8 +109,7 @@ describe('ng-modern-boilerplate', () => {
                 .toBe(0);
 
             expect(fs.existsSync('dist/documentation')).toBe(true);
-            expect(fs.existsSync('dist/documentation/ng-modern-boilerplate')).toBe(true);
-            expect(fs.existsSync('dist/documentation/ng-modern-boilerplate/index.html')).toBe(true);
+            expect(fs.existsSync('dist/documentation/index.html')).toBe(true);
         });
     });
 });

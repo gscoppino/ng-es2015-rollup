@@ -1,7 +1,7 @@
 /**
  * Class that proxies $http, adding some conveniences
  * such as request memoization and sequencing.
- * @memberof module:HttpModule
+ * @type {angular.Service}
  */
 class HttpService {
     static get $inject() { return ['$q', '$http']; }
@@ -130,4 +130,4 @@ class HttpService {
     }
 }
 
-export default HttpService;
+export { HttpService };

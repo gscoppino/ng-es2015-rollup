@@ -2,7 +2,6 @@ import { API_BASE } from 'app/config/api/api.module.js';
 
 /**
  * An instance of the class represents a mocked RESTful resource.
- * @memberof module:ApiMockBackendFactoryModule
  */
 class MockResource {
     constructor(name, options={}) {
@@ -142,7 +141,7 @@ class MockResource {
 MockResourceFactory.$inject = ['$log', '$httpBackend'];
 /**
  * Factory to create mock RESTful resources.
- * @memberof module:ApiMockBackendFactoryModule
+ * @type {angular.Service}
  * @returns {MockResourceFactory}
  */
 function MockResourceFactory($log, $httpBackend) {
@@ -228,5 +227,5 @@ function MockResourceFactory($log, $httpBackend) {
     return factory;
 }
 
-export default MockResourceFactory;
+export { MockResourceFactory };
 export { MockResource };

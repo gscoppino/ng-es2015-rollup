@@ -1,8 +1,7 @@
 import angular from 'angular';
+import { <%= UpperCamelCaseName %>Component } from './<%= name %>.component.js';
 
-import template from './<%= name %>.component.html';
-import component from './<%= name %>.component.js';
-
-export default angular.module('app.components.<%= name %>', [])
-    .component('<%= lowerCamelCaseName %>', Object.assign({ template }, component))
+export const <%= UpperCamelCaseName %>Module = angular
+    .module('app.components.<%= name %>', [])
+    .component('<%= lowerCamelCaseName %>', <%= UpperCamelCaseName %>Component)
     .name;

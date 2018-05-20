@@ -9,4 +9,4 @@ function SampleDirective(SampleService) {
     };
 }
 
-export default SampleDirective;
+export { SampleDirective };

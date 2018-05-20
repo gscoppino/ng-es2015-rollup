@@ -1,7 +1,9 @@
 import angular from 'angular';
 
 /**
- * @module StoreConfigModule
- * @description Configures the application store.
+ * @type {angular.Module}
+ * @desc Configures the application store.
  */
-export default angular.module('app.config.store', []).name;
+export const StoreConfigModule = angular
+    .module('app.config.store', [])
+    .name;

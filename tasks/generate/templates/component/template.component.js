@@ -1,3 +1,5 @@
+import <%= UpperCamelCaseName %>Template from './<%= name %>.component.html';
+
 class <%= UpperCamelCaseName %>Controller {
 
     static get $inject() { return []; }
@@ -16,7 +18,11 @@ class <%= UpperCamelCaseName %>Controller {
     $postLink() {}
 }
 
-export default {
+export const <%= UpperCamelCaseName %>Component = {
+    template: <%= UpperCamelCaseName %>Template,
     controller: <%= UpperCamelCaseName %>Controller,
     bindings: {}
 };
+
+export { <%= UpperCamelCaseName %>Template };
+export { <%= UpperCamelCaseName %>Controller };

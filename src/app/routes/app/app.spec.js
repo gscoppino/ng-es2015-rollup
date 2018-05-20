@@ -1,8 +1,7 @@
 import angular from 'angular';
+import { AppRouterModule } from './app.module.js';
 
-import RoutesModule from './app.module.js';
-
-beforeEach(angular.mock.module(RoutesModule));
+beforeEach(angular.mock.module(AppRouterModule));
 
 describe('Routes Configuration', () => {
     it('should have loaded the default route.', angular.mock.inject(($rootScope, $state) => {

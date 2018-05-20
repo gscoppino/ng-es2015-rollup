@@ -1,10 +1,9 @@
 import angular from 'angular';
-
-import RoutesModule from './routes.module.js';
+import { RouterConfigModule } from './routes.module.js';
 
 let $locationProvider;
 
-beforeEach(angular.mock.module(RoutesModule, (_$locationProvider_) => {
+beforeEach(angular.mock.module(RouterConfigModule, (_$locationProvider_) => {
     $locationProvider = _$locationProvider_;
 }));
 

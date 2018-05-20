@@ -14,4 +14,4 @@ class SampleService {
     }
 }
 
-export default SampleService;
+export { SampleService };

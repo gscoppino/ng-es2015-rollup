@@ -1,6 +1,5 @@
 import angular from 'angular';
-
-import AppModule from './app.module.js';
+import { AppModule } from './app.module.js';
 
 beforeEach(angular.mock.module(AppModule));
 

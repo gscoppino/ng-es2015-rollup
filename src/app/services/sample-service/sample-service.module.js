@@ -1,7 +1,7 @@
 import angular from 'angular';
+import { SampleService } from './sample-service.service.js';
 
-import service from './sample-service.service.js';
-
-export default angular.module('app.services.sample-service', [])
-    .service('SampleService', service)
+export const SampleServiceModule = angular
+    .module('app.services.sample-service', [])
+    .service('SampleService', SampleService)
     .name;

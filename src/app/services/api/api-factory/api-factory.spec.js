@@ -1,6 +1,5 @@
 import angular from 'angular';
-
-import { provider as ApiFactoryProvider, RESTApi } from './api-factory.module.js';
+import { ApiFactoryProvider, RESTApi } from './api-factory.module.js';
 
 describe('Api Factory Module', () => {
     let $providerInjector;

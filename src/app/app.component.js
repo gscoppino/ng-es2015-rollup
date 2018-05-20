@@ -1,5 +1,8 @@
+import AppTemplate from './app.component.html';
+
 /**
- * @description Controller for the application root component.
+ * @type {angular.Controller}
+ * @desc Controller for the application root component.
  */
 class AppController {
 
@@ -46,14 +49,17 @@ class AppController {
 }
 
 /**
- * @memberof module:AppModule
- * @description The root component of the application.
- * @property controller {function} - [AppController]{@link AppController}
- * @property bindings {object} - [AppController.bindings]{@link AppController.bindings}
+ * @type {angular.Component}
+ * @desc The root component of the application.
+ * @property {String} template {@link AppTemplate}
+ * @property {angular.Controller} controller {@link AppController}
+ * @property {Object} bindings {@link AppController.bindings}
  */
-const AppComponent = {
+export const AppComponent = {
+    template: AppTemplate,
     controller: AppController,
     bindings: AppController.bindings
 };
 
-export default AppComponent;
+export { AppTemplate };
+export { AppController };

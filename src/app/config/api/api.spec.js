@@ -1,5 +1,4 @@
 import angular from 'angular';
-
 import { API_BASE, ApiConfig } from './api.module.js';
 
 describe('Api Module', () => {

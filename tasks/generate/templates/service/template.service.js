@@ -6,4 +6,4 @@ class <%= UpperCamelCaseName %>Service {
     }
 }
 
-export default <%= UpperCamelCaseName %>Service;
+export { <%= UpperCamelCaseName %>Service };

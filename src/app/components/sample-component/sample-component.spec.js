@@ -1,6 +1,5 @@
 import angular from 'angular';
-
-import SampleComponentModule from './sample-component.module.js';
+import { SampleComponentModule } from './sample-component.module.js';
 
 beforeEach(angular.mock.module(SampleComponentModule));
 

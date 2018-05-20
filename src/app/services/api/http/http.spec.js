@@ -1,6 +1,5 @@
 import angular from 'angular';
-
-import HttpModule from './http.module.js';
+import { HttpModule } from './http.module.js';
 
 beforeEach(angular.mock.module(HttpModule));
 

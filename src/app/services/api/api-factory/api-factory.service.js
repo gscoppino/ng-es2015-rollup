@@ -1,5 +1,4 @@
 /**
- * @memberof module:ApiFactoryModule
  * @classdesc Models RESTful resources by providing methods to interact with a resource.
  */
 class RESTApi {
@@ -278,7 +277,7 @@ class RESTApi {
 }
 
 /**
- * @memberof module:ApiFactoryModule
+ * @type {angular.Provider}
  * @classdesc Takes an API base URL in the configuration phase and returns
  *   a factory that can be used to create objects to interface with REST
  *   API resources under the given base URL.
@@ -299,6 +298,7 @@ class ApiFactoryProvider {
             /**
              * A factory for new RESTApi's.
              * @interface ApiFactory
+             * @type {angular.Service}
              */
             let factory = {
                 /**
@@ -329,5 +329,5 @@ class ApiFactoryProvider {
     }
 }
 
-export default ApiFactoryProvider;
+export { ApiFactoryProvider };
 export { RESTApi };

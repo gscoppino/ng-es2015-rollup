@@ -1,7 +1,5 @@
 import angular from 'angular';
-
-import template from './<%= name %>.component.html';
-import component from './<%= name %>.component.js';
+import { <%= UpperCamelCaseName %>Component } from './<%= name %>.component.js';
 
 RouterConfig.$inject = ['$stateProvider'];
 /**
@@ -21,7 +19,8 @@ export { RouterConfig };
  * @module <%= UpperCamelCaseName %>RouterModule
  * @description Configures the frontend routing.
  */
-export default angular.module('app.routes.<%= name %>', [])
+export const <%= UpperCamelCaseName %>Module = angular
+    .module('app.routes.<%= name %>', [])
 	.config(RouterConfig)
-    .component('<%= lowerCamelCaseName %>', Object.assign({ template }, component))
+    .component('<%= lowerCamelCaseName %>', <%= UpperCamelCaseName %>Component)
     .name;

@@ -3,8 +3,8 @@ import UIRouterModule from '@uirouter/angularjs';
 
 RouterConfig.$inject = ['$locationProvider', '$urlServiceProvider'];
 /**
- * @memberof module:RouterConfigModule
- * @description Attempt to use HTML5 History API for routing, if available.
+ * @type {angular.Config}
+ * @desc Attempt to use HTML5 History API for routing, if available.
  *   Otherwise, route using hashbangs.
  */
 function RouterConfig($locationProvider, $urlServiceProvider) {
@@ -15,14 +15,15 @@ function RouterConfig($locationProvider, $urlServiceProvider) {
     $urlServiceProvider.rules.otherwise({ state: 'app' });
 }
 
-export { RouterConfig };
-
 /**
- * @module RouterConfigModule
- * @description Configures the frontend routing.
+ * @type {angular.Module}
+ * @desc Configures the frontend routing.
  */
-export default angular.module('app.config.routes', [
-    UIRouterModule
-])
+export const RouterConfigModule = angular
+    .module('app.config.routes', [
+        UIRouterModule
+    ])
     .config(RouterConfig)
     .name;
+
+export { RouterConfig };

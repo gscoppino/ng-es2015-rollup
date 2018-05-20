@@ -1,6 +1,5 @@
 import angular from 'angular';
-
-import SampleDirectiveModule from './sample-directive.module.js';
+import { SampleDirectiveModule } from './sample-directive.module.js';
 
 beforeEach(angular.mock.module(SampleDirectiveModule));
 

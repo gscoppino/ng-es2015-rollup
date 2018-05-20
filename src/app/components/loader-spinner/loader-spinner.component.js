@@ -1,6 +1,12 @@
+import LoaderSpinnerTemplate from './loader-spinner.component.html';
+
 /**
- * @memberof module:LoaderSpinnerModule
- * @name LoaderSpinnerComponent
- * @description A component that renders an SVG loading spinner.
+ * @type {angular.Component}
+ * @desc A component that renders an SVG loading spinner.
+ * @property {String} template {@link LoaderSpinnerTemplate}
  */
-export default {};
+export const LoaderSpinnerComponent = {
+    template: LoaderSpinnerTemplate
+};
+
+export { LoaderSpinnerTemplate };

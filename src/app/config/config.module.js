@@ -1,15 +1,14 @@
 import angular from 'angular';
 import AngularAriaModule from 'angular-aria';
-
-import ApiConfigModule from 'app/config/api/api.module.js';
-import ApiMockBackendConfigModule from 'app/config/mock-api/mock-api.module.js'; // Remove to disable the mock backend.
-import RouterConfigModule from 'app/config/routes/routes.module.js';
-import StoreConfigModule from 'app/config/store/store.module.js';
+import { ApiConfigModule } from 'app/config/api/api.module.js';
+import { ApiMockBackendConfigModule } from 'app/config/mock-api/mock-api.module.js'; // Remove to disable the mock backend.
+import { RouterConfigModule } from 'app/config/routes/routes.module.js';
+import { StoreConfigModule } from 'app/config/store/store.module.js';
 
 RootscopeConfig.$inject = ['$rootScopeProvider'];
 /**
- * @memberof module:ConfigModule
- * @description Keeps the limit on how many times a digest cycle can trigger
+ * @type {angular.Config}
+ * @desc Keeps the limit on how many times a digest cycle can trigger
  * new model updates, as low as possible.
  */
 function RootscopeConfig($rootScopeProvider) {
@@ -19,8 +18,8 @@ function RootscopeConfig($rootScopeProvider) {
 
 CompilerConfig.$inject = ['$compileProvider'];
 /**
- * @memberof module:ConfigModule
- * @description
+ * @type {angular.Config}
+ * @desc
  *   Disable AngularJS debug mode if not running in a dev environment.
  *   Enforce strict component bindings (non-optional bindings must always be provided to components).
  *   Keep the limit on how many times $onChanges can trigger new model updates,
@@ -57,8 +56,8 @@ function CompilerConfig($compileProvider) {
 
 HttpConfig.$inject = ['$httpProvider'];
 /**
- * @memberof module:ConfigModule
- * @description Allow coalescing of multiple HTTP responses into a single digest cycle.
+ * @type {angular.Config}
+ * @desc Allow coalescing of multiple HTTP responses into a single digest cycle.
  */
 function HttpConfig($httpProvider) {
     // Provides a small performance boost by avoiding extra digest cycles.
@@ -68,20 +67,17 @@ function HttpConfig($httpProvider) {
 export { RootscopeConfig, CompilerConfig, HttpConfig };
 
 /**
- * @module ConfigModule
- * @requires ApiConfigModule
- * @requires ApiMockBackendConfigModule
- * @requires RouterConfigModule
- * @requires StoreConfigModule
- * @description Configures core AngularJS and application services.
+ * @type {angular.Module}
+ * @desc Configures core AngularJS and application services.
  */
-export default angular.module('app.config', [
-    AngularAriaModule,
-    ApiConfigModule,
-    ApiMockBackendConfigModule, // Remove if disabling the mock backend
-    RouterConfigModule,
-    StoreConfigModule
-])
+export const ConfigModule = angular
+    .module('app.config', [
+        AngularAriaModule,
+        ApiConfigModule,
+        ApiMockBackendConfigModule, // Remove if disabling the mock backend
+        RouterConfigModule,
+        StoreConfigModule
+    ])
     .config(RootscopeConfig)
     .config(CompilerConfig)
     .config(HttpConfig)

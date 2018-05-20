@@ -1,3 +1,5 @@
+import SampleComponentTemplate from './sample-component.component.html';
+
 class SampleComponentController {
 
     static get $inject() { return ['$log']; }
@@ -29,7 +31,8 @@ class SampleComponentController {
     }
 }
 
-export default {
+export const SampleComponent = {
+    template: SampleComponentTemplate,
     controller: SampleComponentController,
     bindings: {
         input1: '<',
@@ -37,3 +40,6 @@ export default {
         output1: '&'
     }
 };
+
+export { SampleComponentTemplate };
+export { SampleComponentController };

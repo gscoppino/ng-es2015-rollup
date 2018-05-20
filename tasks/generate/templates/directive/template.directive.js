@@ -6,4 +6,4 @@ function <%= UpperCamelCaseName %>Directive() {
     };
 }
 
-export default <%= UpperCamelCaseName %>Directive;
+export { <%= UpperCamelCaseName %>Directive };

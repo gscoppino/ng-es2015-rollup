@@ -1,6 +1,7 @@
 import angular from 'angular';
-import service from '<%= name %>.service.js';
+import { <%= UpperCamelCaseName %>Service } from '<%= name %>.service.js';
 
-export default angular.module('app.services.<%= name %>', [])
-    .service('<%= UpperCamelCaseName %>Service', service)
+export const <%= UpperCamelCaseName %>Module = angular
+    .module('app.services.<%= name %>', [])
+    .service('<%= UpperCamelCaseName %>Service', <%= UpperCamelCaseName %>Service)
     .name;

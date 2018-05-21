@@ -1,14 +1,16 @@
-/** @module main */
+import 'babel-polyfill';
 import './sw-init.js';
 import './vendor.js';
 
 import angular from 'angular';
 
-import App from './app/app.js';
+import { AppModule } from './app/app.module.js';
 
 /** Bootstraps the Angular application. */
 function bootstrap() {
-    angular.bootstrap(document.documentElement, [App], { strictDi: true });
+    document.removeEventListener('DOMContentLoaded', bootstrap);
+
+    angular.bootstrap(document.documentElement, [AppModule], { strictDi: true });
 }
 
 /**
@@ -23,7 +25,7 @@ function setupBootstrap() {
         // Either way, we should perform the bootstrap.
         bootstrap();
     } else {
-        // Wait for the document to be ready before performing the bootstrap.
+        // Wait for the document to be loaded and parsed before performing the bootstrap.
         document.addEventListener('DOMContentLoaded', bootstrap);
     }
 }

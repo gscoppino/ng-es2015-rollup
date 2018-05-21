@@ -1,36 +1,26 @@
 import gulp from 'gulp';
 import del from 'del';
 import karma from 'karma';
-import System from 'systemjs';
-
-function lazyLoadKarmaConfig() {
-    System.config({
-        map: {
-            'path': '@node/path'
-        }
-    });
-
-    return System.import('tasks/test/karma.config.js')
-        .then(m => m.default);
-}
 
 gulp.task('clean:test-coverage', () => del('dist/coverage'));
 
-gulp.task('test', ['clean:test-coverage'], (fin)=> {
-    lazyLoadKarmaConfig().then((KARMA_CONFIG) => {
-        KARMA_CONFIG.singleRun = true;
-        KARMA_CONFIG.autoWatch = false;
-        new karma.Server(KARMA_CONFIG, (exitCode) => {
-            process.exit(exitCode);
-            fin();
-        }).start();
-    });
+gulp.task('test', ['clean:test-coverage'], (callbackFn) => {
+    import('./karma.config.js')
+        .then(config => {
+            config.singleRun = true;
+            config.autoWatch = false;
+            new karma.Server(config, (exitCode) => {
+                process.exit(exitCode);
+                callbackFn();
+            }).start();
+        });
 });
 
-gulp.task('watch:test', ['clean:test-coverage'], ()=> {
-    return lazyLoadKarmaConfig().then((KARMA_CONFIG) => {
-        KARMA_CONFIG.singleRun = false;
-        KARMA_CONFIG.autoWatch = true;
-        new karma.Server(KARMA_CONFIG).start();
-    });
+gulp.task('watch:test', ['clean:test-coverage'], () => {
+    import('./karma.config.js')
+        .then(config => {
+            config.singleRun = false;
+            config.autoWatch = true;
+            new karma.Server(config).start();
+        });
 });

@@ -3,16 +3,13 @@ import path from 'path';
 import pathconfig from './pathconfig.js';
 
 export default {
+    mode: 'development',
+
     // Output bundle as IIFE.
     target: 'web',
 
     entry: {
-        [path.basename(pathconfig.devBundle, '.js')]: [
-            // All entries are loaded into the bundle,
-            // but only the last is exported.
-            'babel-polyfill',
-            pathconfig.entry
-        ],
+        [path.basename(pathconfig.devBundle, '.js')]: pathconfig.entry,
         // Use a stub for the production service worker to prevent errors in development.
         sw: path.resolve(process.cwd(), 'src', 'sw.js')
     },
@@ -29,18 +26,21 @@ export default {
     },
 
     resolve: {
-        // Allow importing files relative to the application root.
-        root: path.resolve(process.cwd(), 'src'),
+        modules: [
+            // Allow importing files relative to the application root.
+            path.resolve(process.cwd(), 'src'),
 
-        // Allow importing modules from node_modules.
-        modulesDirectories: ['node_modules']
+            // Allow importing modules from node_modules.
+            'node_modules'
+        ]
     },
 
-    // The section configures the pipeline that imports are applied against.
-    // Imports that match patterns in the pipeline will have those pipelines
+    // The section configures the rules that imports are applied against.
+    // Imports that match patterns in the rules will have those rules
     // applied to them (unless they are explicitly excluded).
-    // NOTE: The pipeline is evaluated tail to head at each stage.
+    // NOTE: The rules is evaluated in reverse order.
     module: {
+<<<<<<< HEAD
         preLoaders: [
             // Lint all HTML files.
             {
@@ -49,28 +49,31 @@ export default {
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
                 loaders: ['htmlhint']
             },
+=======
+        rules: [
+>>>>>>> 483d74687b6cfbe1f24ee9ca2ce390d1e0c2a9c0
             // Lint all Javascript files.
             {
                 test: /\.js$/,
                 include: [path.resolve(process.cwd(), 'src')],
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
-                loaders: ['eslint-loader']
-            }
-        ],
-        loaders: [
+                enforce: 'pre',
+                use: ['eslint-loader']
+            },
+
             // Import HTML as raw strings.
             {
                 test: /\.html$/,
                 include: [path.resolve(process.cwd(), 'src')],
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
-                loaders: ['raw-loader']
+                use: ['raw-loader']
             },
-            // Transform ES2015 syntax to ES5 for all source files.
+            // Transform syntax to a format supported by the target environment.
             {
                 test: /\.js$/,
                 include: [path.resolve(process.cwd(), 'src')],
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
-                loaders: ['babel-loader']
+                use: ['babel-loader']
             }
         ]
     },

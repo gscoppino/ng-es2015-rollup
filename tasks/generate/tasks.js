@@ -3,8 +3,7 @@ import template from 'gulp-template';
 import rename from 'gulp-rename';
 import yargs from 'yargs';
 
-let WEB_COMPONENT_REGEX = /^(([a-z]+$|[a-z]+-)+)$/;
-let SERVICE_REGEX = /^([A-Z]{1}[a-z]+)+$/;
+let NAME_REGEX = /^(([a-z]+$|[a-z]+-)+)$/;
 
 // Get the name of the new provider, as passed
 /* gulp generate:<thing> -n name */
@@ -12,9 +11,9 @@ let name = yargs.argv.n;
 
 gulp.task('generate:component', ()=> {
     if (!name) { throw new Error('Must use -n switch to specify name'); }
-    if (name.search(WEB_COMPONENT_REGEX) === -1) {
+    if (name.search(NAME_REGEX) === -1) {
         throw new Error(`Component name should be kebab cased e.g. sample,
-            sample-component, sample-component-child`);
+            sample-component, sample-component-two`);
     }
 
     return gulp.src('tasks/generate/templates/component/*')
@@ -24,16 +23,35 @@ gulp.task('generate:component', ()=> {
             UpperCamelCaseName: name.split('-').map(part => part.substring(0, 1).toUpperCase() + part.substring(1)).join('')
         }))
         .pipe(rename((path) => {
-            path.basename = path.basename.replace('component', name);
+            path.basename = path.basename.replace('template', name);
         }))
-        .pipe(gulp.dest(`src/app/common/components/${name}`));
+        .pipe(gulp.dest(`src/app/components/${name}`));
+});
+
+gulp.task('generate:route', () => {
+    if (!name) { throw new Error('Must use -n switch to specify name'); }
+    if (name.search(NAME_REGEX) === -1) {
+        throw new Error(`Route name should be kebab cased e.g. sample,
+            sample-component, sample-component-two`);
+    }
+
+    return gulp.src('tasks/generate/templates/route/*')
+        .pipe(template({
+            name: name,
+            lowerCamelCaseName: name.split('-').map((part, i) => i === 0 ? part : part.substring(0, 1).toUpperCase() + part.substring(1)).join(''),
+            UpperCamelCaseName: name.split('-').map(part => part.substring(0, 1).toUpperCase() + part.substring(1)).join('')
+        }))
+        .pipe(rename((path) => {
+            path.basename = path.basename.replace('template', name);
+        }))
+        .pipe(gulp.dest(`src/app/routes/${name}`));
 });
 
 gulp.task('generate:directive', ()=> {
     if (!name) { throw new Error('Must use -n switch to specify name'); }
-    if (name.search(WEB_COMPONENT_REGEX) === -1) {
+    if (name.search(NAME_REGEX) === -1) {
         throw new Error(`Directive name should be kebab cased e.g. sample,
-            sample-directive, sample-directive-sibling`);
+            sample-directive, sample-directive-two`);
     }
 
     return gulp.src('tasks/generate/templates/directive/*')
@@ -43,22 +61,26 @@ gulp.task('generate:directive', ()=> {
             UpperCamelCaseName: name.split('-').map(part => part.substring(0, 1).toUpperCase() + part.substring(1)).join('')
         }))
         .pipe(rename((path) => {
-            path.basename = path.basename.replace('directive', name);
+            path.basename = path.basename.replace('template', name);
         }))
-        .pipe(gulp.dest(`src/app/common/directives/${name}`));
+        .pipe(gulp.dest(`src/app/directives/${name}`));
 });
 
 gulp.task('generate:service', ()=> {
     if (!name) { throw new Error('Must use -n switch to specify name'); }
-    if (name.search(SERVICE_REGEX) === -1) {
-        throw new Error(`Service name should be upper camel cased e.g. Sample,
-            SampleService`);
+    if (name.search(NAME_REGEX) === -1) {
+        throw new Error(`Service name should be kebab cased e.g. sample,
+            sample-service`);
     }
 
     return gulp.src('tasks/generate/templates/service/*')
-        .pipe(template({ name }))
-        .pipe(rename((path) => {
-            path.basename = path.basename.replace('service', name);
+        .pipe(template({
+            name: name,
+            lowerCamelCaseName: name.split('-').map((part, i) => i === 0 ? part : part.substring(0, 1).toUpperCase() + part.substring(1)).join(''),
+            UpperCamelCaseName: name.split('-').map(part => part.substring(0, 1).toUpperCase() + part.substring(1)).join('')
         }))
-        .pipe(gulp.dest(`src/app/common/services/${name}`));
+        .pipe(rename((path) => {
+            path.basename = path.basename.replace('template', name);
+        }))
+        .pipe(gulp.dest(`src/app/services/${name}`));
 });

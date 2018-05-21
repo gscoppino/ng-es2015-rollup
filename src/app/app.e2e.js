@@ -7,7 +7,7 @@ describe('App Start', () => {
         expect(appElement.isElementPresent(by.tagName('loader-spinner')))
             .toBe(true);
 
-        expect(appElement.isElementPresent(by.css('main[ui-view]')))
+        expect(appElement.isElementPresent(by.tagName('ui-view')))
             .toBe(true);
     });
 });

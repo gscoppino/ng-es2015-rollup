@@ -1,6 +1,14 @@
 {
   "presets": [
-      ["es2015", { "modules": false }],
+      ["env", {
+        "modules": false,
+        "targets": {
+          "node": "current"
+        }
+      }],
   ],
-  "plugins": ["external-helpers"]
+  "plugins": [
+  	"external-helpers",
+  	"syntax-dynamic-import"
+  ]
 }

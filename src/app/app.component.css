@@ -1,0 +1,14 @@
+@import './styles/box-model.css';
+@import './styles/layout.css';
+@import './components/loader-spinner/loader-spinner.component.css';
+@import './routes/app/app-shell.component.css';
+@import './theme/variables.css';
+
+body {
+    background-color: var(--app-bg-color);
+
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    & > app {
+        display: block;
+    }
+}

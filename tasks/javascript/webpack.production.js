@@ -7,17 +7,13 @@ import pathconfig from './pathconfig.js';
 
 // Disable emitting of sourcemaps.
 const WEBPACK_PRODUCTION_CONFIG = Object.assign({}, WEBPACK_CONFIG, {
+    mode: 'production',
     devtool: undefined
 });
 
 // Disable the mock service worker that is output in development mode.
 WEBPACK_PRODUCTION_CONFIG.entry = {
-    [path.basename(pathconfig.productionBundle, '.js')]: [
-        // All entries are loaded into the bundle,
-        // but only the last is exported.
-        'babel-polyfill',
-        pathconfig.entry
-    ]
+    [path.basename(pathconfig.productionBundle, '.js')]: pathconfig.entry
 };
 
 // Disable sourcemap output.
@@ -29,11 +25,9 @@ WEBPACK_PRODUCTION_CONFIG.output = Object.assign({}, WEBPACK_PRODUCTION_CONFIG.o
 // Minify the resulting bundle.
 WEBPACK_PRODUCTION_CONFIG.plugins = [
     ...WEBPACK_PRODUCTION_CONFIG.plugins,
-    new webpack.optimize.UglifyJsPlugin({
-        sourceMap: false
-    }),
     new SWPrecacheWebpackPlugin({
         filename: 'sw.js',
+        minify: true,
         staticFileGlobs: [
             'dist/index.html',
             'dist/main.css',

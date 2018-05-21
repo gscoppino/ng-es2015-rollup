@@ -1,0 +1,18 @@
+{
+	"source": "src",
+	"index": "README.md",
+	"package": "package.json",
+	"includes": ["\\.js$"],
+	"excludes": ["\\.spec.js$", "\\.e2e.js$", "node_modules"],
+	"destination": "dist/documentation",
+	"plugins": [{
+		"name": "esdoc-standard-plugin",
+		"option": {
+			"test": {
+				"source": "src",
+				"includes": ["\\.spec.js$", "\\.e2e.js$"],
+				"excludes": ["node_modules"]
+			}
+		}
+	}]
+}

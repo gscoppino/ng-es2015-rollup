@@ -1,5 +1,13 @@
 language: node_js
 node_js:
-    - "node"
+    - "8"
+addons: # https://developers.google.com/web/updates/2017/06/headless-karma-mocha-chai
+  chrome: stable
+sudo: required # https://developers.google.com/web/updates/2017/06/headless-karma-mocha-chai
+before_install:
+    - npm install -g greenkeeper-lockfile@1
+before_script:
+    - greenkeeper-lockfile-update
 after_script:
+    - greenkeeper-lockfile-upload
     - npm run coverage-ci

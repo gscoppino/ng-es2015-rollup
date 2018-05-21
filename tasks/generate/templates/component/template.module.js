@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { <%= UpperCamelCaseName %>Component } from './<%= name %>.component.js';
 
 export const <%= UpperCamelCaseName %>Module = angular

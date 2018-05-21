@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { <%= UpperCamelCaseName %>Directive } from './<%= name %>.directive.js';
 
 export const <%= UpperCamelCaseName %>Module = angular

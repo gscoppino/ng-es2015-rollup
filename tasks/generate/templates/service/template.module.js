@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { <%= UpperCamelCaseName %>Service } from '<%= name %>.service.js';
 
 export const <%= UpperCamelCaseName %>Module = angular

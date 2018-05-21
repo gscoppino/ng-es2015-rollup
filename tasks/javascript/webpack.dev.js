@@ -40,18 +40,16 @@ export default {
     // applied to them (unless they are explicitly excluded).
     // NOTE: The rules is evaluated in reverse order.
     module: {
-<<<<<<< HEAD
-        preLoaders: [
+        rules: [
             // Lint all HTML files.
             {
                 test: /\.html$/,
                 include: [path.resolve(process.cwd(), 'src')],
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
-                loaders: ['htmlhint']
+                enforce: 'pre',
+                use: ['htmlhint']
             },
-=======
-        rules: [
->>>>>>> 483d74687b6cfbe1f24ee9ca2ce390d1e0c2a9c0
+
             // Lint all Javascript files.
             {
                 test: /\.js$/,

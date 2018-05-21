@@ -1,5 +1,5 @@
 /**
- * @classdesc Models RESTful resources by providing methods to interact with a resource.
+ * @desc Models RESTful resources by providing methods to interact with a resource.
  */
 class RESTApi {
     /**
@@ -278,7 +278,7 @@ class RESTApi {
 
 /**
  * @type {angular.Provider}
- * @classdesc Takes an API base URL in the configuration phase and returns
+ * @desc Takes an API base URL in the configuration phase and returns
  *   a factory that can be used to create objects to interface with REST
  *   API resources under the given base URL.
  */

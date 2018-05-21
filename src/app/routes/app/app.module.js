@@ -20,7 +20,8 @@ export { RouterConfig };
 
 /**
  * @type {angular.Module}
- * @desc Configures the frontend routing.
+ * @desc Provides the application shell component and configures the router
+ *   to render the application shell when the correct URL is active.
  */
 export const AppRouterModule = angular
     .module('app.routes.app', [

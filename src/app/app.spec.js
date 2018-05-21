@@ -4,6 +4,7 @@ import { AppModule } from './app.module.js';
 
 beforeEach(angular.mock.module(AppModule));
 
+/** @test {AppModule} */
 describe('App Component', () => {
     describe('View', () => {
         let $rootScope, $compile;

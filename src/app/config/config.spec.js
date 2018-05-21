@@ -2,6 +2,7 @@ import angular from 'angular';
 
 import { CompilerConfig } from './config.module.js';
 
+/** @test {CompilerConfig} */
 describe('Compiler Configuration', () => {
     let mockLocationObj = {},
         mockCompileProvider = {};

@@ -2,6 +2,7 @@ import angular from 'angular';
 
 import { API_BASE, ApiConfig } from './api.module.js';
 
+/** @test {ApiConfig} */
 describe('Api Module', () => {
     let $providerInjector;
 

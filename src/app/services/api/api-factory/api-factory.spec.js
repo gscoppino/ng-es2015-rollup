@@ -2,6 +2,7 @@ import angular from 'angular';
 
 import { ApiFactoryProvider, RESTApi } from './api-factory.module.js';
 
+/** @test {ApiFactoryProvider} */
 describe('Api Factory Module', () => {
     let $providerInjector;
 
@@ -62,6 +63,7 @@ describe('Api Factory Module', () => {
     });
 });
 
+/** @test {RESTApi} */
 describe('RESTApi', () => {
     let Api;
 

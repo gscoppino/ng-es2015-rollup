@@ -7,6 +7,7 @@ import { API_BASE } from 'app/config/api/api.module.js';
 
 beforeEach(angular.mock.module(ApiMockBackendFactoryModule));
 
+/** @test {MockResource} **/
 describe('MockResource', () => {
     let mockCollection = [{ id: 1 }], resource, nestedResource;
 
@@ -251,6 +252,7 @@ describe('MockResource', () => {
     });
 });
 
+/** @test {MockResourceFactory} */
 describe('MockResourceFactory', () => {
     let $log, MockResourceFactory;
 

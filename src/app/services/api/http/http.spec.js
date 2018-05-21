@@ -4,6 +4,7 @@ import { HttpModule } from './http.module.js';
 
 beforeEach(angular.mock.module(HttpModule));
 
+/** @test {HttpModule} */
 describe('Http Service', () => {
     let Http;
 

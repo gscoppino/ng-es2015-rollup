@@ -4,6 +4,7 @@ import { AppRouterModule } from './app.module.js';
 
 beforeEach(angular.mock.module(AppRouterModule));
 
+/** @test {AppRouterModule} */
 describe('Routes Configuration', () => {
     it('should have loaded the default route.', angular.mock.inject(($rootScope, $state) => {
         // This test could be better but is OK for now.
@@ -13,6 +14,7 @@ describe('Routes Configuration', () => {
     }));
 });
 
+/** @test {AppRouterModule} */
 describe('App Shell Component', () => {
     describe('View', () => {
         let $rootScope, $compile;

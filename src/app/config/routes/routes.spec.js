@@ -8,6 +8,7 @@ beforeEach(angular.mock.module(RouterConfigModule, (_$locationProvider_) => {
     $locationProvider = _$locationProvider_;
 }));
 
+/** @test {RouterConfigModule} */
 describe('Routes Configuration', () => {
     it('should be in HTML5 mode.', () => {
         expect($locationProvider.html5Mode().enabled).toBe(true);

@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { ApiFactoryModule } from 'app/services/api/api-factory/api-factory.module.js';
 
 const API_BASE = '/api';

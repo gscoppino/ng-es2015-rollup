@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { API_BASE } from 'app/config/api/api.module.js';
 import { createMockApi } from './mock-api.module.js';
 

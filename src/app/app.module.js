@@ -1,8 +1,10 @@
 import angular from 'angular';
+
 import UIRouterModule from '@uirouter/angularjs';
 import { ConfigModule } from 'app/config/config.module.js';
 import { AppRouterModule } from 'app/routes/app/app.module.js';
 import { LoaderSpinnerModule } from 'app/components/loader-spinner/loader-spinner.module.js';
+
 import { AppComponent } from './app.component.js';
 
 /**

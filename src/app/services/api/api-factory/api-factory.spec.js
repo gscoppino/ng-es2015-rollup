@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { ApiFactoryProvider, RESTApi } from './api-factory.module.js';
 
 describe('Api Factory Module', () => {

@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { AppRouterModule } from './app.module.js';
 
 beforeEach(angular.mock.module(AppRouterModule));

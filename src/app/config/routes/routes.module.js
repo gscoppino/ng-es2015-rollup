@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import UIRouterModule from '@uirouter/angularjs';
 
 RouterConfig.$inject = ['$locationProvider', '$urlServiceProvider'];

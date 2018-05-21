@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import AngularAriaModule from 'angular-aria';
 import { ApiConfigModule } from 'app/config/api/api.module.js';
 import { ApiMockBackendConfigModule } from 'app/config/mock-api/mock-api.module.js'; // Remove to disable the mock backend.

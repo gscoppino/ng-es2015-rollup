@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { SampleComponent } from './sample-component.component.js';
 
 export const SampleComponentModule = angular

@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { HttpService } from './http.service.js';
 
 /**

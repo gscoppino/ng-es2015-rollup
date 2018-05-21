@@ -3,6 +3,7 @@ import './sw-init.js';
 import './vendor.js';
 
 import angular from 'angular';
+
 import { AppModule } from './app/app.module.js';
 
 /** Bootstraps the Angular application. */

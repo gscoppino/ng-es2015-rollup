@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { SampleService } from './sample-service.service.js';
 
 export const SampleServiceModule = angular

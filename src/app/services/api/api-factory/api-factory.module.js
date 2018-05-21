@@ -1,5 +1,7 @@
 import angular from 'angular';
+
 import { HttpModule } from 'app/services/api/http/http.module.js';
+
 import { ApiFactoryProvider, RESTApi } from './api-factory.service.js';
 
 /**

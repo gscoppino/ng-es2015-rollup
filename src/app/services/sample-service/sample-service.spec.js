@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { SampleServiceModule } from './sample-service.module.js';
 
 beforeEach(angular.mock.module(SampleServiceModule));

@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { RouterConfigModule } from './routes.module.js';
 
 let $locationProvider;

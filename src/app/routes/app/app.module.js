@@ -1,5 +1,7 @@
 import angular from 'angular';
+
 import UIRouterModule from '@uirouter/angularjs';
+
 import { AppShellComponent } from './app-shell.component.js';
 
 RouterConfig.$inject = ['$stateProvider'];

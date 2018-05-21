@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import { LoaderSpinnerComponent } from './loader-spinner.component.js';
 
 /**

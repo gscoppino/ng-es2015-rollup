@@ -47,7 +47,7 @@ export default {
                 include: [path.resolve(process.cwd(), 'src')],
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
                 enforce: 'pre',
-                use: ['htmlhint']
+                use: ['htmlhint-loader']
             },
 
             // Lint all Javascript files.

@@ -8,6 +8,7 @@ function startDevServer() {
         port: 3000,
         ui: false,
         ghostMode: false,
+        open: false,
         single: true,
         server: {
             baseDir: 'dist'

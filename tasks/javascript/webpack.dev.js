@@ -50,12 +50,14 @@ export default {
                 use: ['eslint-loader']
             },
 
-            // Import HTML as raw strings.
+            // Import HTML as ES2015 template strings.
             {
                 test: /\.html$/,
                 include: [path.resolve(process.cwd(), 'src')],
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
-                use: ['raw-loader']
+                use: [{ loader: 'html-loader', options: {
+                    url: false
+                }}]
             },
             // Transform syntax to a format supported by the target environment.
             {

@@ -13,7 +13,7 @@ describe('App Component', () => {
             $compile = $injector.get('$compile');
         }));
 
-        it('should compile', () => {
+        it('should compile.', () => {
             let scope = $rootScope.$new(),
                 element = $compile('<app></app>')(scope);
 
@@ -42,14 +42,13 @@ describe('App Component', () => {
                 expect(Object.assign).toHaveBeenCalled();
             });
 
-            it(`should set a flag to indicate that no further loading is expected (since as of this writing,
-            there are no states to load).`, () => {
+            it('should initialize the loading status flag to false.', () => {
                 let AppController = $componentController('app');
 
                 expect(AppController.isLoading).toBe(false);
             });
 
-            it('should log a message to the logger.', () => {
+            it('should log a message with the $log service.', () => {
                 spyOn($log, 'log').and.callFake(angular.noop);
                 $componentController('app');
 
@@ -65,21 +64,36 @@ describe('App Component', () => {
             });
 
             describe('$onInit', () => {
-                it('should listen for the route change events, in order to properly update the application state.',
-                angular.mock.inject(($transitions) => {
-                    spyOn($transitions, 'onStart').and.callFake(angular.noop);
-                    AppController.$onInit();
+                it('should listen for route change events.',
+                    angular.mock.inject(($transitions) => {
+                        spyOn($transitions, 'onStart')
+                            .and
+                            .callFake(angular.noop);
 
-                    expect($transitions.onStart).toHaveBeenCalledWith({}, jasmine.any(Function));
-                }));
+                        AppController.$onInit();
 
-                describe('route changes', () => {
-                    it('should set the loading flag on the instance to true.',
+                        expect($transitions.onStart)
+                            .toHaveBeenCalledWith({}, jasmine.any(Function));
+                    }));
+            });
+        });
+
+        describe('Events', () => {
+            let AppController;
+
+            beforeEach(() => {
+                AppController = $componentController('app');
+            });
+
+            describe('Route Change Started', () => {
+                it('should set the loading status flag to true.',
                     angular.mock.inject(($q, $transitions) => {
                         let transitionStartCallback;
-                        spyOn($transitions, 'onStart').and.callFake((criteria, callback) => {
-                            transitionStartCallback = callback;
-                        });
+                        spyOn($transitions, 'onStart')
+                            .and
+                            .callFake((criteria, callback) => {
+                                transitionStartCallback = callback;
+                            });
 
                         AppController.$onInit();
 
@@ -90,15 +104,17 @@ describe('App Component', () => {
 
                         expect(AppController.isLoading).toBe(true);
                     }));
-                });
+            });
 
-                describe('route change successful', () => {
-                    it('should set the loading flag on the instance to false.',
+            describe('Route Change Finished (Success)', () => {
+                it('should set the loading status flag to false.',
                     angular.mock.inject(($rootScope, $q, $transitions) => {
                         let transitionStartCallback;
-                        spyOn($transitions, 'onStart').and.callFake((criteria, callback) => {
-                            transitionStartCallback = callback;
-                        });
+                        spyOn($transitions, 'onStart')
+                            .and
+                            .callFake((criteria, callback) => {
+                                transitionStartCallback = callback;
+                            });
 
                         AppController.$onInit();
 
@@ -111,15 +127,17 @@ describe('App Component', () => {
                         $rootScope.$digest();
                         expect(AppController.isLoading).toBe(false);
                     }));
-                });
+            });
 
-                describe('route change unsuccessful', () => {
-                    it('should set the loading flag on the instance to false.',
+            describe('Route Change Finished (Fail)', () => {
+                it('should set the loading status flag to false.',
                     angular.mock.inject(($rootScope, $q, $transitions) => {
                         let transitionStartCallback;
-                        spyOn($transitions, 'onStart').and.callFake((criteria, callback) => {
-                            transitionStartCallback = callback;
-                        });
+                        spyOn($transitions, 'onStart')
+                            .and
+                            .callFake((criteria, callback) => {
+                                transitionStartCallback = callback;
+                            });
 
                         AppController.$onInit();
 
@@ -132,7 +150,6 @@ describe('App Component', () => {
                         $rootScope.$digest();
                         expect(AppController.isLoading).toBe(false);
                     }));
-                });
             });
         });
     });

@@ -49,14 +49,16 @@ describe('Api Factory Module', () => {
 
                 describe('create', () => {
                     it('should create a new RESTApi instance',
-                    angular.mock.inject(($injector) => {
-                        instantiatedApiFactoryProvider.setBaseUrl('/test/api');
-                        spyOn($injector, 'instantiate').and.callThrough();
+                        angular.mock.inject(($injector) => {
+                            instantiatedApiFactoryProvider
+                                .setBaseUrl('/test/api');
 
-                        let TestApi = ApiFactory.create('test');
+                            spyOn($injector, 'instantiate').and.callThrough();
 
-                        expect(TestApi instanceof RESTApi).toBe(true);
-                    }));
+                            let TestApi = ApiFactory.create('test');
+
+                            expect(TestApi instanceof RESTApi).toBe(true);
+                        }));
                 });
             });
         });
@@ -71,11 +73,12 @@ describe('RESTApi', () => {
         Api = new RESTApi('test-resource', '/test-api', Http);
     }));
 
-    it('should have the right name, baseUrl, and request handler.', angular.mock.inject((Http) => {
-        expect(Api.name).toBe('test-resource');
-        expect(Api.baseUrl).toBe('/test-api');
-        expect(Api.http).toBe(Http);
-    }));
+    it('should have the right name, baseUrl, and request handler.',
+        angular.mock.inject((Http) => {
+            expect(Api.name).toBe('test-resource');
+            expect(Api.baseUrl).toBe('/test-api');
+            expect(Api.http).toBe(Http);
+        }));
 
     describe('getList', () => {
         let $rootScope, $q;

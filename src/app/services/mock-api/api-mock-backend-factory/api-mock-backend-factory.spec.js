@@ -9,7 +9,7 @@ beforeEach(angular.mock.module(ApiMockBackendFactoryModule));
 
 /** @test {MockResource} **/
 describe('MockResource', () => {
-    let mockCollection = [{ id: 1 }], resource, nestedResource;
+    let mockCollection = [{ id: 1 }], resource;
 
     it('should create a new empty collection if none is passed.', () => {
         expect(new MockResource('test').collection).toEqual([]);
@@ -20,7 +20,6 @@ describe('MockResource', () => {
     });
 
     beforeEach(() => {
-        nestedResource = new MockResource('test2');
         resource = new MockResource('test', {
             fixtureData: mockCollection
         });
@@ -148,7 +147,9 @@ describe('MockResource', () => {
             spyOn(MockResource, '_query').and.callThrough();
 
             let response = resource.respondToGET(null, null, null, null, { name: 'John' });
-            expect(MockResource._query).toHaveBeenCalledWith(mockElement.name, 'John', null);
+            expect(MockResource._query)
+                .toHaveBeenCalledWith(mockElement.name, 'John', null);
+
             expect(response[0]).toBe(200);
             expect(response[1]).toEqual([mockElement]);
 
@@ -163,7 +164,10 @@ describe('MockResource', () => {
             spyOn(MockResource, '_query').and.callThrough();
 
             let response = resource.respondToGET(null, null, null, null, { name_in: 'jo' });
-            expect(MockResource._query).toHaveBeenCalledWith(mockElement.name, 'jo', '_in');
+
+            expect(MockResource._query)
+                .toHaveBeenCalledWith(mockElement.name, 'jo', '_in');
+
             expect(response[0]).toBe(200);
             expect(response[1]).toEqual([mockElement]);
 
@@ -197,12 +201,14 @@ describe('MockResource', () => {
             expect(response[1]).toEqual({ id: 2, description: 'A new element.' });
 
             // Ensure immutability
-            expect(resource.collection.find((element) => element === response[1])).toBeFalsy();
+            expect(resource.collection.find((element) => element === response[1]))
+                .toBeFalsy();
         });
 
         it('should update the collection with the new element.', () => {
             resource.respondToPOST(null, null, JSON.stringify({ description: 'A new element.' }), null, {});
-            expect(resource.collection).toContain({ id: 2, description: 'A new element.' });
+            expect(resource.collection)
+                .toContain({ id: 2, description: 'A new element.' });
         });
     });
 
@@ -220,7 +226,8 @@ describe('MockResource', () => {
         it('should update the collection element with the new data, ignoring any "id" property in the data.', () => {
             resource.collection.push({ id: 2 });
             resource.respondToPUT(null, null, JSON.stringify({ id: 3, description: 'An updated element.' }), null, { id: 2 });
-            expect(resource.collection).toContain({ id: 2, description: 'An updated element.' });
+            expect(resource.collection)
+                .toContain({ id: 2, description: 'An updated element.' });
         });
 
         it('should return a 404 NOT FOUND with status message if the element of the specified id is not found.', () => {
@@ -267,11 +274,13 @@ describe('MockResourceFactory', () => {
         beforeEach(angular.mock.inject(($injector) => {
             $httpBackend = $injector.get('$httpBackend');
             mockRespondDefinitionFn = jasmine.createSpy().and.callFake(angular.noop);
-            spyOn($httpBackend, 'whenRoute').and.returnValue({ respond: mockRespondDefinitionFn });
+            spyOn($httpBackend, 'whenRoute')
+                .and
+                .returnValue({ respond: mockRespondDefinitionFn });
         }));
 
         it('should create correct GET/POST/PUT/DELETE routes for the passed collection name and define responses.', () => {
-            let resource = MockResourceFactory.create('users');
+            MockResourceFactory.create('users');
 
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('GET', `${API_BASE}/users/:id?`);
             expect($httpBackend.whenRoute).toHaveBeenCalledWith('POST', `${API_BASE}/users`);
@@ -336,7 +345,8 @@ describe('MockResourceFactory', () => {
         });
 
         it('should return the newly created MockResource.', () => {
-            expect(MockResourceFactory.create('users') instanceof MockResource).toBe(true);
+            expect(MockResourceFactory.create('users') instanceof MockResource)
+                .toBe(true);
         });
     });
 });

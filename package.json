@@ -72,7 +72,7 @@
     "stylelint": "~9.2.x",
     "stylelint-config-standard": "~18.2.x",
     "sw-precache-webpack-plugin": "~0.11.x",
-    "webpack": "~4.8.x",
+    "webpack": "~4.9.x",
     "yargs": "~11.0.x"
   },
   "dependencies": {

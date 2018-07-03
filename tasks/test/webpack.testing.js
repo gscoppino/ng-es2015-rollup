@@ -19,7 +19,7 @@ export default {
     // The section configures the rules that imports are applied against.
     // Imports that match patterns in the rules will have those rules
     // applied to them (unless they are explicitly excluded).
-    // NOTE: The rules is evaluated in reverse order.
+    // NOTE: The rules are evaluated in reverse order.
     module: {
         rules: [
             // Lint all Javascript files.

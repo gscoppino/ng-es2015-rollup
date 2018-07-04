@@ -30,14 +30,12 @@ export default {
                 enforce: 'pre',
                 use: ['eslint-loader']
             },
-            // Import HTML as ES2015 template strings.
+            // Import HTML as raw strings.
             {
                 test: /\.html$/,
                 include: [path.resolve(process.cwd(), 'src')],
                 exclude: [path.resolve(process.cwd(), 'node_modules')],
-                use: [{ loader: 'html-loader', options: {
-                    url: false
-                }}]
+                use: ['raw-loader']
             },
             // Transform syntax to a format supported by the target environment, for all source and spec files.
             // Instrumentation of source files for code coverage is done

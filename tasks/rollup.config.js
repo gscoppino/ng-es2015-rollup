@@ -19,5 +19,5 @@ export default {
             exclude: 'node_modules/**'
         })
     ],
-    experimentalDynamicImport: true
+    inlineDynamicImports: true
 };

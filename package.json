@@ -67,7 +67,7 @@
     "protractor": "~5.4.0",
     "puppeteer": "~1.4.x",
     "raw-loader": "~0.5.x",
-    "rollup": "~0.62.x",
+    "rollup": "~0.64.1",
     "rollup-plugin-babel": "~3.0.x",
     "stylelint": "~9.4.x",
     "stylelint-config-standard": "~18.2.x",

@@ -54,7 +54,7 @@
     "gulp-rename": "~1.2.x",
     "gulp-template": "~5.0.x",
     "jasmine": "~3.1.x",
-    "karma": "~2.0.x",
+    "karma": "~3.0.0",
     "karma-chrome-launcher": "~2.2.x",
     "karma-coverage": "~1.1.x",
     "karma-jasmine": "~1.1.x",

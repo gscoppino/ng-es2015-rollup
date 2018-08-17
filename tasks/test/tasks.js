@@ -6,6 +6,7 @@ gulp.task('clean:test-coverage', () => del('dist/coverage'));
 
 gulp.task('test', ['clean:test-coverage'], (callbackFn) => {
     import('./karma.config.js')
+        .then(m => m.default)
         .then(config => {
             config.singleRun = true;
             config.autoWatch = false;
@@ -18,6 +19,7 @@ gulp.task('test', ['clean:test-coverage'], (callbackFn) => {
 
 gulp.task('watch:test', ['clean:test-coverage'], () => {
     import('./karma.config.js')
+        .then(m => m.default)
         .then(config => {
             config.singleRun = false;
             config.autoWatch = true;

@@ -73,7 +73,7 @@
     "stylelint-config-standard": "~18.2.x",
     "sw-precache-webpack-plugin": "~0.11.x",
     "webpack": "~4.10.x",
-    "yargs": "~12.0.1"
+    "yargs": "~12.0.x"
   },
   "dependencies": {
     "@uirouter/angularjs": "~1.0.x",

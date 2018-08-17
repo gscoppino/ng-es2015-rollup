@@ -51,10 +51,10 @@
     "eslint-loader": "~2.1.x",
     "gulp": "~3.9.x",
     "gulp-htmlmin": "~4.0.x",
-    "gulp-rename": "~1.2.x",
+    "gulp-rename": "~1.4.x",
     "gulp-template": "~5.0.x",
-    "jasmine": "~3.1.x",
-    "karma": "~2.0.x",
+    "jasmine": "~3.2.x",
+    "karma": "~3.0.x",
     "karma-chrome-launcher": "~2.2.x",
     "karma-coverage": "~1.1.x",
     "karma-jasmine": "~1.1.x",
@@ -73,7 +73,7 @@
     "stylelint-config-standard": "~18.2.x",
     "sw-precache-webpack-plugin": "~0.11.x",
     "webpack": "~4.16.5",
-    "yargs": "~11.0.x"
+    "yargs": "~12.0.x"
   },
   "dependencies": {
     "@uirouter/angularjs": "~1.0.x",

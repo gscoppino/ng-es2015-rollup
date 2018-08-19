@@ -9,7 +9,7 @@ import './docs/tasks.js';
 import './test/tasks.js';
 import './serve/tasks.js';
 import './generate/tasks.js';
-import { buildMarkupProduction } from './html/tasks.js';
+import { buildMainPageProduction } from './html/tasks.js';
 import { buildJavascriptProduction } from './javascript/tasks.js';
 import { startDevServer } from './serve/tasks.js';
 
@@ -38,7 +38,7 @@ gulp.task('watch', [
 ]);
 
 gulp.task('build-production', [
-    'clean:markup',
+    'build:markup-production-phase1',
     'build:css-production',
     'clean:js',
     'build:images'
@@ -46,7 +46,7 @@ gulp.task('build-production', [
     // Production CSS is built before the markup, in
     // order for the critical CSS to be included in the final
     // markup.
-    buildMarkupProduction().on('end', () => {
+    buildMainPageProduction().on('end', () => {
         // Production markup and CSS are both built
         // before Javascript, in order for those assets to be
         // pre-cached by the service worker.

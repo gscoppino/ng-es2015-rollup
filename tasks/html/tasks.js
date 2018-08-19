@@ -12,20 +12,30 @@ gulp.task('build:markup', ['clean:markup'], ()=> {
 
 gulp.task('watch:markup', ['build:markup'], ()=> gulp.watch('src/*.html', ['build:markup']));
 
-function buildMarkupProduction() {
-    return gulp.src('src/*.html')
+const HTMLMIN_OPTIONS = {
+    collapseWhitespace: true,
+    removeComments: true, // NOTE: This is safe to use with conditional comments
+    minifyCSS: true
+};
+
+function buildFallbackPageProduction() {
+    return gulp.src('src/fallback.html')
+        .pipe(htmlmin(HTMLMIN_OPTIONS))
+        .pipe(gulp.dest('dist'));
+}
+
+gulp.task('build:markup-production-phase1', ['clean:markup'], buildFallbackPageProduction);
+
+function buildMainPageProduction() {
+    return gulp.src('src/index.html')
         .pipe(critical({
             base: 'dist/',
             inline: true
         }))
-        .pipe(htmlmin({
-            collapseWhitespace: true,
-            removeComments: true, // NOTE: This is safe to use with conditional comments
-            minifyCSS: true
-        }))
+        .pipe(htmlmin(HTMLMIN_OPTIONS))
         .pipe(gulp.dest('dist'));
 }
 
-gulp.task('build:markup-production', ['clean:markup'], buildMarkupProduction);
+gulp.task('build:markup-production', ['build:markup-production-phase1'], buildMainPageProduction);
 
-export { buildMarkupProduction };
+export { buildMainPageProduction };

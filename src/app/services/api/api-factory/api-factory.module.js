@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import { HttpModule } from 'app/services/api/http/http.module.js';
+import { HttpServiceModule } from 'app/services/api/http/http.module.js';
 
 import { ApiFactoryProvider, RESTApi } from './api-factory.service.js';
 
@@ -11,7 +11,7 @@ import { ApiFactoryProvider, RESTApi } from './api-factory.service.js';
  */
 export const ApiFactoryModule = angular
     .module('app.services.api.api-factory', [
-        HttpModule
+        HttpServiceModule
     ])
     .provider('ApiFactory', ApiFactoryProvider)
     .name;

@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-import { <%= UpperCamelCaseName %>Module } from './<%= name %>.module.js';
+import { <%= UpperCamelCaseName %>RouterModule } from './<%= name %>.module.js';
 
-beforeEach(angular.mock.module(<%= UpperCamelCaseName %>Module));
+beforeEach(angular.mock.module(<%= UpperCamelCaseName %>RouterModule));
 
 describe('<%= name %>', () => {
     describe('Component', () => {

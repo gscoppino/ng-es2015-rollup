@@ -34,7 +34,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-core": "~6.26.x",
-    "babel-loader": "~7.1.x",
+    "babel-loader": "~8.0.0",
     "babel-plugin-external-helpers": "~6.22.x",
     "babel-plugin-istanbul": "~4.1.x",
     "babel-plugin-syntax-dynamic-import": "~6.18.x",

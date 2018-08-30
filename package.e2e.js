@@ -1,9 +1,12 @@
-var fs = require('fs');
-var path = require('path');
-var child_process = require('child_process');
+const fs = require('fs');
+const path = require('path');
+const child_process = require('child_process');
+
+const NPM = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
+const NPX = /^win/.test(process.platform) ? 'npx.cmd' : 'npx';
 
 describe('ng-modern-boilerplate', () => {
-    var DEV_ARTIFACTS = [
+    const DEV_ARTIFACTS = [
         'dist/fallback.html',
         'dist/index.html',
         'dist/main.css',
@@ -14,15 +17,13 @@ describe('ng-modern-boilerplate', () => {
         'dist/sw.js.map'
     ];
 
-    var PROD_ARTIFACTS = [
+    const PROD_ARTIFACTS = [
         'dist/fallback.html',
         'dist/index.html',
         'dist/main.css',
         'dist/main.js',
         'dist/sw.js'
     ];
-
-    var NPM = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
 
     beforeEach(() => {
         rm_rf('dist');
@@ -33,6 +34,12 @@ describe('ng-modern-boilerplate', () => {
     });
 
     describe('clean', () => {
+        beforeAll(() => {
+            console.log('\n');
+            console.log('Testing clean task...');
+            console.log('---------------------');
+        });
+
         it('should remove dev build artifacts created by "npm run build".', () => {
             fs.mkdirSync('dist');
             fs.mkdirSync('dist/fallback');
@@ -40,9 +47,9 @@ describe('ng-modern-boilerplate', () => {
                 fs.writeFileSync(artifact, '');
             });
 
-            expect(child_process.spawnSync(NPM, ['run', 'clean']).status)
-                .toBe(0);
+            let clean = startSynchronousNPMTask('clean');
 
+            expect(clean.status).toBe(0);
             DEV_ARTIFACTS.forEach(function (artifact) {
                 expect(fs.existsSync(artifact)).toBe(false);
             });
@@ -55,9 +62,9 @@ describe('ng-modern-boilerplate', () => {
                 fs.writeFileSync(artifact, '');
             });
 
-            expect(child_process.spawnSync(NPM, ['run', 'clean']).status)
-                .toBe(0);
+            let clean = startSynchronousNPMTask('clean');
 
+            expect(clean.status).toBe(0);
             PROD_ARTIFACTS.forEach(function (artifact) {
                 expect(fs.existsSync(artifact)).toBe(false);
             });
@@ -65,10 +72,16 @@ describe('ng-modern-boilerplate', () => {
     });
 
     describe('build', () => {
-        it('should create the correct build artifacts in the dist folder.', () => {
-            expect(child_process.spawnSync(NPM, ['run', 'build']).status)
-                .toBe(0);
+        beforeAll(() => {
+            console.log('\n');
+            console.log('Testing development build task...');
+            console.log('---------------------------------');
+        });
 
+        it('should create the correct build artifacts in the dist folder.', () => {
+            let build = startSynchronousNPMTask('build');
+
+            expect(build.status).toBe(0);
             DEV_ARTIFACTS.concat([
                 'dist',
                 'dist/fallback'
@@ -79,10 +92,16 @@ describe('ng-modern-boilerplate', () => {
     });
 
     describe('build-production', () => {
-        it('should create the correct build artifacts in the dist folder.', () => {
-            expect(child_process.spawnSync(NPM, ['run', 'build-production']).status)
-                .toBe(0);
+        beforeAll(() => {
+            console.log('\n');
+            console.log('Testing production build task...');
+            console.log('--------------------------------');
+        });
 
+        it('should create the correct build artifacts in the dist folder.', () => {
+            let build = startSynchronousNPMTask('build-production');
+
+            expect(build.status).toBe(0);
             PROD_ARTIFACTS.concat([
                 'dist',
                 'dist/fallback'
@@ -93,34 +112,73 @@ describe('ng-modern-boilerplate', () => {
     });
 
     describe('test-unit', () => {
-        it('should run the unit tests for the source code, and output HTML coverage info.', () => {
-            expect(child_process.spawnSync(NPM, ['run', 'test-unit']).status)
-                .toBe(0);
+        beforeAll(() => {
+            console.log('\n');
+            console.log('Unit test task...');
+            console.log('-----------------');
+        });
 
+        it('should run the unit tests for the source code, and output HTML coverage info.', () => {
+            let test = startSynchronousNPMTask('test-unit');
+
+            expect(test.status).toBe(0);
             expect(fs.existsSync('dist/coverage')).toBe(true);
             expect(fs.existsSync('dist/coverage/html')).toBe(true);
             expect(fs.existsSync('dist/coverage/html/index.html')).toBe(true);
         });
     });
 
-    describe('documentation', () => {
-        it('should generate docs for the source code.', () => {
-            expect(child_process.spawnSync(NPM, ['run', 'documentation']).status)
-                .toBe(0);
+    describe('test-e2e', () => {
+        beforeAll(() => {
+            console.log('\n');
+            console.log('Integration test task...');
+            console.log('------------------------');
+        });
 
+        it('should run the end to end tests for the production code.', () => {
+            let server = child_process.spawn(NPX, ['gulp', 'server'], {
+                detached: true,
+                stdio: 'inherit'
+            });
+
+            startSynchronousNPMTask('build-production');
+
+            let test = startSynchronousNPMTask('test-integration-dev');
+
+            expect(test.status).toBe(0);
+        });
+    });
+
+    describe('documentation', () => {
+        beforeAll(() => {
+            console.log('\n');
+            console.log('Testing documentation generation task...');
+            console.log('----------------------------------------');
+        });
+
+        it('should generate docs for the source code.', () => {
+            let docgen = startSynchronousNPMTask('documentation');
+
+            expect(docgen.status).toBe(0);
             expect(fs.existsSync('dist/documentation')).toBe(true);
             expect(fs.existsSync('dist/documentation/index.html')).toBe(true);
         });
     });
 });
 
+function startSynchronousNPMTask(taskName) {
+    return child_process.spawnSync(NPM, ['run', taskName], {
+        stdio: 'inherit'
+    });
+}
+
 function rm_rf(inputPath) {
-    var folderPath = path.resolve(process.cwd(), inputPath);
+    let folderPath = path.resolve(process.cwd(), inputPath);
     if (folderPath === '/') throw new Error('Attempted to delete root directory!');
 
     if (fs.existsSync(folderPath)) {
         fs.readdirSync(folderPath).forEach(function (file) {
-            var filePath = path.join(folderPath, file);
+            let filePath = path.join(folderPath, file);
             if (fs.lstatSync(filePath).isDirectory()) {
                 rm_rf(filePath);
             } else {

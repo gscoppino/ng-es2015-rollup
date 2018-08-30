@@ -11,7 +11,7 @@ import './serve/tasks.js';
 import './generate/tasks.js';
 import { buildMainPageProduction } from './html/tasks.js';
 import { buildJavascriptProduction } from './javascript/tasks.js';
-import { startDevServer } from './serve/tasks.js';
+import { startServer, startDevServer } from './serve/tasks.js';
 
 gulp.task('clean', [
     'clean:markup',
@@ -55,4 +55,4 @@ gulp.task('build-production', [
 });
 
 gulp.task('develop', ['watch'], startDevServer);
-gulp.task('production', ['build-production'], startDevServer);
+gulp.task('production', ['build-production'], startServer);

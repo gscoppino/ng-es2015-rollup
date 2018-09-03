@@ -7,7 +7,7 @@ process.env.CHROME_BIN = puppeteer.executablePath();
 export default {
     frameworks: ['jasmine'],
     files: [
-        'node_modules/babel-polyfill/dist/polyfill.min.js', // Polyfill any missing features in the test environment.
+        'node_modules/@babel/polyfill/dist/polyfill.min.js', // Polyfill any missing features in the test environment.
         'src/main.spec.js'
     ],
     preprocessors: {

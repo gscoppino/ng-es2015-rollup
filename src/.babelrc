@@ -3,7 +3,7 @@
     [
       "@babel/preset-env",
       {
-        "useBuiltIns": true,
+        "useBuiltIns": "entry",
         "targets": {
           "browsers": [
             "IE 9",

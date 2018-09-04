@@ -10,9 +10,9 @@ beforeEach(angular.mock.module(RouterConfigModule, (_$locationProvider_) => {
 
 /** @test {RouterConfigModule} */
 describe('Routes Configuration', () => {
-    it('should be in HTML5 mode.', () => {
+    it('should be in HTML5 mode.', angular.mock.inject(() => { // ensure the injector is instantiated.
         expect($locationProvider.html5Mode().enabled).toBe(true);
-    });
+    }));
 
     it('should have loaded the default route.', angular.mock.inject(($rootScope, $state) => {
         // This test could be better but is OK for now.

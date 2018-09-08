@@ -1,9 +1,11 @@
 {
   "presets": [
-    ["env", {
-      "useBuiltIns": true,
-      "targets": {
-        "browsers": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "targets": {
+          "browsers": [
             "IE 9",
             "last 2 Chrome versions",
             "last 2 Firefox versions",
@@ -13,14 +15,23 @@
             "last 2 ChromeAndroid versions",
             "last 2 iOS versions",
             "last 2 ExplorerMobile versions"
-        ]
+          ]
+        }
       }
-    }]
+    ]
   ],
   "env": {
     "test": {
       "plugins": [
-        ["istanbul", { "exclude": ["**/*/main.test.js", "**/*.spec.js"]}]
+        [
+          "istanbul",
+          {
+            "exclude": [
+              "**/*/main.test.js",
+              "**/*.spec.js"
+            ]
+          }
+        ]
       ]
     }
   }

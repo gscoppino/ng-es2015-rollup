@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-import { LoaderSpinnerModule } from './loader-spinner.module.js';
+import { LoaderSpinnerComponentModule } from './loader-spinner.module.js';
 
-beforeEach(angular.mock.module(LoaderSpinnerModule));
+beforeEach(angular.mock.module(LoaderSpinnerComponentModule));
 
 /** @test {LoaderSpinnerModule} */
 describe('Loader Spinner Component', () => {

@@ -20,7 +20,7 @@ export { RouterConfig };
  * @module <%= UpperCamelCaseName %>RouterModule
  * @description Configures the frontend routing.
  */
-export const <%= UpperCamelCaseName %>Module = angular
+export const <%= UpperCamelCaseName %>RouterModule = angular
     .module('app.routes.<%= name %>', [])
 	.config(RouterConfig)
     .component('<%= lowerCamelCaseName %>', <%= UpperCamelCaseName %>Component)

@@ -1,14 +1,15 @@
 {
   "presets": [
-      ["env", {
-        "modules": false,
+    [
+      "@babel/preset-env",
+      {
         "targets": {
           "node": "current"
         }
-      }],
+      }
+    ]
   ],
   "plugins": [
-  	"external-helpers",
-  	"syntax-dynamic-import"
+    "@babel/plugin-syntax-dynamic-import"
   ]
 }

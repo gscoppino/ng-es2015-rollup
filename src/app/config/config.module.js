@@ -14,7 +14,7 @@ RootscopeConfig.$inject = ['$rootScopeProvider'];
  */
 function RootscopeConfig($rootScopeProvider) {
     // NOTE: Should avoid setting this above the AngularJS default (10 iterations).
-    $rootScopeProvider.digestTtl(1);
+    $rootScopeProvider.digestTtl(2);
 }
 
 CompilerConfig.$inject = ['$compileProvider'];

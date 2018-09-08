@@ -1,7 +1,7 @@
 import gulp from 'gulp';
 import browserSync from 'browser-sync';
 
-function startDevServer() {
+function startServer() {
     let staticServer = browserSync.create();
 
     staticServer.init({
@@ -15,9 +15,17 @@ function startDevServer() {
         }
     });
 
+    return staticServer;
+}
+
+function startDevServer() {
+    let staticServer = startServer();
+
     gulp.watch('dist/**/*', staticServer.reload);
 }
 
+gulp.task('server', startServer);
 gulp.task('devserver', startDevServer);
 
+export { startServer };
 export { startDevServer };

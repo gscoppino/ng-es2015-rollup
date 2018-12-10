@@ -65,7 +65,7 @@
     "postcss-reporter": "~6.0.x",
     "protractor": "~5.4.0",
     "puppeteer": "~1.6.x",
-    "raw-loader": "~0.5.x",
+    "raw-loader": "~1.0.0",
     "rollup": "~0.65.x",
     "rollup-plugin-babel": "~4.0.x",
     "stylelint": "~9.5.x",

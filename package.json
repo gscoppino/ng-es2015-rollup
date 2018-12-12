@@ -67,7 +67,7 @@
     "puppeteer": "~1.6.x",
     "raw-loader": "~0.5.x",
     "rollup": "~0.65.x",
-    "rollup-plugin-babel": "~4.0.x",
+    "rollup-plugin-babel": "~4.1.0",
     "stylelint": "~9.5.x",
     "stylelint-config-standard": "~18.2.x",
     "sw-precache-webpack-plugin": "~0.11.x",

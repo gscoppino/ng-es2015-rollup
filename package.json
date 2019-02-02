@@ -4,8 +4,8 @@
   "description": "Seed project for frontend development with PostCSS for CSS, Babel for Javascript, Webpack for dependency management, and AngularJS with Karma+Jasmine for a development framework.",
   "main": "dist/main.js",
   "engines": {
-    "node": "~8.x",
-    "npm": "~5.x"
+    "node": "~10.x",
+    "npm": "~6.x"
   },
   "scripts": {
     "build": "gulp build",

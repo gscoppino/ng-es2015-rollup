@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-    - "8"
+    - "10"
 addons: # https://developers.google.com/web/updates/2017/06/headless-karma-mocha-chai
   chrome: stable
 sudo: required # https://developers.google.com/web/updates/2017/06/headless-karma-mocha-chai

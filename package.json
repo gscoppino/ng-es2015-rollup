@@ -72,7 +72,7 @@
     "stylelint-config-standard": "~18.2.x",
     "sw-precache-webpack-plugin": "~0.11.x",
     "webpack": "~4.25.x",
-    "yargs": "~12.0.x"
+    "yargs": "~13.1.0"
   },
   "dependencies": {
     "@babel/polyfill": "~7.2.x",

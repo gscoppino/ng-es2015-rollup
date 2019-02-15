@@ -46,7 +46,7 @@
     "del": "~3.0.x",
     "esdoc": "~1.1.x",
     "esdoc-standard-plugin": "~1.0.x",
-    "eslint": "~5.13.x",
+    "eslint": "~5.14.0",
     "eslint-loader": "~2.1.x",
     "gulp": "~3.9.x",
     "gulp-htmlmin": "~5.0.x",

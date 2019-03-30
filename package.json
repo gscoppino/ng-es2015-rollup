@@ -33,9 +33,9 @@
   "author": "Giuseppe Scoppino <scoppino.giuseppe@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "~7.2.x",
+    "@babel/core": "~7.4.x",
     "@babel/plugin-syntax-dynamic-import": "~7.2.x",
-    "@babel/preset-env": "~7.3.x",
+    "@babel/preset-env": "~7.4.x",
     "babel-loader": "~8.0.x",
     "babel-plugin-istanbul": "~5.1.x",
     "browser-sync": "~2.26.x",
@@ -75,10 +75,11 @@
     "yargs": "~12.0.x"
   },
   "dependencies": {
-    "@babel/polyfill": "~7.2.x",
     "@uirouter/angularjs": "~1.0.x",
     "angular": "~1.7.x",
     "angular-aria": "~1.7.x",
-    "angular-mocks": "~1.7.x"
+    "angular-mocks": "~1.7.x",
+    "core-js": "~3.0.x",
+    "regenerator-runtime": "~0.13.x"
   }
 }

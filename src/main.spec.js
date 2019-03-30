@@ -1,5 +1,8 @@
 /* eslint-disable no-console */
 
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+
 // Load angular and angular-mocks onto the global browser context.
 import 'angular';
 import 'angular-mocks';

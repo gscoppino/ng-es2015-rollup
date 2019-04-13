@@ -68,7 +68,7 @@
     "raw-loader": "~2.0.x",
     "rollup": "~1.1.x",
     "rollup-plugin-babel": "~4.3.x",
-    "stylelint": "~9.10.x",
+    "stylelint": "~10.0.0",
     "stylelint-config-standard": "~18.2.x",
     "sw-precache-webpack-plugin": "~0.11.x",
     "webpack": "~4.25.x",

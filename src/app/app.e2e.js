@@ -1,13 +1,13 @@
 describe('App Start', () => {
-    it('should render the app component.', () => {
-        browser.get('/');
+    it('should render the app component.', async () => {
+        await browser.get('/');
 
         let appElement = element(by.tagName('app'));
 
-        expect(appElement.isElementPresent(by.tagName('loader-spinner')))
+        expect(await appElement.isElementPresent(by.tagName('loader-spinner')))
             .toBe(true);
 
-        expect(appElement.isElementPresent(by.tagName('ui-view')))
+        expect(await appElement.isElementPresent(by.tagName('ui-view')))
             .toBe(true);
     });
 });

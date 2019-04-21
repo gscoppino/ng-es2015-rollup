@@ -48,7 +48,7 @@
     "esdoc-standard-plugin": "~1.0.x",
     "eslint": "~5.16.x",
     "eslint-loader": "~2.1.x",
-    "gulp": "~3.9.x",
+    "gulp": "~4.0.1",
     "gulp-htmlmin": "~5.0.x",
     "gulp-rename": "~1.4.x",
     "gulp-template": "~5.0.x",

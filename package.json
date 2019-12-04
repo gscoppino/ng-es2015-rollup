@@ -50,7 +50,7 @@
     "eslint-loader": "~2.1.x",
     "gulp": "~3.9.x",
     "gulp-htmlmin": "~5.0.x",
-    "gulp-rename": "~1.4.x",
+    "gulp-rename": "~2.0.0",
     "gulp-template": "~5.0.x",
     "jasmine": "~3.4.x",
     "karma": "~4.1.x",

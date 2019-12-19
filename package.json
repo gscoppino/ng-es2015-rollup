@@ -35,7 +35,7 @@
   "devDependencies": {
     "@babel/core": "~7.7.7",
     "@babel/plugin-syntax-dynamic-import": "~7.7.4",
-    "@babel/preset-env": "~7.4.x",
+    "@babel/preset-env": "~7.7.7",
     "babel-loader": "~8.0.x",
     "babel-plugin-istanbul": "~5.1.x",
     "browser-sync": "~2.26.x",

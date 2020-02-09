@@ -69,7 +69,7 @@
     "rollup": "~1.10.x",
     "rollup-plugin-babel": "~4.3.x",
     "stylelint": "~10.0.x",
-    "stylelint-config-standard": "~18.3.x",
+    "stylelint-config-standard": "~20.0.0",
     "sw-precache-webpack-plugin": "~0.11.x",
     "webpack": "~4.30.x",
     "yargs": "~13.2.x"

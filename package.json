@@ -34,7 +34,7 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "~7.8.7",
-    "@babel/plugin-syntax-dynamic-import": "~7.2.x",
+    "@babel/plugin-syntax-dynamic-import": "~7.8.3",
     "@babel/preset-env": "~7.4.x",
     "babel-loader": "~8.0.x",
     "babel-plugin-istanbul": "~5.1.x",

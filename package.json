@@ -36,7 +36,7 @@
     "@babel/core": "~7.4.x",
     "@babel/plugin-syntax-dynamic-import": "~7.2.x",
     "@babel/preset-env": "~7.4.x",
-    "babel-loader": "~8.0.x",
+    "babel-loader": "~8.1.0",
     "babel-plugin-istanbul": "~5.1.x",
     "browser-sync": "~2.26.x",
     "coveralls": "~3.0.x",

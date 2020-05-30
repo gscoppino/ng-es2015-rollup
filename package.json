@@ -33,7 +33,7 @@
   "author": "Giuseppe Scoppino <scoppino.giuseppe@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "~7.4.x",
+    "@babel/core": "~7.10.2",
     "@babel/plugin-syntax-dynamic-import": "~7.2.x",
     "@babel/preset-env": "~7.4.x",
     "babel-loader": "~8.0.x",
